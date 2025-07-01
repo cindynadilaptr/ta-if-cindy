@@ -1,21 +1,7 @@
 # Research Logbook
 
-## August
-
-### 2024-08-30
-- Developing the new feature
-- Fixing the bug
-    ```
-    def test():
-        pass
-    ```
-
 ## July
 
-### 2024-07-15
-- Researching the new feature
-- Updating the documentation
-    ```
-    def test():
-        pass
-    ```
+### 2025-07-01
+- Created a GitHub repository
+- Explored the dataset: identified the number of parameters in the dataset and attempted to transfer data from PDF format to CSV
