@@ -8,3 +8,6 @@
 
 ### 2025-07-02
 - Explore dataset: Dataset exploration: cataloging parameters, studying variable categories and types, and preparing dataset presentation materials.
+
+### 2025-07-31
+- Converting a dataset from a PDF report format into a spreadsheet.
