@@ -12,5 +12,7 @@
 ### 2025-07-31
 - Converting a dataset from a PDF report format into a spreadsheet.
 
+## August
+
 ### 2025-08-14
 - Exploring and analyzing literature pertinent to the research topic.
