@@ -16,3 +16,12 @@
 
 ### 2025-08-14
 - Exploring and analyzing literature pertinent to the research topic.
+
+### 2025-08-23
+- Doing research for another stunting dataset (SSGI) in different year.
+
+### 2025-08-25
+- Annotating national paper about Random Forest method in Stunting Dataset.
+
+### 2025-08-26
+- Annotating international paper that using DHS for timeseries dataset.
