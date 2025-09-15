@@ -25,3 +25,9 @@
 
 ### 2025-08-26
 - Annotating international paper that using DHS for timeseries dataset.
+
+### 2025-08-30
+- Exploring SSGI Dataset in different year
+
+### 2025-09-06
+- Processing XLSX data into a tabular format 
