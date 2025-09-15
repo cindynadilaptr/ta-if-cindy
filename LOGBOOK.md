@@ -31,3 +31,6 @@
 
 ### 2025-09-06
 - Processing XLSX data into a tabular format 
+
+### 2025-09-15
+- Exploring dataset with python
