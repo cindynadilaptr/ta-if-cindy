@@ -29,8 +29,16 @@
 ### 2025-08-30
 - Exploring SSGI Dataset in different year
 
+## September
+
 ### 2025-09-06
 - Processing XLSX data into a tabular format 
 
 ### 2025-09-15
 - Exploring dataset with python
+
+## October
+
+### 2025-10-12
+- Preprocess dataset
+- Tuning Hyperparameter
