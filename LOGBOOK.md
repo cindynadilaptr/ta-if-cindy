@@ -42,3 +42,6 @@
 ### 2025-10-12
 - Preprocess dataset
 - Tuning Hyperparameter
+
+### 2025-10-14
+-  Trying to apply model into dataset
