@@ -1,0 +1,82 @@
+\newpage
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\thepage}
+\chapter{PENDAHULUAN} \label{Bab I}
+
+\section{Latar Belakang} \label{I.Latar Belakang}
+Manusia memerlukan kondisi tubuh yang sehat untuk dapat beraktivitas secara maksimal. Saat ini salah satu masalah kesehatan yang banyak terjadi di Indonesia adalah kendala \textit{stunting}. Masalah ini telah menjadi perhatian serius karena dampaknya yang meluas, terutama pada anak-anak sebagai generasi penerus bangsa. Berbagai faktor, seperti pola hidup, akses terhadap makanan bergizi, serta kualitas pelayanan kesehatan, turut berkontribusi terhadap tingginya prevalensi masalah ini.
+
+Penyakit \textit{stunting} merupakan kondisi di mana tubuh mengalami kekurangan gizi secara berlebihan dan terjadi pada rentang waktu yang cukup lama (sitasi1). Dampak dari masalah ini akan mengakibatkan kendala pertumbuhan pada anak sehingga tinggi badan anak cenderung menjadi lebih pendek. Tak hanya memengaruhi pertumbuhan fisik, penyakit stunting juga akan berpengaruh ke dalam aspek pertumbuhan lainnya seperti mental, intelektual, dan kognitif anak (sitasi2). Oleh karena itu, penting untuk memahami faktor-faktor yang menyebabkan terjadinya \textit{stunting} agar dapat mengambil langkah-langkah pencegahan yang efektif.
+
+Di Indonesia, kasus \textit{stunting} terjadi pada balita usia 0-5 tahun berada pada persentase sebesar 19,8\% menurut Survei Status Gizi Indonesia (SSGI) (sitasi3). Meskipun telah mengalami penurunan dari tahun sebelumnya yaitu angka 21,5\%, hasil ini menunjukan bahwa target pemerintah Indonesia yaitu menurunkan prevalensi \textit{stunting} sampai 14,4\% di tahun 2029 masih belum tercapai (sitasi4,sitasi5). \textit{Stunting} dapat berasal dari faktor-faktor yang sangat kompleks dilihat dari aspek sosial, biologis, maupun lingkungan. Biasanya, penyebab utama pada \textit{stunting} dapat terjadi karena kurangnya asupan gizi, buruknya sanitasi, serta akses yang rendah terhadap pelayanan kesehatan (sitasi6,sitasi7). Terdapat faktor penting lain yang menyebabkan terjadinya stunting yaitu kurangnya edukasi ibu tentang betapa penting untuk menjaga gizi seimbang pada masa kehamilan, masa menyusui, dan masa pertumbuhan anak (sitasi7). Pada beberapa kasus, ibu hamil yang melahirkan bayi dengan kondisi berat badan lahir rendah (BBLR) mengalami fase kekurangan gizi selama masa kehamilannya (sitasi7). Hal ini dapat mengakibatkan terjadinya \textit{stunting} di kemudian hari. 
+
+Tingkat \textit{stunting} di Indonesia sendiri dinilai tidak merata di seluruh wilayah. Beberapa provinsi seperti Bali dan DI Yogyakarta menunjukkan angka prevalensi yang relatif rendah, berbanding terbalik dengan provinsi Nusa Tenggara Timur dan Sulawesi Barat yang mencatat angka jauh lebih tinggi (sitasi3). Situasi yang timpang ini menunjukkan adanya variasi faktor determinan yang memengaruhi kejadian \textit{stunting} di tiap daerah, baik dari segi sosial, ekonomi, pendidikan, maupun kondisi lingkungan (sitasi8). Faktor lainnya seperti status gizi ibu, akses terhadap layanan kesehatan, dan sanitasi dasar memiliki kontribusi yang berbeda-beda pada setiap wilayah. Maka dari itu, diperlukan analisis yang lebih mendalam untuk memahami faktor-faktor yang paling berpengaruh untuk situasi \textit{stunting} tiap provinsi.
+
+Penelitian sebelumnya menerapkan algoritma \textit{machine learning} untuk memprediksi \textit{stunting} pada kalangan remaja di Ethiopia dan menemukan bahwa metode konvensional kurang mampu menangkap interaksi kompleks antarvariabel (sitasi8). Namun penelitian tersebut dilakukan secara terbatas pada kelompok usia remaja dan wilayah tertentu, sehingga belum secara langsung dapat digeneralisasi dan masih memerlukan kajian tersendiri untuk ke skala nasional Indonesia yang mencakup berbagai karakteristik. Dengan demikian, penting untuk mengeksplorasi pendekatan serupa pada skala provinsi di Indonesia untuk memahami faktor determinan \textit{stunting} berdasarkan kondisi lokal.
+
+Dalam beberapa tahun terakhir, pendekatan \textit{machine learning} mulai banyak digunakan dalam bidang kesehatan dan gizi untuk mengidentifikasi pola tersembunyi dalam data yang kompleks (sitasi9). Salah satu algoritma yang populer adalah \textit{Random Forest}, yang dikenal memiliki kemampuan tinggi dalam menangani variabel dalam jumlah besar serta menghasilkan prediksi yang akurat. Keunggulan lain dari Random Forest adalah kemampuannya dalam mengukur tingkat kepentingan setiap fitur \textit{(feature importance)}, sehingga dapat membantu memahami faktor-faktor mana yang paling berpengaruh terhadap suatu fenomena. Namun demikian, model ini sering dianggap sebagai \textit{black box} karena sulit dijelaskan secara langsung oleh pengambil kebijakan atau peneliti non-teknis.
+
+Untuk mengatasi keterbatasan interpretasi tersebut, digunakan metode interpretabilitas seperti SHAP (\textit{SHapley Additive exPlanations}) yang mampu menjelaskan kontribusi masing-masing fitur terhadap hasil prediksi model (sitasi9). Melalui pendekatan ini, setiap faktor dapat dinilai apakah ia meningkatkan atau menurunkan kemungkinan terjadinya stunting pada suatu wilayah. Dengan demikian, kombinasi antara \textit{Random Forest} dan \textit{SHAP} tidak hanya memberikan hasil prediksi yang akurat, tetapi juga penjelasan yang dapat dipahami secara intuitif oleh pengambil keputusan. Pendekatan ini memberikan nilai tambah dalam analisis kebijakan berbasis data, terutama untuk menentukan prioritas intervensi di daerah dengan tingkat \textit{stunting} tinggi.
+
+Berdasarkan uraian tersebut, penelitian ini bertujuan untuk mengidentifikasi faktor-faktor determinan utama yang memengaruhi prevalensi \textit{stunting} antarprovinsi di Indonesia menggunakan data SSGI tahun 2024 melalui pendekatan \textit{Random Forest} yang diinterpretasikan dengan SHAP. Penelitian ini berfokus pada dua aspek utama, yaitu menilai performa model dalam memprediksi tingkat \textit{stunting} serta memahami peran masing-masing variabel terhadap hasil prediksi. Hasil penelitian diharapkan dapat memberikan dasar empiris bagi pemerintah dan pemangku kebijakan dalam merancang strategi intervensi gizi yang lebih efektif dan berbasis bukti ilmiah.
+
+\section{Rumusan Masalah} \label{I.Rumusan Masalah}
+
+Berdasarkan latar belakang yang telah diuraikan di atas, maka permasalahan penelitian dirumuskan sebagai berikut: \par
+
+\begin{enumerate}[noitemsep]
+	\item Bagaimana
+	\item Bagaimana 
+\end{enumerate}
+
+
+\section{Tujuan Penelitian} \label{I.Tujuan}
+Berdasarkan rumusan masalah yang telah diuraikan di atas, maka tujuan dari penelitian ini adalah: \par
+
+\begin{enumerate}[noitemsep]
+	\item Menentukan 
+	\item Mengimplementasikan
+\end{enumerate}
+
+
+\section{Batasan Masalah} \label{I.Batasan}
+Adapun batasan masalah dari penelitian ini agar sesuai dengan yang diharapkan adalah sebagai berikut: \par
+
+\begin{enumerate}[noitemsep]
+    \item Bahasa pemrograman yang digunakan adalah bahasa pemrograman Python.
+    \item 
+\end{enumerate}
+
+
+\section{Manfaat Penelitian} \label{I.Manfaat}
+Adapun manfaat yang diperoleh dari hasil penelitian ini adalah sebagai berikut: \par
+
+\begin{enumerate}[noitemsep]
+    \item Menghasilkan sistem 
+    \item 
+\end{enumerate}
+
+
+\section{Sistematika Penulisan} \label{I.Sistematika}
+Sistematika penulisan berisi pembahasan apa yang akan ditulis disetiap Bab. Sistematika pada umumnya berupa paragraf yang setiap paragraf mencerminkan bahasan setiap Bab. \par
+
+\noindent\textbf{Bab I}
+
+Bab ini berisikan penjelasan latar belakang dari topik penelitian yang berlangsung, rumusan masalah dari masalah yang dihadapi pada penjelasan di latar belakang, tujuan dari penelitian, batasan dari penelitian, manfaat dari hasil penelitian, dan sistematika penulisan tugas akhir. \par
+
+\noindent\textbf{Bab II}
+
+Bab ini membahas mengenai teori-teori dan penelitian yang berkaitan dengan penelitian ini.
+
+\noindent\textbf{Bab III}
+
+Bab ini berisikan penjelasan alur kerja sistem, alat dan data yang digunakan, metode yang digunakan, dan rancangan pengujian.
+
+\noindent\textbf{Bab IV}
+
+Bab ini membahas hasil implementasi dan pengujian dari penelitian yang dilakukan.
+
+\noindent\textbf{Bab V}
+
+Bab ini membahas kesimpulan dari hasil penelitian dan juga saran untuk penelitian selanjutnya.
