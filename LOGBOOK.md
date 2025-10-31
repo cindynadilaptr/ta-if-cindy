@@ -46,5 +46,8 @@
 ### 2025-10-14
 -  Trying to apply model into dataset
 
-### 2025-10-14
+### 2025-10-30
 - Updated and refined the preprocessing phase to improve data quality, and developed SHAP-based feature importance analysis using the Random Forest model.
+
+### 2025-10-31
+- began writing Chapter 1 (background and problem formulation)
