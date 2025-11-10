@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.2 $
+% $ biblatex bbl format version 3.3 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,116 +18,354 @@
 
 
 \refsection{0}
-  \datalist[entry]{none/global//global/global}
-    \entry{Ivanny2014Perbandingan}{article}{}
-      \name{author}{3}{}{%
-        {{hash=8b8eaa341c944861a75892301184ad14}{%
-           family={Kasenda},
-           familyi={K\bibinitperiod},
-           given={Ivanny},
-           giveni={I\bibinitperiod}}}%
-        {{hash=87905bf25650a7805efa58083be89961}{%
-           family={Marunduh},
-           familyi={M\bibinitperiod},
-           given={Sylviah},
-           giveni={S\bibinitperiod}}}%
-        {{hash=90566c7937bff7f446da310476f0c6b0}{%
-           family={Wungouw},
-           familyi={W\bibinitperiod},
-           given={Herlina},
-           giveni={H\bibinitperiod}}}%
+  \datalist[entry]{none/global//global/global/global}
+    \entry{said2024pencegahan}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=1fa5149393a3584cb0af8d48d54cc64e}{%
+           family={Said},
+           familyi={S\bibinitperiod},
+           given={Dede\bibnamedelima Hafirman},
+           giveni={D\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+        {{hash=11b01de105cbab5443a3bc932ccfe57d}{%
+           family={Rahmah},
+           familyi={R\bibinitperiod},
+           given={Azizatur},
+           giveni={A\bibinitperiod}}}%
       }
-      \strng{namehash}{259b997f26875333f8aaf7d1d4eb94d4}
-      \strng{fullhash}{b450990de46be62875c1d0d6860522f6}
-      \strng{bibnamehash}{b450990de46be62875c1d0d6860522f6}
-      \strng{authorbibnamehash}{b450990de46be62875c1d0d6860522f6}
-      \strng{authornamehash}{259b997f26875333f8aaf7d1d4eb94d4}
-      \strng{authorfullhash}{b450990de46be62875c1d0d6860522f6}
+      \strng{namehash}{f26c9889a763fd8156fa2b1d2dcef892}
+      \strng{fullhash}{f26c9889a763fd8156fa2b1d2dcef892}
+      \strng{fullhashraw}{f26c9889a763fd8156fa2b1d2dcef892}
+      \strng{bibnamehash}{f26c9889a763fd8156fa2b1d2dcef892}
+      \strng{authorbibnamehash}{f26c9889a763fd8156fa2b1d2dcef892}
+      \strng{authornamehash}{f26c9889a763fd8156fa2b1d2dcef892}
+      \strng{authorfullhash}{f26c9889a763fd8156fa2b1d2dcef892}
+      \strng{authorfullhashraw}{f26c9889a763fd8156fa2b1d2dcef892}
       \field{sortinit}{1}
       \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Jurnal e-Biomedik (eBM)}
+      \field{issn}{2721-5148}
+      \field{journaltitle}{Jurnal Pembelajaran Pemberdayaan Masyarakat (JP2M)}
       \field{number}{2}
-      \field{title}{PERBANDINGAN DENYUT NADI ANTARA PENDUDUK YANG TINGGAL DI DATARAN TINGGI DAN DATARAN RENDAH}
-      \field{volume}{2}
-      \field{year}{2014}
+      \field{title}{{Pencegahan stunting melalui edukasi gaya hidup sehat dan penguatan ekonomi}}
+      \field{volume}{5}
+      \field{year}{2024}
+      \field{pages}{349\bibrangedash 358}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.33474/jp2m.v5i2.21872
+      \endverb
     \endentry
-    \entry{Suryanto2019MAE}{article}{}
-      \name{author}{2}{}{%
-        {{hash=620e2e2907547e99ccd6c457b47b5af3}{%
-           family={Suryanto},
+    \entry{rahagia2023upaya}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=56d64bc9a93dd6498a8698ec013d4508}{%
+           family={Rahagia},
+           familyi={R\bibinitperiod},
+           given={Rasi},
+           giveni={R\bibinitperiod}}}%
+        {{hash=71e4debef78d493360a11fc99bcfc63e}{%
+           family={Sriyanah},
            familyi={S\bibinitperiod},
-           given={Andik\bibnamedelima Adi},
-           giveni={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
-        {{hash=4cd3fe68a4734b8e6711f6ea6e53f844}{%
-           family={Muqtadir},
-           familyi={M\bibinitperiod},
-           given={Asfan},
+           given={Nour},
+           giveni={N\bibinitperiod}}}%
+        {{hash=4c3d674f2e403296f2e20f6efe40a809}{%
+           family={Tyarini},
+           familyi={T\bibinitperiod},
+           given={Indrawati\bibnamedelima Aris},
+           giveni={I\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=fb2d421e6a58d7bb80926c3737e5e092}{%
+           family={Lontaan},
+           familyi={L\bibinitperiod},
+           given={Anita},
            giveni={A\bibinitperiod}}}%
+        {{hash=3fc3d91f5abb0a67e9cd8759defd6918}{%
+           family={Yunus},
+           familyi={Y\bibinitperiod},
+           given={Muh},
+           giveni={M\bibinitperiod}}}%
       }
-      \strng{namehash}{eacd0c8675a5402ec64e24ecafd3ea5b}
-      \strng{fullhash}{eacd0c8675a5402ec64e24ecafd3ea5b}
-      \strng{bibnamehash}{eacd0c8675a5402ec64e24ecafd3ea5b}
-      \strng{authorbibnamehash}{eacd0c8675a5402ec64e24ecafd3ea5b}
-      \strng{authornamehash}{eacd0c8675a5402ec64e24ecafd3ea5b}
-      \strng{authorfullhash}{eacd0c8675a5402ec64e24ecafd3ea5b}
+      \strng{namehash}{ab721922bfd305b57ebb6a84a7e99cf6}
+      \strng{fullhash}{82ee297b14c9217617b9d49df014c475}
+      \strng{fullhashraw}{82ee297b14c9217617b9d49df014c475}
+      \strng{bibnamehash}{ab721922bfd305b57ebb6a84a7e99cf6}
+      \strng{authorbibnamehash}{ab721922bfd305b57ebb6a84a7e99cf6}
+      \strng{authornamehash}{ab721922bfd305b57ebb6a84a7e99cf6}
+      \strng{authorfullhash}{82ee297b14c9217617b9d49df014c475}
+      \strng{authorfullhashraw}{82ee297b14c9217617b9d49df014c475}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{SAINTEKBU}
+      \field{issn}{2829-162X}
+      \field{journaltitle}{Abdimas Polsaka: Jurnal Pengabdian Kepada Masyarakat}
       \field{number}{1}
-      \field{title}{PENERAPAN METODE MEAN ABSOLUTE ERROR (MEA) DALAM ALGORITMA REGRESI LINEAR UNTUK PREDIKSI PRODUKSI PADI}
-      \field{volume}{11}
-      \field{year}{2019}
-      \field{pages}{78\bibrangedash 83}
-      \range{pages}{6}
+      \field{title}{{Upaya Pencegahan Stunting Berbasis Edukasi dan Sosialisasi}}
+      \field{volume}{2}
+      \field{year}{2023}
       \verb{doi}
-      \verb 10.32764/saintekbu.v11i1.298
-      \endverb
-      \verb{urlraw}
-      \verb https://ejournal.unwaha.ac.id/index.php/saintek/article/view/298
-      \endverb
-      \verb{url}
-      \verb https://ejournal.unwaha.ac.id/index.php/saintek/article/view/298
+      \verb 10.35816/abdimaspolsaka.v2i1.38
       \endverb
     \endentry
-    \entry{cort2005maermse}{article}{}
-      \name{author}{2}{}{%
-        {{hash=7e389034db1c4f1ba99047863db850eb}{%
-           family={Willmott},
-           familyi={W\bibinitperiod},
-           given={Cort\bibnamedelima J.},
-           giveni={C\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
-        {{hash=683ecc9a84dc4c42d3b77ac983b771ca}{%
-           family={Matsuura},
-           familyi={M\bibinitperiod},
-           given={Kenji},
-           giveni={K\bibinitperiod}}}%
+    \entry{kemenkes2025ssgi}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=742214c04e9bf4a7dc38adc89b83e90b}{%
+           family={{Kementerian Kesehatan RI}},
+           familyi={K\bibinitperiod}}}%
       }
-      \strng{namehash}{62fb2205b9983b6df20c51349d89b32d}
-      \strng{fullhash}{62fb2205b9983b6df20c51349d89b32d}
-      \strng{bibnamehash}{62fb2205b9983b6df20c51349d89b32d}
-      \strng{authorbibnamehash}{62fb2205b9983b6df20c51349d89b32d}
-      \strng{authornamehash}{62fb2205b9983b6df20c51349d89b32d}
-      \strng{authorfullhash}{62fb2205b9983b6df20c51349d89b32d}
+      \list{institution}{1}{%
+        {Kementerian Kesehatan RI}%
+      }
+      \strng{namehash}{742214c04e9bf4a7dc38adc89b83e90b}
+      \strng{fullhash}{742214c04e9bf4a7dc38adc89b83e90b}
+      \strng{fullhashraw}{742214c04e9bf4a7dc38adc89b83e90b}
+      \strng{bibnamehash}{742214c04e9bf4a7dc38adc89b83e90b}
+      \strng{authorbibnamehash}{742214c04e9bf4a7dc38adc89b83e90b}
+      \strng{authornamehash}{742214c04e9bf4a7dc38adc89b83e90b}
+      \strng{authorfullhash}{742214c04e9bf4a7dc38adc89b83e90b}
+      \strng{authorfullhashraw}{742214c04e9bf4a7dc38adc89b83e90b}
       \field{sortinit}{3}
       \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{journaltitle}{Climate Research}
+      \field{title}{{Survei Status Gizi Indonesia (SSGI) 2024 Dalam Angka}}
+      \field{type}{techreport}
+      \field{year}{2025}
+    \endentry
+    \entry{bkpk2023ski}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=28092608f3e553d23f5ebcf9e03a015b}{%
+           family={{Badan Kebijakan Pembangunan Kesehatan}},
+           familyi={B\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Kementerian Kesehatan RI}%
+      }
+      \strng{namehash}{28092608f3e553d23f5ebcf9e03a015b}
+      \strng{fullhash}{28092608f3e553d23f5ebcf9e03a015b}
+      \strng{fullhashraw}{28092608f3e553d23f5ebcf9e03a015b}
+      \strng{bibnamehash}{28092608f3e553d23f5ebcf9e03a015b}
+      \strng{authorbibnamehash}{28092608f3e553d23f5ebcf9e03a015b}
+      \strng{authornamehash}{28092608f3e553d23f5ebcf9e03a015b}
+      \strng{authorfullhash}{28092608f3e553d23f5ebcf9e03a015b}
+      \strng{authorfullhashraw}{28092608f3e553d23f5ebcf9e03a015b}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Survei Kesehatan Indonesia (SKI) 2023 Dalam Angka}}
+      \field{type}{techreport}
+      \field{year}{2023}
+    \endentry
+    \entry{setneg2024strategi}{report}{}{}
+      \name{author}{1}{}{%
+        {{hash=3e34d9c7062110376f3878669e2d1248}{%
+           family={{Kementerian Sekretariat Negara RI}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Kementerian Sekretariat Negara RI}%
+      }
+      \strng{namehash}{3e34d9c7062110376f3878669e2d1248}
+      \strng{fullhash}{3e34d9c7062110376f3878669e2d1248}
+      \strng{fullhashraw}{3e34d9c7062110376f3878669e2d1248}
+      \strng{bibnamehash}{3e34d9c7062110376f3878669e2d1248}
+      \strng{authorbibnamehash}{3e34d9c7062110376f3878669e2d1248}
+      \strng{authornamehash}{3e34d9c7062110376f3878669e2d1248}
+      \strng{authorfullhash}{3e34d9c7062110376f3878669e2d1248}
+      \strng{authorfullhashraw}{3e34d9c7062110376f3878669e2d1248}
+      \field{sortinit}{5}
+      \field{sortinithash}{20e9b4b0b173788c5dace24730f47d8c}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Strategi Nasional Percepatan Pencegahan dan Penurunan Stunting 2025-2029}}
+      \field{type}{techreport}
+      \field{year}{2024}
+    \endentry
+    \entry{supriyanto2023implementasi}{article}{}{}
+      \name{author}{1}{}{%
+        {{hash=6433999c9d33914a77a92ce837c97575}{%
+           family={Supriyanto},
+           familyi={S\bibinitperiod},
+           given={Hadi},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{6433999c9d33914a77a92ce837c97575}
+      \strng{fullhash}{6433999c9d33914a77a92ce837c97575}
+      \strng{fullhashraw}{6433999c9d33914a77a92ce837c97575}
+      \strng{bibnamehash}{6433999c9d33914a77a92ce837c97575}
+      \strng{authorbibnamehash}{6433999c9d33914a77a92ce837c97575}
+      \strng{authornamehash}{6433999c9d33914a77a92ce837c97575}
+      \strng{authorfullhash}{6433999c9d33914a77a92ce837c97575}
+      \strng{authorfullhashraw}{6433999c9d33914a77a92ce837c97575}
+      \field{sortinit}{6}
+      \field{sortinithash}{b33bc299efb3c36abec520a4c896a66d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2964-9048}
+      \field{journaltitle}{Jurnal Multidisiplin Indonesia}
+      \field{number}{2}
+      \field{title}{{Implementasi Kebijakan Penurunan Stunting di Kecamatan Salem Kabupaten Brebes}}
+      \field{volume}{2}
+      \field{year}{2023}
+    \endentry
+    \entry{saleh2023edukasi}{article}{}{}
+      \name{author}{3}{}{%
+        {{hash=97e8212a08869a66f15a547b50ac780f}{%
+           family={Saleh},
+           familyi={S\bibinitperiod},
+           given={Asmulyati\bibnamedelima S.},
+           giveni={A\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=5e0832b99ed20ad825e29c40fbc772e9}{%
+           family={Hasan},
+           familyi={H\bibinitperiod},
+           given={Tobianus},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f85327f152051ec6aa35b40e6377dc85}{%
+           family={Saleh},
+           familyi={S\bibinitperiod},
+           given={Ummi\bibnamedelimb Kaltsum\bibnamedelima S.},
+           giveni={U\bibinitperiod\bibinitdelim K\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{0250f378a2069acb5a4a0c2038762a02}
+      \strng{fullhash}{e9d0a834f217265e381ad68ffc6e12e3}
+      \strng{fullhashraw}{e9d0a834f217265e381ad68ffc6e12e3}
+      \strng{bibnamehash}{e9d0a834f217265e381ad68ffc6e12e3}
+      \strng{authorbibnamehash}{e9d0a834f217265e381ad68ffc6e12e3}
+      \strng{authornamehash}{0250f378a2069acb5a4a0c2038762a02}
+      \strng{authorfullhash}{e9d0a834f217265e381ad68ffc6e12e3}
+      \strng{authorfullhashraw}{e9d0a834f217265e381ad68ffc6e12e3}
+      \field{sortinit}{7}
+      \field{sortinithash}{108d0be1b1bee9773a1173443802c0a3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{2807-3576}
+      \field{journaltitle}{AHMAR METAKARYA: JURNAL PENGABDIAN MASYARAKAT}
+      \field{number}{2}
+      \field{title}{{Edukasi Penerapan Gizi Seimbang Masa Kehamilan Berbasis Pangan Lokal Sebagai Pencegahan Stunting}}
+      \field{volume}{2}
+      \field{year}{2023}
+      \field{pages}{49\bibrangedash 53}
+      \range{pages}{5}
+    \endentry
+    \entry{zemariam2025prediction}{article}{}{}
+      \name{author}{8}{}{%
+        {{hash=be2a881cbb2d9137e8ffe83f0792d647}{%
+           family={Zemariam},
+           familyi={Z\bibinitperiod},
+           given={Alemu\bibnamedelima Birara},
+           giveni={A\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=beac9e8aef8fdab95592f41a9b6f38ef}{%
+           family={Abate},
+           familyi={A\bibinitperiod},
+           given={Biruk\bibnamedelima Beletew},
+           giveni={B\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=f0138e41db5a29f7e8d11bdde71f2305}{%
+           family={Alamaw},
+           familyi={A\bibinitperiod},
+           given={Addis\bibnamedelima Wondmagegn},
+           giveni={A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=1df532fe13aeec81077f23e569171047}{%
+           family={Lake},
+           familyi={L\bibinitperiod},
+           given={Eyob\bibnamedelima shitie},
+           giveni={E\bibinitperiod\bibinitdelim s\bibinitperiod}}}%
+        {{hash=fae8631e135a237eb7513dc8cca2457c}{%
+           family={Yilak},
+           familyi={Y\bibinitperiod},
+           given={Gizachew},
+           giveni={G\bibinitperiod}}}%
+        {{hash=bbd242efe42e0b798336f232819740db}{%
+           family={Ayele},
+           familyi={A\bibinitperiod},
+           given={Mulat},
+           giveni={M\bibinitperiod}}}%
+        {{hash=61acc6864a0e7ad6c1cdc49d3a041fc8}{%
+           family={Tilahun},
+           familyi={T\bibinitperiod},
+           given={Befkad\bibnamedelima Derese},
+           giveni={B\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=a81525c0c01db431c28bcc47913ecf06}{%
+           family={Ngusie},
+           familyi={N\bibinitperiod},
+           given={Habtamu\bibnamedelima Setegn},
+           giveni={H\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{1fc4da67c4a0662d849faadfdc966df8}
+      \strng{fullhash}{31c9656d109ddcca7fbf441a03a6a0b3}
+      \strng{fullhashraw}{31c9656d109ddcca7fbf441a03a6a0b3}
+      \strng{bibnamehash}{1fc4da67c4a0662d849faadfdc966df8}
+      \strng{authorbibnamehash}{1fc4da67c4a0662d849faadfdc966df8}
+      \strng{authornamehash}{1fc4da67c4a0662d849faadfdc966df8}
+      \strng{authorfullhash}{31c9656d109ddcca7fbf441a03a6a0b3}
+      \strng{authorfullhashraw}{31c9656d109ddcca7fbf441a03a6a0b3}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{PLOS ONE}
       \field{number}{1}
-      \field{title}{Advantages of the mean absolute error (MAE) over the root mean square error (RMSE) in assessing average model performance}
-      \field{volume}{30}
-      \field{year}{2005}
-      \field{pages}{79\bibrangedash 82}
-      \range{pages}{4}
+      \field{title}{{Prediction of stunting and its socioeconomic determinants among adolescent girls in Ethiopia using machine learning algorithms}}
+      \field{volume}{20}
+      \field{year}{2025}
+      \field{pages}{e0316452}
+      \range{pages}{-1}
       \verb{doi}
-      \verb 10.3354/CR030079
+      \verb 10.1371/journal.pone.0316452
+      \endverb
+    \endentry
+    \entry{tamanna2025identifying}{article}{}{}
+      \name{author}{5}{}{%
+        {{hash=d73c71ff164872f37d653261a98d7a09}{%
+           family={Tamanna},
+           familyi={T\bibinitperiod},
+           given={Tanzila},
+           giveni={T\bibinitperiod}}}%
+        {{hash=a513c6e9116ba798e678cf214be085c5}{%
+           family={Mahmud},
+           familyi={M\bibinitperiod},
+           given={Shohel},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7e22224c1999a70a9b63ebbe322ea51e}{%
+           family={Salma},
+           familyi={S\bibinitperiod},
+           given={Nahid},
+           giveni={N\bibinitperiod}}}%
+        {{hash=0c2ed33a7742d391bd25fec9ba1fa7c2}{%
+           family={Hossain},
+           familyi={H\bibinitperiod},
+           given={Md.\bibnamedelimi Musharraf},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=60ef7a830d06c3f8c4a0dc024e71d5b3}{%
+           family={Karim},
+           familyi={K\bibinitperiod},
+           given={Md.\bibnamedelimi Rezaul},
+           giveni={M\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+      }
+      \strng{namehash}{5156b5d46b05ea2db18b4cc98d8dbc68}
+      \strng{fullhash}{004e15124ffe4046a4bdc4f9a091ea7d}
+      \strng{fullhashraw}{004e15124ffe4046a4bdc4f9a091ea7d}
+      \strng{bibnamehash}{5156b5d46b05ea2db18b4cc98d8dbc68}
+      \strng{authorbibnamehash}{5156b5d46b05ea2db18b4cc98d8dbc68}
+      \strng{authornamehash}{5156b5d46b05ea2db18b4cc98d8dbc68}
+      \strng{authorfullhash}{004e15124ffe4046a4bdc4f9a091ea7d}
+      \strng{authorfullhashraw}{004e15124ffe4046a4bdc4f9a091ea7d}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Scientific Reports}
+      \field{number}{14336}
+      \field{title}{{Identifying determinants of malnutrition in under-five children in Bangladesh: insights from the BDHS-2022 cross-sectional study}}
+      \field{volume}{15}
+      \field{year}{2025}
+      \verb{doi}
+      \verb 10.1038/s41598-025-99288-y
       \endverb
     \endentry
   \enddatalist
+  \missing{Ivanny2014Perbandingan}
+  \missing{Suryanto2019MAE}
+  \missing{cort2005maermse}
 \endrefsection
 \endinput
 

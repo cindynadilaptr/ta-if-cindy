@@ -1,13 +1,13 @@
  \renewcommand *\cftchappresnum {\MakeUppercase []{BAB}~} 
 \babel@toc {bahasa}{}\relax 
-\contentsline {chapter}{LEMBAR PENGESAHAN}{iii}{section*.2}%
-\contentsline {chapter}{Halaman Pernyataan Orisinalitas}{iv}{section*.3}%
-\contentsline {chapter}{Halaman Persetujuan Publikasi}{v}{section*.4}%
-\contentsline {chapter}{KATA PENGANTAR}{vi}{section*.5}%
-\contentsline {chapter}{RINGKASAN}{vii}{section*.6}%
-\contentsline {chapter}{ABSTRAK}{viii}{section*.7}%
-\contentsline {chapter}{ABSTRACT}{ix}{section*.8}%
-\contentsline {chapter}{DAFTAR ISI}{x}{section*.9}%
+\contentsline {chapter}{LEMBAR PENGESAHAN}{ii}{section*.2}%
+\contentsline {chapter}{Halaman Pernyataan Orisinalitas}{iii}{section*.3}%
+\contentsline {chapter}{Halaman Persetujuan Publikasi}{iv}{section*.4}%
+\contentsline {chapter}{KATA PENGANTAR}{v}{section*.5}%
+\contentsline {chapter}{RINGKASAN}{vi}{section*.6}%
+\contentsline {chapter}{ABSTRAK}{vii}{section*.7}%
+\contentsline {chapter}{ABSTRACT}{viii}{section*.8}%
+\contentsline {chapter}{DAFTAR ISI}{ix}{section*.9}%
 \contentsline {chapter}{DAFTAR TABEL}{xi}{section*.11}%
 \contentsline {chapter}{DAFTAR GAMBAR}{xii}{section*.13}%
 \contentsline {chapter}{DAFTAR RUMUS}{xiii}{section*.15}%
