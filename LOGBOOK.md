@@ -51,3 +51,8 @@
 
 ### 2025-10-31
 - began writing Chapter 1 (background and problem formulation)
+
+## November
+
+### 2025-11-10
+- Update chapter 1 (RP, RO, etc) and drop wasting & underweight variable
