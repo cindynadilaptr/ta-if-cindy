@@ -1,0 +1,77 @@
+\newpage
+\chapter{PENDAHULUAN} \label{Bab I}
+
+\section{Latar Belakang} \label{I.Latar Belakang}
+Manusia memerlukan kondisi tubuh yang sehat untuk dapat beraktivitas secara maksimal. Saat ini salah satu masalah kesehatan yang banyak terjadi di Indonesia adalah kendala \textit{stunting}. Masalah ini telah menjadi perhatian serius karena dampaknya yang meluas, terutama pada anak-anak sebagai generasi penerus bangsa. Berbagai faktor, seperti pola hidup, akses terhadap makanan bergizi, serta kualitas pelayanan kesehatan, turut berkontribusi terhadap tingginya prevalensi masalah ini.
+
+Penyakit \textit{stunting} merupakan kondisi di mana tubuh mengalami kekurangan gizi secara berlebihan dan terjadi pada rentang waktu yang cukup lama \cite{said2024pencegahan}. Dampak dari masalah ini akan mengakibatkan kendala pertumbuhan pada anak sehingga tinggi badan anak cenderung menjadi lebih pendek. Tak hanya memengaruhi pertumbuhan fisik, penyakit stunting juga akan berpengaruh ke dalam aspek pertumbuhan lainnya seperti mental, intelektual, dan kognitif anak \cite{rahagia2023upaya}. Oleh karena itu, penting untuk memahami faktor-faktor yang menyebabkan terjadinya \textit{stunting} agar dapat mengambil langkah-langkah pencegahan yang efektif.
+
+Di Indonesia, kasus \textit{stunting} terjadi pada balita usia 0-5 tahun berada pada persentase sebesar 19,8\% menurut Survei Status Gizi Indonesia (SSGI) \cite{kemenkes2025ssgi}. Meskipun telah mengalami penurunan dari tahun sebelumnya yaitu angka 21,5\%, hasil ini menunjukan bahwa target pemerintah Indonesia yaitu menurunkan prevalensi \textit{stunting} sampai 14,4\% di tahun 2029 masih belum tercapai \cite{bkpk2023ski}, \cite{setneg2024strategi}. \textit{Stunting} dapat berasal dari faktor-faktor yang sangat kompleks dilihat dari aspek sosial, biologis, maupun lingkungan. Biasanya, penyebab utama pada \textit{stunting} dapat terjadi karena kurangnya asupan gizi, buruknya sanitasi, serta akses yang rendah terhadap pelayanan kesehatan \cite{supriyanto2023implementasi}, \cite{saleh2023edukasi}. Terdapat faktor penting lain yang menyebabkan terjadinya stunting yaitu kurangnya edukasi ibu tentang betapa penting untuk menjaga gizi seimbang pada masa kehamilan, masa menyusui, dan masa pertumbuhan anak \cite{saleh2023edukasi}. Pada beberapa kasus, ibu hamil yang melahirkan bayi dengan kondisi berat badan lahir rendah (BBLR) mengalami fase kekurangan gizi selama masa kehamilannya \cite{saleh2023edukasi}. Hal ini dapat mengakibatkan terjadinya \textit{stunting} di kemudian hari. 
+
+Tingkat \textit{stunting} di Indonesia sendiri dinilai tidak merata di seluruh wilayah. Beberapa provinsi seperti Bali dan DI Yogyakarta menunjukkan angka prevalensi yang relatif rendah, berbanding terbalik dengan provinsi Nusa Tenggara Timur dan Sulawesi Barat yang mencatat angka jauh lebih tinggi \cite{kemenkes2025ssgi}. Situasi yang timpang ini menunjukkan adanya variasi faktor determinan yang memengaruhi kejadian \textit{stunting} di tiap daerah, baik dari segi sosial, ekonomi, pendidikan, maupun kondisi lingkungan \cite{zemariam2025prediction}. Faktor lainnya seperti status gizi ibu, akses terhadap layanan kesehatan, dan sanitasi dasar memiliki kontribusi yang berbeda-beda pada setiap wilayah. Adanya variasi faktor risiko ini mengindikasikan bahwa pendekatan penanganan yang bersifat generalis memiliki keterbatasan dalam menjangkau akar masalah di tiap daerah, sehingga dibutuhkan landasan data yang spesifik per wilayah untuk mendukung perumusan strategi intervensi yang lebih presisi dan tepat sasaran.  Maka dari itu, diperlukan analisis yang lebih mendalam untuk memahami faktor-faktor yang paling berpengaruh untuk situasi \textit{stunting} tiap provinsi.
+
+Penelitian sebelumnya menerapkan algoritma \textit{machine learning} untuk memprediksi \textit{stunting} pada kalangan remaja di Ethiopia dan menemukan bahwa metode konvensional kurang mampu menangkap interaksi kompleks antarvariabel \cite{zemariam2025prediction}. Namun penelitian tersebut dilakukan secara terbatas pada kelompok usia remaja dan wilayah tertentu, sehingga belum secara langsung dapat digeneralisasi dan masih memerlukan kajian tersendiri untuk ke skala nasional Indonesia yang mencakup berbagai karakteristik. Dengan demikian, penting untuk mengeksplorasi pendekatan serupa pada skala provinsi di Indonesia untuk memahami faktor determinan \textit{stunting} berdasarkan kondisi lokal.
+
+Dalam beberapa tahun terakhir, pendekatan \textit{machine learning} mulai banyak digunakan dalam bidang kesehatan dan gizi untuk mengidentifikasi pola tersembunyi dalam data yang kompleks \cite{tamanna2025identifying}. Salah satu algoritma yang populer adalah \textit{Random Forest}, yang dikenal memiliki kemampuan tinggi dalam menangani variabel dalam jumlah besar serta menghasilkan prediksi yang akurat. Keunggulan lain dari Random Forest adalah kemampuannya dalam mengukur tingkat kepentingan setiap fitur \textit{(feature importance)}, sehingga dapat membantu memahami faktor-faktor mana yang paling berpengaruh terhadap suatu fenomena. Namun demikian, model ini sering dianggap sebagai \textit{black box} karena sulit dijelaskan secara langsung oleh pengambil kebijakan atau peneliti non-teknis.
+
+Untuk mengatasi keterbatasan interpretasi tersebut, digunakan metode interpretabilitas seperti SHAP (\textit{SHapley Additive exPlanations}) yang mampu menjelaskan kontribusi masing-masing fitur terhadap hasil prediksi model \cite{tamanna2025identifying}. Melalui pendekatan ini, setiap faktor dapat dinilai apakah ia meningkatkan atau menurunkan kemungkinan terjadinya stunting pada suatu wilayah. Dengan demikian, kombinasi antara \textit{Random Forest} dan SHAP tidak hanya memberikan hasil prediksi yang akurat, tetapi juga penjelasan yang dapat dipahami secara intuitif oleh pengambil keputusan. Pendekatan ini memberikan nilai tambah dalam analisis kebijakan berbasis data, terutama untuk menentukan prioritas intervensi di daerah dengan tingkat \textit{stunting} tinggi.
+
+Untuk menjawab permasalahan tersebut, penelitian ini bertujuan untuk mengidentifikasi faktor-faktor determinan utama yang memengaruhi prevalensi \textit{stunting} antarprovinsi di Indonesia menggunakan data SSGI tahun 2024 melalui pendekatan \textit{Random Forest} yang diinterpretasikan dengan SHAP. Penelitian ini berfokus pada dua aspek utama, yaitu menilai performa model dalam memprediksi tingkat \textit{stunting} serta memahami peran masing-masing variabel terhadap hasil prediksi. Hasil penelitian diharapkan dapat memberikan dasar empiris bagi pemerintah dan pemangku kebijakan dalam merancang strategi intervensi gizi yang lebih efektif dan berbasis bukti ilmiah.
+
+\section{Rumusan Masalah} \label{I.Rumusan Masalah}
+
+Berdasarkan pemaparan latar belakang, dihasilkan rumusan masalah pada penelitian yang akan dijabarkan pada poin berikut: \par
+
+\begin{enumerate}[noitemsep]
+	\item Apa saja faktor-faktor yang menjadi determinan utama penyebab \textit{stunting} antarprovinsi di Indonesia berdasarkan data SSGI tahun 2024?
+	\item Bagaimana performa model \textit{Random Forest} dalam memprediksi prevalensi \textit{stunting} antarprovinsi di Indonesia?
+    \item Bagaimana interpretasi SHAP digunakan untuk menjelaskan kontribusi masing-masing faktor terhadap hasil prediksi model \textit{Random Forest}? 
+\end{enumerate}
+
+\section{Tujuan Penelitian} \label{I.Tujuan}
+Setelah penjabaran rumusan masalah, pada penelitian ini dibuat tujuan penelitian yaitu sebagai berikut: \par
+
+\begin{enumerate}[noitemsep]
+	\item Mengidentifikasi faktor-faktor determinan utama penyebab \textit{stunting} antarprovinsi di Indonesia berdasarkan data SSGI tahun 2024. 
+	\item Menganalisis performa model \textit{Random Forest} dalam memprediksi prevalensi \textit{stunting} antarprovinsi di Indonesia.
+    \item Menerapkan interpretasi SHAP untuk menjelaskan kontribusi masing-masing faktor terhadap hasil prediksi model \textit{Random Forest}.
+\end{enumerate}
+
+\section{Batasan Masalah} \label{I.Batasan}
+Agar penelitian tidak terlalu luas dan tidak keluar dari pokok permasalahan, maka ditentukan batasan oleh beberapa poin berikut: \par
+
+\begin{enumerate}[noitemsep]
+    \item Data yang digunakan untuk penelitian ini terbatas pada Survei Status Gizi Indonesia (SSGI) tahun 2024 yang telah dipublikasikan oleh Kementerian Kesehatan RI. Perlu diketahui bahwa penelitian ini tida menggunakan data tambahan dari sumber lain. Sehingga penelitian yang dilakukan bukan analisis \textit{time-series} antartahun dan memiliki ruang lingkup spasial terbatas pada 34 provinsi di Indonesia sesuai ketersediaan data.
+    \item Populasi yang diambil untuk menjadi fokus penelitian ini adalah anak balita usia 0-59 bulan (5 tahun), sesuai dengan sasaran pengukuran prevalensi \textit{stunting} pada SSGI.
+    \item Variabel yang digunakan untuk penelitian ini mencakup berbagai faktor yang memiliki potensi untuk memengaruhi prevalensi penyebab stunting, seperti karakteristik balita, karakteristik ibu, serta kondisi rumah tangga yang meliputi status gizi, pendidikan, ekonomi, dan akses terhadap fasilitas kesehatan, air bersih, serta sanitasi. variabel-variabel ini merupakan sebagian dari indikator yang tersedia dalam dataset SSGI tahun 2024 dan dipilih berdasarkan relevansi terhadap topik penelitian.
+    \item Analisis yang dilakukan pada penelitian ini difokuskan pada tingkat provinsi di Indonesia, sehingga hasilnya mencerminkan kondisi agregat dan tidak mempertimbangkan variasi di tingkat kabupaten/kota atau individu.
+    \item Model yang digunakan untuk penelitian ini adalah algoritma \textit{Random Forest} untuk memprediksi prevalensi \textit{stunting}, dengan interpretasi hasil menggunakan metode SHAP (\textit{SHapley Additive exPlanations}) untuk memahami kontribusi setiap variabel terhadap prediksi prevalensi \textit{stunting}.
+    \item Penelitian ini berfokus pada analisis faktor determinan penyebab \textit{stunting}, bukan pada pengembangan sistem prediksi \textit{stunting} secara \textit{real-time} atau aplikasi praktis lainnya.
+\end{enumerate}
+
+\section{Manfaat Penelitian} \label{I.Manfaat}
+Penelitian ini dilaksanakan dengan harapan agar nantinya dapat memiliki manfaat sebagai berikut: \par
+
+\begin{enumerate}[noitemsep]
+    \item Bagi masyarakat, penelitian ini diharapkan dapat memberi gambaran empiris mengenai faktor-faktor utama yang memiliki kontribusi terhadap \textit{stunting} di berbagai provinsi di Indonesia terutama di Sumatera. Hasil penelitian diharapkan dapat menjadi dasar bagi tenaga kesehatan dan pemerintah dalam menyusun strategi intervensi gizi yang lebih terarah dan sesuai dengan karakteristik wilayah masing-masing. 
+    \item Bagi peneliti, penelitian ini bermanfaat untuk mengembangkan pemahaman mengenai penerapan algoritma \textit{machine learning}, khususnya \textit{Random Forest} dengan interpretasi SHAP dalan menganalisis data kesehatan masyarakat. 
+    \item Bagi akademisi, dapat dijadikan referensi mahasiswa lain yang ingin meneliti terkait faktor-faktor penyebab \textit{stunting} maupun penerapan model \textit{machine learning} untuk analisis data survei kesehatan.
+\end{enumerate}
+
+\section{Sistematika Penulisan} \label{I.Sistematika}
+Secara keseluruhan, struktur penulisan laporan ini disusun untuk memberikan gambaran umum setiap tahapan penelitian mengenai analisis determinan penyebab \textit{stunting} di provinsi-provinsi di Indonesia. Setiap bab disusun secara sistematis agar pembahasan mengenai penerapan model \textit{Random Forest} dan interpretasi SHAP pada data SSGI tahun 2024 dapat diikuti dengan runtut dan mudah dipahami.
+
+\subsection*{Bab I}
+Bab I berisi pendahuluan. Pendahuluan menguraikan latar belakang, rumusan masalah, tujuan, manfaat, batasan masalah dan sistematika penulisan dari penelitian.
+
+\subsection*{Bab II}
+Bab II berisi tinjauan pustaka. Pada bab ini akan dibahas teori-teori mengenai \textit{stunting}, faktor-faktor determinan penyebab \textit{stunting}, Survei Status Gizi Indonesia (SSGI), serta penerapan algoritma \textit{machine learning} khususnya \textit{Random Forest} pada model prediksi risiko \textit{stunting}. Selain itu, bab ini juga membahas hasil penelitian terdahulu yang relevan sebagai landasan konseptual dan pembeda penelitian ini dari studi yang telah dilakukan sebelumnya.
+
+\subsection*{Bab III}
+Bab ini menjelaskan metode yang akan digunakan dalam penelitian, termask sumber dan jenis data, variabel penelitian, tahapan pengolahan data, serta rancangan model analisis menggunakan \textit{Random Forest} dan SHAP. Selain itu, bab ini juga menjelaskan mengenai teknik evaluasi model serta prosedur interpretasi hasil untuk mengidentifikasi faktor determinan utama penyebab \textit{stunting}.
+
+\subsection*{Bab IV}
+Bab ini menguraikan hasil analisis data, performa model \textit{Random Forest}, hasil interpretasi SHAP, setra pembahasan mengenai faktor-faktor determinan yang memiliki pengaruh prevalensi \textit{stunting} antarprovinsi di Indonesia.
+
+\subsection*{Bab V}
+Bab V berisi Kesimpulan dan saran. Pada bab ini akan diberikan kesimpulan dari hasil penelitian yang menjawab rumusan masalah berdasarkan hasil analisis yang telah dilakukan sebelumnya. Saran-saran juga diberikan sebagai masukan bagi pihak terkait dan peneliti selanjutnya untuk pengembangan kebijakan dan penelitian lanjutan di bidang \textit{stunting}.
