@@ -2,107 +2,107 @@
 \chapter{METODE PENELITIAN} \label{Bab III}
 
 \section{Alur Penelitian} \label{III.Alur}
-Penelitian ini dilakukan dengan mengikuti tahapan sistematis untuk memastikan hasil analisis determinan \textit{stunting} akurat dan dapat dipertanggungjawabkan. Alur penelitian dimulai dari studi literatur hingga interpretasi hasil menggunakan metode SHAP. Secara garis besar, tahapan penelitian digambarkan dalam diagram alir (\textit{flowchart}) pada Gambar \ref{fig:3.alur}.
+Penelitian ini dirancang untuk menganalisis faktor-faktor determinan penyebab \textit{stunting} pada tingkat provinsi di Indonesia dengan memanfaatkan data sekunder \textit{Annual Report} Survei Status Gizi Indonesia (SSGI) tahun 2024. Pendekatan yang digunakan mengombinasikan pemodelan \textit{machine Learning} regresi menggunakan \textit{Random Forest} dan metode interpretasi model SHAP \textit{SHapley Additive exPlanations}. Model ini dibangun menggunakan dataset agregat tingkat provinsi yang memuat berbagai indikator status gizi balita serta faktor determinan yang mencakup aspek kesehatan ibu dan anak, pola asuh, layanan kesehatan, penyakit, perlindungan sosial, dan kondisi sanitasi. Penelitian ini bertujuan untuk mengidentifikasi  faktor determinan utama yang berkontribusi terhadap tingginya prevalensi \textit{stunting} antar provinsi, serta memberikan pemahaman yang bersifat interpretatif sebagai dasar perumusan kebijakan dan intervensi gizi yang lebih tepat sasaran. Secara garis besar, tahapan penelitian digambarkan dalam diagram alir (\textit{flowchart}) pada Gambar \ref{fig:3.alur}.
 
 \begin{figure}[H]
     \centering
-    % Pastikan kamu punya file gambar flowchart di folder figures/
-    % Jika belum ada, sementara bisa di-comment dulu baris includegraphics-nya
-    \includegraphics[width=0.7\textwidth]{figure/flowchart_penelitian.png}
+    \includegraphics[width=0.8\textwidth]{figure/alur_utama.jpg}
     \caption{Diagram Alir Penelitian}
     \label{fig:3.alur}
 \end{figure}
 
-\section{Penjabaran Langkah Penelitian} \label{III.Jabar Alur}
-Berdasarkan Gambar \ref{fig:3.alur}, berikut adalah penjabaran rinci dari setiap tahapan yang dilakukan dalam penelitian ini:
+Berdasarkan Gambar \ref{fig:3.alur}, alur penelitian disusun secara sistematis yang diawali dengan tahap identifikasi masalah mengenai urgensi penanganan \textit{stunting} di Indonesia dan kompleksitas faktor determinan yang mempengaruhinya di tingkat provinsi. Tahap ini didukung oleh studi literatur mendalam untuk memahami variabel-variabel determinan multidimensi yang mencakup berbagai aspek, serta metode pengolahan data dan pemodelan \textit{machine learning} yang relevan. Berlandaskan pemahaman tersebut, selanjutnya dilakukan pengumpulan dataset yang bersumber dari Laporan Tahunan Survei Status Gizi Indonesia (SSGI) tahun 2024. Laporan Tahunan SSGI 2024 kemudian digunakan untuk menyiapkan dataset agregat tingkat provinsi yang memuat variabel target (prevalensi \textit{stunting}) dan variabel fitur (faktor determinan). Data mentah yang diperoleh selanjutnya diproses melalui tahapan pra-pemrosesan data yang meliputi pembersihan data, penyaringan data, dan pemisahan variabel target dan fitur. 
 
-\subsection{Pengumpulan Data} \label{III.Langkah1}
-Langkah awal penelitian adalah pengumpulan data sekunder dari Survei Status Gizi Indonesia (SSGI) tahun 2024. Data ini memuat informasi prevalensi \textit{stunting} serta berbagai indikator kesehatan dan lingkungan di tingkat provinsi di Indonesia. Data diperoleh dalam format CSV (\textit{Comma Separated Values}).
+Setelah data siap, tahap berikutnya adalah pembangunan model regresi menggunakan algoritma \textit{Random Forest}. Proses ini mencakup penentuan parameter terbaik melalui \textit{Grid Search} dan validasi silang (\textit{Cross Validation}) untuk memastikan performa model yang optimal. Model yang telah dilatih kemudian dievaluasi kinerjanya menggunakan metrik statistik seperti \textit{Mean Absolute Error} (MAE), \textit{Mean Squared Error} (MSE), \textit{Root Mean Squared Error} (RMSE), \textit{Mean Absolute Percentage Error} (MAPE), serta koefisien determinasi ($R^2$ Score). Langkah terakhir adalah menginterpretasikan hasil prediksi model \textit{Random Forest} menggunakan \textit{SHapley Additive exPlanations} (SHAP) untuk mengetahui kontribusi setiap fitur (determinan) terhadap angka \textit{stunting}, baik secara global maupun lokal per provinsi.
 
-\subsection{Pra-pemrosesan Data (\textit{Data Preprocessing})} \label{III.Langkah2}
-Data mentah yang diperoleh perlu diproses agar siap digunakan dalam pemodelan. Tahapan ini meliputi:
+\section{Tahapan Penelitian} \label{sec:tahapan}
+Sesuai dengan alur yang tertera pada Gambar \ref{fig:3.alur}, penelitian ini dilaksanakan melalui tahapan-tahapan sebagai berikut:
+
+\subsection{Identifikasi Masalah} \label{subsec:identifikasi}
+Tahap pertama adalah mengidentifikasi permasalahan utama terkait prevalensi \textit{stunting} di Indonesia yang masih menjadi isu prioritas nasional. Permasalahan difokuskan pada kompleksitas faktor determinan yang bervariasi antarprovinsi dan keterbatasan metode statistik konvensional dalam menangkap hubungan non-linear antar variabel. Oleh karena itu, penelitian ini dirumuskan untuk tidak hanya memprediksi angka stunting, tetapi juga menjelaskan faktor penyebab utamanya menggunakan pendekatan \textit{Machine Learning}.
+
+\subsection{Studi Literatur} \label{subsec:literatur}
+Pada tahap ini, dilakukan penelusuran dan kajian terhadap pustaka yang relevan, meliputi:
 \begin{enumerate}
-    \item \textbf{Pembersihan Data:} Mengonversi tipe data kolom numerik yang terdeteksi sebagai objek (string) menjadi tipe \textit{float}.
-    \item \textbf{Penyaringan Data (\textit{Filtering}):} Menghapus baris data yang tidak relevan untuk analisis tingkat provinsi, yaitu data agregat nasional ("Indonesia") dan provinsi pemekaran baru yang datanya belum lengkap (misalnya "Papua Tengah" dan "Papua Pegunungan") untuk menjaga konsistensi model.
-    \item \textbf{Pemisahan Variabel:} Memisahkan variabel target ($y$) yaitu \texttt{prevalensi\_stunting\_persen} dan variabel fitur ($X$) yang mencakup indikator determinan lainnya.
+    \item \textbf{Teori Determinan Stunting:} Mempelajari kerangka konsep WHO dan UNICEF terkait penyebab malnutrisi (asupan makan, kesehatan, lingkungan, dan pola asuh) untuk menentukan variabel penelitian yang tepat.
+    \item \textbf{Metode Machine Learning:} Mengkaji penelitian terdahulu terkait penerapan algoritma \textit{Random Forest} untuk data kesehatan dan metode validasi \textit{Leave-One-Out Cross Validation} (LOOCV) untuk dataset berukuran kecil.
+    \item \textbf{Interpretabilitas Model:} Mempelajari metode SHAP (\textit{SHapley Additive exPlanations}) sebagai solusi untuk menjelaskan model \textit{black-box} agar hasil prediksi dapat dipahami secara medis dan kebijakan.
 \end{enumerate}
 
-\subsection{Pembangunan Model \textit{Random Forest}} \label{III.Langkah3}
-Tahap ini melibatkan pembangunan model regresi menggunakan algoritma \textit{Random Forest}. Proses ini mencakup:
+\subsection{Pengumpulan Data} \label{subsec:pengumpulan}
+Setelah variabel ditentukan berdasarkan studi literatur, dilakukan pengumpulan data sekunder dari Laporan Publikasi Survei Status Gizi Indonesia (SSGI) tahun 2024. Data diekstraksi dari lampiran laporan resmi menjadi format terstruktur (CSV). Dataset ini mencakup variabel target (prevalensi stunting) dan 56 variabel fitur yang merepresentasikan indikator kesehatan ibu, balita, serta lingkungan dari seluruh provinsi di Indonesia.
+
+\subsection{Pra-pemrosesan Data (\textit{Data Preprocessing})} \label{subsec:preprocessing}
+Data mentah yang diperoleh diproses untuk menjamin kualitas input model melalui langkah-langkah:
 \begin{enumerate}
-    \item \textbf{Penentuan Parameter (\textit{Hyperparameter Tuning}):} Menggunakan metode \textit{Grid Search} untuk mencari kombinasi parameter terbaik, meliputi jumlah pohon (\textit{n\_estimators}) dan kedalaman maksimum pohon (\textit{max\_depth}).
-    \item \textbf{Validasi Silang (\textit{Cross Validation}):} Mengingat jumlah sampel data provinsi yang terbatas, metode \textit{Leave-One-Out Cross Validation} (LOOCV) digunakan untuk memvalidasi performa model secara objektif dan mencegah \textit{overfitting}.
+    \item \textbf{Pembersihan Data (\textit{Cleaning}):} Mengonversi tipe data numerik dan menangani nilai yang hilang atau tidak konsisten.
+    \item \textbf{Seleksi Fitur Berbasis Domain:} Memilih variabel yang relevan berdasarkan kajian literatur dan membuang variabel yang bersifat \textit{confounding} (seperti status gizi lain: \textit{underweight} dan \textit{wasting}) agar model fokus pada determinan penyebab.
+    \item \textbf{Penyaringan Wilayah:} Menggunakan 36 provinsi dengan data lengkap dan mengecualikan provinsi pemekaran baru yang datanya belum stabil untuk menjaga validitas pelatihan.
 \end{enumerate}
 
-\subsection{Evaluasi Model} \label{III.Langkah4}
-Model yang telah dilatih dievaluasi kinerjanya menggunakan metrik statistik untuk mengukur seberapa dekat prediksi model dengan data aktual. Metrik yang digunakan meliputi \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), dan koefisien determinasi ($R^2$ Score).
+\subsection{Pembangunan Model \textit{Random Forest}} \label{subsec:modeling}
+Pada tahap ini, algoritma \textit{Random Forest Regressor} diterapkan untuk membangun model prediksi. Proses ini meliputi:
+\begin{enumerate}
+    \item \textbf{Optimasi Parameter (\textit{Hyperparameter Tuning}):} Melakukan pencarian parameter optimal (\textit{grid search}) untuk komponen \textit{n\_estimators} (jumlah pohon) dan \textit{max\_depth} (kedalaman pohon) guna mendapatkan akurasi terbaik.
+    \item \textbf{Validasi Model (LOOCV):} Menggunakan skema \textit{Leave-One-Out Cross Validation}, dimana model dilatih dan diuji berulang kali sebanyak jumlah provinsi ($N$) untuk memastikan model tidak mengalami \textit{overfitting} akibat sedikitnya jumlah sampel data.
+\end{enumerate}
 
-\subsection{Interpretasi Model dengan SHAP} \label{III.Langkah5}
-Langkah terakhir adalah menginterpretasikan hasil prediksi model \textit{black-box} Random Forest menggunakan \textit{SHapley Additive exPlanations} (SHAP). Analisis ini bertujuan untuk mengetahui kontribusi setiap fitur (determinan) terhadap angka stunting, baik secara global maupun lokal per provinsi.
+\subsection{Evaluasi Performa Model} \label{subsec:evaluasi}
+Kinerja model diukur menggunakan metrik evaluasi regresi untuk melihat tingkat kesalahan prediksi. Metrik yang digunakan adalah \textit{Mean Absolute Error} (MAE) untuk melihat rata-rata kesalahan absolut, \textit{Root Mean Squared Error} (RMSE) untuk melihat sensitivitas terhadap kesalahan besar, dan $R^2$ Score untuk melihat kemampuan model menjelaskan varian data.
 
-\section{Alat dan Bahan} \label{III.AlatBahan}
+\subsection{Interpretasi Hasil dengan SHAP} \label{subsec:shap}
+Tahap akhir dan utama adalah penerapan metode SHAP untuk membuka "kotak hitam" model \textit{Random Forest}. Analisis ini menghasilkan:
+\begin{enumerate}
+    \item \textbf{Interpretasi Global:} Mengidentifikasi fitur mana yang paling dominan mempengaruhi stunting di skala nasional melalui \textit{Summary Plot}.
+    \item \textbf{Interpretasi Lokal:} Menganalisis faktor spesifik penyebab tingginya atau rendahnya stunting di provinsi tertentu menggunakan \textit{Waterfall Plot}, sehingga rekomendasi yang dihasilkan lebih tepat sasaran.
+\end{enumerate}
 
-\subsection{Alat} \label{III.Alat}
+\section{Alat dan Bahan} \label{sec:alat_bahan}
+
+\subsection{Alat Penelitian}
 Penelitian ini dilaksanakan menggunakan perangkat keras dan perangkat lunak dengan spesifikasi sebagai berikut:
-\begin{enumerate}[noitemsep]
-    \item \textbf{Perangkat Keras:} Laptop dengan prosesor minimal Intel Core i5/AMD Ryzen 5, RAM 8GB, dan penyimpanan SSD untuk komputasi data.
-    \item \textbf{Sistem Operasi:} Windows 11 64-bit.
-    \item \textbf{Bahasa Pemrograman:} Python versi 3.10 atau lebih baru.
-    \item \textbf{Lingkungan Pengembangan (\textit{IDE}):} Visual Studio Code dan Jupyter Notebook.
+\begin{enumerate}
+    \item \textbf{Perangkat Keras:} Laptop dengan prosesor minimal Intel Core i5/AMD Ryzen 5, RAM 8GB, dan penyimpanan SSD.
+    \item \textbf{Lingkungan Pengembangan:} Visual Studio Code dan Jupyter Notebook dengan bahasa pemrograman Python 3.10.
     \item \textbf{Pustaka (\textit{Libraries}):} 
     \begin{itemize}
         \item \textit{Pandas} dan \textit{NumPy} untuk manipulasi data.
-        \item \textit{Scikit-learn} untuk pemodelan \textit{Random Forest} dan evaluasi.
+        \item \textit{Scikit-learn} untuk algoritma \textit{Random Forest} dan evaluasi.
         \item \textit{Matplotlib} dan \textit{Seaborn} untuk visualisasi data.
         \item \textit{SHAP} untuk interpretasi model.
     \end{itemize}
 \end{enumerate}
 
-\subsection{Bahan} \label{III.Bahan}
-Bahan utama yang digunakan dalam penelitian ini adalah dataset Survei Status Gizi Indonesia (SSGI) Tahun 2024. Dataset ini berisi rekapitulasi indikator gizi dan kesehatan dari seluruh provinsi di Indonesia yang mencakup variabel dependen (prevalensi stunting) dan variabel independen (faktor determinan).
-
-\section{Metode Analisis Data} \label{III.MetodeAnalisis}
-Penelitian ini menggunakan pendekatan kuantitatif dengan metode \textit{Machine Learning}. Metode analisis yang digunakan terdiri dari:
-
+\subsection{Bahan Penelitian}
+Bahan utama adalah dataset SSGI Tahun 2024 yang mencakup variabel dependen (prevalensi stunting) dan 56 variabel independen yang dikelompokkan ke dalam pilar determinan sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Analisis Deskriptif:} Digunakan untuk memahami distribusi data stunting dan korelasi antar variabel melalui visualisasi histogram dan matriks korelasi (\textit{heatmap}).
-    \item \textbf{Analisis Prediktif:} Menggunakan algoritma \textit{Random Forest Regressor} untuk memodelkan hubungan kompleks non-linear antara faktor determinan dan prevalensi stunting.
-    \item \textbf{Analisis Interpretatif:} Menggunakan nilai SHAP untuk menjelaskan \textit{feature importance} (tingkat kepentingan fitur) dan arah pengaruh (positif/negatif) dari setiap determinan terhadap stunting.
+    \item \textbf{Praktik Pengasuhan \& Kesehatan Ibu:} Termasuk risiko kehamilan, kepatuhan TTD, dan akses KB.
+    \item \textbf{Pemberian Makan Bayi \& Anak (PMBA):} Termasuk IMD, ASI Eksklusif, dan keragaman diet MPASI.
+    \item \textbf{Pelayanan Kesehatan Balita:} Termasuk kelengkapan imunisasi dan pemantauan pertumbuhan.
+    \item \textbf{Kesehatan Lingkungan:} Akses air minum, sanitasi, dan pengelolaan limbah layak.
+    \item \textbf{Faktor Sosial-Ekonomi:} Termasuk kepemilikan JKN, bantuan sosial, dan pendampingan keluarga.
 \end{enumerate}
 
-\section{Ilustrasi Perhitungan Evaluasi} \label{III.Ilustrasi}
-Untuk mengukur kinerja model regresi, digunakan beberapa rumus evaluasi sebagai berikut:
+\section{Ilustrasi Perhitungan Evaluasi} \label{sec:rumus}
+Untuk mengukur kinerja model regresi secara kuantitatif, digunakan persamaan sebagai berikut:
 
 \begin{enumerate}
-    \item \textbf{Mean Absolute Error (MAE):} Rata-rata selisih mutlak antara nilai prediksi dan nilai aktual.
+    \item \textbf{Mean Absolute Error (MAE):}
     \begin{equation}
         MAE = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|
     \end{equation}
     
-    \item \textbf{Root Mean Squared Error (RMSE):} Akar kuadrat dari rata-rata kesalahan kuadrat, yang memberikan bobot lebih pada kesalahan besar.
+    \item \textbf{Root Mean Squared Error (RMSE):}
     \begin{equation}
         RMSE = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
     \end{equation}
     
-    \item \textbf{Koefisien Determinasi ($R^2$):} Mengukur seberapa baik variabilitas data dijelaskan oleh model.
+    \item \textbf{Koefisien Determinasi ($R^2$):}
     \begin{equation}
         R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}
     \end{equation}
 \end{enumerate}
+\noindent Dimana $y_i$ adalah nilai aktual, $\hat{y}_i$ adalah nilai prediksi, dan $\bar{y}$ adalah rata-rata nilai aktual.
 
-Dimana:
-\begin{itemize}
-    \item $n$ = Jumlah sampel data
-    \item $y_i$ = Nilai aktual stunting provinsi ke-$i$
-    \item $\hat{y}_i$ = Nilai prediksi stunting provinsi ke-$i$
-    \item $\bar{y}$ = Rata-rata nilai stunting aktual
-\end{itemize}
-
-\section{Rancangan Pengujian} \label{III.Rancang_Uji}
-Pengujian model dilakukan menggunakan skema \textit{Leave-One-Out Cross Validation} (LOOCV). Dalam metode ini, dari total $N$ provinsi, model dilatih menggunakan $N-1$ data provinsi dan diuji pada 1 data provinsi yang disisihkan. Proses ini diulang sebanyak $N$ kali sehingga setiap provinsi pernah menjadi data uji tepat satu kali.
-
-Hipotesis hasil yang diharapkan dari pengujian ini adalah:
-\begin{enumerate}
-    \item Model \textit{Random Forest} mampu memprediksi prevalensi stunting dengan nilai \textit{error} (MAE/RMSE) yang rendah.
-    \item Analisis SHAP dapat mengidentifikasi faktor determinan utama (misalnya sanitasi atau pendidikan ibu) yang memiliki dampak paling signifikan terhadap angka stunting di Indonesia tahun 2024.
-\end{enumerate}
+\section{Rancangan Pengujian} \label{sec:uji}
+Pengujian dilakukan untuk membuktikan hipotesis bahwa model \textit{Random Forest} dapat memprediksi prevalensi stunting dengan tingkat kesalahan yang rendah dan analisis SHAP mampu mengisolasi faktor determinan dominan. Validitas pengujian dijamin melalui skema LOOCV dimana setiap provinsi diuji secara independen tanpa pernah dilihat oleh model pada fase pelatihan (\textit{unseen data}).
