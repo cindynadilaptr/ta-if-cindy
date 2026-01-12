@@ -56,3 +56,20 @@
 
 ### 2025-11-10
 - Update chapter 1 (RP, RO, etc) and drop wasting & underweight variable
+
+## Januari
+
+### 2026-01-09
+- Revised the background section to strengthen the urgency of stunting analysis using machine learning.
+- Adjusted the problem formulation and research objectives according to the supervisor's feedback.
+- Corrected citation formats and ensured alignment with the updated thesis template.
+
+### 2026-01-12
+- Designed the research flowchart illustrating the end-to-end process: from SSGI 2024 data collection, preprocessing, Random Forest modeling, to SHAP interpretation.
+- Created a detailed outline for Chapter 3, covering:
+  1. Research Flow
+  2. Data Collection (SSGI 2024 Dataset)
+  3. Data Preprocessing Steps (Cleaning, Filtering, Splitting)
+  4. Random Forest Model Development (Hyperparameter Tuning, LOOCV)
+  5. Model Evaluation Metrics (MAE, RMSE, R-Squared)
+  6. Model Interpretation using SHAP.
