@@ -73,3 +73,8 @@
   4. Random Forest Model Development (Hyperparameter Tuning, LOOCV)
   5. Model Evaluation Metrics (MAE, RMSE, R-Squared)
   6. Model Interpretation using SHAP.
+
+### 2026-01-18
+- Wrote the **Problem Identification** section
+- Completed the **Literature Review** section
+- Drafted the **Data Collection** section: Defined the dataset source (SSGI 2024) and clarified the unit of analysis.
