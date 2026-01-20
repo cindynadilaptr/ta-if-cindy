@@ -78,3 +78,14 @@
 - Wrote the **Problem Identification** section
 - Completed the **Literature Review** section
 - Drafted the **Data Collection** section: Defined the dataset source (SSGI 2024) and clarified the unit of analysis.
+
+### 2026-01-19
+- Analyzed dataset_explore.ipynb to align technical steps with the thesis narrative.
+- Drafted the Data Preparation section: Detailed the extraction process from SSGI PDF reports.
+- Drafted the Data Preprocessing section: Defined data cleaning, imputation, and feature separation steps.
+
+### 2026-01-20
+- Drafted the Model Evaluation section: Defined metrics (MAE, RMSE, MAPE, $R^2$) and validation strategy.
+- Drafted the Interpretation section: Explained Global and Local SHAP analysis workflows.
+- Completed the Development Method section: Structured using the KDD framework.
+- Integrated Scientific Citations: Added justifications for Random Forest (Pratama et al.), LOOCV (Cha et al.), and SHAP (Shen et al.).
