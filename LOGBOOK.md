@@ -89,3 +89,6 @@
 - Drafted the Interpretation section: Explained Global and Local SHAP analysis workflows.
 - Completed the Development Method section: Structured using the KDD framework.
 - Integrated Scientific Citations: Added justifications for Random Forest (Pratama et al.), LOOCV (Cha et al.), and SHAP (Shen et al.).
+
+### 2026-01-21
+- Drafted Sections 3.5 & 3.6 (Method calculation & testing scenarios).
