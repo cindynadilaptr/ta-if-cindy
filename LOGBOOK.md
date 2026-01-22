@@ -92,3 +92,6 @@
 
 ### 2026-01-21
 - Drafted Sections 3.5 & 3.6 (Method calculation & testing scenarios).
+
+### 2026-01-22
+- Finding research for literature study (gap research and novelty)

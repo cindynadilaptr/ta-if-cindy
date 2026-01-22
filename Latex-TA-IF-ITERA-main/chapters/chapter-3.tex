@@ -78,8 +78,8 @@ Setelah melalui tahapan penyiapan dan pra-pemrosesan data, \textit{dataset} yang
     \label{fig:6.flow_rf}
 \end{figure}
 
-\subsubsection{Validasi Silang dan Optimasi Hiperparameter}
-Tahap awal pembangunan model difokuskan pada pencarian konfigurasi model yang paling optimal melalui strategi validasi yang ketat. Mengingat keterbatasan jumlah sampel data yang hanya tersedia pada tingkat provinsi (n=36), penelitian ini menerapkan metode \textit{Leave-One-Out Cross Validation} (LOOCV) sebagai pengganti pembagian data latih-uji konvensional \cite{cha2021comparison}. Dalam skema ini, proses pelatihan dilakukan secara iteratif sebanyak jumlah sampel, di mana pada setiap iterasi, satu provinsi digunakan sebagai data uji sementara provinsi sisanya menjadi data latih. Pendekatan ini dipilih untuk memaksimalkan pemanfaatan informasi dari data yang terbatas serta menghasilkan estimasi performa model yang tidak bias terhadap pemilihan acak data uji tertentu.
+\subsubsection{\textit{Hyperparameter Tuning} Berbasis \textit{Cross Validation}}
+Tahap awal pembangunan model difokuskan pada pencarian konfigurasi model yang paling optimal melalui strategi validasi yang ketat. Mengingat keterbatasan jumlah sampel data yang hanya tersedia pada tingkat provinsi, penelitian ini menerapkan metode \textit{Leave-One-Out Cross Validation} (LOOCV) sebagai pengganti pembagian data latih-uji konvensional \cite{cha2021comparison}. Dalam skema ini, proses pelatihan dilakukan secara iteratif sebanyak jumlah sampel, di mana pada setiap iterasi, satu provinsi digunakan sebagai data uji sementara provinsi sisanya menjadi data latih. Pendekatan ini dipilih untuk memaksimalkan pemanfaatan informasi dari data yang terbatas serta menghasilkan estimasi performa model yang tidak bias terhadap pemilihan acak data uji tertentu.
 
 Bersamaan dengan proses validasi LOOCV, dilakukan optimasi kinerja model melalui mekanisme \textit{Hyperparameter Tuning} menggunakan metode \textit{Grid Search}. Tahap ini bertujuan untuk mencari kombinasi parameter terbaik meliputi jumlah pohon (\textit{n\_estimators}), kedalaman maksimal (\textit{max\_depth}), dan jumlah sampel minimum percabangan yang menghasilkan tingkat kesalahan prediksi terendah. Eksplorasi ruang parameter ini dinilai krusial untuk mencegah terjadinya \textit{overfitting}\footnote{\textit{Overfitting} adalah kondisi di mana model mempelajari detail spesifik atau \textit{noise} data latih secara berlebihan, sehingga akurasi tinggi pada fase pelatihan namun gagal melakukan generalisasi (prediksi buruk) pada data baru.} yang sering menjadi kendala pada dataset berskala kecil \cite{fatmawati2024random}. Kombinasi parameter yang menghasilkan nilai rata-rata \textit{Root Mean Squared Error} (RMSE) terendah selama proses validasi silang kemudian ditetapkan sebagai konfigurasi model optimal.
 
@@ -92,23 +92,23 @@ Selain menghasilkan prediksi angka prevalensi, model final ini memiliki fungsi k
 Evaluasi performa model dilakukan untuk mengukur sejauh mana model \textit{Random Forest Regression} mampu memprediksi prevalensi \textit{stunting} secara akurat pada tingkat provinsi. Mengingat penelitian ini bersifat regresi, digunakan beberapa metrik evaluasi berbasis kesalahan prediksi dan kekuatan penjelasan model. Penggunaan lebih dari satu metrik bertujuan untuk memberikan gambaran performa model secara komprehensif, baik dari sisi rata-rata kesalahan absolut, sensitivitas terhadap kesalahan besar, maupun kemampuan model dalam menjelaskan variasi data target. Seluruh metrik dievaluasi pada skema validasi silang yang telah ditetapkan pada tahap pemodelan.
 
 \begin{enumerate}
-    \item \textbf{Mean Absolute Error (MAE)}  
+    \item \textbf{\textit{Mean Absolute Error} (MAE)}  
     
     MAE digunakan untuk mengukur rata-rata selisih absolut antara nilai prevalensi \textit{stunting} hasil prediksi model dengan nilai aktual pada masing-masing provinsi. Metrik ini memberikan gambaran kesalahan prediksi secara langsung dalam satuan persentase, sehingga memudahkan interpretasi seberapa jauh hasil prediksi model menyimpang dari data SSGI 2024 yang sebenarnya.
 
-    \item \textbf{Mean Squared Error (MSE)}  
+    \item \textbf{\textit{Mean Squared Error} (MSE)}  
     
     MSE digunakan untuk mengevaluasi kesalahan prediksi dengan memberikan penalti lebih besar pada selisih prediksi yang tinggi antarprovinsi. Penggunaan metrik ini penting untuk memastikan bahwa model tidak menghasilkan kesalahan ekstrem pada provinsi tertentu yang dapat mengaburkan pola determinan \textit{stunting} secara nasional.
 
-    \item \textbf{Root Mean Squared Error (RMSE)}  
+    \item \textbf{\textit{Root Mean Squared Error} (RMSE)}  
     
     RMSE digunakan sebagai indikator utama akurasi model karena mengembalikan nilai kesalahan ke dalam skala yang sama dengan prevalensi \textit{stunting}. Dalam konteks penelitian ini, RMSE membantu menilai seberapa besar deviasi prediksi model terhadap nilai aktual \textit{stunting} antarprovinsi secara keseluruhan.
 
-    \item \textbf{R-squared ($R^2$)}  
+    \item \textbf{\textit{R-squared} ($R^2$)}  
     
     Koefisien determinasi $R^2$ digunakan untuk mengukur sejauh mana variasi prevalensi \textit{stunting} antarprovinsi dapat dijelaskan oleh variabel determinan yang dimasukkan ke dalam model. Metrik ini memberikan gambaran kemampuan model dalam menangkap hubungan kompleks antara faktor kesehatan ibu, balita, dan lingkungan dengan tingkat \textit{stunting}.
 
-    \item \textbf{Mean Absolute Percentage Error (MAPE)}  
+    \item \textbf{\textit{Mean Absolute Percentage Error} (MAPE)}  
     
     MAPE digunakan untuk mengukur kesalahan prediksi dalam bentuk persentase relatif terhadap nilai aktual prevalensi \textit{stunting}. Metrik ini membantu melihat konsistensi performa model antarprovinsi, terutama ketika terdapat perbedaan tingkat \textit{stunting} yang cukup besar antara satu wilayah dan wilayah lainnya.
 \end{enumerate}
@@ -199,17 +199,17 @@ Tabel \ref{tab:distribusi_variabel} menunjukkan bahwa variabel determinan yang d
 
 Penelitian ini menerapkan kerangka kerja pengembangan sistem berbasis data (\textit{data-driven}) yang mengacu pada tahapan standar \textit{Knowledge Discovery in Databases} (KDD)\footnote{\textit{Knowledge Discovery in Databases} (KDD) adalah proses non-trivial untuk mengidentifikasi pola yang valid, baru, berpotensi bermanfaat, dan dapat dipahami dari sekumpulan data yang besar (Fayyad et al., 1996).}. Kerangka kerja ini digunakan untuk memastikan bahwa proses transformasi data sekunder dari laporan SSGI 2024 menjadi informasi analitis dilakukan secara sistematis dan terstruktur. Sebagai metode utama dalam tahap pemodelan, penelitian ini menggunakan algoritma \textit{Random Forest Regression}, yang secara luas dikenal memiliki kemampuan dalam memodelkan hubungan non-linier dan menangani interaksi kompleks antarvariabel determinan. Pemilihan algoritma ini didukung oleh temuan penelitian sebelumnya yang menunjukkan kinerja \textit{Random Forest} yang kompetitif dalam konteks pemodelan prevalensi \textit{stunting} di Indonesia \cite{pratama2024comparison}.
 
-Tantangan metodologis utama dalam penelitian ini adalah keterbatasan jumlah observasi data pada tingkat provinsi ($n=36$), yang berpotensi menimbulkan risiko \textit{overfitting} apabila digunakan skema pembagian data latih dan uji konvensional. Oleh karena itu, diterapkan strategi validasi \textit{Leave-One-Out Cross Validation} (LOOCV), di mana setiap provinsi secara bergantian digunakan sebagai data uji sementara provinsi lainnya berperan sebagai data latih. Pendekatan ini memungkinkan pemanfaatan data secara maksimal dan memberikan estimasi performa model yang lebih stabil pada \textit{dataset} berukuran kecil, sebagaimana direkomendasikan dalam penelitian sebelumnya \cite{cha2021comparison}.
+Tantangan metodologis utama dalam penelitian ini adalah keterbatasan jumlah observasi data pada tingkat provinsi, yang berpotensi menimbulkan risiko \textit{overfitting} apabila digunakan skema pembagian data latih dan uji konvensional. Oleh karena itu, diterapkan strategi validasi \textit{Leave-One-Out Cross Validation} (LOOCV), di mana setiap provinsi secara bergantian digunakan sebagai data uji sementara provinsi lainnya berperan sebagai data latih. Pendekatan ini memungkinkan pemanfaatan data secara maksimal dan memberikan estimasi performa model yang lebih stabil pada \textit{dataset} berukuran kecil, sebagaimana direkomendasikan dalam penelitian sebelumnya \cite{cha2021comparison}.
 
 Selain aspek akurasi prediksi, penelitian ini juga menekankan pada interpretabilitas model melalui integrasi metode SHAP. Metode ini digunakan untuk mengkuantifikasi kontribusi relatif setiap variabel determinan terhadap hasil prediksi model, baik secara global maupun pada tingkat provinsi. Pendekatan SHAP dipilih karena kemampuannya dalam menjelaskan model berbasis \textit{ensemble} secara transparan, sehingga hasil pemodelan tidak hanya menghasilkan estimasi angka prevalensi \textit{stunting}, tetapi juga menyediakan dasar analitis yang dapat mendukung perumusan kebijakan intervensi gizi yang lebih tepat sasaran \cite{shen2023machine}.
 
 \section{Ilustrasi Perhitungan Metode} \label{sec:ilustrasi_metode}
 
-Bagian ini menyajikan simulasi pemrosesan data SSGI 2024 oleh model untuk menghasilkan prediksi prevalensi \textit{stunting}. Angka yang digunakan di sini adalah data hipotetis (\textit{dummy}) untuk menggambarkan alur kalkulasi dari \textit{input} fitur hingga evaluasi akhir.
+Bagian ini menyajikan simulasi pemrosesan data SSGI 2024 oleh model untuk menghasilkan prediksi prevalensi \textit{stunting}. Angka yang digunakan di sini adalah data hipotetis untuk menggambarkan alur kalkulasi dari \textit{input} fitur hingga evaluasi akhir.
 
-\subsection{Prediksi Random Forest Regression}
+\subsection{Prediksi \textit{Random Forest Regression}}
 
-Dalam penelitian ini, prediksi prevalensi \textit{stunting} untuk satu provinsi tidak ditentukan oleh satu pohon keputusan tunggal, melainkan melalui konsensus dari banyak pohon (\textit{ensemble}). Setiap pohon dalam model akan memberikan estimasi angka prevalensi berdasarkan fitur \textit{input} (seperti sanitasi, kemiskinan, dll) yang dipelajarinya.
+Dalam penelitian ini, prediksi prevalensi \textit{stunting} untuk satu provinsi tidak ditentukan oleh satu pohon keputusan tunggal, melainkan melalui konsensus dari banyak pohon (\textit{ensemble}). Setiap pohon dalam model akan memberikan estimasi angka prevalensi berdasarkan fitur \textit{input} yang dipelajarinya.
 
 Berikut adalah ilustrasi jika model terdiri dari 3 pohon keputusan, di mana masing-masing pohon memberikan estimasi angka \textit{stunting} sebagai berikut:
 
@@ -237,7 +237,7 @@ Nilai prediksi akhir ($\hat{y}$) untuk provinsi tersebut diperoleh dengan merata
 \]
 \par\vspace{0.8cm}
 
-\noindent \textbf{Penyelesaian:}
+\noindent Penyelesaian:
 \par\vspace{0.2cm}
 \begin{align*}
     \hat{y} &= \frac{18.5 + 17.9 + 18.2}{3} \\[0.3cm]
@@ -247,7 +247,7 @@ Nilai prediksi akhir ($\hat{y}$) untuk provinsi tersebut diperoleh dengan merata
 
 Angka \textbf{18.2\%} inilah yang menjadi prediksi final prevalensi \textit{stunting} untuk provinsi tersebut.
 
-\subsection{Perhitungan Error Prediksi}
+\subsection{Perhitungan \textit{Error} Prediksi}
 
 Validasi akurasi dilakukan dengan membandingkan angka prediksi model terhadap data aktual SSGI. Selisih absolut antara kedua nilai ini menunjukkan seberapa jauh deviasi estimasi model untuk satu provinsi.
 
@@ -276,7 +276,7 @@ Perhitungan deviasi atau \textit{error} individu ($e$) adalah:
 \]
 \par\vspace{0.8cm}
 
-\noindent \textbf{Penyelesaian:}
+\noindent Penyelesaian:
 \par\vspace{0.2cm}
 \begin{align*}
     e &= |20.0 - 18.2| \\[0.3cm]
@@ -315,7 +315,7 @@ Untuk mengukur performa model secara menyeluruh terhadap seluruh provinsi di Ind
 \]
 \par\vspace{0.5cm}
 
-\noindent \textbf{Penyelesaian:}
+\noindent Penyelesaian:
 \par\vspace{0.2cm}
 \begin{align*}
     \text{MAE} &= \frac{2 + 1 + 2}{3} = \mathbf{1.67}
@@ -333,7 +333,7 @@ Model memiliki rata-rata kesalahan prediksi sebesar \textbf{1.67 poin}.
 \]
 \par\vspace{0.5cm}
 
-\noindent \textbf{Penyelesaian:}
+\noindent Penyelesaian:
 \par\vspace{0.2cm}
 \begin{align*}
     \text{MSE} &= \frac{4 + 1 + 4}{3} = \mathbf{3.00}
@@ -349,7 +349,7 @@ Model memiliki rata-rata kesalahan prediksi sebesar \textbf{1.67 poin}.
 \]
 \par\vspace{0.5cm}
 
-\noindent \textbf{Penyelesaian:}
+\noindent Penyelesaian:
 \par\vspace{0.2cm}
 \begin{align*}
     \text{RMSE} &= \sqrt{3.00} \approx \mathbf{1.73}
@@ -367,7 +367,7 @@ Deviasi standar kesalahan model berada pada angka \textbf{1.73 poin}.
 \]
 \par\vspace{0.5cm}
 
-\noindent \textbf{Penyelesaian:}
+\noindent Penyelesaian:
 \par\vspace{0.2cm}
 \begin{align*}
     \text{MAPE} &= \frac{100\%}{3} (0.10 + 0.067 + 0.08) \\[0.2cm]
@@ -379,11 +379,11 @@ Rata-rata kesalahan model adalah sebesar \textbf{8.22\%} dari nilai aktual.
 
 \section{Ilustrasi Rancangan Pengujian} \label{sec:ilustrasi_pengujian}
 
-Bagian ini menjabarkan skenario eksperimen yang dilakukan untuk melatih dan memvalidasi model. Mengingat jumlah observasi yang terbatas (36 provinsi), strategi pembagian data dan pemilihan parameter menjadi krusial untuk mencegah \textit{overfitting} dan memastikan hasil evaluasi yang objektif.
+Bagian ini menjabarkan skenario eksperimen yang dilakukan untuk melatih dan memvalidasi model. Mengingat jumlah observasi yang terbatas yaitu provinsi di Indonesia, strategi pembagian data dan pemilihan parameter menjadi krusial untuk mencegah \textit{overfitting} dan memastikan hasil evaluasi yang objektif.
 
 \subsection{Skema \textit{Leave-One-Out Cross Validation} (LOOCV)}
 
-Penelitian ini menerapkan metode \textit{Leave-One-Out Cross Validation} (LOOCV) untuk memaksimalkan penggunaan data. Dalam skema ini, evaluasi dilakukan melalui 36 kali iterasi, di mana pada setiap iterasi, satu provinsi disisihkan sebagai data uji (\textit{testing set}) sementara 35 provinsi lainnya digunakan sebagai data latih (\textit{training set}).
+Penelitian ini menerapkan metode \textit{Leave-One-Out Cross Validation} (LOOCV) untuk memaksimalkan penggunaan data. Dalam skema ini, evaluasi dilakukan melalui \textit{N} kali iterasi, di mana pada setiap iterasi, satu provinsi disisihkan sebagai data uji (\textit{testing set}) sementara sisa provinsi lainnya digunakan sebagai data latih (\textit{training set}).
 
 Berikut adalah ilustrasi pembagian data pada setiap iterasi pengujian:
 
@@ -394,21 +394,21 @@ Berikut adalah ilustrasi pembagian data pada setiap iterasi pengujian:
     \label{tab:loocv_scheme_dummy}
     \begin{tabular}{cll}
     \toprule
-    \textbf{Iterasi} & \textbf{Data Latih (35 Provinsi)} & \textbf{Data Uji (1 Provinsi)} \\
+    \textbf{Iterasi} & \textbf{Data Latih (N-1 Provinsi)} & \textbf{Data Uji (1 Provinsi)} \\
     \midrule
-    1 & Prov 2, 3, ..., 36 & \textbf{Provinsi 1} \\
-    2 & Prov 1, 3, ..., 36 & \textbf{Provinsi 2} \\
+    1 & Prov 2, 3, ..., N & \textbf{Provinsi 1} \\
+    2 & Prov 1, 3, ..., N & \textbf{Provinsi 2} \\
     ... & ... & ... \\
-    36 & Prov 1, 2, ..., 35 & \textbf{Provinsi 36} \\
+    N & Prov 1, 2, ..., N & \textbf{Provinsi N} \\
     \bottomrule
     \end{tabular}
 \end{table}
 
 Dengan mekanisme ini, model diuji pada setiap provinsi tepat satu kali tanpa bias pemilihan data, dan performa akhir dihitung dari rata-rata \textit{error} seluruh iterasi.
 
-\subsection{Hyperparameter Tuning}
+\subsection{\textit{Hyperparameter Tuning}}
 
-Untuk mendapatkan konfigurasi model yang paling optimal dalam memprediksi \textit{stunting}, dilakukan pencarian parameter terbaik menggunakan teknik \textit{Grid Search}. Berbagai kombinasi parameter (seperti jumlah pohon dan kedalaman pohon) diuji performanya menggunakan skema LOOCV di atas.
+Untuk mendapatkan konfigurasi model yang paling optimal dalam memprediksi \textit{stunting}, dilakukan pencarian parameter terbaik menggunakan teknik \textit{Grid Search}. Berbagai kombinasi parameter seperti jumlah pohon dan kedalaman pohon diuji performanya menggunakan skema LOOCV di atas.
 
 Tabel berikut mengilustrasikan simulasi hasil pencarian parameter, di mana keputusan pemilihan didasarkan pada nilai rata-rata RMSE terendah.
 
