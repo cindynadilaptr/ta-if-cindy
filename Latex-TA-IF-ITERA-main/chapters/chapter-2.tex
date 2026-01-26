@@ -2,34 +2,75 @@
 \chapter{TINJAUAN PUSTAKA} \label{Bab II}
 
 \section{Tinjauan Pustaka} \label{II.Tinjauan}
-Berisi penelitian terdahulu yang menjadi konsep / pendukung penelitian yang dilakukan. Lakukan pembahasan secara sistematis dengan menjelaskan masalah apa yang diangkat di penelitian terdahulu, metode yang digunakan, kontribusi yang diberikan, serta analisis penulis terkait dengan keunggulan atau keterbatasannya. Tuangkan perbandingan penelitian terdahulu dengan penelitian yang akan dikerjakan, minimal 5 jurnal pembanding (4-5 tahun terakhir). Kemudian penulis sebaiknya melakukan rangkuman terutama terkait dengan peluang pengembangan atau tugas akhir yang akan dilakukan \par
+Penelitian mengenai \textit{stunting} kini makin banyak menggunakan pendekatan komputasi seperti \textit{Machine Learning} untuk mendapatkan hasil yang lebih akurat. Beberapa studi sebelumnya sudah menerapkan algoritma \textit{Random Forest} serta metode interpretasi SHAP untuk memahami pola data dengan lebih baik. Selain itu, penggunaan metrik evaluasi yang tepat juga menjadi hal penting untuk memastikan model bisa dipercaya. Bab ini akan membahas tinjauan dari delapan jurnal utama yang menjadi acuan penelitian ini dalam mengolah data Survei Status Gizi Indonesia (SSGI) tahun 2024.
 
-Perujukan literatur dapat dilakukan dengan menambahkan entri baru dalam file \verb|references.bib|. Cara merujuk sitasi menggunakan \verb|\cite{nama label sitasi}|. Hasil sitasi seperti ini: \cite{knuth2001art}, \cite{Vogels2006Am}, atau \cite{Suryanto2019MAE}\cite{Ivanny2014Banding}. Daftar Pustaka hanya akan memunculkan sitasi yang direferensikan menggunakan command \verb|\cite{}|. \par
+Penelitian yang dilakukan oleh Pande dan rekan-rekan \cite{pande_indian_stunting_2023} pada tahun 2023 meneliti faktor-faktor penentu pertumbuhan linear anak di India guna memahami penyebab masalah gizi kronis. Dengan memanfaatkan data NFHS-5 yang mencakup lebih dari 146 ribu balita, studi ini menggunakan pendekatan \textit{multilevel mixed-effect logistic regression} untuk menguji pengaruh variabel dari tingkat individu hingga lingkungan komunitas. Hasil analisis menunjukkan bahwa prevalensi \textit{stunting} mencapai angka 36\%, di mana faktor individu seperti jenis kelamin laki-laki dan berat lahir rendah terbukti meningkatkan risiko secara signifikan. Temuan menarik lainnya adalah pada tingkat komunitas, di mana lingkungan dengan tingkat kemiskinan tinggi meningkatkan kemungkinan \textit{stunting} hingga 68\%, sedangkan komunitas dengan literasi tinggi justru mampu menurunkan risiko tersebut secara efektif. Penelitian ini menjadi referensi yang sangat relevan karena memberikan landasan empiris bahwa variabel sosial-ekonomi dan lingkungan memiliki kontribusi besar terhadap kejadian \textit{stunting}, selaras dengan variabel yang akan dianalisis dalam penelitian ini.
 
-Tuliskan \textbf{judul jurnal, penulis jurnal, tahun jurnal terbit, penjelasan isi jurnal, metode penelitian, hasil penelitian \& pengujian}. \par
-\begin{enumerate}[noitemsep]
-	\item Sistem Informasi Pendaftaran Haji dan Umroh Di PT Multazam Sriwijaya Barakah Palembang Menggunakan Metode Rapid Application Development. \blindtext
-	\item Sistem Informasi Umroh Di PT XYZ Lampung Menggunakan Metode Rapid Application Development. \blindtext
-\end{enumerate}
+Selanjutnya, studi yang dilakukan oleh Zemariam dan rekan-rekan \cite{zemariam2025prediction} pada tahun 2025 mengkaji kemampuan berbagai algoritma \textit{machine learning} untuk memprediksi status \textit{stunting} serta determinan sosial-ekonominya pada remaja perempuan di Ethiopia. Penelitian ini membandingkan kinerja delapan algoritma berbeda, termasuk \textit{Random Forest}, dengan menerapkan teknik penyeimbangan data (\textit{SMOTE}) serta seleksi fitur algoritma Boruta untuk menyaring variabel yang paling informatif. Hasil evaluasi menunjukkan bahwa \textit{Random Forest} menjadi model dengan performa terbaik dibandingkan algoritma lainnya, mencatatkan akurasi sebesar 77\% dan nilai AUC mencapai 85\%. Model ini juga berhasil mengidentifikasi bahwa faktor wilayah, indeks kekayaan rendah, serta minimnya pendidikan formal merupakan prediktor utama kejadian \textit{stunting}. Temuan ini sangat mendukung penelitian ini karena membuktikan efektivitas \textit{Random Forest} dalam menangani data survei kesehatan yang kompleks, serta kemampuannya dalam menyoroti kontribusi variabel sosial-ekonomi terhadap isu gizi secara akurat.
 
-Tabel ringkasan tinjauan pustaka ditulis setelah penjelasan masing-masing jurnal. \par
-\begin{longtable}{| b{0.05\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|p{0.15\textwidth}|p{0.25\textwidth}|} % Longtable berguna agar tabel dapat terpotong di halaman baru
-	\caption{Literasi Penelitian Terdahulu}
-	\label{table:2.literasi}\\
-	\hline
-	\textbf{No.} & \textbf{Judul} & \textbf{Masalah} & \textbf{Metode} & \textbf{Hasil} \\
-	\hline
-	\endfirsthead % Header tabel untuk halaman pertama
-	\hline
-	\textbf{No.} & \textbf{Judul} & \textbf{Masalah} & \textbf{Metode} & \textbf{Hasil} \\
-	\hline
-	\endhead % Header tabel untuk halaman selanjutnya (repeat header row)
-	1. & Sistem Informasi Pendaftaran Haji dan Umroh Di PT Multazam Sriwijaya Barakah Palembang Menggunakan Metode Rapid Application Development & Belum adanya sistem untuk pendaftaran haji \& umrah & Rapid Application Development & Sistem Informasi Pendaftaran Haji dan Umroh di PT Multazam Sriwijaya Barakah Palembang\\ 
-	\hline
-	2. & Sistem Informasi Umroh Di PT XYZ Lampung Menggunakan Metode Rapid Application Development & Belum adanya sistem untuk pendaftaran haji \& umrah & Rapid Application Development & Sistem Informasi Pendaftaran Umroh di PT XYZ Lampung\\ 
-	\hline
-	3. & Sistem Informasi Umroh Di PT XYZ Lampung Menggunakan Metode Rapid Application Development & Belum adanya sistem untuk pendaftaran haji \& umrah & Rapid Application Development & Sistem Informasi Pendaftaran Umroh di PT XYZ Lampung\\ 
-	\hline
+Penelitian terbaru yang dilakukan oleh Jemil dan rekan-rekan \cite{jemil2026predicting} pada tahun 2026 bertujuan memprediksi kejadian \textit{severe stunting} serta determinan utamanya pada balita di 12 negara Afrika Timur. Menggunakan data DHS dengan sampel lebih dari 76 ribu anak, studi ini membandingkan kinerja delapan algoritma klasifikasi—termasuk \textit{Random Forest}—dengan menerapkan teknik \textit{SMOTE} untuk penyeimbangan data serta \textit{Stratified 10-Fold Cross-Validation} sebagai metode evaluasi. Hasil eksperimen menempatkan \textit{Random Forest} sebagai model terbaik dengan akurasi mencapai 87\% dan nilai AUC sebesar 0,83. Lebih lanjut, melalui analisis interpretabilitas (SHAP), studi ini berhasil mengungkap bahwa faktor seperti kurangnya ASI eksklusif, status ekonomi rendah, serta sanitasi buruk merupakan pemicu utama risiko \textit{stunting} parah. Referensi ini sangat krusial bagi penelitian ini karena memberikan validasi empiris mengenai keandalan kombinasi \textit{Random Forest} dan metode SHAP dalam membedah faktor risiko malnutrisi secara mendetail.
+
+Selanjutnya, penelitian yang dilakukan oleh Tamanna dan rekan-rekan \cite{tamanna2025identifying} pada tahun 2025 memanfaatkan data \textit{Bangladesh Demographic and Health Survey} (BDHS) untuk mengevaluasi determinan berbagai bentuk malnutrisi, termasuk \textit{stunting}, \textit{wasting}, dan \textit{underweight}. Studi ini menerapkan algoritma Boruta untuk seleksi fitur sebelum menguji performa berbagai model \textit{machine learning}, seperti \textit{Random Forest}, XGBoost, dan SVM, dalam memprediksi status gizi balita. Hasil evaluasi menunjukkan bahwa \textit{Random Forest} mampu memodelkan kondisi malnutrisi secara kompetitif, dengan akurasi prediksi \textit{stunting} mencapai 64,19\% dan \textit{wasting} sebesar 76,68\%. Melalui analisis nilai SHAP, penelitian ini juga mengidentifikasi bahwa pendidikan ibu, indeks kekayaan, serta fasilitas sanitasi merupakan prediktor utama status gizi anak. Temuan ini memperkuat landasan penelitian ini karena membuktikan bahwa \textit{Random Forest} efektif digunakan untuk memodelkan masalah gizi yang kompleks, sekaligus menegaskan peran krusial variabel sosial-ekonomi yang akan menjadi fokus analisis pada tingkat provinsi di Indonesia.
+
+Dalam konteks nasional, penelitian yang dilakukan oleh Pratama dan rekan-rekan \cite{pratama2024comparison} pada tahun 2024 membandingkan efektivitas berbagai algoritma \textit{machine learning} untuk memprediksi prevalensi \textit{stunting} tingkat provinsi di Indonesia. Dengan memanfaatkan dataset gabungan dari Survei Status Gizi Indonesia (SSGI) tahun 2021–2022 dan data publikasi resmi lainnya, studi ini menguji performa model seperti SVR, GAM, dan \textit{Random Forest} menggunakan metrik evaluasi regresi. Hasilnya menunjukkan bahwa \textit{Random Forest Regression} memberikan kinerja paling unggul dengan nilai $R^2$ sebesar 0,703 dan tingkat kesalahan (MAPE) di bawah 10\%, sekaligus mengonfirmasi korelasi kuat antara akses sanitasi layak dan kemiskinan terhadap angka prevalensi. Temuan ini menjadi landasan empiris yang sangat krusial bagi penelitian ini, karena membuktikan bahwa \textit{Random Forest} merupakan metode yang tangguh untuk menangani karakteristik data agregat SSGI, sehingga sangat relevan untuk diterapkan kembali pada data terbaru tahun 2024.
+
+Penelitian oleh Kutlu, Donmez, dan Freeman \cite{kutlu2024machine} pada tahun 2024 berfokus pada penerapan \textit{machine learning} untuk menilai risiko diabetes sekaligus mengatasi keterbatasan model \textit{black-box} dalam konteks klinis. Dengan memanfaatkan dataset masif berisi lebih dari 250 ribu pasien, studi ini mengombinasikan seleksi fitur \textit{Recursive Feature Elimination} (RFE) dan algoritma XGBoost yang menghasilkan akurasi prediksi sebesar 86,6\%. Lebih jauh, analisis menggunakan metode SHAP berhasil mengungkap bahwa status kesehatan umum, tekanan darah, serta BMI merupakan variabel paling berpengaruh dalam pengambilan keputusan model. Studi ini menjadi rujukan metodologis yang kuat karena membuktikan bahwa integrasi SHAP mampu menjembatani celah antara akurasi algoritma dan kebutuhan interpretasi medis, selaras dengan tujuan penelitian ini dalam menjelaskan determinan \textit{stunting}.
+
+Selain itu, penelitian oleh Orji dan Ukwandu \cite{orji2024machine} pada tahun 2024 menawarkan perspektif penting mengenai standar evaluasi model regresi dalam prediksi biaya kesehatan yang transparan. Studi ini membandingkan algoritma seperti \textit{Random Forest} dan XGBoost, dengan fokus khusus pada penggunaan metrik evaluasi yang komprehensif, mulai dari $R^2$ hingga \textit{Mean Absolute Percentage Error} (MAPE). Hasil pengujian menunjukkan bahwa \textit{Random Forest} memiliki performa yang sangat kompetitif dengan nilai $R^2$ mencapai 0,82 dan MAPE sebesar 12,7\%, sembari tetap mempertahankan kemampuan interpretasi fitur yang krusial bagi pembuat kebijakan. Relevansi utama jurnal ini bagi penelitian adalah pada kerangka validasi model regresinya yang ketat, yang menjadi acuan metodologis dalam memilih metrik pengukuran *error* yang tepat untuk memodelkan prevalensi \textit{stunting}.
+
+Terakhir, penelitian metodologis oleh Irisson dan rekan-rekan \cite{irisson2022iterative} pada tahun 2022 menyoroti tantangan validasi pada data spasial yang sering kali memiliki autokorelasi, di mana metode pengujian konvensional cenderung memberikan estimasi \textit{error} yang terlalu optimis. Untuk mengatasi hal tersebut, studi ini memperkenalkan pendekatan \textit{Iterative Spatial Leave-One-Out Cross-Validation} (SLOOCV) yang menjamin independensi antara data latih dan data uji. Hasil eksperimen menunjukkan bahwa metode ini mampu menghasilkan estimasi kinerja yang jauh lebih realistis serta mengurangi bias prediksi secara signifikan dibandingkan teknik pembagian acak biasa. Prinsip ini menjadi landasan kuat bagi penggunaan skema \textit{Leave-One-Out Cross-Validation} (LOOCV) dalam penelitian ini, mengingat data agregat provinsi memiliki karakteristik spasial terbatas yang membutuhkan strategi evaluasi model yang ketat.
+
+Untuk mempermudah pemetaan posisi penelitian ini terhadap studi-studi terdahulu, ringkasan sistematis dari kedelapan jurnal rujukan tersebut disajikan secara lengkap pada Tabel \ref{tab:tinjauan_pustaka}. Tabel ini merangkum aspek-aspek kunci yang meliputi judul, metode yang digunakan, serta temuan utama, guna memperjelas perbedaan pendekatan dan kontribusi kebaruan yang ditawarkan dalam penelitian ini.
+\begin{longtable}{|p{0.05\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|p{0.15\textwidth}|p{0.25\textwidth}|}
+    \caption{Ringkasan Penelitian Terdahulu}
+    \label{tab:tinjauan_pustaka}\\
+    \hline
+    \textbf{No.} & \textbf{Judul \& Penulis} & \textbf{Masalah} & \textbf{Metode} & \textbf{Hasil Utama} \\
+    \hline
+    \endfirsthead
+
+    \hline
+    \textbf{No.} & \textbf{Judul \& Penulis} & \textbf{Masalah} & \textbf{Metode} & \textbf{Hasil Utama} \\
+    \hline
+    \endhead
+
+    \hline
+    \endfoot
+
+    \hline
+    \endlastfoot
+
+    % 1. Pande
+    1. & \textit{Analyzing determinants from both compositional and contextual level impeding desired linear growth of children in Indian context} \cite{pande_indian_stunting_2023} & Identifikasi determinan \textit{stunting} anak (individu \& kontekstual) di India. & \textit{Multilevel Mixed-Effect Logistic Regression}. & Prevalensi \textit{stunting} 36\%; faktor risiko utama meliputi jenis kelamin laki-laki, BBLR, dan kemiskinan komunitas; literasi tinggi menjadi faktor protektif. \\ 
+    \hline
+
+    % 2. Zemariam
+    2. & \textit{Prediction of stunting and its socioeconomic determinants among adolescent girls in Ethiopia using machine learning algorithms} \cite{zemariam2025prediction} & Prediksi \textit{stunting} pada remaja perempuan di Ethiopia beserta faktor sosial-ekonominya. & \textit{Random Forest} (RF), SMOTE, Boruta. & RF menjadi model terbaik (Akurasi 77\%, AUC 85\%). Faktor dominan: wilayah, indeks kekayaan rendah, dan kurangnya pendidikan. \\ 
+    \hline
+
+    % 3. Jemil
+    3. & \textit{Predicting severe stunting and its determinants among under-five in Eastern African Countries: A machine learning algorithms} \cite{jemil2026predicting} & Prediksi kejadian \textit{severe stunting} balita di 12 negara Afrika Timur. & RF, SMOTE, \textit{Stratified 10-Fold CV}, SHAP. & RF unggul dengan Akurasi 87\% dan AUC 0.83. SHAP mengungkap determinan kunci: kurang ASI eksklusif, ekonomi lemah, dan sanitasi buruk. \\ 
+    \hline
+
+    % 4. Tamanna
+    4. & \textit{Identifying determinants of malnutrition in under-five children in Bangladesh: insights from the BDHS-2022 cross-sectional study} \cite{tamanna2025identifying} & Evaluasi determinan malnutrisi (\textit{stunting, wasting}) pada balita di Bangladesh. & Boruta \textit{Feature Selection}, RF, XGBoost. & RF kompetitif dengan akurasi \textit{stunting} 64,19\% dan \textit{wasting} 76,68\%. Determinan utama: pendidikan ibu, kekayaan, dan sanitasi. \\ 
+    \hline
+
+    % 5. Pratama
+    5. & \textit{Comparison of Machine Learning Algorithms for Predicting Stunting Prevalence in Indonesia} \cite{pratama2024comparison} & Prediksi prevalensi \textit{stunting} tingkat provinsi di Indonesia (Data SSGI). & \textit{Random Forest Regression}, SVR, GAM. & \textit{RF Regression} terbaik ($R^2=0,703$, MAPE <10\%). Menunjukkan korelasi kuat antara sanitasi layak dan kemiskinan terhadap prevalensi. \\ 
+    \hline
+
+    % 6. Kutlu
+    6. & \textit{Machine learning interpretability in diabetes risk assessment: a SHAP analysis} \cite{kutlu2024machine} & Mengatasi sifat \textit{black-box} model prediksi risiko kesehatan (Diabetes). & XGBoost, RFE, SHAP. & Akurasi 86,6\%. SHAP berhasil memberikan interpretasi transparan terhadap fitur dominan (kesehatan umum, TD, BMI) dalam model medis. \\ 
+    \hline
+
+    % 7. Orji
+    7. & \textit{Machine learning for an explainable cost prediction of medical insurance} \cite{orji2024machine} & Prediksi biaya asuransi kesehatan yang transparan (\textit{explainable}). & RF, XGBoost, SHAP, Evaluasi Regresi ($R^2$, MAPE). & RF mencapai $R^2$ 0,82 dan MAPE 12,7\%. Menetapkan standar evaluasi regresi yang komprehensif serta pentingnya interpretabilitas fitur. \\ 
+    \hline
+
+    % 8. Irisson
+    8. & \textit{Iterative spatial leave-one-out cross-validation and gap-filling based data augmentation for supervised learning applications in marine remote sensing} \cite{irisson2022iterative} & Bias validasi pada data spasial yang memiliki autokorelasi antar wilayah. & \textit{Iterative Spatial Leave-One-Out Cross-Validation} (SLOOCV). & Metode validasi LOOCV spasial menghasilkan estimasi \textit{error} yang lebih realistis dan tidak bias dibandingkan pembagian acak biasa pada data berbasis wilayah. \\ 
+    \hline
 \end{longtable}
 
 \section{Dasar Teori} \label{II.Teori}
