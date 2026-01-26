@@ -95,3 +95,6 @@
 
 ### 2026-01-22
 - Finding research for literature study (gap research and novelty)
+
+### 2026-01-26
+- Writing Literature Review on Machine Learning for Stunting Prediction.
