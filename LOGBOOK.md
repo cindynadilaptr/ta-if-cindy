@@ -98,3 +98,6 @@
 
 ### 2026-01-26
 - Writing Literature Review on Machine Learning for Stunting Prediction.
+
+### 2026-01-28
+- Revising Chapter 1&3 based on feedback

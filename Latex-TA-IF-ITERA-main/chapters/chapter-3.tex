@@ -2,39 +2,31 @@
 \chapter{METODE PENELITIAN} \label{Bab III}
 
 \section{Alur Penelitian} \label{III.Alur}
-Penelitian ini dirancang untuk menganalisis faktor-faktor determinan penyebab \textit{stunting} pada tingkat provinsi di Indonesia dengan memanfaatkan data sekunder \textit{Annual Report} Survei Status Gizi Indonesia (SSGI) tahun 2024. Pendekatan yang digunakan mengombinasikan pemodelan \textit{machine Learning} regresi menggunakan \textit{Random Forest} dan metode interpretasi model SHAP \textit{(SHapley Additive exPlanations)}. Model ini dibangun menggunakan dataset agregat tingkat provinsi yang memuat berbagai indikator status gizi balita serta faktor determinan yang mencakup aspek kesehatan ibu dan anak, pola asuh, layanan kesehatan, penyakit, perlindungan sosial, dan kondisi sanitasi. Penelitian ini bertujuan untuk mengidentifikasi  faktor determinan utama yang berkontribusi terhadap tingginya prevalensi \textit{stunting} antar provinsi, serta memberikan pemahaman yang bersifat interpretatif sebagai dasar perumusan kebijakan dan intervensi gizi yang lebih tepat sasaran. Secara garis besar, tahapan penelitian digambarkan dalam diagram alir (\textit{flowchart}) pada Gambar \ref{fig:3.alur}.
+Penelitian ini dirancang untuk menganalisis faktor-faktor determinan penyebab \textit{stunting} pada tingkat provinsi di Indonesia dengan memanfaatkan data sekunder \textit{Annual Report} SSGI tahun 2024. Pendekatan yang digunakan mengombinasikan pemodelan \textit{machine Learning} regresi menggunakan \textit{Random Forest} dan metode interpretasi model SHAP. Model ini dibangun menggunakan dataset agregat tingkat provinsi yang memuat berbagai indikator status gizi balita serta faktor determinan yang mencakup aspek kesehatan ibu dan anak, pola asuh, layanan kesehatan, penyakit, perlindungan sosial, dan kondisi sanitasi. Penelitian ini bertujuan untuk mengidentifikasi  faktor determinan utama yang berkontribusi terhadap tingginya prevalensi \textit{stunting} antar provinsi, serta memberikan pemahaman yang bersifat interpretatif sebagai dasar perumusan kebijakan dan intervensi gizi yang lebih tepat sasaran. Secara garis besar, tahapan penelitian digambarkan dalam diagram alir (\textit{flowchart}) pada Gambar \ref{fig:3.alur}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figure/alur_utama.jpg}
+    \includegraphics[width=0.8\textwidth]{figure/alur_utama.pdf}
     \caption{Diagram Alir Penelitian}
     \label{fig:3.alur}
 \end{figure}
 
-Berdasarkan Gambar \ref{fig:3.alur}, alur penelitian disusun secara sistematis yang diawali dengan tahap identifikasi masalah mengenai urgensi penanganan \textit{stunting} di Indonesia dan kompleksitas faktor determinan yang mempengaruhinya di tingkat provinsi. Tahap ini didukung oleh studi literatur mendalam untuk memahami variabel-variabel determinan multidimensi yang mencakup berbagai aspek, serta metode pengolahan data dan pemodelan \textit{machine learning} yang relevan. Berlandaskan pemahaman tersebut, selanjutnya dilakukan pengumpulan dataset yang bersumber dari Laporan Tahunan Survei Status Gizi Indonesia (SSGI) tahun 2024. Laporan Tahunan SSGI 2024 kemudian digunakan untuk menyiapkan dataset agregat tingkat provinsi yang memuat variabel target (prevalensi \textit{stunting}) dan variabel fitur (faktor determinan). Data mentah yang diperoleh selanjutnya diproses melalui tahapan pra-pemrosesan data yang meliputi pembersihan data, penyaringan data, dan pemisahan variabel target dan fitur. 
+Berdasarkan Gambar \ref{fig:3.alur}, alur penelitian disusun secara sistematis yang diawali dengan tahap identifikasi masalah mengenai urgensi penanganan \textit{stunting} di Indonesia dan kompleksitas faktor determinan yang mempengaruhinya di tingkat provinsi. Tahap ini didukung oleh studi literatur mendalam untuk memahami variabel-variabel determinan multidimensi yang mencakup berbagai aspek, serta metode pengolahan data dan pemodelan \textit{machine learning} yang relevan. Berlandaskan pemahaman tersebut, selanjutnya dilakukan pengumpulan dataset yang bersumber dari Laporan Tahunan SSGI tahun 2024. Laporan Tahunan SSGI 2024 kemudian digunakan untuk menyiapkan dataset agregat tingkat provinsi yang memuat variabel target (prevalensi \textit{stunting}) dan variabel fitur (faktor determinan). Data mentah yang diperoleh selanjutnya diproses melalui tahapan pra-pemrosesan data yang meliputi pembersihan data, penyaringan data, dan pemisahan variabel target dan fitur. 
 
-Setelah data siap, tahap berikutnya adalah pembangunan model regresi menggunakan algoritma \textit{Random Forest}. Proses ini mencakup penentuan parameter terbaik melalui \textit{Grid Search} dan validasi silang (\textit{Cross Validation}) untuk memastikan performa model yang optimal. Model yang telah dilatih kemudian dievaluasi kinerjanya menggunakan metrik statistik seperti \textit{Mean Absolute Error} (MAE), \textit{Mean Squared Error} (MSE), \textit{Root Mean Squared Error} (RMSE), \textit{Mean Absolute Percentage Error} (MAPE), serta koefisien determinasi ($R^2$ Score). Langkah terakhir adalah menginterpretasikan hasil prediksi model \textit{Random Forest} menggunakan SHAP untuk mengetahui kontribusi setiap fitur determinan terhadap angka \textit{stunting}, baik secara global skala nasional maupun lokal per provinsi.
+Setelah data siap, tahap berikutnya adalah pembangunan model regresi menggunakan algoritma \textit{Random Forest}. Proses ini mencakup penentuan parameter terbaik melalui \textit{Grid Search} dan validasi silang (\textit{Cross Validation}) untuk memastikan performa model yang optimal. Model yang telah dilatih kemudian dievaluasi kinerjanya menggunakan metrik statistik seperti MAE, MSE, RMSE, MAPE, serta koefisien determinasi ($R^2$ Score). Langkah terakhir adalah menginterpretasikan hasil prediksi model \textit{Random Forest} menggunakan SHAP untuk mengetahui kontribusi setiap fitur determinan terhadap angka \textit{stunting}, baik secara global skala nasional maupun lokal per provinsi.
 
 \section{Langkah Penelitian} \label{sec:langkah_penelitian}
 
 Tahapan penelitian disusun secara sistematis untuk menjawab rumusan masalah yang telah ditetapkan. Secara garis besar, alur penelitian terdiri dari identifikasi masalah, studi literatur, penyiapan data, pra-pemrosesan, pembangunan model, hingga evaluasi dan interpretasi hasil. Penjelasan rinci mengenai masing-masing tahapan diuraikan sebagai berikut.
 
-\subsection{Identifikasi Masalah} \label{subsec:identifikasi}
-Tahap awal penelitian ini dilakukan dengan mengidentifikasi permasalahan mengenai prevalensi \textit{stunting} di Indonesia serta kompleksitas faktor determinan yang mempengaruhinya. Identifikasi masalah dalam penelitian ini dilakukan melalui tahapan observasi statistik awal terhadap distribusi dataset SSGI 2024 yang menyajikan data \textit{stunting} dalam berbagai aspek determinan, seperti kesehatan ibu, pelayanan kesehatan, pola asuh, konsumsi pangan, lingkungan, serta faktor sosial ekonomi. Keberagaman indikator tersebut memperlihatkan bahwa permasalahan \textit{stunting} bersifat multidimensional dan tidak hanya dipengaruhi oleh faktor tunggal. Temuan ini mendorong munculnya pertanyaan penelitian mengenai kesesuaian strategi intervensi gizi yang bersifat seragam dalam menurunkan prevalensi \textit{stunting} di seluruh provinsi di Indonesia. Berdasarkan kondisi tersebut, penelitian ini ditujukan untuk mengidentifikasi faktor determinan utama penyebab \textit{stunting} pada tingkat provinsi menggunakan pendekatan analisis data interpretasi berbasis \textit{machine learning}.
-
-\subsection{Studi Literatur} \label{subsec:literatur}
-Pada tahap studi literatur, dilakukan identifikasi mengenai pendekatan, metode, dan jenis data yang digunakan dalam penelitian terkait \textit{stunting} terdahulu. Hal ini dilakukan untuk menemukan celah penelitian yang dapat diisi melalui pendekatan baru yang diusulkan. Hasil tinjauan literatur menunjukkan bahwa sebagian besar studi menerapkan metode prediksi \textit{stunting} dengan algoritma \textit{machine learning}, terutama algoritma \textit{Random Forest}, \textit{Gradient Boosting}, dan \textit{XGBoost} dengan fokus utama pada peningkatan akurasi prediksi. Selain itu, sebagian besar penelitian \textit{machine learning} mengenai \textit{stunting} dilakukan menggunakan data individu atau wilayah yang terbatas dengan fokus utama pada peningkatan akurasi prediksi. Penelitian yang menggunakan data agregat tingkat provinsi masih sangat minim, begitu pula dengan penggunaan metode interpretasi model untuk memahami kontribusi faktor determinan penyebab \textit{stunting}.
-
-Berdasarkan temuan tersebut, penelitian ini mengadopsi pendekatan pemodelan \textit{machine learning} regresi menggunakan algoritma \textit{Random Forest} yang dipadukan dengan metode interpretasi SHAP untuk mengisi celah penelitian yang ada. Pendekatan ini diharapkan dapat memberikan wawasan baru mengenai faktor-faktor determinan utama penyebab \textit{stunting} pada tingkat agregat provinsi menggunakan data SSGI 2024 yang masih terbatas penggunaannya. Tahap studi literatur juga dilakukan sebagai dasar pemilihan teori dan metode yang akan diterapkan dalam penelitian.
-
 \subsection{Penyiapan Data} \label{subsec:penyiapan}
-Data yang digunakan dalam penelitian ini merupakan data sekunder yang bersumber dari Laporan Publikasi Survei Status Gizi Indonesia (SSGI) tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Laporan ini disajikan dalam bentuk dokumen PDF dan memuat informasi statistik yang komprehensif, mencakup ±5.189 tabel statistik yang menggambarkan indikator kesehatan ibu dan anak, pola asuh, akses pelayanan kesehatan, kondisi sanitasi dan lingkungan, serta karakteristik demografi rumah tangga. Secara spesifik, populasi target dalam survei ini difokuskan pada rumah tangga kelompok balita usia 0-59 bulan, dengan data yang disajikan menggunakan pendekatan \textit{cross-sectional} untuk menggambarkan kondisi kesehatan pada satu titik waktu tertentu. Seluruh informasi statistik tersebut disajikan dalam bentuk numerik atau persentase yang merepresentasikan prevalensi kejadian di wilayah terkait.
+Data yang digunakan dalam penelitian ini merupakan data sekunder yang bersumber dari Laporan Publikasi SSGI tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Laporan ini disajikan dalam bentuk dokumen PDF dan memuat informasi statistik yang komprehensif, mencakup ±5.189 tabel statistik yang menggambarkan indikator kesehatan ibu dan anak, pola asuh, akses pelayanan kesehatan, kondisi sanitasi dan lingkungan, serta karakteristik demografi rumah tangga. Secara spesifik, populasi target dalam survei ini difokuskan pada rumah tangga kelompok balita usia 0-59 bulan, dengan data yang disajikan menggunakan pendekatan \textit{cross-sectional} untuk menggambarkan kondisi kesehatan pada satu titik waktu tertentu. Seluruh informasi statistik tersebut disajikan dalam bentuk numerik atau persentase yang merepresentasikan prevalensi kejadian di wilayah terkait.
 
 Informasi dalam laporan SSGI 2024 disajikan dalam berbagai tingkat agregasi wilayah, mulai dari data nasional, provinsi, hingga rincian kabupaten/kota. Dari berbagai tingkatan tersebut, penelitian ini membatasi unit analisis pada skala provinsi guna menganalisis variabilitas determinan \textit{stunting} antarwilayah secara makro. Namun, kompleksitas struktur data ini menyebabkan data tidak dapat langsung digunakan sebagai \textit{dataset} penelitian kuantitatif tanpa melalui proses penyiapan data terlebih dahulu. Oleh karena itu, diperlukan suatu tahapan penyiapan data untuk mengekstraksi, menyeleksi, dan menyusun kembali informasi yang relevan agar diperoleh \textit{dataset} terstruktur yang sesuai dengan tujuan penelitian. Alur penyiapan data yang dilakukan dalam penelitian ini ditunjukkan pada Gambar \ref{fig:4.persiapan_data}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figure/penyiapan_data.jpg}
+    \includegraphics[width=0.8\textwidth]{figure/penyiapan_data.pdf}
     \caption{Alur Penyiapan Data}
     \label{fig:4.persiapan_data}
 \end{figure}
@@ -54,7 +46,13 @@ Pendekatan seleksi ini diterapkan untuk menyesuaikan karakteristik data dengan t
 \subsubsection{Transformasi dan Agregasi Data}
 Setelah melalui proses seleksi tabel, langkah selanjutnya adalah transformasi data untuk memastikan setiap variabel yang terbentuk memiliki representasi informasi yang kuat terhadap risiko \textit{stunting}. Pada tahap ini, tidak semua informasi dari tabel mentah digunakan secara langsung; sebaliknya, dilakukan peninjauan ulang untuk menetapkan satu indikator yang paling representatif dari setiap tabel. Untuk tabel yang hanya memuat indikator tunggal, nilai persentase diadopsi langsung sebagai fitur numerik. Namun, pada tabel yang memiliki kategori majemuk, dilakukan strategi transformasi khusus dengan memilih indikator yang mencerminkan risiko tertinggi atau melakukan penggabungan kategori agar menghasilkan variabel baru yang lebih ringkas dan substantif.
 
-Selanjutnya, proses agregasi dilakukan untuk menyederhanakan struktur data sehingga seluruh variabel memiliki skala yang seragam dan mudah dibandingkan antarprovinsi. Seluruh variabel direpresentasikan dalam bentuk persentase guna menjaga konsistensi satuan data dan memudahkan proses pemodelan. Hasil dari tahap ini adalah \textit{dataset} terstruktur berbasis provinsi yang siap digunakan sebagai input pada tahapan analisis selanjutnya.
+Selanjutnya, proses agregasi dilakukan untuk menyederhanakan struktur data sehingga seluruh variabel memiliki skala yang seragam dan mudah dibandingkan antar provinsi. Pada tabel yang memiliki lebih dari satu kategori indikator, proses agregasi dilakukan melalui pendekatan penggabungan indikator berbasis risiko. Sebagai contoh, pada tabel usia kehamilan ibu yang terdiri dari kategori usia $<$21 tahun, 21--39 tahun, dan $>$40 tahun, hanya kategori yang merepresentasikan kondisi berisiko yang dipertahankan. Nilai persentase ibu dengan usia kehamilan $<$20 tahun dan $>$35 tahun dijumlahkan untuk membentuk satu variabel baru yang merepresentasikan proporsi kehamilan berisiko pada usia ekstrem. Secara matematis, proses ini dapat dinyatakan sebagai berikut:
+
+\begin{equation}
+X_{\text{risiko usia kehamilan}} = X_{<20} + X_{>35}
+\end{equation}
+
+Di mana $X_{<20}$ adalah persentase kehamilan usia di bawah 20 tahun dan $X_{>35}$ adalah persentase kehamilan usia di atas 35 tahun. Pendekatan serupa diterapkan pada tabel lain yang memiliki kategori majemuk, dengan prinsip utama mempertahankan indikator yang memiliki relevansi risiko terhadap kejadian \textit{stunting} serta menghindari redundansi informasi antarvariabel. Seluruh variabel direpresentasikan dalam bentuk persentase guna menjaga konsistensi satuan data dan memudahkan proses pemodelan. Hasil dari tahap ini adalah \textit{dataset} terstruktur berbasis provinsi yang siap digunakan sebagai input pada tahapan analisis selanjutnya.
 
 \subsection{Pra-pemrosesan Data} \label{subsec:preprocessing}
 Setelah proses penyiapan dan pembentukan \textit{dataset} terstruktur selesai dilakukan, tahap selanjutnya adalah pra-pemrosesan data. Tahapan ini bertujuan untuk memastikan bahwa data yang digunakan sebagai input model memiliki kualitas yang baik, konsisten, dan layak secara statistik sebelum masuk ke proses pemodelan \textit{machine learning}. Mengingat \textit{dataset} disusun dari hasil ekstraksi dan transformasi data sekunder, terdapat potensi munculnya permasalahan seperti nilai kosong atau ketidakkonsistenan format.
@@ -63,7 +61,7 @@ Alur pra-pemrosesan data ditunjukkan pada Gambar \ref{fig:5.flowchart_preprocess
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{figure/preprocess.jpg}
+    \includegraphics[width=0.9\textwidth]{figure/preprocess.pdf}
     \caption{Alur Pra-pemrosesan Data}
     \label{fig:5.flowchart_preprocessing}
 \end{figure}
@@ -73,7 +71,7 @@ Setelah melalui tahapan penyiapan dan pra-pemrosesan data, \textit{dataset} yang
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figure/alur_train.jpg}
+    \includegraphics[width=0.8\textwidth]{figure/alur_train.pdf}
     \caption{Alur Pembangunan Model \textit{Random Forest Regression}}
     \label{fig:6.flow_rf}
 \end{figure}
@@ -81,7 +79,7 @@ Setelah melalui tahapan penyiapan dan pra-pemrosesan data, \textit{dataset} yang
 \subsubsection{\textit{Hyperparameter Tuning} Berbasis \textit{Cross Validation}}
 Tahap awal pembangunan model difokuskan pada pencarian konfigurasi model yang paling optimal melalui strategi validasi yang ketat. Mengingat keterbatasan jumlah sampel data yang hanya tersedia pada tingkat provinsi, penelitian ini menerapkan metode \textit{Leave-One-Out Cross Validation} (LOOCV) sebagai pengganti pembagian data latih-uji konvensional \cite{cha2021comparison}. Dalam skema ini, proses pelatihan dilakukan secara iteratif sebanyak jumlah sampel, di mana pada setiap iterasi, satu provinsi digunakan sebagai data uji sementara provinsi sisanya menjadi data latih. Pendekatan ini dipilih untuk memaksimalkan pemanfaatan informasi dari data yang terbatas serta menghasilkan estimasi performa model yang tidak bias terhadap pemilihan acak data uji tertentu.
 
-Bersamaan dengan proses validasi LOOCV, dilakukan optimasi kinerja model melalui mekanisme \textit{Hyperparameter Tuning} menggunakan metode \textit{Grid Search}. Tahap ini bertujuan untuk mencari kombinasi parameter terbaik meliputi jumlah pohon (\textit{n\_estimators}), kedalaman maksimal (\textit{max\_depth}), dan jumlah sampel minimum percabangan yang menghasilkan tingkat kesalahan prediksi terendah. Eksplorasi ruang parameter ini dinilai krusial untuk mencegah terjadinya \textit{overfitting}\footnote{\textit{Overfitting} adalah kondisi di mana model mempelajari detail spesifik atau \textit{noise} data latih secara berlebihan, sehingga akurasi tinggi pada fase pelatihan namun gagal melakukan generalisasi (prediksi buruk) pada data baru.} yang sering menjadi kendala pada dataset berskala kecil \cite{fatmawati2024random}. Kombinasi parameter yang menghasilkan nilai rata-rata \textit{Root Mean Squared Error} (RMSE) terendah selama proses validasi silang kemudian ditetapkan sebagai konfigurasi model optimal.
+Bersamaan dengan proses validasi LOOCV, dilakukan optimasi kinerja model melalui mekanisme \textit{Hyperparameter Tuning} menggunakan metode \textit{Grid Search}. Tahap ini bertujuan untuk mencari kombinasi parameter terbaik meliputi jumlah pohon (\texttt{n\_estimators}), kedalaman maksimal (\texttt{max\_depth}), dan jumlah sampel minimum percabangan yang menghasilkan tingkat kesalahan prediksi terendah. Eksplorasi ruang parameter ini dinilai krusial untuk mencegah terjadinya \textit{overfitting}\footnote{\textit{Overfitting} merupakan kondisi saat model terlalu mempelajari \textit{noise} data latih sehingga kehilangan kemampuan generalisasi pada data baru.} yang sering menjadi kendala pada dataset berskala kecil \cite{fatmawati2024random}. Kombinasi parameter yang menghasilkan nilai rata-rata \textit{Root Mean Squared Error} (RMSE) terendah selama proses validasi silang kemudian ditetapkan sebagai konfigurasi model optimal.
 
 \subsubsection{Pelatihan Model Final}
 Setelah parameter optimal diperoleh dari tahap validasi, langkah selanjutnya adalah pembangunan model final (\textit{final model fitting}). Pada tahap ini, model \textit{Random Forest} dilatih ulang menggunakan keseluruhan \textit{dataset} provinsi yang tersedia dengan menerapkan parameter terbaik hasil optimasi sebelumnya. Tujuannya adalah untuk menangkap pola data secara utuh tanpa menyisakan data untuk pengujian, karena evaluasi performa telah diselesaikan pada tahap validasi silang. Model terbaik ini kemudian digunakan untuk memetakan hubungan non-linier yang kompleks antara seluruh variabel determinan dengan prevalensi \textit{stunting}.
@@ -115,10 +113,9 @@ Evaluasi performa model dilakukan untuk mengukur sejauh mana model \textit{Rando
 
 \section{Interpretasi Hasil dengan SHAP} \label{sec:shap}
 
-Interpretasi hasil dilakukan menggunakan metode \textit{SHAP (SHapley Additive exPlanations)} untuk menjelaskan keputusan model \textit{Random Forest} yang bersifat \textit{black-box}. Pendekatan ini memungkinkan identifikasi besaran pengaruh setiap faktor determinan terhadap prediksi prevalensi \textit{stunting} secara transparan. Analisis dilakukan secara komprehensif, mencakup tinjauan global untuk skala nasional serta tinjauan lokal spesifik per provinsi. Secara ringkas, alur kerja analisis interpretabilitas model ini diilustrasikan pada Gambar \ref{fig:7.flow_shap}.
-\begin{figure}[H]
+Interpretasi keputusan model \textit{Random Forest} yang bersifat \textit{black-box} dilakukan menggunakan metode SHAP guna mengidentifikasi besaran pengaruh faktor determinan secara transparan. Analisis mencakup tinjauan global skala nasional dan tinjauan lokal spesifik per provinsi. Alur kerja analisis interpretabilitas model ini diilustrasikan pada Gambar \ref{fig:7.flow_shap}.\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figure/alur_SHAP.jpg}
+    \includegraphics[width=0.8\textwidth]{figure/alur_SHAP.pdf}
     \caption{Alur Interpretasi Model dengan SHAP}
     \label{fig:7.flow_shap}
 \end{figure}
@@ -129,7 +126,7 @@ Interpretasi global bertujuan untuk memberikan gambaran menyeluruh mengenai fakt
 \begin{enumerate}
     \item \textbf{\textit{Feature Importance Plot}} 
     
-    Visualisasi berbentuk diagram batang yang mengurutkan variabel determinan berdasarkan besaran rata-rata nilai SHAP absolut ($\text{meanOf}|SHAP|$). Grafik ini berfungsi untuk menentukan fitur mana yang memiliki dampak paling signifikan terhadap model secara keseluruhan tanpa memandang arah pengaruhnya (positif atau negatif).
+    Visualisasi berbentuk diagram batang ini mengurutkan variabel determinan berdasarkan besaran rata-rata nilai SHAP absolut, yang dinyatakan secara matematis sebagai $\frac{1}{n} \sum_{i=1}^{n} |\phi_i^{(j)}|$. Grafik ini berfungsi untuk menentukan fitur mana yang memiliki dampak paling signifikan terhadap model secara keseluruhan tanpa memandang arah pengaruhnya, baik positif maupun negatif.    
     
     \item \textbf{\textit{Summary Plot (Beeswarm)}} 
     
@@ -149,28 +146,23 @@ Setelah sampel provinsi ditetapkan, dilakukan interpretasi lokal menggunakan vis
 Melalui \textit{Waterfall Plot}, kontribusi masing-masing variabel dapat diamati secara eksplisit baik dari segi arah maupun besar pengaruhnya. Variabel dengan kontribusi positif merepresentasikan faktor yang mendorong peningkatan risiko \textit{stunting}, sedangkan kontribusi negatif menunjukkan faktor yang berperan dalam menurunkan risiko tersebut. Pendekatan ini memberikan transparansi terhadap keputusan model serta menjadi dasar analisis perbedaan determinan \textit{stunting} antarprovinsi pada tahap pembahasan hasil.
 
 
-\section{Alat dan Bahan} \label{sec:alat_bahan}
+\section{Konfigurasi Model dan Data} \label{sec:alat_bahan}
 
-\subsection{Alat Penelitian}
-Perangkat yang digunakan dalam penelitian ini meliputi perangkat keras dan perangkat lunak yang mendukung proses pengolahan data, pemodelan, serta interpretasi hasil. Adapun rincian alat penelitian yang digunakan adalah sebagai berikut:
+\subsection{Lingkungan Pengembangan Model}
+Proses pembangunan model dan pengolahan data dilakukan dalam lingkungan bahasa pemrograman \texttt{Python} versi 3.10. Untuk menjaga reproduksibilitas penelitian, berikut adalah daftar pustaka (\textit{library}) utama beserta versinya dan peran spesifiknya dalam sistem:
 
-\begin{enumerate}[noitemsep]
-    \item \textbf{Perangkat Keras:} Laptop dengan spesifikasi prosesor Intel® Core™ i7-11600H (2.9 GHz, 6 core), RAM 16 GB, penyimpanan 256 GB SSD, dan kartu grafis NVIDIA® GeForce RTX™ 3050. Perangkat ini digunakan untuk menjalankan seluruh proses komputasi, mulai dari pra-pemrosesan data hingga pelatihan dan interpretasi model \textit{Random Forest}.
-    
-    \item \textbf{Sistem Operasi:} Windows 11 sebagai lingkungan kerja utama dalam menjalankan perangkat lunak dan bahasa pemrograman yang digunakan pada penelitian ini.
-    
-    \item \textbf{Bahasa Pemrograman:} Python versi 3.10 yang digunakan sebagai bahasa utama dalam pengolahan data, pembangunan model \textit{machine learning}, serta analisis interpretabilitas model.
-    
-    \item \textbf{Library Python:} 
-    Pandas dan NumPy digunakan untuk manipulasi dan pengolahan data numerik, Scikit-learn untuk implementasi model \textit{Random Forest} dan validasi silang, Matplotlib dan Seaborn untuk visualisasi data dan hasil analisis, serta SHAP untuk interpretasi kontribusi variabel determinan terhadap prediksi \textit{stunting}.
-    
-    \item \textbf{Perangkat Lunak Pendukung:} 
-    Visual Studio Code digunakan sebagai editor kode utama untuk pengembangan skrip program, sedangkan Jupyter Notebook dimanfaatkan untuk eksplorasi data, dokumentasi proses analisis, dan visualisasi hasil secara interaktif.
+\begin{enumerate}
+    \item \texttt{scikit-learn} (v1.7.2): Digunakan untuk implementasi algoritma \textit{Random Forest}, pembagian data \textit{Leave-One-Out Cross-Validation}, serta optimasi \textit{hyperparameter}.
+    \item \texttt{shap} (v0.49.1): Digunakan sebagai instrumen interpretasi model untuk menghitung nilai kontribusi tiap fitur melalui pendekatan \textit{Shapley values}.
+    \item \texttt{pandas} (v2.3.2): Digunakan untuk manipulasi struktur data, khususnya dalam proses agregasi dari data individu ke tingkat provinsi.
+    \item \texttt{numpy} (v2.3.3): Mendukung operasi komputasi matriks dan pemrosesan \textit{array} numerik yang efisien.
+    \item \texttt{matplotlib} (v3.10.6) \& \texttt{seaborn} (v0.13.2): Digunakan untuk memvisualisasikan distribusi variabel dan hasil interpretasi fitur secara grafis.
+    \item \texttt{scipy} (v1.16.2): Digunakan untuk pengolahan statistik tingkat lanjut yang diperlukan dalam pembersihan data.
 \end{enumerate}
 
 
-\subsection{Bahan Penelitian}
-Dataset yang digunakan dalam penelitian ini bersumber dari Laporan Publikasi Survei Status Gizi Indonesia (SSGI) tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Data tersebut merupakan data sekunder berskala nasional yang menyajikan berbagai indikator status gizi, kesehatan ibu dan anak, serta kondisi lingkungan dan sosial ekonomi pada tingkat provinsi. Setelah melalui tahap penyiapan dan seleksi data, diperoleh satu dataset terstruktur yang terdiri dari 56 variabel independen dan satu variabel dependen berupa prevalensi \textit{stunting}. Untuk memudahkan pemahaman struktur data dan menjaga konsistensi analisis determinan, seluruh variabel independen kemudian dikelompokkan ke dalam beberapa kategori tematik berdasarkan karakteristik indikator yang diwakilinya.
+\subsection{Karakteristik Data} \label{sec:karakteristik_data}
+Dataset yang digunakan dalam penelitian ini bersumber dari Laporan Publikasi SSGI tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Data tersebut merupakan data sekunder berskala nasional yang menyajikan berbagai indikator status gizi, kesehatan ibu dan anak, serta kondisi lingkungan dan sosial ekonomi pada tingkat provinsi. Setelah melalui tahap penyiapan dan seleksi data, diperoleh satu dataset terstruktur yang terdiri dari 56 variabel independen dan satu variabel dependen berupa prevalensi \textit{stunting}. Untuk memudahkan pemahaman struktur data dan menjaga konsistensi analisis determinan, seluruh variabel independen kemudian dikelompokkan ke dalam beberapa kategori tematik berdasarkan karakteristik indikator yang diwakilinya.
 
 \begin{table}[H]
 \centering
@@ -194,14 +186,6 @@ Dataset yang digunakan dalam penelitian ini bersumber dari Laporan Publikasi Sur
 \end{table}
 
 Tabel \ref{tab:distribusi_variabel} menunjukkan bahwa variabel determinan yang digunakan dalam penelitian ini didominasi oleh indikator terkait riwayat kehamilan, pola pemberian makan bayi dan anak, serta akses pelayanan kesehatan. Komposisi ini mencerminkan pendekatan multidimensi dalam menganalisis \textit{stunting}, di mana faktor biologis, perilaku, layanan kesehatan, serta kondisi lingkungan dianalisis secara simultan. Pengelompokan ini juga menjadi dasar dalam interpretasi model, khususnya pada tahap analisis kontribusi fitur menggunakan SHAP.
-
-\section{Metode Pengembangan} \label{sec:metode_pengembangan}
-
-Penelitian ini menerapkan kerangka kerja pengembangan sistem berbasis data (\textit{data-driven}) yang mengacu pada tahapan standar \textit{Knowledge Discovery in Databases} (KDD)\footnote{\textit{Knowledge Discovery in Databases} (KDD) adalah proses non-trivial untuk mengidentifikasi pola yang valid, baru, berpotensi bermanfaat, dan dapat dipahami dari sekumpulan data yang besar (Fayyad et al., 1996).}. Kerangka kerja ini digunakan untuk memastikan bahwa proses transformasi data sekunder dari laporan SSGI 2024 menjadi informasi analitis dilakukan secara sistematis dan terstruktur. Sebagai metode utama dalam tahap pemodelan, penelitian ini menggunakan algoritma \textit{Random Forest Regression}, yang secara luas dikenal memiliki kemampuan dalam memodelkan hubungan non-linier dan menangani interaksi kompleks antarvariabel determinan. Pemilihan algoritma ini didukung oleh temuan penelitian sebelumnya yang menunjukkan kinerja \textit{Random Forest} yang kompetitif dalam konteks pemodelan prevalensi \textit{stunting} di Indonesia \cite{pratama2024comparison}.
-
-Tantangan metodologis utama dalam penelitian ini adalah keterbatasan jumlah observasi data pada tingkat provinsi, yang berpotensi menimbulkan risiko \textit{overfitting} apabila digunakan skema pembagian data latih dan uji konvensional. Oleh karena itu, diterapkan strategi validasi \textit{Leave-One-Out Cross Validation} (LOOCV), di mana setiap provinsi secara bergantian digunakan sebagai data uji sementara provinsi lainnya berperan sebagai data latih. Pendekatan ini memungkinkan pemanfaatan data secara maksimal dan memberikan estimasi performa model yang lebih stabil pada \textit{dataset} berukuran kecil, sebagaimana direkomendasikan dalam penelitian sebelumnya \cite{cha2021comparison}.
-
-Selain aspek akurasi prediksi, penelitian ini juga menekankan pada interpretabilitas model melalui integrasi metode SHAP. Metode ini digunakan untuk mengkuantifikasi kontribusi relatif setiap variabel determinan terhadap hasil prediksi model, baik secara global maupun pada tingkat provinsi. Pendekatan SHAP dipilih karena kemampuannya dalam menjelaskan model berbasis \textit{ensemble} secara transparan, sehingga hasil pemodelan tidak hanya menghasilkan estimasi angka prevalensi \textit{stunting}, tetapi juga menyediakan dasar analitis yang dapat mendukung perumusan kebijakan intervensi gizi yang lebih tepat sasaran \cite{shen2023machine}.
 
 \section{Ilustrasi Perhitungan Metode} \label{sec:ilustrasi_metode}
 
@@ -231,20 +215,15 @@ Berikut adalah ilustrasi jika model terdiri dari 3 pohon keputusan, di mana masi
 
 Nilai prediksi akhir ($\hat{y}$) untuk provinsi tersebut diperoleh dengan merata-ratakan seluruh \textit{output} pohon menggunakan persamaan berikut:
 
-\par\vspace{0.8cm} % Spasi aman
+Selanjutnya, proses agregasi dilakukan untuk menyederhanakan struktur data sehingga seluruh variabel memiliki skala yang seragam. Pada tabel yang memiliki lebih dari satu kategori indikator, proses agregasi dilakukan melalui pendekatan penggabungan indikator berbasis risiko. Sebagai contoh, pada tabel usia kehamilan ibu, nilai persentase kehamilan usia ekstrem dijumlahkan untuk membentuk satu variabel baru. 
+
+\par\vspace{0.8cm} % Kasih spasi atas yang lega
 \[
-   \hat{y} = \frac{1}{N} \sum_{i=1}^{N} h_i(x)
+   X_{\text{risiko usia kehamilan}} = X_{<20} + X_{>35}
 \]
-\par\vspace{0.8cm}
+\par\vspace{0.8cm} % Kasih spasi bawah yang lega
 
-\noindent Penyelesaian:
-\par\vspace{0.2cm}
-\begin{align*}
-    \hat{y} &= \frac{18.5 + 17.9 + 18.2}{3} \\[0.3cm]
-    \hat{y} &= \mathbf{18.2\%}
-\end{align*}
-\par\vspace{0.5cm}
-
+\noindent Di mana $X_{<20}$ adalah persentase kehamilan usia di bawah 20 tahun dan $X_{>35}$ adalah persentase kehamilan usia di atas 35 tahun. Pendekatan serupa diterapkan pada tabel lain yang memiliki kategori majemuk dengan prinsip mempertahankan indikator risiko utama terhadap \textit{stunting}. Seluruh variabel direpresentasikan dalam bentuk persentase guna menjaga konsistensi satuan data. Hasil dari tahap ini adalah \textit{dataset} terstruktur berbasis provinsi yang siap digunakan sebagai input pada tahapan analisis selanjutnya.
 Angka \textbf{18.2\%} inilah yang menjadi prediksi final prevalensi \textit{stunting} untuk provinsi tersebut.
 
 \subsection{Perhitungan \textit{Error} Prediksi}
@@ -306,7 +285,7 @@ Untuk mengukur performa model secara menyeluruh terhadap seluruh provinsi di Ind
     \end{tabular}
 \end{table}
 
-\subsubsection*{1. Mean Absolute Error (MAE)}
+\subsubsection*{1. MAE}
 \textit{Mean Absolute Error} (MAE) dihitung untuk mengetahui rata-rata penyimpangan absolut prediksi \textit{stunting} dalam satuan persen.
 
 \par\vspace{0.5cm}
@@ -324,7 +303,7 @@ Untuk mengukur performa model secara menyeluruh terhadap seluruh provinsi di Ind
 
 Model memiliki rata-rata kesalahan prediksi sebesar \textbf{1.67 poin}.
 
-\subsubsection*{2. Mean Squared Error (MSE)}
+\subsubsection*{2. MSE}
 \textit{Mean Squared Error} (MSE) dihitung untuk memberikan bobot lebih pada kesalahan prediksi yang ekstrem, guna memastikan model sensitif terhadap data provinsi dengan selisih \textit{stunting} yang besar.
 
 \par\vspace{0.5cm}
@@ -340,7 +319,7 @@ Model memiliki rata-rata kesalahan prediksi sebesar \textbf{1.67 poin}.
 \end{align*}
 \par\vspace{0.5cm}
 
-\subsubsection*{3. Root Mean Squared Error (RMSE)}
+\subsubsection*{3. RMSE}
 \textit{Root Mean Squared Error} (RMSE) mengembalikan nilai kesalahan ke satuan asli (persentase) untuk menggambarkan standar deviasi dari residu prediksi model terhadap data SSGI.
 
 \par\vspace{0.5cm}
@@ -358,7 +337,7 @@ Model memiliki rata-rata kesalahan prediksi sebesar \textbf{1.67 poin}.
 
 Deviasi standar kesalahan model berada pada angka \textbf{1.73 poin}.
 
-\subsubsection*{4. Mean Absolute Percentage Error (MAPE)}
+\subsubsection*{4. MAPE}
 \textit{Mean Absolute Percentage Error} (MAPE) digunakan untuk melihat rasio kesalahan model relatif terhadap besaran angka \textit{stunting} aktual di masing-masing provinsi.
 
 \par\vspace{0.5cm}
