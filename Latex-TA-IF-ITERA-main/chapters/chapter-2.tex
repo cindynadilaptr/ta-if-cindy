@@ -2,25 +2,29 @@
 \chapter{TINJAUAN PUSTAKA} \label{Bab II}
 
 \section{Tinjauan Pustaka} \label{II.Tinjauan}
-Penelitian mengenai \textit{stunting} kini makin banyak menggunakan pendekatan komputasi seperti \textit{Machine Learning} untuk mendapatkan hasil yang lebih akurat. Beberapa studi sebelumnya sudah menerapkan algoritma \textit{Random Forest} serta metode interpretasi SHAP untuk memahami pola data dengan lebih baik. Selain itu, penggunaan metrik evaluasi yang tepat juga menjadi hal penting untuk memastikan model bisa dipercaya. Bab ini akan membahas tinjauan dari delapan jurnal utama yang menjadi acuan penelitian ini dalam mengolah data Survei Status Gizi Indonesia (SSGI) tahun 2024.
+\section{Tinjauan Pustaka}
 
-Penelitian yang dilakukan oleh Pande dan rekan-rekan \cite{pande_indian_stunting_2023} pada tahun 2023 meneliti faktor-faktor penentu pertumbuhan linear anak di India guna memahami penyebab masalah gizi kronis. Dengan memanfaatkan data NFHS-5 yang mencakup lebih dari 146 ribu balita, studi ini menggunakan pendekatan \textit{multilevel mixed-effect logistic regression} untuk menguji pengaruh variabel dari tingkat individu hingga lingkungan komunitas. Hasil analisis menunjukkan bahwa prevalensi \textit{stunting} mencapai angka 36\%, di mana faktor individu seperti jenis kelamin laki-laki dan berat lahir rendah terbukti meningkatkan risiko secara signifikan. Temuan menarik lainnya adalah pada tingkat komunitas, di mana lingkungan dengan tingkat kemiskinan tinggi meningkatkan kemungkinan \textit{stunting} hingga 68\%, sedangkan komunitas dengan literasi tinggi justru mampu menurunkan risiko tersebut secara efektif. Penelitian ini menjadi referensi yang sangat relevan karena memberikan landasan empiris bahwa variabel sosial-ekonomi dan lingkungan memiliki kontribusi besar terhadap kejadian \textit{stunting}, selaras dengan variabel yang akan dianalisis dalam penelitian ini.
+Bagian ini memaparkan tinjauan terhadap delapan jurnal utama yang menjadi acuan dan rujukan dalam pelaksanaan penelitian ini. Jurnal-jurnal tersebut memberikan landasan mengenai pemilihan algoritma, penggunaan variabel determinan, serta metode evaluasi model yang diterapkan dalam tugas akhir ini.
 
-Selanjutnya, studi yang dilakukan oleh Zemariam dan rekan-rekan \cite{zemariam2025prediction} pada tahun 2025 mengkaji kemampuan berbagai algoritma \textit{machine learning} untuk memprediksi status \textit{stunting} serta determinan sosial-ekonominya pada remaja perempuan di Ethiopia. Penelitian ini membandingkan kinerja delapan algoritma berbeda, termasuk \textit{Random Forest}, dengan menerapkan teknik penyeimbangan data (\textit{SMOTE}) serta seleksi fitur algoritma Boruta untuk menyaring variabel yang paling informatif. Hasil evaluasi menunjukkan bahwa \textit{Random Forest} menjadi model dengan performa terbaik dibandingkan algoritma lainnya, mencatatkan akurasi sebesar 77\% dan nilai AUC mencapai 85\%. Model ini juga berhasil mengidentifikasi bahwa faktor wilayah, indeks kekayaan rendah, serta minimnya pendidikan formal merupakan prediktor utama kejadian \textit{stunting}. Temuan ini sangat mendukung penelitian ini karena membuktikan efektivitas \textit{Random Forest} dalam menangani data survei kesehatan yang kompleks, serta kemampuannya dalam menyoroti kontribusi variabel sosial-ekonomi terhadap isu gizi secara akurat.
+\begin{enumerate}
+    \item Pande \textit{et al.} pada tahun 2023 meneliti faktor-faktor penentu pertumbuhan linear anak di India guna memahami penyebab masalah gizi kronis. Studi ini menggunakan pendekatan \textit{multilevel mixed-effect logistic regression} untuk menguji pengaruh variabel dari tingkat individu hingga lingkungan komunitas dengan memanfaatkan data NFHS-5 yang mencakup lebih dari 146 ribu balita. Hasil analisis menunjukkan bahwa prevalensi \textit{stunting} mencapai angka 36\%, di mana faktor individu seperti jenis kelamin laki-laki dan berat lahir rendah terbukti meningkatkan risiko secara signifikan. Lingkungan dengan tingkat kemiskinan tinggi meningkatkan kemungkinan \textit{stunting} hingga 68\% pada tingkat komunitas, sedangkan komunitas dengan literasi tinggi justru mampu menurunkan risiko tersebut secara efektif. Penelitian ini menjadi referensi yang sangat relevan karena memberikan landasan empiris bahwa variabel sosial-ekonomi dan lingkungan memiliki kontribusi besar terhadap kejadian \textit{stunting}, selaras dengan variabel yang akan dianalisis dalam penelitian ini \cite{pande_indian_stunting_2023}.
 
-Penelitian terbaru yang dilakukan oleh Jemil dan rekan-rekan \cite{jemil2026predicting} pada tahun 2026 bertujuan memprediksi kejadian \textit{severe stunting} serta determinan utamanya pada balita di 12 negara Afrika Timur. Menggunakan data DHS dengan sampel lebih dari 76 ribu anak, studi ini membandingkan kinerja delapan algoritma klasifikasi—termasuk \textit{Random Forest}—dengan menerapkan teknik \textit{SMOTE} untuk penyeimbangan data serta \textit{Stratified 10-Fold Cross-Validation} sebagai metode evaluasi. Hasil eksperimen menempatkan \textit{Random Forest} sebagai model terbaik dengan akurasi mencapai 87\% dan nilai AUC sebesar 0,83. Lebih lanjut, melalui analisis interpretabilitas (SHAP), studi ini berhasil mengungkap bahwa faktor seperti kurangnya ASI eksklusif, status ekonomi rendah, serta sanitasi buruk merupakan pemicu utama risiko \textit{stunting} parah. Referensi ini sangat krusial bagi penelitian ini karena memberikan validasi empiris mengenai keandalan kombinasi \textit{Random Forest} dan metode SHAP dalam membedah faktor risiko malnutrisi secara mendetail.
+    \item Zemariam \textit{et al.} pada tahun 2025 mengkaji kemampuan berbagai algoritma \textit{machine learning} untuk memprediksi status \textit{stunting} serta determinan sosial-ekonominya pada remaja perempuan di Ethiopia. Penelitian ini membandingkan kinerja delapan algoritma berbeda, termasuk \textit{Random Forest}, dengan menerapkan teknik penyeimbangan data (\textit{SMOTE}) serta seleksi fitur algoritma Boruta untuk menyaring variabel yang paling informatif. Hasil evaluasi menunjukkan bahwa \textit{Random Forest} menjadi model dengan performa terbaik dibandingkan algoritma lainnya, mencatatkan akurasi sebesar 77\% dan nilai AUC mencapai 85\%. Model ini juga berhasil mengidentifikasi bahwa faktor wilayah, indeks kekayaan rendah, serta minimnya pendidikan formal merupakan prediktor utama kejadian \textit{stunting}. Temuan ini sangat mendukung penelitian ini karena membuktikan efektivitas \textit{Random Forest} dalam menangani data survei kesehatan yang kompleks, serta kemampuannya dalam menyoroti kontribusi variabel sosial-ekonomi terhadap isu gizi secara akurat \cite{zemariam2025prediction}.
 
-Selanjutnya, penelitian yang dilakukan oleh Tamanna dan rekan-rekan \cite{tamanna2025identifying} pada tahun 2025 memanfaatkan data \textit{Bangladesh Demographic and Health Survey} (BDHS) untuk mengevaluasi determinan berbagai bentuk malnutrisi, termasuk \textit{stunting}, \textit{wasting}, dan \textit{underweight}. Studi ini menerapkan algoritma Boruta untuk seleksi fitur sebelum menguji performa berbagai model \textit{machine learning}, seperti \textit{Random Forest}, XGBoost, dan SVM, dalam memprediksi status gizi balita. Hasil evaluasi menunjukkan bahwa \textit{Random Forest} mampu memodelkan kondisi malnutrisi secara kompetitif, dengan akurasi prediksi \textit{stunting} mencapai 64,19\% dan \textit{wasting} sebesar 76,68\%. Melalui analisis nilai SHAP, penelitian ini juga mengidentifikasi bahwa pendidikan ibu, indeks kekayaan, serta fasilitas sanitasi merupakan prediktor utama status gizi anak. Temuan ini memperkuat landasan penelitian ini karena membuktikan bahwa \textit{Random Forest} efektif digunakan untuk memodelkan masalah gizi yang kompleks, sekaligus menegaskan peran krusial variabel sosial-ekonomi yang akan menjadi fokus analisis pada tingkat provinsi di Indonesia.
+    \item Jemil \textit{et al.} pada tahun 2026 bertujuan memprediksi kejadian \textit{severe stunting} serta determinan utamanya pada balita di 12 negara Afrika Timur. Studi ini membandingkan kinerja delapan algoritma klasifikasi---termasuk \textit{Random Forest}---dengan menerapkan teknik \textit{SMOTE} untuk penyeimbangan data serta \textit{Stratified 10-Fold Cross-Validation} sebagai metode evaluasi menggunakan data DHS dengan sampel lebih dari 76 ribu anak. Hasil eksperimen menempatkan \textit{Random Forest} sebagai model terbaik dengan akurasi mencapai 87\% dan nilai AUC sebesar 0,83. Studi ini berhasil mengungkap bahwa faktor seperti kurangnya ASI eksklusif, status ekonomi rendah, serta sanitasi buruk merupakan pemicu utama risiko \textit{stunting} parah melalui analisis interpretabilitas (SHAP). Referensi ini sangat krusial bagi penelitian ini karena memberikan validasi empiris mengenai keandalan kombinasi \textit{Random Forest} dan metode SHAP dalam membedah faktor risiko malnutrisi secara mendetail \cite{jemil2026predicting}.
 
-Dalam konteks nasional, penelitian yang dilakukan oleh Pratama dan rekan-rekan \cite{pratama2024comparison} pada tahun 2024 membandingkan efektivitas berbagai algoritma \textit{machine learning} untuk memprediksi prevalensi \textit{stunting} tingkat provinsi di Indonesia. Dengan memanfaatkan dataset gabungan dari Survei Status Gizi Indonesia (SSGI) tahun 2021–2022 dan data publikasi resmi lainnya, studi ini menguji performa model seperti SVR, GAM, dan \textit{Random Forest} menggunakan metrik evaluasi regresi. Hasilnya menunjukkan bahwa \textit{Random Forest Regression} memberikan kinerja paling unggul dengan nilai $R^2$ sebesar 0,703 dan tingkat kesalahan (MAPE) di bawah 10\%, sekaligus mengonfirmasi korelasi kuat antara akses sanitasi layak dan kemiskinan terhadap angka prevalensi. Temuan ini menjadi landasan empiris yang sangat krusial bagi penelitian ini, karena membuktikan bahwa \textit{Random Forest} merupakan metode yang tangguh untuk menangani karakteristik data agregat SSGI, sehingga sangat relevan untuk diterapkan kembali pada data terbaru tahun 2024.
+    \item Tamanna \textit{et al.} pada tahun 2025 memanfaatkan data \textit{Bangladesh Demographic and Health Survey} (BDHS) untuk mengevaluasi determinan berbagai bentuk malnutrisi, termasuk \textit{stunting}, \textit{wasting}, dan \textit{underweight}. Studi ini menerapkan algoritma Boruta untuk seleksi fitur sebelum menguji performa berbagai model \textit{machine learning}, seperti \textit{Random Forest}, XGBoost, dan SVM, dalam memprediksi status gizi balita. Hasil evaluasi menunjukkan bahwa \textit{Random Forest} mampu memodelkan kondisi malnutrisi secara kompetitif, dengan akurasi prediksi \textit{stunting} mencapai 64,19\% dan \textit{wasting} sebesar 76,68\%. Penelitian ini juga mengidentifikasi bahwa pendidikan ibu, indeks kekayaan, serta fasilitas sanitasi merupakan prediktor utama status gizi anak melalui analisis nilai SHAP. Temuan ini memperkuat landasan penelitian ini karena membuktikan bahwa \textit{Random Forest} efektif digunakan untuk memodelkan masalah gizi yang kompleks, sekaligus menegaskan peran krusial variabel sosial-ekonomi yang akan menjadi fokus analisis pada tingkat provinsi di Indonesia \cite{tamanna2025identifying}.
 
-Penelitian oleh Kutlu, Donmez, dan Freeman \cite{kutlu2024machine} pada tahun 2024 berfokus pada penerapan \textit{machine learning} untuk menilai risiko diabetes sekaligus mengatasi keterbatasan model \textit{black-box} dalam konteks klinis. Dengan memanfaatkan dataset masif berisi lebih dari 250 ribu pasien, studi ini mengombinasikan seleksi fitur \textit{Recursive Feature Elimination} (RFE) dan algoritma XGBoost yang menghasilkan akurasi prediksi sebesar 86,6\%. Lebih jauh, analisis menggunakan metode SHAP berhasil mengungkap bahwa status kesehatan umum, tekanan darah, serta BMI merupakan variabel paling berpengaruh dalam pengambilan keputusan model. Studi ini menjadi rujukan metodologis yang kuat karena membuktikan bahwa integrasi SHAP mampu menjembatani celah antara akurasi algoritma dan kebutuhan interpretasi medis, selaras dengan tujuan penelitian ini dalam menjelaskan determinan \textit{stunting}.
+    \item Pratama \textit{et al.} pada tahun 2024 membandingkan efektivitas berbagai algoritma \textit{machine learning} untuk memprediksi prevalensi \textit{stunting} tingkat provinsi di Indonesia dalam konteks nasional. Studi ini menguji performa model seperti SVR, GAM, dan \textit{Random Forest} menggunakan metrik evaluasi regresi dengan memanfaatkan dataset gabungan dari Survei Status Gizi Indonesia (SSGI) tahun 2021--2022 dan data publikasi resmi lainnya. Hasilnya menunjukkan bahwa \textit{Random Forest Regression} memberikan kinerja paling unggul dengan nilai $R^2$ sebesar 0,703 dan tingkat kesalahan (MAPE) di bawah 10\%. Korelasi kuat antara akses sanitasi layak dan kemiskinan terhadap angka prevalensi juga terkonfirmasi dalam penelitian tersebut. Temuan ini menjadi landasan empiris yang sangat krusial bagi penelitian ini, karena membuktikan bahwa \textit{Random Forest} merupakan metode yang tangguh untuk menangani karakteristik data agregat SSGI, sehingga sangat relevan untuk diterapkan kembali pada data terbaru tahun 2024 \cite{pratama2024comparison}.
 
-Selain itu, penelitian oleh Orji dan Ukwandu \cite{orji2024machine} pada tahun 2024 menawarkan perspektif penting mengenai standar evaluasi model regresi dalam prediksi biaya kesehatan yang transparan. Studi ini membandingkan algoritma seperti \textit{Random Forest} dan XGBoost, dengan fokus khusus pada penggunaan metrik evaluasi yang komprehensif, mulai dari $R^2$ hingga \textit{Mean Absolute Percentage Error} (MAPE). Hasil pengujian menunjukkan bahwa \textit{Random Forest} memiliki performa yang sangat kompetitif dengan nilai $R^2$ mencapai 0,82 dan MAPE sebesar 12,7\%, sembari tetap mempertahankan kemampuan interpretasi fitur yang krusial bagi pembuat kebijakan. Relevansi utama jurnal ini bagi penelitian adalah pada kerangka validasi model regresinya yang ketat, yang menjadi acuan metodologis dalam memilih metrik pengukuran *error* yang tepat untuk memodelkan prevalensi \textit{stunting}.
+    \item Kutlu, Donmez, dan Freeman pada tahun 2024 berfokus pada penerapan \textit{machine learning} untuk menilai risiko diabetes sekaligus mengatasi keterbatasan model \textit{black-box} dalam konteks klinis. Studi ini mengombinasikan seleksi fitur \textit{Recursive Feature Elimination} (RFE) dan algoritma XGBoost yang menghasilkan akurasi prediksi sebesar 86,6\% dengan memanfaatkan dataset masif berisi lebih dari 250 ribu pasien. Analisis menggunakan metode SHAP berhasil mengungkap bahwa status kesehatan umum, tekanan darah, serta BMI merupakan variabel paling berpengaruh dalam pengambilan keputusan model. Integrasi SHAP mampu menjembatani celah antara akurasi algoritma dan kebutuhan interpretasi medis, sehingga studi ini menjadi rujukan metodologis yang kuat dan selaras dengan tujuan penelitian ini dalam menjelaskan determinan \textit{stunting} \cite{kutlu2024machine}.
 
-Terakhir, penelitian metodologis oleh Irisson dan rekan-rekan \cite{irisson2022iterative} pada tahun 2022 menyoroti tantangan validasi pada data spasial yang sering kali memiliki autokorelasi, di mana metode pengujian konvensional cenderung memberikan estimasi \textit{error} yang terlalu optimis. Untuk mengatasi hal tersebut, studi ini memperkenalkan pendekatan \textit{Iterative Spatial Leave-One-Out Cross-Validation} (SLOOCV) yang menjamin independensi antara data latih dan data uji. Hasil eksperimen menunjukkan bahwa metode ini mampu menghasilkan estimasi kinerja yang jauh lebih realistis serta mengurangi bias prediksi secara signifikan dibandingkan teknik pembagian acak biasa. Prinsip ini menjadi landasan kuat bagi penggunaan skema \textit{Leave-One-Out Cross-Validation} (LOOCV) dalam penelitian ini, mengingat data agregat provinsi memiliki karakteristik spasial terbatas yang membutuhkan strategi evaluasi model yang ketat.
+    \item Orji dan Ukwandu pada tahun 2024 menawarkan perspektif penting mengenai standar evaluasi model regresi dalam prediksi biaya kesehatan yang transparan. Studi ini membandingkan algoritma seperti \textit{Random Forest} dan XGBoost, dengan fokus khusus pada penggunaan metrik evaluasi yang komprehensif, mulai dari $R^2$ hingga \textit{Mean Absolute Percentage Error} (MAPE). Hasil pengujian menunjukkan bahwa \textit{Random Forest} memiliki performa yang sangat kompetitif dengan nilai $R^2$ mencapai 0,82 dan MAPE sebesar 12,7\%, sembari tetap mempertahankan kemampuan interpretasi fitur yang krusial bagi pembuat kebijakan. Kerangka validasi model regresinya yang ketat menjadi relevansi utama jurnal ini bagi penelitian. Hal tersebut menjadi acuan metodologis dalam memilih metrik pengukuran \textit{error} yang tepat untuk memodelkan prevalensi \textit{stunting} \cite{orji2024machine}.
 
-Untuk mempermudah pemetaan posisi penelitian ini terhadap studi-studi terdahulu, ringkasan sistematis dari kedelapan jurnal rujukan tersebut disajikan secara lengkap pada Tabel \ref{tab:tinjauan_pustaka}. Tabel ini merangkum aspek-aspek kunci yang meliputi judul, metode yang digunakan, serta temuan utama, guna memperjelas perbedaan pendekatan dan kontribusi kebaruan yang ditawarkan dalam penelitian ini.
+    \item Irisson \textit{et al.} pada tahun 2022 menyoroti tantangan validasi pada data spasial yang sering kali memiliki autokorelasi, di mana metode pengujian konvensional cenderung memberikan estimasi \textit{error} yang terlalu optimis. Studi ini memperkenalkan pendekatan \textit{Iterative Spatial Leave-One-Out Cross-Validation} (SLOOCV) yang menjamin independensi antara data latih dan data uji untuk mengatasi hal tersebut. Hasil eksperimen menunjukkan bahwa metode ini mampu menghasilkan estimasi kinerja yang jauh lebih realistis serta mengurangi bias prediksi secara signifikan dibandingkan teknik pembagian acak biasa. Penggunaan skema \textit{Leave-One-Out Cross-Validation} (LOOCV) dalam penelitian ini didasari oleh prinsip kuat tersebut. Data agregat provinsi memiliki karakteristik spasial terbatas yang membutuhkan strategi evaluasi model yang ketat \cite{irisson2022iterative}.
+\end{enumerate}
+
+Ringkasan sistematis dari seluruh jurnal rujukan ditampilkan pada Tabel \ref{tab:tinjauan_pustaka} untuk mempermudah pemetaan posisi penelitian terhadap studi-studi terdahulu. Tabel ini merangkum aspek-aspek kunci yang meliputi judul, metode, serta temuan utama guna memperjelas perbedaan pendekatan dan kontribusi kebaruan dalam penelitian ini.
 \begin{longtable}{|p{0.05\textwidth}|p{0.2\textwidth}|p{0.2\textwidth}|p{0.15\textwidth}|p{0.25\textwidth}|}
     \caption{Ringkasan Penelitian Terdahulu}
     \label{tab:tinjauan_pustaka}\\
@@ -40,35 +44,27 @@ Untuk mempermudah pemetaan posisi penelitian ini terhadap studi-studi terdahulu,
     \hline
     \endlastfoot
 
-    % 1. Pande
     1. & \textit{Analyzing determinants from both compositional and contextual level impeding desired linear growth of children in Indian context} \cite{pande_indian_stunting_2023} & Identifikasi determinan \textit{stunting} anak (individu \& kontekstual) di India. & \textit{Multilevel Mixed-Effect Logistic Regression}. & Prevalensi \textit{stunting} 36\%; faktor risiko utama meliputi jenis kelamin laki-laki, BBLR, dan kemiskinan komunitas; literasi tinggi menjadi faktor protektif. \\ 
     \hline
 
-    % 2. Zemariam
     2. & \textit{Prediction of stunting and its socioeconomic determinants among adolescent girls in Ethiopia using machine learning algorithms} \cite{zemariam2025prediction} & Prediksi \textit{stunting} pada remaja perempuan di Ethiopia beserta faktor sosial-ekonominya. & \textit{Random Forest} (RF), SMOTE, Boruta. & RF menjadi model terbaik (Akurasi 77\%, AUC 85\%). Faktor dominan: wilayah, indeks kekayaan rendah, dan kurangnya pendidikan. \\ 
     \hline
 
-    % 3. Jemil
     3. & \textit{Predicting severe stunting and its determinants among under-five in Eastern African Countries: A machine learning algorithms} \cite{jemil2026predicting} & Prediksi kejadian \textit{severe stunting} balita di 12 negara Afrika Timur. & RF, SMOTE, \textit{Stratified 10-Fold CV}, SHAP. & RF unggul dengan Akurasi 87\% dan AUC 0.83. SHAP mengungkap determinan kunci: kurang ASI eksklusif, ekonomi lemah, dan sanitasi buruk. \\ 
     \hline
 
-    % 4. Tamanna
     4. & \textit{Identifying determinants of malnutrition in under-five children in Bangladesh: insights from the BDHS-2022 cross-sectional study} \cite{tamanna2025identifying} & Evaluasi determinan malnutrisi (\textit{stunting, wasting}) pada balita di Bangladesh. & Boruta \textit{Feature Selection}, RF, XGBoost. & RF kompetitif dengan akurasi \textit{stunting} 64,19\% dan \textit{wasting} 76,68\%. Determinan utama: pendidikan ibu, kekayaan, dan sanitasi. \\ 
     \hline
 
-    % 5. Pratama
     5. & \textit{Comparison of Machine Learning Algorithms for Predicting Stunting Prevalence in Indonesia} \cite{pratama2024comparison} & Prediksi prevalensi \textit{stunting} tingkat provinsi di Indonesia (Data SSGI). & \textit{Random Forest Regression}, SVR, GAM. & \textit{RF Regression} terbaik ($R^2=0,703$, MAPE <10\%). Menunjukkan korelasi kuat antara sanitasi layak dan kemiskinan terhadap prevalensi. \\ 
     \hline
 
-    % 6. Kutlu
     6. & \textit{Machine learning interpretability in diabetes risk assessment: a SHAP analysis} \cite{kutlu2024machine} & Mengatasi sifat \textit{black-box} model prediksi risiko kesehatan (Diabetes). & XGBoost, RFE, SHAP. & Akurasi 86,6\%. SHAP berhasil memberikan interpretasi transparan terhadap fitur dominan (kesehatan umum, TD, BMI) dalam model medis. \\ 
     \hline
 
-    % 7. Orji
     7. & \textit{Machine learning for an explainable cost prediction of medical insurance} \cite{orji2024machine} & Prediksi biaya asuransi kesehatan yang transparan (\textit{explainable}). & RF, XGBoost, SHAP, Evaluasi Regresi ($R^2$, MAPE). & RF mencapai $R^2$ 0,82 dan MAPE 12,7\%. Menetapkan standar evaluasi regresi yang komprehensif serta pentingnya interpretabilitas fitur. \\ 
     \hline
 
-    % 8. Irisson
     8. & \textit{Iterative spatial leave-one-out cross-validation and gap-filling based data augmentation for supervised learning applications in marine remote sensing} \cite{irisson2022iterative} & Bias validasi pada data spasial yang memiliki autokorelasi antar wilayah. & \textit{Iterative Spatial Leave-One-Out Cross-Validation} (SLOOCV). & Metode validasi LOOCV spasial menghasilkan estimasi \textit{error} yang lebih realistis dan tidak bias dibandingkan pembagian acak biasa pada data berbasis wilayah. \\ 
     \hline
 \end{longtable}
@@ -98,6 +94,140 @@ Berikut adalah contoh penyisipan tabel menggunakan \verb|\begin{longtable}{}|: \
 		\hline
 	\end{longtable}
 
+
+\subsection{Dasar Teori}
+
+\subsubsection{Stunting}
+
+Stunting merupakan kondisi kegagalan pertumbuhan pada anak akibat kekurangan gizi kronis serta infeksi berulang dalam jangka waktu lama (SITASI). Secara teknis, kondisi ini diukur menggunakan indeks Tinggi Badan menurut Umur (TB/U) dengan ambang batas nilai \textit{Z-score} kurang dari -2 Standar Deviasi (SD) (SITASI). Penentuan status \textit{stunting} melalui perhitungan \textit{Z-score} secara matematis dinyatakan sebagai berikut:
+
+\begin{equationcaptioned}[eq:zscore]{
+    Z = \frac{x - \text{median}}{\text{SD}}
+}{
+    Rumus perhitungan Z-score antropometri
+}
+\end{equationcaptioned}
+
+Kondisi ini memiliki dampak jangka pendek berupa penurunan daya tahan tubuh, serta dampak jangka panjang yang menghambat perkembangan kognitif dan kapasitas intelektual anak (SITASI). Hal tersebut menjadikannya sebagai masalah multidimensi yang dipengaruhi oleh berbagai faktor risiko, mulai dari pola asuh dan nutrisi hingga faktor lingkungan. Karakteristik data stunting yang dipengaruhi oleh interaksi variabel yang kompleks membuat pendekatan komputasi diperlukan untuk mengidentifikasi pola determinan secara lebih akurat. Melalui pemodelan yang tepat, hubungan antar-variabel ini dapat dipetakan guna mendukung strategi pencegahan yang lebih efektif di tingkat wilayah.
+
+\subsubsection{Determinan Stunting}
+
+Determinan \textit{stunting} dalam skala populasi diukur melalui berbagai indikator agregat yang mencerminkan kualitas kesehatan, sosial ekonomi, dan lingkungan di suatu wilayah. Penentuan variabel determinan dalam penelitian ini merujuk pada kerangka konseptual yang ditetapkan oleh \textit{World Health Organization} (WHO), yang membagi faktor risiko menjadi tingkat konteks sosial, politik, serta faktor rumah tangga dan lingkungan (SITASI). Visualisasi kerangka faktor risiko tersebut disajikan pada Gambar \ref{fig:framework_stunting} untuk memberikan gambaran menyeluruh mengenai interaksi antarvariabel.
+
+\begin{figure}[ht]
+    \centering
+    % \includegraphics[width=0.8\textwidth]{framework_stunting_who.png}
+    \caption{Kerangka Konseptual Faktor Penyebab \textit{Stunting} \cite{SITASI_SUMBER_GAMBAR}}
+    \label{fig:framework_stunting}
+\end{figure}
+
+
+Indikator kesehatan ibu dan anak menjadi variabel utama yang diukur melalui persentase cakupan layanan di suatu provinsi. Hal ini mencakup variabel seperti persentase ibu hamil risiko tinggi, persentase balita dengan ASI eksklusif, serta cakupan imunisasi dasar lengkap (SITASI). Merujuk pada Gambar \ref{fig:framework_stunting}, indikator-indikator ini merepresentasikan kualitas pengasuhan dan asupan yang merupakan faktor penyebab langsung di tingkat wilayah. Tinggi rendahnya persentase capaian ini mencerminkan sejauh mana perlindungan kesehatan anak telah terimplementasi secara merata.
+
+Variabel sosial ekonomi dan lingkungan yang direpresentasikan melalui indikator makro juga memberikan kontribusi besar terhadap fluktuasi prevalensi. Indikator lingkungan diukur melalui persentase rumah tangga dengan akses air minum aman dan sanitasi layak, sementara indikator sosial ekonomi mencakup tingkat kemiskinan provinsi (SITASI). Faktor-faktor tersebut bertindak sebagai determinan dasar yang memengaruhi kemampuan masyarakat dalam mengakses sumber daya gizi secara kolektif. Peningkatan kualitas infrastruktur dasar di tingkat provinsi dipercaya memiliki korelasi linear terhadap penurunan angka \textit{stunting} secara signifikan.
+
+Pemetaan seluruh indikator determinan berbasis persentase ini berfungsi sebagai landasan dalam tahap pemilihan fitur (\textit{feature selection}) pada pemodelan regresi. Melalui pendekatan ini, model \textit{Random Forest} dapat mempelajari pola hubungan antara proporsi variabel determinan terhadap nilai kontinu prevalensi \textit{stunting} di tingkat provinsi. Analisis berbasis indikator wilayah ini sangat relevan untuk mengidentifikasi area yang membutuhkan intervensi kebijakan lebih mendalam.
+
+\subsubsection{Survei Status Gizi Indonesia (SSGI)}
+
+Survei Status Gizi Indonesia (SSGI) merupakan instrumen nasional utama yang digunakan oleh pemerintah untuk memantau status gizi balita secara berkala di seluruh wilayah Indonesia (SITASI). Survei ini bertujuan untuk menyediakan data prevalensi \textit{stunting}, \textit{wasting}, \textit{underweight}, dan \textit{overweight} yang akurat dan representatif dari tingkat nasional hingga kabupaten/kota (SITASI). Dalam penelitian ini, laporan resmi SSGI digunakan sebagai sumber data primer untuk mengekstraksi variabel target dan variabel prediktor dalam skala provinsi. Penggunaan data sekunder publikasi resmi ini menjamin bahwa basis analisis yang digunakan telah melalui proses validasi teknis oleh lembaga berwenang sebelum dipublikasikan secara nasional.
+
+Indikator yang dikumpulkan dalam SSGI mencakup intervensi gizi spesifik dan intervensi gizi sensitif yang disajikan dalam bentuk proporsi atau persentase populasi (SITASI). Indikator spesifik meliputi cakupan layanan kesehatan langsung seperti pemberian ASI eksklusif, sedangkan indikator sensitif mencakup faktor pendukung seperti persentase rumah tangga dengan akses sanitasi layak (SITASI). Metodologi perolehan data prevalensi dilakukan melalui pengukuran antropometri yang terstandarisasi guna menghasilkan estimasi angka yang konsisten antarwilayah. Proses standardisasi ini sangat penting untuk meminimalisir bias pengukuran yang mungkin terjadi saat pengambilan data di lapangan.
+
+Data agregat yang dihasilkan SSGI memiliki karakteristik nilai kontinu dalam rentang 0--100 persen (SITASI). Struktur ini merepresentasikan kondisi kesehatan dan sosial ekonomi pada 38 provinsi di Indonesia secara makro. Format persentase yang konsisten pada seluruh variabel memudahkan perbandingan antarwilayah serta identifikasi variasi determinan terhadap prevalensi \textit{stunting}. Pendekatan berbasis data agregat ini memberikan gambaran populasi yang lebih luas dibandingkan data individu dalam mendukung analisis kebijakan di tingkat wilayah.
+
+\subsubsection{\textit{Machine Learning}}
+
+\textit{Machine Learning} merupakan cabang dari kecerdasan buatan yang memungkinkan sistem untuk mempelajari pola secara mandiri dari kumpulan data tanpa melalui pemrograman instruksi secara eksplisit (SITASI). Teknologi ini bekerja dengan membangun model statistik yang mampu mengenali tren tersembunyi guna melakukan generalisasi pada data baru. Di bidang kesehatan, pendekatan ini sangat berguna untuk menganalisis hubungan antar variabel yang kompleks dan sering kali bersifat non-linear. Penggunaan algoritma ini berpotensi menghasilkan estimasi yang lebih adaptif terhadap kompleksitas data dibandingkan dengan pendekatan statistik konvensional (SITASI).
+
+Prinsip kerja yang paling relevan dalam pemetaan faktor kesehatan adalah \textit{supervised learning}, di mana model dilatih menggunakan pasangan data masukan dan target yang sudah diketahui nilainya (SITASI). Melalui proses pelatihan ini, algoritma akan mencoba menemukan fungsi pemetaan paling optimal untuk meminimalkan kesalahan prediksi. Pendekatan ini secara khusus dapat diterapkan dalam bentuk regresi jika variabel yang diprediksi berupa nilai kontinu, seperti angka prevalensi \textit{stunting} di tingkat provinsi. Pemodelan ini menjadi dasar teknis sebelum melakukan implementasi algoritma yang lebih spesifik guna mendapatkan performa prediksi yang stabil dan akurat.
+
+\subsubsection{Supervised Learning}
+\textit{Supervised learning} adalah kategori dalam pembelajaran mesin yang beroperasi menggunakan pasangan data masukan dan target yang telah memiliki label atau nilai kebenaran sebelumnya (SITASI). Dalam mekanismenya, algoritma akan mempelajari fungsi pemetaan antara fitur masukan (\textit{input}) dan variabel target (\textit{output}) untuk meminimalkan selisih kesalahan prediksi. Peran fitur dalam proses ini sangat krusial, karena kualitas informasi yang dikandung oleh fitur akan menentukan kemampuan model dalam mengenali karakteristik unik dari data (SITASI). Tujuan akhir dari model ini adalah untuk memprediksi label atau nilai pada data baru dengan tingkat akurasi yang optimal berdasarkan pengalaman pelatihan. Berdasarkan tipe variabel targetnya, \textit{supervised learning} dapat diklasifikasikan lebih spesifik menjadi tugas klasifikasi atau tugas regresi.
+
+\subsubsection{Regresi dalam Machine Learning}
+Pendekatan regresi dalam \textit{machine learning} digunakan secara khusus untuk menangani permasalahan di mana variabel target yang diprediksi merupakan nilai kontinu atau numerik (SITASI). Berbeda dengan klasifikasi yang mengelompokkan data ke dalam kategori diskrit, regresi berfokus pada estimasi hubungan kuantitatif antar variabel untuk menghasilkan keluaran dalam rentang angka tertentu. Ilustrasi dasar dari hubungan ini dapat digambarkan melalui persamaan regresi linear sederhana sebagai berikut:
+
+\begin{equationcaptioned}[eq:linreg]{
+    y = \beta_0 + \beta_1x + \epsilon
+}{
+    Persamaan dasar regresi linear
+}
+\end{equationcaptioned}
+
+Di mana $y$ adalah variabel target, $x$ adalah fitur masukan, $\beta$ adalah koefisien model, dan $\epsilon$ merupakan \textit{error} (SITASI). Penggunaan metode regresi ini memungkinkan peneliti untuk memodelkan fenomena numerik seperti angka prevalensi dengan tingkat presisi yang terukur. Sebelum model melakukan estimasi terhadap target tersebut, diperlukan tahapan pemilihan variabel yang paling relevan melalui proses \textit{feature selection}.
+
+\subsubsection{Feature Selection}
+\textit{Feature selection} adalah proses identifikasi dan pemilihan subset fitur yang paling relevan untuk digunakan dalam pembangunan model prediktif (SITASI). Tujuan utama dari tahapan ini adalah untuk mengurangi dimensi data, meningkatkan efisiensi komputasi, serta menghindari masalah \textit{overfitting} yang dapat menurunkan performa generalisasi model. Secara umum, metode ini terbagi menjadi tiga kategori utama, yaitu \textit{filter methods}, \textit{wrapper methods}, dan \textit{embedded methods} (SITASI). Dengan mengeliminasi fitur yang redundan atau tidak informatif, model dapat lebih fokus pada variabel yang memiliki korelasi kuat terhadap variabel target. Setelah fitur yang relevan terpilih, langkah selanjutnya adalah memastikan data tersebut berada dalam format yang seragam melalui transformasi data.
+
+\subsubsection{Transformasi Data}
+Transformasi data merupakan prosedur modifikasi nilai data asli ke dalam format atau skala tertentu guna meningkatkan performa algoritma pembelajaran mesin (SITASI). Proses ini mencakup normalisasi skala agar seluruh fitur memiliki rentang nilai yang seragam, penggabungan kategori yang serupa, hingga konversi indikator tertentu agar lebih representatif. Dalam analisis data kesehatan, transformasi sering kali diperlukan untuk memastikan bahwa perbedaan satuan antar variabel tidak memengaruhi bobot keputusan model secara bias (SITASI). Keberhasilan transformasi akan menentukan kualitas representasi informasi yang kemudian dapat diproses lebih lanjut ke tahap agregasi. Setelah data ditransformasi, informasi tersebut sering kali perlu dikelompokkan kembali melalui mekanisme agregasi data.
+
+\subsubsection{Agregasi Data}
+Agregasi data adalah proses pengumpulan dan perangkuman data dari tingkat individu menjadi format kelompok atau unit yang lebih besar, seperti wilayah administratif (SITASI). Dalam konteks spasial, agregasi memungkinkan peneliti untuk melihat representasi makro dari suatu populasi yang sering kali lebih stabil dan bermakna untuk kebijakan publik dibandingkan data individu yang fluktuatif. Meskipun memberikan keunggulan dalam penyederhanaan informasi, agregasi memiliki keterbatasan berupa hilangnya variasi detail di tingkat mikro (SITASI). Namun, penggunaan data agregat sangat efektif untuk memetakan determinan kesehatan masyarakat pada lingkup wilayah seperti provinsi. Data agregat yang telah tersusun rapi ini kemudian siap digunakan sebagai masukan bagi algoritma \textit{Random Forest Regression}.
+
+\subsubsection{Random Forest Regression}
+\textit{Random Forest Regression} merupakan algoritma \textit{ensemble learning} yang bekerja dengan membangun sekumpulan pohon keputusan (\textit{decision trees}) secara independen selama tahap pelatihan (SITASI). Algoritma ini menerapkan mekanisme \textit{bootstrap aggregating} (\textit{bagging}) dan seleksi fitur acak untuk menciptakan variasi antar pohon guna meningkatkan stabilitas model. Perbedaan utama \textit{Random Forest} untuk regresi dibandingkan klasifikasi terletak pada \textit{output} akhirnya yang merupakan nilai rata-rata dari seluruh prediksi pohon (SITASI). Struktur model ini dapat diilustrasikan sebagai berikut:
+
+\begin{figure}[ht]
+    \centering
+    % \includegraphics[width=0.6\textwidth]{rf_structure.png}
+    \caption{Struktur Umum \textit{Random Forest Regression} \cite{SITASI_GAMBAR}}
+    \label{fig:rf_structure}
+\end{figure}
+
+Secara matematis, hasil prediksi akhir ($ \hat{y} $) dari total $K$ pohon keputusan dapat dirumuskan sebagai:
+
+\begin{equationcaptioned}[eq:rf_avg]{
+    \hat{y} = \frac{1}{K} \sum_{k=1}^{K} f_k(x)
+}{
+    Rata-rata prediksi pada Random Forest Regression
+}
+\end{equationcaptioned}
+
+Model ini dikenal sangat tangguh dalam menangani data non-linear dan memiliki ketahanan terhadap \textit{outlier} di dalam dataset (SITASI). Setelah model berhasil dibangun dan melakukan prediksi, kinerjanya harus diukur secara objektif melalui evaluasi model regresi.
+
+\subsubsection{Evaluasi Model Regresi}
+Evaluasi model regresi bertujuan untuk mengukur sejauh mana prediksi yang dihasilkan oleh model mendekati nilai aktual dari data observasi (SITASI). Terdapat beberapa metrik statistik utama yang umum digunakan, antara lain \textit{Mean Absolute Error} (MAE), \textit{Root Mean Square Error} (RMSE), \textit{Mean Absolute Percentage Error} (MAPE), serta Koefisien Determinasi ($R^2$). Masing-masing metrik memberikan perspektif berbeda mengenai besaran kesalahan dan kualitas kecocokan model terhadap data (SITASI). Adapun rumus untuk metrik-metrik tersebut adalah sebagai berikut:
+
+\begin{equationcaptioned}[eq:metrics]{
+    MAE = \frac{1}{n} \sum |y - \hat{y}|, \quad RMSE = \sqrt{\frac{1}{n} \sum (y - \hat{y})^2}
+}{
+    Rumus metrik evaluasi MAE dan RMSE
+}
+\end{equationcaptioned}
+
+Pemilihan metrik yang tepat sangat menentukan interpretasi peneliti terhadap akurasi model yang dikembangkan. Untuk menjamin bahwa nilai evaluasi tersebut tidak bersifat bias, diperlukan prosedur validasi yang ketat melalui \textit{cross validation}.
+
+\subsubsection{Cross Validation}
+\textit{Cross validation} merupakan teknik validasi model yang bertujuan untuk menilai kemampuan generalisasi model pada dataset yang independen (SITASI). Prosedur ini dilakukan dengan membagi data menjadi bagian latih (\textit{training set}) dan bagian uji (\textit{testing set}) secara berulang dengan skema tertentu. Tujuan utamanya adalah untuk mengurangi bias evaluasi yang mungkin muncul jika model hanya diuji pada satu bagian data acak saja (SITASI). Melalui proses ini, peneliti dapat memperoleh estimasi performa model yang lebih stabil dan objektif. Salah satu varian dari teknik ini yang sangat intensif dan sistematis adalah \textit{Leave-One-Out Cross Validation} (LOOCV).
+
+\subsubsection{Leave-One-Out Cross Validation (LOOCV)}
+\textit{Leave-One-Out Cross Validation} (LOOCV) merupakan bentuk ekstrem dari \textit{K-Fold Cross Validation} di mana jumlah lipatan (\textit{fold}) sama dengan jumlah total sampel data ($N$) (SITASI). Dalam setiap iterasinya, satu sampel digunakan sebagai data uji sementara $N-1$ sampel lainnya digunakan sebagai data latih, dan proses ini diulang sebanyak $N$ kali. Skema ini sangat cocok digunakan untuk dataset dengan jumlah sampel yang kecil karena mampu memaksimalkan penggunaan data untuk pelatihan model (SITASI). Kelebihan utamanya adalah menghasilkan estimasi yang hampir tidak bias, meskipun membutuhkan biaya komputasi yang lebih tinggi jika jumlah data meningkat. 
+
+\begin{figure}[ht]
+    \centering
+    % \includegraphics[width=0.7\textwidth]{loocv_scheme.png}
+    \caption{Skema Partisi Data pada LOOCV \cite{SITASI_GAMBAR}}
+    \label{fig:loocv}
+\end{figure}
+
+Meskipun model telah tervalidasi dengan baik, kompleksitas algoritma \textit{ensemble} sering kali menciptakan hambatan dalam memahami alasan di balik sebuah prediksi, yang dikenal sebagai masalah \textit{black-box}.
+
+\subsubsection{Interpretabilitas Model}
+Interpretabilitas model merujuk pada sejauh mana manusia dapat memahami alasan dan proses pengambilan keputusan di balik keluaran sebuah algoritma (SITASI). Masalah \textit{black-box} sering kali ditemukan pada algoritma kompleks seperti \textit{Random Forest}, di mana hubungan antar variabel sulit dijelaskan secara intuitif. Di bidang kesehatan, interpretasi menjadi aspek yang sangat krusial karena pembuat kebijakan perlu mengetahui variabel apa yang paling memengaruhi suatu kondisi (SITASI). Penjelasan model dapat dibagi menjadi \textit{global explanation} untuk tren populasi secara menyeluruh dan \textit{local explanation} untuk kasus spesifik. Untuk menjembatani kebutuhan interpretasi pada model kompleks tersebut, metode SHAP menjadi salah satu solusi yang paling banyak digunakan.
+
+\subsubsection{SHAP (SHapley Additive exPlanations)}
+SHAP (\textit{SHapley Additive exPlanations}) merupakan metode interpretasi model yang didasarkan pada teori permainan (\textit{game theory}) untuk menjelaskan kontribusi setiap fitur terhadap prediksi tertentu (SITASI). Metode ini menghitung nilai Shapley yang merepresentasikan besaran kontribusi rata-rata suatu fitur terhadap seluruh kemungkinan kombinasi fitur lainnya. Nilai ini memberikan keadilan dalam distribusi atribusi fitur sehingga peneliti dapat memahami arah dan kekuatan pengaruh setiap variabel (SITASI). Besarnya kontribusi fitur $i$ dalam model $f$ dengan himpunan fitur $S$ dirumuskan sebagai berikut:
+
+\begin{equationcaptioned}[eq:shap]{
+    \phi_i(f,x) = \sum_{S \subseteq N \setminus \{i\}} \frac{|S|!(M-|S|-1)!}{M!} [f_x(S \cup \{i\}) - f_x(S)]
+}{
+    Rumus nilai Shapley untuk kontribusi fitur
+}
+\end{equationcaptioned}
+
+Keunggulan utama SHAP terletak pada konsistensi teoritisnya dan kemampuannya untuk memberikan visualisasi yang jelas baik di tingkat global maupun lokal. Melalui penerapan SHAP, hasil prediksi prevalensi \textit{stunting} tidak hanya menjadi sekadar angka, tetapi juga memberikan wawasan mengenai faktor determinan utama di tiap wilayah.
 \subsubsection{Subsubbab} \label{II.Teori1.1}
 Berikut adalah contoh subsubbab. Ini adalah level subbab maksimal dalam laporan Tugas Akhir, dan tidak boleh lebih dalam. \par
 

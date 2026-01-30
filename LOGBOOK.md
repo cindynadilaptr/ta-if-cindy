@@ -4,100 +4,97 @@
 
 ### 2025-07-01
 - Created a GitHub repository
-- Explored the dataset: identified the number of parameters in the dataset and attempted to transfer data from PDF format to CSV
+- Explored the dataset: identified the number of parameters and converted data from PDF format to CSV
 
 ### 2025-07-02
-- Explore dataset: Dataset exploration: cataloging parameters, studying variable categories and types, and preparing dataset presentation materials.
+- Cataloged dataset parameters and studied variable categories and types
+- Prepared dataset presentation materials
 
 ### 2025-07-31
-- Converting a dataset from a PDF report format into a spreadsheet.
+- Converted dataset from PDF report format into spreadsheet
 
 ## August
 
 ### 2025-08-14
-- Exploring and analyzing literature pertinent to the research topic.
+- Explored and analyzed literature relevant to the research topic
 
 ### 2025-08-23
-- Doing research for another stunting dataset (SSGI) in different year.
+- Researched additional stunting dataset (SSGI) from different year
 
 ### 2025-08-25
-- Annotating national paper about Random Forest method in Stunting Dataset.
+- Annotated national paper on Random Forest method in Stunting Dataset
 
 ### 2025-08-26
-- Annotating international paper that using DHS for timeseries dataset.
+- Annotated international paper using DHS for time-series dataset
 
 ### 2025-08-30
-- Exploring SSGI Dataset in different year
+- Explored SSGI Dataset from different year
 
 ## September
 
 ### 2025-09-06
-- Processing XLSX data into a tabular format 
+- Processed XLSX data into tabular format
 
 ### 2025-09-15
-- Exploring dataset with python
+- Explored dataset using Python
 
 ## October
 
 ### 2025-10-12
-- Preprocess dataset
-- Tuning Hyperparameter
+- Preprocessed dataset and tuned hyperparameters
 
 ### 2025-10-14
--  Trying to apply model into dataset
+- Applied model to dataset
 
 ### 2025-10-30
-- Updated and refined the preprocessing phase to improve data quality, and developed SHAP-based feature importance analysis using the Random Forest model.
+- Refined preprocessing phase to improve data quality
+- Developed SHAP-based feature importance analysis using Random Forest model
 
 ### 2025-10-31
-- began writing Chapter 1 (background and problem formulation)
+- Began writing Chapter 1 (background and problem formulation)
 
 ## November
 
 ### 2025-11-10
-- Update chapter 1 (RP, RO, etc) and drop wasting & underweight variable
+- Updated Chapter 1 (research problem, research objectives) and removed wasting and underweight variables
 
-## Januari
+## January
 
 ### 2026-01-09
-- Revised the background section to strengthen the urgency of stunting analysis using machine learning.
-- Adjusted the problem formulation and research objectives according to the supervisor's feedback.
-- Corrected citation formats and ensured alignment with the updated thesis template.
+- Revised background section to strengthen stunting analysis urgency using machine learning
+- Adjusted problem formulation and research objectives per supervisor feedback
+- Corrected citation formats and aligned with updated thesis template
 
 ### 2026-01-12
-- Designed the research flowchart illustrating the end-to-end process: from SSGI 2024 data collection, preprocessing, Random Forest modeling, to SHAP interpretation.
-- Created a detailed outline for Chapter 3, covering:
-  1. Research Flow
-  2. Data Collection (SSGI 2024 Dataset)
-  3. Data Preprocessing Steps (Cleaning, Filtering, Splitting)
-  4. Random Forest Model Development (Hyperparameter Tuning, LOOCV)
-  5. Model Evaluation Metrics (MAE, RMSE, R-Squared)
-  6. Model Interpretation using SHAP.
+- Designed research flowchart: SSGI 2024 data collection → preprocessing → Random Forest modeling → SHAP interpretation
+- Created detailed Chapter 3 outline covering research flow, data collection, preprocessing, model development, evaluation metrics, and interpretation
 
 ### 2026-01-18
-- Wrote the **Problem Identification** section
-- Completed the **Literature Review** section
-- Drafted the **Data Collection** section: Defined the dataset source (SSGI 2024) and clarified the unit of analysis.
+- Wrote Problem Identification section
+- Completed Literature Review section
+- Drafted Data Collection section defining SSGI 2024 dataset source and unit of analysis
 
 ### 2026-01-19
-- Analyzed dataset_explore.ipynb to align technical steps with the thesis narrative.
-- Drafted the Data Preparation section: Detailed the extraction process from SSGI PDF reports.
-- Drafted the Data Preprocessing section: Defined data cleaning, imputation, and feature separation steps.
+- Aligned technical implementation with thesis narrative
+- Drafted Data Preparation and Data Preprocessing sections detailing extraction and cleaning processes
 
 ### 2026-01-20
-- Drafted the Model Evaluation section: Defined metrics (MAE, RMSE, MAPE, $R^2$) and validation strategy.
-- Drafted the Interpretation section: Explained Global and Local SHAP analysis workflows.
-- Completed the Development Method section: Structured using the KDD framework.
-- Integrated Scientific Citations: Added justifications for Random Forest (Pratama et al.), LOOCV (Cha et al.), and SHAP (Shen et al.).
+- Drafted Model Evaluation section with metrics (MAE, RMSE, MAPE, $R^2$)
+- Drafted Interpretation section on Global and Local SHAP analysis
+- Completed Development Method section using KDD framework
+- Integrated scientific citations for Random Forest, LOOCV, and SHAP methods
 
 ### 2026-01-21
-- Drafted Sections 3.5 & 3.6 (Method calculation & testing scenarios).
+- Drafted Sections 3.5 and 3.6 (method calculations and testing scenarios)
 
 ### 2026-01-22
-- Finding research for literature study (gap research and novelty)
+- Researched literature gaps and research novelty
 
 ### 2026-01-26
-- Writing Literature Review on Machine Learning for Stunting Prediction.
+- Wrote Literature Review on Machine Learning for Stunting Prediction
 
 ### 2026-01-28
-- Revising Chapter 1&3 based on feedback
+- Revised Chapters 1 and 3 based on feedback
+
+### 2026-01-30
+- Continued theoretical foundations for Chapter 2

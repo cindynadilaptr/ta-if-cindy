@@ -48,9 +48,11 @@ Setelah melalui proses seleksi tabel, langkah selanjutnya adalah transformasi da
 
 Selanjutnya, proses agregasi dilakukan untuk menyederhanakan struktur data sehingga seluruh variabel memiliki skala yang seragam dan mudah dibandingkan antar provinsi. Pada tabel yang memiliki lebih dari satu kategori indikator, proses agregasi dilakukan melalui pendekatan penggabungan indikator berbasis risiko. Sebagai contoh, pada tabel usia kehamilan ibu yang terdiri dari kategori usia $<$21 tahun, 21--39 tahun, dan $>$40 tahun, hanya kategori yang merepresentasikan kondisi berisiko yang dipertahankan. Nilai persentase ibu dengan usia kehamilan $<$20 tahun dan $>$35 tahun dijumlahkan untuk membentuk satu variabel baru yang merepresentasikan proporsi kehamilan berisiko pada usia ekstrem. Secara matematis, proses ini dapat dinyatakan sebagai berikut:
 
-\begin{equation}
-X_{\text{risiko usia kehamilan}} = X_{<20} + X_{>35}
-\end{equation}
+\par\vspace{0.8cm} 
+\[
+   X_{\text{risiko usia kehamilan}} = X_{<20} + X_{>35}
+\]
+\par\vspace{0.8cm} 
 
 Di mana $X_{<20}$ adalah persentase kehamilan usia di bawah 20 tahun dan $X_{>35}$ adalah persentase kehamilan usia di atas 35 tahun. Pendekatan serupa diterapkan pada tabel lain yang memiliki kategori majemuk, dengan prinsip utama mempertahankan indikator yang memiliki relevansi risiko terhadap kejadian \textit{stunting} serta menghindari redundansi informasi antarvariabel. Seluruh variabel direpresentasikan dalam bentuk persentase guna menjaga konsistensi satuan data dan memudahkan proses pemodelan. Hasil dari tahap ini adalah \textit{dataset} terstruktur berbasis provinsi yang siap digunakan sebagai input pada tahapan analisis selanjutnya.
 
@@ -152,12 +154,12 @@ Melalui \textit{Waterfall Plot}, kontribusi masing-masing variabel dapat diamati
 Proses pembangunan model dan pengolahan data dilakukan dalam lingkungan bahasa pemrograman \texttt{Python} versi 3.10. Untuk menjaga reproduksibilitas penelitian, berikut adalah daftar pustaka (\textit{library}) utama beserta versinya dan peran spesifiknya dalam sistem:
 
 \begin{enumerate}
-    \item \texttt{scikit-learn} (v1.7.2): Digunakan untuk implementasi algoritma \textit{Random Forest}, pembagian data \textit{Leave-One-Out Cross-Validation}, serta optimasi \textit{hyperparameter}.
-    \item \texttt{shap} (v0.49.1): Digunakan sebagai instrumen interpretasi model untuk menghitung nilai kontribusi tiap fitur melalui pendekatan \textit{Shapley values}.
-    \item \texttt{pandas} (v2.3.2): Digunakan untuk manipulasi struktur data, khususnya dalam proses agregasi dari data individu ke tingkat provinsi.
-    \item \texttt{numpy} (v2.3.3): Mendukung operasi komputasi matriks dan pemrosesan \textit{array} numerik yang efisien.
-    \item \texttt{matplotlib} (v3.10.6) \& \texttt{seaborn} (v0.13.2): Digunakan untuk memvisualisasikan distribusi variabel dan hasil interpretasi fitur secara grafis.
-    \item \texttt{scipy} (v1.16.2): Digunakan untuk pengolahan statistik tingkat lanjut yang diperlukan dalam pembersihan data.
+    \item \texttt{scikit-learn} (v1.7.2), digunakan untuk implementasi algoritma \textit{Random Forest}, pembagian data \textit{Leave-One-Out Cross-Validation}, serta optimasi \textit{hyperparameter}.
+    \item \texttt{shap} (v0.49.1), digunakan sebagai instrumen interpretasi model untuk menghitung nilai kontribusi tiap fitur melalui pendekatan \textit{Shapley values}.
+    \item \texttt{pandas} (v2.3.2), digunakan untuk manipulasi struktur data, khususnya dalam proses agregasi dari data individu ke tingkat provinsi.
+    \item \texttt{numpy} (v2.3.3), mendukung operasi komputasi matriks dan pemrosesan \textit{array} numerik yang efisien.
+    \item \texttt{matplotlib} (v3.10.6) \& \texttt{seaborn} (v0.13.2), digunakan untuk memvisualisasikan distribusi variabel dan hasil interpretasi fitur secara grafis.
+    \item \texttt{scipy} (v1.16.2), digunakan untuk pengolahan statistik tingkat lanjut yang diperlukan dalam pembersihan data.
 \end{enumerate}
 
 
