@@ -98,3 +98,6 @@
 
 ### 2026-01-30
 - Continued theoretical foundations for Chapter 2
+
+### 2026-02-06
+- Completing citations for Chapter 2

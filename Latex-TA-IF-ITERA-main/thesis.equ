@@ -1,4 +1,8 @@
-\contentsline {myequations}{\numberline {Rumus~2.1} Rumus sederhana }{19}{equation.2.1}%
-\contentsline {myequations}{\numberline {Rumus~2.2} Mean Absolute Error (MAE) }{19}{equation.2.2}%
-\contentsline {myequations}{\numberline {Rumus~2.3} Distribusi Normal }{19}{equation.2.3}%
-\contentsline {myequations}{\numberline {Rumus~2.4} Sistem persamaan linier }{19}{equation.2.4}%
+\contentsline {myequations}{\numberline {Rumus~2.1} Rumus perhitungan Z-score antropometri }{18}{equation.2.1}%
+\contentsline {myequations}{\numberline {Rumus~2.2} Persamaan dasar regresi linear }{22}{equation.2.2}%
+\contentsline {myequations}{\numberline {Rumus~2.3} Rata-rata prediksi pada Random Forest Regression }{24}{equation.2.3}%
+\contentsline {myequations}{\numberline {Rumus~2.4} Rumus Mean Absolute Error (MAE) }{26}{equation.2.4}%
+\contentsline {myequations}{\numberline {Rumus~2.5} Rumus Root Mean Square Error (RMSE) }{26}{equation.2.5}%
+\contentsline {myequations}{\numberline {Rumus~2.6} Rumus Mean Absolute Percentage Error (MAPE) }{27}{equation.2.6}%
+\contentsline {myequations}{\numberline {Rumus~2.7} Rumus Koefisien Determinasi ($R^2$) }{27}{equation.2.7}%
+\contentsline {myequations}{\numberline {Rumus~2.8} Rumus nilai Shapley untuk kontribusi fitur }{29}{equation.2.8}%
