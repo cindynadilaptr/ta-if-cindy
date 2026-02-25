@@ -19,7 +19,7 @@ Setelah data siap, tahap berikutnya adalah pembangunan model regresi menggunakan
 
 Tahapan penelitian disusun secara sistematis untuk menjawab rumusan masalah yang telah ditetapkan. Secara garis besar, alur penelitian terdiri dari identifikasi masalah, studi literatur, penyiapan data, pra-pemrosesan, pembangunan model, hingga evaluasi dan interpretasi hasil. Penjelasan rinci mengenai masing-masing tahapan diuraikan sebagai berikut.
 
-\subsection{Penyiapan Data} \label{subsec:penyiapan}
+\subsection{Persiapan Data} \label{subsec:penyiapan}
 Data yang digunakan dalam penelitian ini merupakan data sekunder yang bersumber dari Laporan Publikasi SSGI tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Laporan ini disajikan dalam bentuk dokumen PDF dan memuat informasi statistik yang komprehensif, mencakup ±5.189 tabel statistik yang menggambarkan indikator kesehatan ibu dan anak, pola asuh, akses pelayanan kesehatan, kondisi sanitasi dan lingkungan, serta karakteristik demografi rumah tangga. Secara spesifik, populasi target dalam survei ini difokuskan pada rumah tangga kelompok balita usia 0-59 bulan, dengan data yang disajikan menggunakan pendekatan \textit{cross-sectional} untuk menggambarkan kondisi kesehatan pada satu titik waktu tertentu. Seluruh informasi statistik tersebut disajikan dalam bentuk numerik atau persentase yang merepresentasikan prevalensi kejadian di wilayah terkait.
 
 Informasi dalam laporan SSGI 2024 disajikan dalam berbagai tingkat agregasi wilayah, mulai dari data nasional, provinsi, hingga rincian kabupaten/kota. Dari berbagai tingkatan tersebut, penelitian ini membatasi unit analisis pada skala provinsi guna menganalisis variabilitas determinan \textit{stunting} antarwilayah secara makro. Namun, kompleksitas struktur data ini menyebabkan data tidak dapat langsung digunakan sebagai \textit{dataset} penelitian kuantitatif tanpa melalui proses penyiapan data terlebih dahulu. Oleh karena itu, diperlukan suatu tahapan penyiapan data untuk mengekstraksi, menyeleksi, dan menyusun kembali informasi yang relevan agar diperoleh \textit{dataset} terstruktur yang sesuai dengan tujuan penelitian. Alur penyiapan data yang dilakukan dalam penelitian ini ditunjukkan pada Gambar \ref{fig:4.persiapan_data}.
@@ -67,6 +67,33 @@ Alur pra-pemrosesan data ditunjukkan pada Gambar \ref{fig:5.flowchart_preprocess
     \caption{Alur Pra-pemrosesan Data}
     \label{fig:5.flowchart_preprocessing}
 \end{figure}
+
+\subsubsection{Representasi Dataset Penelitian} \label{sec:karakteristik_data}
+Dataset yang digunakan dalam penelitian ini bersumber dari Laporan Publikasi SSGI tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Data tersebut merupakan data sekunder berskala nasional yang menyajikan berbagai indikator status gizi, kesehatan ibu dan anak, serta kondisi lingkungan dan sosial ekonomi pada tingkat provinsi. Setelah melalui tahap penyiapan dan seleksi data, diperoleh satu dataset terstruktur yang terdiri dari 56 variabel independen dan satu variabel dependen berupa prevalensi \textit{stunting}. Untuk memudahkan pemahaman struktur data dan menjaga konsistensi analisis determinan, seluruh variabel independen kemudian dikelompokkan ke dalam beberapa kategori tematik berdasarkan karakteristik indikator yang diwakilinya.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Distribusi Variabel Determinan Stunting berdasarkan Kategori}
+\label{tab:distribusi_variabel}
+\begin{tabular}{|c|l|c|}
+\hline
+\textbf{No} & \textbf{Kategori Variabel} & \textbf{Jumlah Fitur} \\ \hline
+1 & Riwayat Kehamilan dan Kelahiran & 15 \\ \hline
+2 & Riwayat Pemberian ASI dan MP-ASI & 17 \\ \hline
+3 & Akses dan Pemanfaatan Pelayanan Kesehatan & 9 \\ \hline
+4 & Imunisasi dan Morbiditas Balita & 8 \\ \hline
+5 & Kepemilikan dan Pemanfaatan Jaminan Kesehatan & 2 \\ \hline
+6 & Pendampingan Keluarga dan Pengetahuan Stunting & 4 \\ \hline
+7 & Kontrasepsi Pasca Bersalin & 1 \\ \hline
+8 & Bantuan Sosial & 1 \\ \hline
+9 & Akses Air Minum dan Sanitasi & 4 \\ \hline
+\multicolumn{2}{|c|}{\textbf{Total}} & \textbf{56} \\ \hline
+\end{tabular}
+\end{table}
+
+Tabel \ref{tab:distribusi_variabel} menunjukkan bahwa variabel determinan yang digunakan dalam penelitian ini didominasi oleh indikator terkait riwayat kehamilan, pola pemberian makan bayi dan anak, serta akses pelayanan kesehatan. Komposisi ini mencerminkan pendekatan multidimensi dalam menganalisis \textit{stunting}, di mana faktor biologis, perilaku, layanan kesehatan, serta kondisi lingkungan dianalisis secara simultan. Pengelompokan ini juga menjadi dasar dalam interpretasi model, khususnya pada tahap analisis kontribusi fitur menggunakan SHAP.
+
 
 \subsection{Pembangunan Model \textit{Random Forest}} \label{subsec:modeling}
 Setelah melalui tahapan penyiapan dan pra-pemrosesan data, \textit{dataset} yang telah bersih dan terstruktur selanjutnya digunakan pada tahap pemodelan. Pada penelitian ini, pendekatan yang digunakan adalah \textit{Random Forest Regression} untuk memodelkan hubungan antara variabel determinan \textit{stunting} dan nilai prevalensi \textit{stunting} pada tingkat provinsi yang memiliki nilai numerik kontinu. Pemilihan metode ini didasarkan pada kemampuannya dalam menangani data dengan jumlah fitur yang relatif banyak serta hubungan non-linier antarvariabel tanpa asumsi distribusi data yang ketat \cite{shen2023machine}. Alur proses pemodelan disajikan secara ringkas pada Gambar~\ref{fig:6.flow_rf}.
@@ -143,14 +170,11 @@ Interpretasi lokal dilakukan untuk memahami mekanisme prediksi model \textit{Ran
 Mengingat interpretasi lokal bersifat mendalam dan kontekstual, tidak seluruh provinsi dianalisis secara individual. Oleh karena itu, dilakukan pemilihan sampel provinsi yang bertujuan untuk merepresentasikan variasi kondisi \textit{stunting} di Indonesia. Pemilihan sampel didasarkan pada distribusi nilai prevalensi \textit{stunting} hasil prediksi model, sehingga mencakup provinsi dengan tingkat prevalensi relatif tinggi, rendah, serta kondisi menengah. Pendekatan ini memungkinkan analisis yang lebih terfokus tanpa mengurangi representativitas karakteristik wilayah secara nasional.
 
 \subsubsection{Visualisasi dan Analisis \textit{Waterfall Plot}}
-Setelah sampel provinsi ditetapkan, dilakukan interpretasi lokal menggunakan visualisasi \textit{Waterfall Plot}. Visualisasi ini digunakan untuk menguraikan proses pembentukan nilai prediksi prevalensi \textit{stunting} oleh model pada satu provinsi tertentu. Proses dimulai dari nilai rata-rata prediksi model (\textit{base value}), kemudian setiap variabel determinan ditampilkan sebagai kontribusi aditif yang dapat meningkatkan atau menurunkan nilai prediksi hingga mencapai nilai akhir.
+Setelah sampel provinsi ditetapkan, interpretasi lokal dilakukan menggunakan visualisasi \textit{Waterfall Plot}. Visualisasi ini menampilkan bagaimana nilai prediksi suatu provinsi terbentuk secara bertahap mulai dari nilai dasar (\textit{base value}) hingga mencapai nilai prediksi akhir. Nilai dasar tersebut merepresentasikan rata-rata prediksi model pada seluruh data, kemudian setiap variabel determinan ditambahkan atau dikurangkan secara berurutan sesuai besar kontribusinya terhadap prediksi provinsi tersebut. Dengan demikian, grafik ini memperlihatkan proses pembentukan prediksi sebagai akumulasi kontribusi dari masing-masing variabel.
 
-Melalui \textit{Waterfall Plot}, kontribusi masing-masing variabel dapat diamati secara eksplisit baik dari segi arah maupun besar pengaruhnya. Variabel dengan kontribusi positif merepresentasikan faktor yang mendorong peningkatan risiko \textit{stunting}, sedangkan kontribusi negatif menunjukkan faktor yang berperan dalam menurunkan risiko tersebut. Pendekatan ini memberikan transparansi terhadap keputusan model serta menjadi dasar analisis perbedaan determinan \textit{stunting} antarprovinsi pada tahap pembahasan hasil.
+Secara visual, \textit{Waterfall Plot} menyerupai diagram batang bertingkat yang bergerak naik atau turun dari satu titik awal menuju nilai akhir. Batang yang mengarah ke atas menunjukkan variabel yang meningkatkan nilai prediksi prevalensi stunting, sedangkan batang yang mengarah ke bawah menunjukkan variabel yang menurunkan nilai tersebut. Panjang setiap batang menggambarkan besar kecilnya pengaruh variabel terhadap hasil prediksi. Melalui penyajian ini, pembaca dapat secara langsung melihat faktor mana yang paling dominan membentuk nilai prediksi pada suatu provinsi, sehingga keputusan model tidak lagi terlihat sebagai proses yang tertutup atau sulit dipahami.
 
-
-\section{Konfigurasi Model dan Data} \label{sec:alat_bahan}
-
-\subsection{Lingkungan Pengembangan Model}
+\section{Lingkungan Pengembangan Model}
 Proses pembangunan model dan pengolahan data dilakukan dalam lingkungan bahasa pemrograman \texttt{Python} versi 3.10. Untuk menjaga reproduksibilitas penelitian, berikut adalah daftar pustaka (\textit{library}) utama beserta versinya dan peran spesifiknya dalam sistem:
 
 \begin{enumerate}
@@ -161,33 +185,6 @@ Proses pembangunan model dan pengolahan data dilakukan dalam lingkungan bahasa p
     \item \texttt{matplotlib} (v3.10.6) \& \texttt{seaborn} (v0.13.2), digunakan untuk memvisualisasikan distribusi variabel dan hasil interpretasi fitur secara grafis.
     \item \texttt{scipy} (v1.16.2), digunakan untuk pengolahan statistik tingkat lanjut yang diperlukan dalam pembersihan data.
 \end{enumerate}
-
-
-\subsection{Karakteristik Data} \label{sec:karakteristik_data}
-Dataset yang digunakan dalam penelitian ini bersumber dari Laporan Publikasi SSGI tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Data tersebut merupakan data sekunder berskala nasional yang menyajikan berbagai indikator status gizi, kesehatan ibu dan anak, serta kondisi lingkungan dan sosial ekonomi pada tingkat provinsi. Setelah melalui tahap penyiapan dan seleksi data, diperoleh satu dataset terstruktur yang terdiri dari 56 variabel independen dan satu variabel dependen berupa prevalensi \textit{stunting}. Untuk memudahkan pemahaman struktur data dan menjaga konsistensi analisis determinan, seluruh variabel independen kemudian dikelompokkan ke dalam beberapa kategori tematik berdasarkan karakteristik indikator yang diwakilinya.
-
-\begin{table}[H]
-\centering
-\small
-\caption{Distribusi Variabel Determinan Stunting berdasarkan Kategori}
-\label{tab:distribusi_variabel}
-\begin{tabular}{|c|l|c|}
-\hline
-\textbf{No} & \textbf{Kategori Variabel} & \textbf{Jumlah Fitur} \\ \hline
-1 & Riwayat Kehamilan dan Kelahiran & 15 \\ \hline
-2 & Riwayat Pemberian ASI dan MP-ASI & 17 \\ \hline
-3 & Akses dan Pemanfaatan Pelayanan Kesehatan & 9 \\ \hline
-4 & Imunisasi dan Morbiditas Balita & 8 \\ \hline
-5 & Kepemilikan dan Pemanfaatan Jaminan Kesehatan & 2 \\ \hline
-6 & Pendampingan Keluarga dan Pengetahuan Stunting & 4 \\ \hline
-7 & Kontrasepsi Pasca Bersalin & 1 \\ \hline
-8 & Bantuan Sosial & 1 \\ \hline
-9 & Akses Air Minum dan Sanitasi & 4 \\ \hline
-\multicolumn{2}{|c|}{\textbf{Total}} & \textbf{56} \\ \hline
-\end{tabular}
-\end{table}
-
-Tabel \ref{tab:distribusi_variabel} menunjukkan bahwa variabel determinan yang digunakan dalam penelitian ini didominasi oleh indikator terkait riwayat kehamilan, pola pemberian makan bayi dan anak, serta akses pelayanan kesehatan. Komposisi ini mencerminkan pendekatan multidimensi dalam menganalisis \textit{stunting}, di mana faktor biologis, perilaku, layanan kesehatan, serta kondisi lingkungan dianalisis secara simultan. Pengelompokan ini juga menjadi dasar dalam interpretasi model, khususnya pada tahap analisis kontribusi fitur menggunakan SHAP.
 
 \section{Ilustrasi Perhitungan Metode} \label{sec:ilustrasi_metode}
 

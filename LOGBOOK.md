@@ -101,3 +101,6 @@
 
 ### 2026-02-06
 - Completing citations for Chapter 2
+
+### 2026-02-25
+- Revised the draft of the thesis proposal based on feedback.
