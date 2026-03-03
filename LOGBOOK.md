@@ -104,3 +104,6 @@
 
 ### 2026-02-25
 - Revised the draft of the thesis proposal based on feedback.
+
+### 2026-03-03
+- Revised the draft of the thesis proposal based on feedback.
