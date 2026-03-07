@@ -13,7 +13,7 @@ Penelitian ini dirancang untuk menganalisis faktor-faktor determinan penyebab \t
 
 Berdasarkan Gambar \ref{fig:3.alur}, alur penelitian disusun secara sistematis yang diawali dengan tahap identifikasi masalah mengenai urgensi penanganan \textit{stunting} di Indonesia dan kompleksitas faktor determinan yang mempengaruhinya di tingkat provinsi. Tahap ini didukung oleh studi literatur mendalam untuk memahami variabel-variabel determinan multidimensi yang mencakup berbagai aspek, serta metode pengolahan data dan pemodelan \textit{machine learning} yang relevan. Berlandaskan pemahaman tersebut, selanjutnya dilakukan pengumpulan dataset yang bersumber dari Laporan Tahunan SSGI tahun 2024. Laporan Tahunan SSGI 2024 kemudian digunakan untuk menyiapkan dataset agregat tingkat provinsi yang memuat variabel target (prevalensi \textit{stunting}) dan variabel fitur (faktor determinan). Data mentah yang diperoleh selanjutnya diproses melalui tahapan pra-pemrosesan data yang meliputi pembersihan data, penyaringan data, dan pemisahan variabel target dan fitur. 
 
-Setelah data siap, tahap berikutnya adalah pembangunan model regresi menggunakan algoritma \textit{Random Forest}. Proses ini mencakup penentuan parameter terbaik melalui \textit{Grid Search} dan validasi silang (\textit{Cross Validation}) untuk memastikan performa model yang optimal. Model yang telah dilatih kemudian dievaluasi kinerjanya menggunakan metrik statistik seperti MAE, MSE, RMSE, MAPE, serta koefisien determinasi ($R^2$ Score). Langkah terakhir adalah menginterpretasikan hasil prediksi model \textit{Random Forest} menggunakan SHAP untuk mengetahui kontribusi setiap fitur determinan terhadap angka \textit{stunting}, baik secara global skala nasional maupun lokal per provinsi.
+Setelah data siap, tahap berikutnya adalah pembangunan model regresi menggunakan algoritma \textit{Random Forest}. Proses ini mencakup penentuan parameter terbaik melalui \textit{Grid Search} dan validasi silang (\textit{Cross Validation}) untuk memastikan performa model yang optimal. Model yang telah dilatih kemudian dievaluasi kinerjanya menggunakan metrik statistik seperti MAE, RMSE, MAPE, serta koefisien determinasi ($R^2$ Score). Langkah terakhir adalah menginterpretasikan hasil prediksi model \textit{Random Forest} menggunakan SHAP untuk mengetahui kontribusi setiap fitur determinan terhadap angka \textit{stunting}, baik secara global skala nasional maupun lokal per provinsi.
 
 \section{Langkah Penelitian} \label{sec:langkah_penelitian}
 
@@ -122,10 +122,6 @@ Evaluasi performa model dilakukan untuk mengukur sejauh mana model \textit{Rando
     \item \textbf{\textit{Mean Absolute Error} (MAE)}  
     
     MAE digunakan untuk mengukur rata-rata selisih absolut antara nilai prevalensi \textit{stunting} hasil prediksi model dengan nilai aktual pada masing-masing provinsi. Metrik ini memberikan gambaran kesalahan prediksi secara langsung dalam satuan persentase, sehingga memudahkan interpretasi seberapa jauh hasil prediksi model menyimpang dari data SSGI 2024 yang sebenarnya.
-
-    \item \textbf{\textit{Mean Squared Error} (MSE)}  
-    
-    MSE digunakan untuk mengevaluasi kesalahan prediksi dengan memberikan penalti lebih besar pada selisih prediksi yang tinggi antarprovinsi. Penggunaan metrik ini penting untuk memastikan bahwa model tidak menghasilkan kesalahan ekstrem pada provinsi tertentu yang dapat mengaburkan pola determinan \textit{stunting} secara nasional.
 
     \item \textbf{\textit{Root Mean Squared Error} (RMSE)}  
     
@@ -302,35 +298,20 @@ Untuk mengukur performa model secara menyeluruh terhadap seluruh provinsi di Ind
 
 Model memiliki rata-rata kesalahan prediksi sebesar \textbf{1.67 poin}.
 
-\subsubsection*{2. MSE}
-\textit{Mean Squared Error} (MSE) dihitung untuk memberikan bobot lebih pada kesalahan prediksi yang ekstrem, guna memastikan model sensitif terhadap data provinsi dengan selisih \textit{stunting} yang besar.
-
-\par\vspace{0.5cm}
-\[
-   \text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2
-\]
-\par\vspace{0.5cm}
-
-\noindent Penyelesaian:
-\par\vspace{0.2cm}
-\begin{align*}
-    \text{MSE} &= \frac{4 + 1 + 4}{3} = \mathbf{3.00}
-\end{align*}
-\par\vspace{0.5cm}
-
 \subsubsection*{3. RMSE}
 \textit{Root Mean Squared Error} (RMSE) mengembalikan nilai kesalahan ke satuan asli (persentase) untuk menggambarkan standar deviasi dari residu prediksi model terhadap data SSGI.
 
 \par\vspace{0.5cm}
 \[
-   \text{RMSE} = \sqrt{\text{MSE}}
+   \text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}
 \]
 \par\vspace{0.5cm}
 
 \noindent Penyelesaian:
 \par\vspace{0.2cm}
 \begin{align*}
-    \text{RMSE} &= \sqrt{3.00} \approx \mathbf{1.73}
+    \text{RMSE} &= \sqrt{\frac{4 + 1 + 4}{3}} \\[0.3cm]
+    \text{RMSE} &= \sqrt{3.00} \approx \mathbf{1.73} 
 \end{align*}
 \par\vspace{0.5cm}
 

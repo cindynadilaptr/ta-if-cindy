@@ -107,3 +107,6 @@
 
 ### 2026-03-03
 - Revised the draft of the thesis proposal based on feedback.
+
+### 2026-03-07
+- Making PPT for seminar proposal and revised the draft.
