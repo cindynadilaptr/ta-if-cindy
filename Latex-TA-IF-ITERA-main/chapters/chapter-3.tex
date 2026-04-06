@@ -140,7 +140,7 @@ Evaluasi performa model dilakukan untuk mengukur sejauh mana model \textit{Rando
 
 Interpretasi keputusan model \textit{Random Forest} yang bersifat \textit{black-box} dilakukan menggunakan metode SHAP guna mengidentifikasi besaran pengaruh faktor determinan secara transparan. Analisis mencakup tinjauan global skala nasional dan tinjauan lokal spesifik per provinsi. Alur kerja analisis interpretabilitas model ini diilustrasikan pada Gambar \ref{fig:7.flow_shap}.\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{figure/alur_SHAP.pdf}
+    \includegraphics[width=0.7\textwidth]{figure/alur_SHAP.pdf}
     \caption{Alur Interpretasi Model dengan SHAP}
     \label{fig:7.flow_shap}
 \end{figure}
@@ -210,15 +210,14 @@ Berikut adalah ilustrasi jika model terdiri dari 3 pohon keputusan, di mana masi
 
 Nilai prediksi akhir ($\hat{y}$) untuk provinsi tersebut diperoleh dengan merata-ratakan seluruh \textit{output} pohon menggunakan persamaan berikut:
 
-Selanjutnya, proses agregasi dilakukan untuk menyederhanakan struktur data sehingga seluruh variabel memiliki skala yang seragam. Pada tabel yang memiliki lebih dari satu kategori indikator, proses agregasi dilakukan melalui pendekatan penggabungan indikator berbasis risiko. Sebagai contoh, pada tabel usia kehamilan ibu, nilai persentase kehamilan usia ekstrem dijumlahkan untuk membentuk satu variabel baru. 
+\par\vspace{0.2cm}
+\begin{align*}
+    \hat{y} &= \frac{18.5 + 17.9 + 18.2}{3} \\[0.3cm]
+    \hat{y} &= \frac{54.6}{3} \\[0.3cm]
+    \hat{y} &= \mathbf{18.2}
+\end{align*}
+\par\vspace{0.5cm}
 
-\par\vspace{0.8cm} % Kasih spasi atas yang lega
-\[
-   X_{\text{risiko usia kehamilan}} = X_{<20} + X_{>35}
-\]
-\par\vspace{0.8cm} % Kasih spasi bawah yang lega
-
-\noindent Di mana $X_{<20}$ adalah persentase kehamilan usia di bawah 20 tahun dan $X_{>35}$ adalah persentase kehamilan usia di atas 35 tahun. Pendekatan serupa diterapkan pada tabel lain yang memiliki kategori majemuk dengan prinsip mempertahankan indikator risiko utama terhadap \textit{stunting}. Seluruh variabel direpresentasikan dalam bentuk persentase guna menjaga konsistensi satuan data. Hasil dari tahap ini adalah \textit{dataset} terstruktur berbasis provinsi yang siap digunakan sebagai input pada tahapan analisis selanjutnya.
 Angka \textbf{18.2\%} inilah yang menjadi prediksi final prevalensi \textit{stunting} untuk provinsi tersebut.
 
 \subsection{Perhitungan \textit{Error} Prediksi}

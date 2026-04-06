@@ -110,3 +110,7 @@
 
 ### 2026-03-07
 - Making PPT for seminar proposal and revised the draft.
+
+### 2026-04-06
+- Revised the draft of the thesis proposal based on feedback.
+- Outline bab 4

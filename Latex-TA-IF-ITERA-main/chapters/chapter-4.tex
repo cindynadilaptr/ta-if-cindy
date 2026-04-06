@@ -72,3 +72,99 @@ Berikan analisis hasil penelitian \& pengujian, berupa data yang didapatkan dari
 	\item Aplikasi yang dikembangkan
 \end{enumerate}
 Analisis dapat membandingkan dengan hasil penelitian sebelumnya yang memiliki kemiripan topik. \par
+
+
+\newpage
+\chapter{HASIL DAN PEMBAHASAN} \label{Bab IV}
+
+% ==========================================
+% SECTION 4.1: HASIL PENELITIAN
+% ==========================================
+\section{Hasil Penelitian} \label{IV.Hasil}
+
+\subsection{Pra-pemrosesan dan Eksplorasi Data}
+\begin{itemize}
+    \item \textbf{Sumber Data:} Menggunakan dataset sekunder SSGI 2024 yang mencakup 38 provinsi.
+    \item \textbf{Kelengkapan Data:} Data agregat resmi terverifikasi 100\% terisi, tidak terdapat \textit{missing value}, sehingga tahap imputasi tidak diperlukan.
+    \item \textbf{Seleksi Fitur:} Mengeliminasi variabel non-determinan agar model fokus pada faktor utama berdasarkan teori kesehatan masyarakat.
+\end{itemize}
+
+\subsection{Implementasi \textit{Random Forest} dan \textit{SHAP}}
+\begin{itemize}
+    \item \textbf{Pemilihan \textit{Random Forest}:} Algoritma ini diimplementasikan karena ketahanannya terhadap \textit{overfitting} pada dataset berukuran kecil (38 observasi).
+    \item \textbf{Integrasi \textit{SHAP}:} Digunakan tidak hanya untuk mengukur tingkat kepentingan variabel, tetapi juga memetakan arah dampaknya terhadap angka \textit{stunting}.
+\end{itemize}
+
+% Tempat menaruh potongan kodingan (contoh)
+\begin{lstlisting}[caption={Ekstraksi Nilai \textit{SHAP}}, label={code:4.shap}, language=Python]
+# Nanti letakkan kodingan ekstraksi SHAP / Random Forest-mu di sini
+import shap
+explainer = shap.TreeExplainer(model)
+shap_values = explainer.shap_values(X_train)
+\end{lstlisting}
+
+% ==========================================
+% SECTION 4.2: HASIL PENGUJIAN
+% ==========================================
+\section{Hasil Pengujian} \label{IV.Hasil_Uji}
+
+\subsection{Skenario \textit{Hyperparameter Tuning}}
+\begin{itemize}
+    \item \textbf{Validasi Silang:} Menggunakan \textit{Leave-One-Out Cross-Validation} (LOOCV) dengan 37 data latih dan 1 data uji yang diulang 38 kali.
+    \item \textbf{Optimasi Parameter:} Pencarian nilai \texttt{n\_estimators}, \texttt{max\_depth}, dan \texttt{min\_samples\_split} terbaik menggunakan \textit{GridSearchCV} yang dilakukan secara tertutup di dalam perulangan data latih untuk mencegah \textit{data leakage}.
+\end{itemize}
+
+\subsection{Evaluasi Kinerja Model}
+\begin{itemize}
+    \item \textbf{Metrik \textit{Error}:} Nilai RMSE, MAE, dan MAPE menunjukkan seberapa akurat tebakan model terhadap data lapangan (lihat Tabel \ref{table:4.metrik}).
+    \item \textbf{Metrik Penjelasan ($R^2$):} Nilai R-Squared menunjukkan persentase variasi prevalensi \textit{stunting} yang berhasil dijelaskan oleh model.
+\end{itemize}
+
+% Tempat menaruh tabel metrik evaluasi
+\begin{longtable}{|c|c|}
+    \caption{Hasil Metrik Evaluasi Kinerja \textit{Random Forest}}
+    \label{table:4.metrik}\\
+    \hline
+    \textbf{Metrik Evaluasi} & \textbf{Nilai} \\ 
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{Metrik Evaluasi} & \textbf{Nilai} \\ 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    \textit{Root Mean Squared Error} (RMSE) & 0.00 \\  % Isi angka nanti
+    \hline
+    \textit{Mean Absolute Error} (MAE) & 0.00 \\ 
+    \hline
+    R-Squared ($R^2$) & 0.00 \\ 
+    \hline
+    \textit{Mean Absolute Percentage Error} (MAPE) & 0.00\% \\ 
+    \hline
+\end{longtable}
+
+% ==========================================
+% SECTION 4.3: ANALISIS HASIL PENELITIAN
+% ==========================================
+\section{Analisis Hasil Penelitian} \label{IV.Analisis}
+
+\subsection{Interpretasi Global (\textit{Global Explanation})}
+\begin{itemize}
+    \item \textbf{Peringkat Variabel:} Analisis fitur paling determinan secara nasional menggunakan \textit{SHAP Bar Plot}.
+    \item \textbf{Arah Kontribusi:} Analisis \textit{SHAP Summary Plot} untuk melihat bagaimana kondisi variabel yang memburuk (titik merah) mendorong kenaikan angka \textit{stunting}.
+\end{itemize}
+
+\subsection{Interpretasi Lokal (\textit{Local Explanation})}
+\begin{itemize}
+    \item \textbf{Bedah Provinsi:} Analisis spesifik pada provinsi dengan prevalensi ekstrem menggunakan \textit{SHAP Waterfall Plot}.
+    \item \textbf{Mekanisme Prediksi:} Menjelaskan pergeseran dari nilai rata-rata nasional (\textit{Base Value}) menuju nilai prediksi akhir akibat dorongan faktor lokal (balok merah/biru).
+\end{itemize}
+
+\subsection{Pembahasan dan Rekomendasi Kebijakan}
+\begin{itemize}
+    \item \textbf{Kesesuaian Teori:} Konfirmasi temuan \textit{multiplier effect} antarvariabel \textit{stunting} dengan pedoman gizi Kementerian Kesehatan.
+    \item \textbf{Rekomendasi Spesifik:} Usulan intervensi kebijakan gizi yang tidak dipukul rata, melainkan disesuaikan dengan akar masalah terbesar di masing-masing provinsi berdasarkan \textit{Waterfall Plot}.
+\end{itemize}
