@@ -114,3 +114,6 @@
 ### 2026-04-06
 - Revised the draft of the thesis proposal based on feedback.
 - Outline bab 4
+
+### 2026-04-12
+- Write the result of research (data prepared)

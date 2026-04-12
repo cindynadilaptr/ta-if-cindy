@@ -77,10 +77,88 @@ Analisis dapat membandingkan dengan hasil penelitian sebelumnya yang memiliki ke
 \newpage
 \chapter{HASIL DAN PEMBAHASAN} \label{Bab IV}
 
-% ==========================================
-% SECTION 4.1: HASIL PENELITIAN
-% ==========================================
 \section{Hasil Penelitian} \label{IV.Hasil}
+Bagian ini menyajikan hasil penelitian yang diperoleh dari seluruh tahapan yang telah dilakukan. Proses penelitian meliputi ekstraksi dan analisis data Survei Status Gizi Indonesia (SSGI) tahun 2024 pada tingkat provinsi, dilanjutkan dengan tahap pra-pemrosesan data hingga pembangunan model prediktif. Model yang digunakan dalam penelitian ini adalah \textit{Random Forest} untuk memprediksi prevalensi \textit{stunting}, yang kemudian dikombinasikan dengan metode \textit{SHAP} (\textit{SHapley Additive exPlanations}) untuk menjelaskan kontribusi masing-masing variabel. Seluruh proses pemodelan dilakukan menggunakan skema validasi \textit{Leave-One-Out Cross-Validation} (LOOCV) serta optimasi parameter melalui \textit{GridSearchCV} guna memperoleh kinerja model yang optimal.
+
+\subsection{Analisis Deskriptif}
+Penelitian ini menggunakan data sekunder yang berasal dari laporan resmi Survei Status Gizi Indonesia (SSGI) tahun 2024 yang dipublikasikan oleh Badan Kebijakan Pembangunan Kesehatan (BKPK) Kementerian Kesehatan RI. Data pada bentuk aslinya berupa rekapitulasi persentase berbagai indikator kesehatan, gizi, dan sosiodemografi yang tersebar dalam beberapa bagian laporan. Karena penelitian ini menggunakan pendekatan \textit{machine learning} berbasis data tabular, format tersebut tidak dapat langsung digunakan sehingga diperlukan proses ekstraksi dan penyusunan ulang data. Proses ekstraksi dilakukan dengan memilih indikator yang relevan dan menyusunnya ke dalam bentuk tabel dengan baris dan kolom yang terstruktur. Hasilnya, data dibagi menjadi satu variabel target yaitu prevalensi \textit{stunting} serta sejumlah variabel prediktor yang mencerminkan faktor-faktor seperti sanitasi, pola asuh, dan pendidikan ibu.
+
+Dataset akhir yang digunakan dalam penelitian ini terdiri dari 38 baris yang mewakili seluruh provinsi di Indonesia. Setiap baris memuat nilai persentase dari variabel target dan variabel prediktor yang telah disusun dalam format yang seragam. Penyusunan ini bertujuan agar data dapat langsung digunakan dalam proses analisis menggunakan algoritma \textit{machine learning}. Selain itu, format tabular ini memudahkan dalam melakukan tahap pra-pemrosesan dan seleksi fitur sebelum model dibangun. Dataset tersebut kemudian menjadi dasar utama dalam proses pelatihan dan evaluasi model yang dilakukan dalam penelitian ini.
+
+\subsection{Persiapan Data}
+Laporan Survei Status Gizi Indonesia (SSGI) tahun 2024 disajikan dalam bentuk dokumen \textit{Portable Document Format} (PDF) yang memuat sekitar 5.189 tabel statistik yang berisi berbagai indikator kesehatan, gizi, serta kondisi sosial dan lingkungan. Data dalam laporan tersebut mencakup informasi terkait kesehatan ibu dan anak, pola asuh, akses layanan kesehatan, sanitasi, serta karakteristik demografi rumah tangga dengan fokus pada balita usia 0--59 bulan menggunakan pendekatan \textit{cross-sectional}. Meskipun data tersedia pada beberapa tingkat wilayah seperti nasional, provinsi, dan kabupaten/kota, penelitian ini hanya menggunakan tingkat provinsi sebagai unit analisis untuk melihat perbedaan determinan \textit{stunting} secara umum. Struktur data dalam bentuk laporan ini belum dapat langsung digunakan untuk pemodelan \textit{machine learning}, sehingga diperlukan proses pengolahan lebih lanjut. Oleh karena itu, kondisi awal dan karakteristik data sebelum dilakukan ekstraksi disajikan pada Tabel \ref{table:4.kondisi_awal}.
+
+\newpage
+
+\begin{longtable}{|c|p{0.3\textwidth}|p{0.5\textwidth}|}
+    \caption{Kondisi Awal Dataset SSGI 2024}
+    \label{table:4.kondisi_awal}\\
+    \hline
+    \textbf{No} & \centering\textbf{Atribut} & \textbf{Keterangan Kondisi Awal} \\ 
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{No} & \centering\textbf{Atribut} & \textbf{Keterangan Kondisi Awal} \\ 
+    \hline
+    \endhead
+    \hline
+    1 & Sumber / Penerbit Data & Badan Kebijakan Pembangunan Kesehatan (BKPK) Kementerian Kesehatan RI \\
+    \hline
+    2 & Format File & Dokumen Laporan \textit{Portable Document Format} (PDF) \\ 
+    \hline
+    3 & Volume Data & $\pm$ 5.189 tabel statistik \\
+    \hline
+    4 & Variabel Target (\textit{Label}) & Angka prevalensi balita \textit{stunted} (pendek) berdasarkan indeks Tinggi Badan menurut Umur (TB/U) \\
+    \hline
+    5 & Cakupan Indikator (\textit{Fitur}) & Kesehatan ibu dan anak, pola asuh, akses kesehatan, sanitasi, dan sosiodemografi \\
+    \hline
+    6 & Populasi Target & Rumah tangga kelompok balita usia 0-59 bulan \\
+    \hline
+    7 & Tingkat Agregasi Wilayah & Nasional, Provinsi (38 Provinsi), dan Kabupaten/Kota \\
+    \hline
+    8 & Pendekatan Pengambilan & \textit{Cross-sectional} (Satu titik waktu tertentu) \\
+    \hline
+    9 & Format Nilai Data & Numerik dan Persentase (\%) \\
+    \hline
+\end{longtable}
+
+\subsubsection{Ekstraksi Data}
+Tahap ekstraksi data dilakukan untuk memindahkan informasi prevalensi dan indikator kesehatan dari dokumen PDF SSGI 2024 ke dalam bentuk data yang lebih terstruktur. Proses ini menggunakan fitur \textit{Power Query} pada Microsoft Excel yang mampu membaca dan mengimpor tabel secara otomatis dari dokumen. Setelah seluruh tabel berhasil diambil, dilakukan penyaringan untuk memilih tabel yang sesuai dengan kebutuhan penelitian, khususnya yang memuat data tingkat provinsi dan indikator determinan \textit{stunting}. Setiap tabel yang dipilih kemudian diperiksa kembali dengan sumber aslinya untuk memastikan tidak terjadi kesalahan posisi data. Hasil dari tahap ini berupa kumpulan tabel mentah yang siap digunakan pada proses selanjutnya, yang dapat dilihat pada Tabel \ref{table:4.hasil_ekstraksi}.
+
+\begin{longtable}{|c|c|p{0.55\textwidth}|}
+    \caption{Potongan Daftar Hasil Ekstraksi Tabel dari Laporan SSGI 2024}
+    \label{table:4.hasil_ekstraksi}\\
+    \hline
+    \textbf{No} & \textbf{Nomor Tabel Laporan} & \textbf{Indikator yang Diekstrak} \\ 
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{No} & \textbf{Nomor Tabel Laporan} & \textbf{Indikator yang Diekstrak} \\ 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    1 & Tabel 4.3 & Status Gizi Tinggi Badan menurut Umur (TB/U) \\ 
+    \hline
+    2 & Tabel 5.15 & Pemeriksaan Kehamilan Ibu \\
+    \hline
+    3 & Tabel 5.33 & Pemberian ASI Eksklusif 6 Bulan \\
+    \hline
+    4 & Tabel 5.113 & Status Imunisasi Dasar Balita (12-23 Bulan) \\
+    \hline
+    5 & Tabel 5.184 & Akses Sanitasi Rumah Tangga (RT) \\
+    \hline
+    \multicolumn{3}{|c|}{\textit{... (Rincian 95 tabel lainnya dilanjutkan pada Lampiran A)}} \\
+    \hline
+\end{longtable}
+
+\subsubsection{Seleksi Fitur Determinan}
+Tahap seleksi fitur dilakukan untuk menentukan variabel yang akan digunakan dalam pemodelan. Proses ini dilakukan dengan memilih indikator yang relevan berdasarkan kajian literatur dan pedoman resmi terkait determinan \textit{stunting}. Variabel yang dipilih mencakup beberapa aspek utama seperti prevalensi \textit{stunting}, kondisi sosial ekonomi, sanitasi, serta pola asuh dan pelayanan kesehatan. Sementara itu, indikator yang tidak berhubungan langsung dengan kondisi gizi balita tidak disertakan dalam analisis. Melalui proses ini, diperoleh kumpulan fitur yang dianggap paling mewakili kondisi tiap provinsi, sebagaimana disajikan pada Tabel \ref{tabel:seleksi_fitur}.
+
+\subsubsection{Transformasi dan Agregasi Data}
+Tahap transformasi dan agregasi data merupakan proses akhir untuk menggabungkan sekaligus menyederhanakan struktur variabel agar memiliki skala yang seragam saat dibandingkan antarprovinsi. Pada tahap ini, seluruh fitur yang telah dipilih digabungkan ke dalam satu \textit{dataframe} menggunakan nama provinsi sebagai kunci penghubung. Selain penggabungan, dilakukan juga proses agregasi dengan mengombinasikan beberapa indikator yang memiliki makna serupa, seperti menggabungkan persentase usia kehamilan berisiko (di bawah 20 tahun dan di atas 35 tahun) menjadi satu variabel. Seluruh variabel tetap dinyatakan dalam bentuk persentase untuk menjaga konsistensi data sebelum digunakan dalam pemodelan. Hasil akhir dari tahap ini berupa dataset mentah dalam format CSV dengan 38 baris observasi yang siap digunakan pada tahap pra-pemrosesan.
 
 \subsection{Pra-pemrosesan dan Eksplorasi Data}
 \begin{itemize}
