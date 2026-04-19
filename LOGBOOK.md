@@ -117,3 +117,6 @@
 
 ### 2026-04-12
 - Write the result of research (data prepared)
+
+### 2026-04-19
+- Write the result of research (pre-process EDA)
