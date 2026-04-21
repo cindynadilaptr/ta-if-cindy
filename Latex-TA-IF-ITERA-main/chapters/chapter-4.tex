@@ -150,77 +150,446 @@ Tahap ekstraksi data dilakukan untuk memindahkan informasi prevalensi dan indika
     \hline
     5 & Tabel 5.184 & Akses Sanitasi Rumah Tangga (RT) \\
     \hline
-    \multicolumn{3}{|c|}{\textit{... (Rincian 95 tabel lainnya dilanjutkan pada Lampiran A)}} \\
-    \hline
 \end{longtable}
 
 \subsubsection{Seleksi Fitur Determinan}
-Tahap seleksi fitur dilakukan untuk menentukan variabel yang akan digunakan dalam pemodelan. Proses ini dilakukan dengan memilih indikator yang relevan berdasarkan kajian literatur dan pedoman resmi terkait determinan \textit{stunting}. Variabel yang dipilih mencakup beberapa aspek utama seperti prevalensi \textit{stunting}, kondisi sosial ekonomi, sanitasi, serta pola asuh dan pelayanan kesehatan. Sementara itu, indikator yang tidak berhubungan langsung dengan kondisi gizi balita tidak disertakan dalam analisis. Melalui proses ini, diperoleh kumpulan fitur yang dianggap paling mewakili kondisi tiap provinsi, sebagaimana disajikan pada Tabel \ref{tabel:seleksi_fitur}.
+Tahap seleksi fitur dilakukan untuk menentukan variabel yang akan digunakan dalam pemodelan. Proses ini dilakukan dengan memilih indikator yang relevan berdasarkan kajian literatur dan pedoman resmi terkait determinan \textit{stunting}. Variabel yang dipilih mencakup beberapa aspek utama seperti prevalensi \textit{stunting}, kondisi sosial ekonomi, sanitasi, serta pola asuh dan pelayanan kesehatan. Sementara itu, indikator yang tidak berhubungan langsung dengan kondisi gizi balita tidak disertakan dalam analisis. Melalui proses ini, diperoleh kumpulan fitur yang dianggap paling mewakili kondisi tiap provinsi, sebagaimana disajikan pada Tabel \ref{tabel:4.seleksi_fitur}.
 
-\subsubsection{Transformasi dan Agregasi Data}
-Tahap transformasi dan agregasi data merupakan proses akhir untuk menggabungkan sekaligus menyederhanakan struktur variabel agar memiliki skala yang seragam saat dibandingkan antarprovinsi. Pada tahap ini, seluruh fitur yang telah dipilih digabungkan ke dalam satu \textit{dataframe} menggunakan nama provinsi sebagai kunci penghubung. Selain penggabungan, dilakukan juga proses agregasi dengan mengombinasikan beberapa indikator yang memiliki makna serupa, seperti menggabungkan persentase usia kehamilan berisiko (di bawah 20 tahun dan di atas 35 tahun) menjadi satu variabel. Seluruh variabel tetap dinyatakan dalam bentuk persentase untuk menjaga konsistensi data sebelum digunakan dalam pemodelan. Hasil akhir dari tahap ini berupa dataset mentah dalam format CSV dengan 38 baris observasi yang siap digunakan pada tahap pra-pemrosesan.
-
-\subsection{Pra-pemrosesan dan Eksplorasi Data}
-\begin{itemize}
-    \item \textbf{Sumber Data:} Menggunakan dataset sekunder SSGI 2024 yang mencakup 38 provinsi.
-    \item \textbf{Kelengkapan Data:} Data agregat resmi terverifikasi 100\% terisi, tidak terdapat \textit{missing value}, sehingga tahap imputasi tidak diperlukan.
-    \item \textbf{Seleksi Fitur:} Mengeliminasi variabel non-determinan agar model fokus pada faktor utama berdasarkan teori kesehatan masyarakat.
-\end{itemize}
-
-\subsection{Implementasi \textit{Random Forest} dan \textit{SHAP}}
-\begin{itemize}
-    \item \textbf{Pemilihan \textit{Random Forest}:} Algoritma ini diimplementasikan karena ketahanannya terhadap \textit{overfitting} pada dataset berukuran kecil (38 observasi).
-    \item \textbf{Integrasi \textit{SHAP}:} Digunakan tidak hanya untuk mengukur tingkat kepentingan variabel, tetapi juga memetakan arah dampaknya terhadap angka \textit{stunting}.
-\end{itemize}
-
-% Tempat menaruh potongan kodingan (contoh)
-\begin{lstlisting}[caption={Ekstraksi Nilai \textit{SHAP}}, label={code:4.shap}, language=Python]
-# Nanti letakkan kodingan ekstraksi SHAP / Random Forest-mu di sini
-import shap
-explainer = shap.TreeExplainer(model)
-shap_values = explainer.shap_values(X_train)
-\end{lstlisting}
-
-% ==========================================
-% SECTION 4.2: HASIL PENGUJIAN
-% ==========================================
-\section{Hasil Pengujian} \label{IV.Hasil_Uji}
-
-\subsection{Skenario \textit{Hyperparameter Tuning}}
-\begin{itemize}
-    \item \textbf{Validasi Silang:} Menggunakan \textit{Leave-One-Out Cross-Validation} (LOOCV) dengan 37 data latih dan 1 data uji yang diulang 38 kali.
-    \item \textbf{Optimasi Parameter:} Pencarian nilai \texttt{n\_estimators}, \texttt{max\_depth}, dan \texttt{min\_samples\_split} terbaik menggunakan \textit{GridSearchCV} yang dilakukan secara tertutup di dalam perulangan data latih untuk mencegah \textit{data leakage}.
-\end{itemize}
-
-\subsection{Evaluasi Kinerja Model}
-\begin{itemize}
-    \item \textbf{Metrik \textit{Error}:} Nilai RMSE, MAE, dan MAPE menunjukkan seberapa akurat tebakan model terhadap data lapangan (lihat Tabel \ref{table:4.metrik}).
-    \item \textbf{Metrik Penjelasan ($R^2$):} Nilai R-Squared menunjukkan persentase variasi prevalensi \textit{stunting} yang berhasil dijelaskan oleh model.
-\end{itemize}
-
-% Tempat menaruh tabel metrik evaluasi
-\begin{longtable}{|c|c|}
-    \caption{Hasil Metrik Evaluasi Kinerja \textit{Random Forest}}
-    \label{table:4.metrik}\\
+\begin{longtable}{|c|p{0.3\textwidth}|p{0.5\textwidth}|}
+    \caption{Potongan Daftar Hasil Seleksi Fitur Determinan \textit{Stunting}}
+    \label{table:4.seleksi_fitur}\\
     \hline
-    \textbf{Metrik Evaluasi} & \textbf{Nilai} \\ 
+    \centering\textbf{No} & \centering\textbf{Aspek Determinan} & \textbf{Nama Variabel (Fitur Asli Laporan)} \\ 
     \hline
     \endfirsthead
     \hline
-    \textbf{Metrik Evaluasi} & \textbf{Nilai} \\ 
+    \centering\textbf{No} & \centering\textbf{Aspek Determinan} & \textbf{Nama Variabel (Fitur Asli Laporan)} \\ 
     \hline
     \endhead
     \hline
     \endfoot
     \hline
     \endlastfoot
-    \textit{Root Mean Squared Error} (RMSE) & 0.00 \\  % Isi angka nanti
+    1 & \textit{Outcome} (Target) & Prevalensi \textit{Stunting} (\%)\\ 
     \hline
-    \textit{Mean Absolute Error} (MAE) & 0.00 \\ 
+    2 & Kondisi Fisik Lahir & Persentase Berat Badan Lahir Rendah (BBLR) \\
     \hline
-    R-Squared ($R^2$) & 0.00 \\ 
+    3 & Asupan Gizi Balita & Persentase Tidak Konsumsi Protein Hewani \\
     \hline
-    \textit{Mean Absolute Percentage Error} (MAPE) & 0.00\% \\ 
+    4 & Penyakit Infeksi & Persentase Balita TBC \\
+    \hline
+    5 & Kapasitas Sosiodemografi & Persentase Pengetahuan \textit{Stunting} Baik \\
+    \hline
+\end{longtable}
+
+\subsubsection{Transformasi dan Agregasi Data}
+Tahap transformasi dan agregasi data merupakan proses penyatuan akhir sekaligus penyederhanaan struktur variabel agar memiliki makna dan skala yang konsisten saat dibandingkan antarprovinsi. Pada tahap ini, seluruh fitur yang telah diekstraksi digabungkan ke dalam satu matriks \textit{dataframe} menggunakan nama provinsi sebagai kunci penghubung (\textit{primary key}). Selain penggabungan tabel, dilakukan proses agregasi sistematis dengan mengombinasikan beberapa indikator yang memiliki kemiripan risiko, seperti menjumlahkan persentase kelompok usia kehamilan ekstrem menjadi satu atribut tunggal guna menghindari redundansi informasi. Seluruh variabel hasil agregasi tersebut tetap dipertahankan dalam satuan persentase untuk memastikan keseragaman format data sebelum diproses oleh algoritma pemodelan. Rincian mengenai sumber tabel laporan, alur operasi matematis yang diterapkan, hingga penamaan atribut baru yang masuk ke dalam \textit{dataset} utama dapat dilihat secara lengkap pada Tabel \ref{table:4.skenario_agregasi}.
+
+\begin{longtable}{|c|p{0.18\textwidth}|p{0.38\textwidth}|p{0.22\textwidth}|}
+    \caption{Skenario Transformasi dan Agregasi Fitur Determinan \textit{Stunting}}
+    \label{table:4.skenario_agregasi}\\
+    \hline
+    \centering\textbf{No} & \centering\textbf{Nama Tabel Laporan} & \centering\textbf{Alur Sistematis \& Logika Agregasi} & \centering\textbf{Nama Atribut Baru (CSV)} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{No} & \centering\textbf{Nama Tabel Laporan} & \centering\textbf{Alur Sistematis \& Logika Agregasi} & \centering\textbf{Nama Atribut Baru (CSV)} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    
+    1 & \raggedright Tabel 4.3 (Status Gizi TB/U) & \raggedright Menggabungkan persentase kategori \textit{Severely Stunting} dan \textit{Stunting} menjadi satu prevalensi target utama. & \texttt{prevalensi\_ stunting\_ persen} \tabularnewline 
+    \hline
+    
+    2 & \raggedright Tabel 5.5 (Usia Ibu Memulai Kehamilan) & \raggedright Menjumlahkan dua persentase kategori usia ekstrem, yakni kelompok usia $<21$ tahun dan $>40$ tahun. & \texttt{persen\_ usia\_ ibu\_ berisiko} \tabularnewline
+    \hline
+    
+    3 & \raggedright Tabel 5.184 (Akses Sanitasi RT) & \raggedright Menjumlahkan nilai dari kategori: BABS Terbuka, BABS Tertutup, dan Akses Belum Layak. & \texttt{persen\_ akses\_ sanitasi\_ berisiko} \tabularnewline
+    \hline
+    
+    4 & \raggedright Tabel 5.33 (Pemberian ASI Eksklusif) & \raggedright Menghitung nilai komplemen (100\% dikurangi persentase "Hanya ASI 0-5 Bulan"). & \texttt{persen\_ tidak\_ asi\_ eksklusif} \tabularnewline
+    \hline
+    
+    5 & \raggedright Tabel 5.113 (Status Imunisasi Dasar) & \raggedright Menggabungkan persentase balita dengan status imunisasi "Tidak Lengkap" dan "Tidak Imunisasi". & \texttt{persen\_ imunisasi\_ dasar\_ incomplete} \tabularnewline
+    \hline
+\end{longtable}
+
+
+\subsection{Pra-pemrosesan dan Eksplorasi Data}
+Tahapan pra-pemrosesan data bertujuan untuk mengubah \textit{dataset} mentah hasil ekstraksi SSGI 2024 menjadi format terstruktur yang bersih dan dapat diproses secara efektif oleh algoritma \textit{machine learning}. Terdapat 58 kolom fitur dalam \textit{dataset} awal ini, namun tidak seluruh indikator tersebut memiliki kualitas data yang baik atau relevansi langsung dalam mendeteksi pola determinan \textit{stunting}. Oleh sebab itu, penelitian ini melakukan serangkaian proses penyiapan lanjutan yang mengacu pada alur pra-pemrosesan, meliputi eksplorasi data, penanganan nilai hilang (\textit{missing value}), hingga eliminasi variabel non-determinan. Sebagai gambaran, bentuk \textit{dataset} mentah sebelum diproses lebih lanjut ditunjukkan pada Tabel \ref{table:4.raw_dataset_awal}. Adapun tahapan dari pra-pemrosesan data dijabarkan sebagai berikut. 
+
+\begin{longtable}{|c|p{0.20\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.15\textwidth}|c|}
+    \caption{Cuplikan \textit{Dataset} Mentah SSGI 2024 Sebelum Pra-pemrosesan}
+    \label{table:4.raw_dataset_awal}\\
+    \hline
+    \centering\textbf{No} & \centering\textbf{Provinsi} & \centering\textbf{prevalensi\_} \newline \textbf{stunting\_} \newline \textbf{persen} & \centering\textbf{persen\_} \newline \textbf{usia\_ibu\_} \newline \textbf{berisiko} & \centering\textbf{persen\_} \newline \textbf{bblr} & \textbf{...} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{No} & \centering\textbf{Provinsi} & \centering\textbf{prevalensi\_} \newline \textbf{stunting\_} \newline \textbf{persen} & \centering\textbf{persen\_} \newline \textbf{usia\_ibu\_} \newline \textbf{berisiko} & \centering\textbf{persen\_} \newline \textbf{bblr} & \textbf{...} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    1 & Aceh & \centering 28,6 & \centering 48,3 & \centering 4,8 & ... \tabularnewline 
+    \hline
+    2 & Sumatera Utara & \centering 22,9 & \centering 48,1 & \centering 3,3 & ... \tabularnewline
+    \hline
+    3 & Sumatera Barat & \centering 24,9 & \centering 44,7 & \centering 6,4 & ... \tabularnewline
+    \hline
+    ... & ... & \centering ... & \centering ... & \centering ... & ... \tabularnewline
+    \hline
+    39 & Indonesia & \centering 19,8 & \centering 40,4 & \centering 6,5 & ... \tabularnewline
+    \hline
+\end{longtable}
+
+\subsubsection{Eksplorasi Data (EDA)}
+Tahap \textit{Exploratory Data Analysis} (EDA) dilakukan untuk memahami karakteristik distribusi data, memastikan kesesuaian tipe variabel, serta mengidentifikasi pola hubungan antarfitur sebelum proses pemodelan. Analisis awal difokuskan pada variabel target, yaitu persentase prevalensi \textit{stunting}, di mana sebarannya divisualisasikan secara nasional untuk melihat ketimpangan antarwilayah. Hasil eksplorasi menunjukkan rentang prevalensi yang signifikan, dengan Provinsi Nusa Tenggara Timur mencatatkan angka tertinggi (37,0\%) dan Bali berada pada posisi terendah (8,6\%). Selanjutnya, dilakukan perhitungan matriks korelasi \textit{Pearson} untuk meninjau hubungan linear antara 15 kandidat fitur teratas dengan variabel target. Analisis ini mengungkap adanya korelasi positif yang sangat kuat antara \textit{stunting} dengan kondisi fisik balita lainnya, seperti prevalensi \textit{underweight} (0,93), serta kaitannya dengan indikator pelayanan kesehatan. Rincian implementasi kode program, beserta grafik distribusi dan \textit{heatmap} korelasi yang dihasilkan dari tahapan ini, diuraikan berturut-turut pada Kode 4.1 serta urutan visualisasi pada Gambar \ref{fig:eda_barchart}, Gambar \ref{fig:eda_histogram}, dan Gambar \ref{fig:eda_heatmap}.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.1} Implementasi Kode Eksplorasi Data (EDA)}, label={code:eda_process}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# 1. Memuat dataset dan konversi format koma menjadi desimal
+df = pd.read_csv('SSGI_2024_dataset.csv')
+for col in df.columns:
+    if col != 'Provinsi' and df[col].dtype == 'object':
+        df[col] = df[col].str.replace(',', '.', regex=False)
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+
+# 2. Visualisasi Distribusi Target per Provinsi (Bar Chart)
+df_clean = df.dropna(subset=['prevalensi_stunting_persen']) \
+             .sort_values(by='prevalensi_stunting_persen')
+
+plt.figure(figsize=(10, 12))
+plt.barh(df_clean['Provinsi'], df_clean['prevalensi_stunting_persen'])
+plt.title('Distribusi Prevalensi Stunting per Provinsi')
+plt.xlabel('Persentase Stunting')
+plt.ylabel('Provinsi')
+plt.tight_layout()
+plt.show()
+
+# 3. Plot Distribusi Stunting (Histogram & KDE)
+plt.figure(figsize=(10, 6))
+sns.histplot(df_clean['prevalensi_stunting_persen'], kde=True, bins=10)
+plt.title('Distribusi Persentase Stunting per Provinsi')
+plt.xlabel('Persentase Stunting (%)')
+plt.ylabel('Jumlah Provinsi')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+# 4. Analisis Korelasi dan Visualisasi Heatmap
+correlation = df.corr(numeric_only=True)['prevalensi_stunting_persen'] \
+                .sort_values(ascending=False)
+top_15_vars = correlation.head(15).index
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(df[top_15_vars].corr(numeric_only=True), 
+            annot=True, cmap='coolwarm', fmt='.2f')
+plt.title('Heatmap Korelasi 15 Variabel Teratas dengan Stunting')
+plt.tight_layout()
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figure/distribusi_stunting.png} 
+    \caption{Distribusi Prevalensi \textit{Stunting} per Provinsi}
+    \label{fig:eda_barchart}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure/distribusi_persen.png}
+    \caption{Histogram Distribusi Data Target}
+    \label{fig:eda_histogram}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figure/heatmap_korelasi.png}
+    \caption{\textit{Heatmap} Korelasi 15 Variabel Teratas}
+    \label{fig:eda_heatmap}
+\end{figure}
+
+\subsubsection{Penanganan \textit{Missing Value}}
+Tahap penanganan \textit{missing value} dilakukan untuk memastikan integritas data sebelum memasuki fase pemodelan. Berdasarkan hasil inspeksi pada data mentah SSGI 2024, ditemukan kekosongan data yang masif pada Provinsi Papua Tengah dan Papua Pegunungan sebagai wilayah pemekaran baru. Karena ketiadaan data tersebut bersifat struktural pada level observasi, metode \textit{listwise deletion} diterapkan dengan menghapus kedua provinsi tersebut dari \textit{dataset}. Selain itu, baris agregat "Indonesia" juga dieliminasi karena bukan merupakan entitas provinsi independen. Langkah ini memastikan bahwa \textit{dataset} yang tersisa merupakan data lengkap (100\% \textit{complete}) tanpa memerlukan imputasi buatan. Implementasi kode dan ringkasan perubahan jumlah observasi ditunjukkan pada Kode 4.2 dan Tabel \ref{table:4.before_after_baris}.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.2} Penghapusan Observasi dan Validasi \textit{Missing Value}}, label={code:missing_value}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+# 1. Menghapus baris provinsi dengan data kosong dan agregat nasional
+provinces_to_drop = ['Papua Tengah', 'Papua Pegunungan', 'Indonesia']
+
+plot_data_clean = plot_data_clean[~plot_data_clean['Provinsi'] \
+                                  .isin(provinces_to_drop)]
+
+# 2. Validasi ketiadaan missing value
+missing_values = plot_data_clean.isnull().sum()
+missing_values = missing_values[missing_values > 0]
+
+if len(missing_values) == 0:
+    print("No missing values found in the dataset")
+\end{lstlisting}
+
+\begin{longtable}{|c|p{0.55\textwidth}|c|}
+    \caption{Perbandingan Jumlah Observasi Sebelum dan Sesudah Pembersihan}
+    \label{table:4.before_after_baris}\\
+    \hline
+    \centering\textbf{No} & \centering\textbf{Kondisi \textit{Dataset}} & \textbf{Jumlah Baris} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{No} & \centering\textbf{Kondisi \textit{Dataset}} & \textbf{Jumlah Baris} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    1 & Sebelum Penanganan \textit{Missing Value} & \centering 39 \tabularnewline 
+    \hline
+    2 & Sesudah Penanganan \textit{Missing Value} & \centering 36 \tabularnewline
+    \hline
+\end{longtable}
+
+\subsubsection{Eliminasi Variabel Non-Determinan}
+Setelah pembersihan baris, dilakukan eliminasi fitur pada tingkat kolom untuk menghindari bias pemodelan. Fitur \texttt{prevalensi\_underweight\_persen} dan \texttt{prevalensi\_wasting\_persen} dihapus secara sengaja karena merupakan indikator malnutrisi yang sangat berkorelasi dengan target \textit{stunting}. Mempertahankan kedua variabel ini akan memicu \textit{data leakage}, di mana model seolah-olah memiliki performa tinggi namun secara logika tidak valid dalam memetakan faktor penyebab (determinan) luar. Proses eliminasi ini dijabarkan pada Kode 4.3 dan perubahan dimensi kolomnya diringkas pada Tabel \ref{table:4.before_after_kolom}.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.3} Eliminasi Fitur untuk Mencegah \textit{Data Leakage}}, label={code:eliminasi_kolom}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+# Menghapus kolom underweight dan wasting
+columns_to_drop = ['prevalensi_underweight_persen', 'prevalensi_wasting_persen']
+plot_data_clean = plot_data_clean.drop(columns=columns_to_drop)
+
+print(f"Jumlah kolom setelah penghapusan: {len(plot_data_clean.columns)}")
+\end{lstlisting}
+
+\begin{longtable}{|c|p{0.55\textwidth}|c|}
+    \caption{Perbandingan Jumlah Atribut Sebelum dan Sesudah Eliminasi}
+    \label{table:4.before_after_kolom}\\
+    \hline
+    \centering\textbf{No} & \centering\textbf{Kondisi \textit{Dataset}} & \textbf{Jumlah Kolom} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{No} & \centering\textbf{Kondisi \textit{Dataset}} & \textbf{Jumlah Kolom} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    1 & Sebelum Eliminasi Variabel & \centering 58 \tabularnewline 
+    \hline
+    2 & Sesudah Eliminasi Variabel & \centering 56 \tabularnewline
+    \hline
+\end{longtable}
+
+\subsubsection{Penetapan Variabel Penelitian}
+Tahap akhir pra-pemrosesan adalah penetapan matriks variabel penelitian yang siap masuk ke tahap pemodelan. \textit{Dataset} final terdiri dari 36 provinsi dengan 54 fitur determinan numerik murni sebagai variabel independen ($X$) dan satu kolom target persentase prevalensi \textit{stunting} ($y$). Kolom nama provinsi dipisahkan karena tidak berperan dalam perhitungan matematis algoritma \textit{Random Forest}. Rincian pemisahan matriks ditunjukkan pada Kode 4.4, sedangkan struktur data finalnya direpresentasikan pada Tabel \ref{table:4.dataset_final}.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.4} Pemisahan Variabel Independen (X) dan Dependen (y)}, label={code:penetapan_variabel}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+# Menentukan target dan fitur prediktor
+y = plot_data_clean['prevalensi_stunting_persen']
+X = plot_data_clean.drop(['Provinsi', 'prevalensi_stunting_persen'], axis=1)
+
+print("Dimensi X:", X.shape) # (36, 54)
+print("Dimensi y:", y.shape) # (36,)
+\end{lstlisting}
+
+\begin{longtable}{|c|p{0.18\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|c|}
+    \caption{Ilustrasi \textit{Dataset} Final Pemodelan \textit{Stunting}}
+    \label{table:4.dataset_final}\\
+    \hline
+    \centering\textbf{Provinsi} \newline \textit{(Index)} & \centering\textbf{y:} \newline \textbf{prevalensi\_} \newline \textbf{stunting} & \centering\textbf{X1:} \newline \textbf{jarak\_} \newline \textbf{hamil\_} \newline \textbf{risiko} & \centering\textbf{X2:} \newline \textbf{usia\_} \newline \textbf{ibu\_} \newline \textbf{risiko} & \textbf{... (X54)} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{Provinsi} \newline \textit{(Index)} & \centering\textbf{y:} \newline \textbf{prevalensi\_} \newline \textbf{stunting} & \centering\textbf{X1:} \newline \textbf{jarak\_} \newline \textbf{hamil\_} \newline \textbf{risiko} & \centering\textbf{X2:} \newline \textbf{usia\_} \newline \textbf{ibu\_} \newline \textbf{risiko} & \textbf{... (X54)} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    Bali & \centering 8,6 & \centering 9,5 & \centering 12,5 & ... \tabularnewline 
+    \hline
+    Jawa Timur & \centering 14,7 & \centering 10,4 & \centering 13,1 & ... \tabularnewline
+    \hline
+    Kep. Riau & \centering 15,0 & \centering 10,6 & \centering 10,3 & ... \tabularnewline
+    \hline
+    ... & \centering ... & \centering ... & \centering ... & ... \tabularnewline
+    \hline
+\end{longtable}
+
+\subsection{Pemodelan \textit{Random Forest}}
+Setelah melalui serangkaian tahapan pra-pemrosesan data (\textit{preprocessing}), langkah selanjutnya adalah pengembangan algoritma untuk memprediksi angka prevalensi \textit{stunting}. Mengacu pada alur penelitian, rangkaian proses pengembangan model dibagi menjadi tiga tahapan utama, mulai dari pencarian parameter optimal (\textit{hyperparameter tuning}), pelatihan model secara utuh (\textit{fitting}), hingga diakhiri dengan evaluasi performa model. Adapun proses-proses tersebut dijabarkan sebagai berikut.
+
+\subsubsection{\textit{Hyperparameter Tuning} Berbasis \textit{Cross Validation}}
+Mengingat dimensi \textit{dataset} penelitian yang tergolong kecil (36 observasi), pembagian data latih (\textit{training}) dan data uji (\textit{testing}) konvensional berisiko menghasilkan variansi bias yang tinggi. Oleh karena itu, pendekatan \textit{Leave-One-Out Cross-Validation} (LOOCV) diterapkan. Model dilatih sebanyak 36 kali, di mana pada setiap iterasinya, 35 data digunakan untuk pelatihan dan 1 data ditinggalkan untuk pengujian. Bersamaan dengan proses ini, dilakukan pencarian parameter terbaik menggunakan \textit{Grid Search} terhadap 108 kombinasi parameter \textit{Random Forest Regressor}. Evaluasi difokuskan untuk menekan nilai \textit{Mean Absolute Error} (MAE). Proses komputasi iteratif ini dijabarkan pada Kode 4.5, sedangkan hasil parameter terbaik yang didapatkan direpresentasikan pada Tabel \ref{table:4.best_param}.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.5} Pelaksanaan LOOCV dan \textit{Grid Search}}, label={code:tuning}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+from sklearn.model_selection import GridSearchCV, LeaveOneOut
+from sklearn.ensemble import RandomForestRegressor
+
+# Definisi kandidat parameter
+param_grid = {
+    'n_estimators': [50, 100, 150],
+    'max_depth': [3, 5, 7, None],
+    'min_samples_leaf': [1, 2, 3],
+    'max_features': ['sqrt', 'log2', None]
+}
+
+model = RandomForestRegressor(random_state=42)
+loocv = LeaveOneOut()
+scorers = {'mae': 'neg_mean_absolute_error', 
+           'rmse': 'neg_root_mean_squared_error'}
+
+# Eksekusi Grid Search dengan LOOCV
+grid_search = GridSearchCV(
+    estimator=model, param_grid=param_grid, cv=loocv, 
+    scoring=scorers, refit='mae', n_jobs=-1, verbose=2)
+
+grid_search.fit(X, y)
+\end{lstlisting}
+
+\begin{longtable}{|c|p{0.4\textwidth}|c|}
+    \caption{Hasil \textit{Hyperparameter Tuning} Model \textit{Random Forest}}
+    \label{table:4.best_param}\\
+    \hline
+    \centering\textbf{No} & \centering\textbf{Nama Parameter} & \textbf{Nilai Optimal} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{No} & \centering\textbf{Nama Parameter} & \textbf{Nilai Optimal} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    1 & \texttt{n\_estimators} & \centering 100 \tabularnewline 
+    \hline
+    2 & \texttt{max\_depth} & \centering 5 \tabularnewline
+    \hline
+    3 & \texttt{min\_samples\_leaf} & \centering 1 \tabularnewline
+    \hline
+    4 & \texttt{max\_features} & \centering \texttt{log2} \tabularnewline
+    \hline
+\end{longtable}
+
+\subsubsection{Pelatihan Model Final}
+Parameter optimal yang diperoleh dari proses \textit{tuning} dikonfigurasi ke dalam algoritma \textit{Random Forest Regressor} yang baru. Model final ini kemudian dilatih kembali (\textit{retrain}) menggunakan keseluruhan 36 baris \textit{dataset} untuk mendapatkan pola pemetaan variabel fitur secara maksimal. Setelah model berhasil dilatih, dilakukan prediksi nilai prevalensi \textit{stunting} guna membandingkan kedekatan nilai aktual target dengan nilai tebakan dari sistem. Rincian implementasi deklarasi model dan prediksi dapat dilihat pada Kode 4.6. Selanjutnya, sintaksis untuk memvisualisasikan sebaran kedekatan tersebut ditunjukkan pada Kode 4.7, dengan hasil komparasi aktual-prediksi dicatat pada Tabel \ref{table:4.komparasi_prediksi} dan Gambar \ref{fig:visualisasi_prediksi}.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.6} Pelatihan Model dan Eksekusi Prediksi}, label={code:pelatihan_final}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Deklarasi model final dengan parameter terbaik
+best_params = grid_search.best_params_
+model_final = RandomForestRegressor(**best_params, random_state=42)
+
+# Melatih model dengan seluruh observasi
+model_final.fit(X, y)
+
+# Melakukan prediksi pada data
+y_pred = model_final.predict(X)
+
+# Menyusun DataFrame komparasi
+comparison_df = pd.DataFrame({
+    'Provinsi': plot_data_clean['Provinsi'],
+    'Actual': y, 'Predicted': y_pred,
+    'Difference': y - y_pred
+}).sort_values('Actual')
+
+pd.set_option('display.float_format', lambda x: '%.2f' % x)
+\end{lstlisting}
+
+\begin{longtable}{|c|p{0.25\textwidth}|p{0.14\textwidth}|p{0.14\textwidth}|p{0.14\textwidth}|}
+    \caption{Cuplikan Perbandingan Nilai Aktual dan Prediksi}
+    \label{table:4.komparasi_prediksi}\\
+    \hline
+    \centering\textbf{No} & \centering\textbf{Provinsi} & \centering\textbf{Aktual} & \centering\textbf{Prediksi} & \centering\textbf{Selisih} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{No} & \centering\textbf{Provinsi} & \centering\textbf{Aktual} & \centering\textbf{Prediksi} & \centering\textbf{Selisih} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    1 & Bali & \centering 8,60 & \centering 12,56 & \centering -3,96 \tabularnewline 
+    \hline
+    2 & Jawa Timur & \centering 14,70 & \centering 16,77 & \centering -2,07 \tabularnewline
+    \hline
+    3 & Kep. Riau & \centering 15,00 & \centering 16,96 & \centering -1,96 \tabularnewline
+    \hline
+    \multicolumn{5}{|c|}{\textit{... }} \tabularnewline
+    \hline
+    35 & Sulawesi Barat & \centering 35,40 & \centering 31,28 & \centering 4,12 \tabularnewline
+    \hline
+    36 & NTT & \centering 37,00 & \centering 33,82 & \centering 3,18 \tabularnewline
+    \hline
+\end{longtable}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figure/pred_act.png} 
+    \caption{Sebaran Nilai Aktual dan Prediksi \textit{Stunting} per Provinsi}
+    \label{fig:visualisasi_prediksi}
+\end{figure}
+
+\subsubsection{Evaluasi Performa Model}
+Tahapan pengujian dilakukan untuk mengukur besaran tingkat kesalahan (\textit{error}) prediksi yang dihasilkan oleh model final. Pendekatan metrik yang digunakan mengacu pada perhitungan secara matematis antara nilai tebakan model (\texttt{y\_pred}) dan data realita (\texttt{y}). Metrik utama yang digunakan terdiri dari \textit{Mean Absolute Error} (MAE), \textit{Mean Squared Error} (MSE), \textit{Root Mean Squared Error} (RMSE), \textit{R-squared} ($R^2$), dan \textit{Mean Absolute Percentage Error} (MAPE). Perhitungan sintaksis dieksekusi pada Kode 4.8, di mana hasil rangkumannya dicatat pada Tabel \ref{table:4.hasil_evaluasi}.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.8} Perhitungan Metrik Evaluasi Regresi}, label={code:evaluasi}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+import numpy as np
+
+# Mengkalkulasi nilai metrik evaluasi
+mae = mean_absolute_error(y, y_pred)
+mse = mean_squared_error(y, y_pred)
+rmse = np.sqrt(mse)
+r2 = r2_score(y, y_pred)
+mape = np.mean(np.abs((y - y_pred) / y)) * 100
+
+print(f"MAE: {mae:.2f} | MSE: {mse:.2f} | RMSE: {rmse:.2f}")
+print(f"R-squared: {r2:.4f} | MAPE: {mape:.2f}%")
+\end{lstlisting}
+
+Berdasarkan hasil evaluasi pada Tabel \ref{table:4.hasil_evaluasi}, model \textit{Random Forest} mampu merekam pola \textit{dataset} dengan nilai determinasi ($R^2$) sebesar 0,9090. Hal ini mengindikasikan bahwa model dapat menjelaskan 90,9\% variabilitas penyebab \textit{stunting} secara representatif. Di sisi lain, persentase deviasi prediksi yang ditunjukkan oleh nilai MAPE mencatatkan angka 7,22\%, yang mengklasifikasikan performa model ke dalam kategori akurat.
+
+\begin{longtable}{|c|p{0.55\textwidth}|c|}
+    \caption{Hasil Pengujian Performa Model Regresi Final}
+    \label{table:4.hasil_evaluasi}\\
+    \hline
+    \centering\textbf{No} & \centering\textbf{Metrik Evaluasi} & \textbf{Skor} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \centering\textbf{No} & \centering\textbf{Metrik Evaluasi} & \textbf{Skor} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    1 & \textit{Mean Absolute Error} (MAE) & \centering 1,40 \tabularnewline 
+    \hline
+    2 & \textit{Mean Squared Error} (MSE) & \centering 3,15 \tabularnewline
+    \hline
+    3 & \textit{Root Mean Squared Error} (RMSE) & \centering 1,77 \tabularnewline
+    \hline
+    4 & \textit{R-Squared} ($R^2$) & \centering 0,9090 \tabularnewline
+    \hline
+    5 & \textit{Mean Absolute Percentage Error} (MAPE) & \centering 7,22\% \tabularnewline
     \hline
 \end{longtable}
 

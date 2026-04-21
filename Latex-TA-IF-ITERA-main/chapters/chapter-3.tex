@@ -95,7 +95,7 @@ Dataset yang digunakan dalam penelitian ini bersumber dari Laporan Publikasi SSG
 Tabel \ref{tab:distribusi_variabel} menunjukkan bahwa variabel determinan yang digunakan dalam penelitian ini didominasi oleh indikator terkait riwayat kehamilan, pola pemberian makan bayi dan anak, serta akses pelayanan kesehatan. Komposisi ini mencerminkan pendekatan multidimensi dalam menganalisis \textit{stunting}, di mana faktor biologis, perilaku, layanan kesehatan, serta kondisi lingkungan dianalisis secara simultan. Pengelompokan ini juga menjadi dasar dalam interpretasi model, khususnya pada tahap analisis kontribusi fitur menggunakan SHAP.
 
 
-\subsection{Pembangunan Model \textit{Random Forest}} \label{subsec:modeling}
+\subsection{Pemodelan \textit{Random Forest}} \label{subsec:modeling}
 Setelah melalui tahapan penyiapan dan pra-pemrosesan data, \textit{dataset} yang telah bersih dan terstruktur selanjutnya digunakan pada tahap pemodelan. Pada penelitian ini, pendekatan yang digunakan adalah \textit{Random Forest Regression} untuk memodelkan hubungan antara variabel determinan \textit{stunting} dan nilai prevalensi \textit{stunting} pada tingkat provinsi yang memiliki nilai numerik kontinu. Pemilihan metode ini didasarkan pada kemampuannya dalam menangani data dengan jumlah fitur yang relatif banyak serta hubungan non-linier antarvariabel tanpa asumsi distribusi data yang ketat \cite{shen2023machine}. Alur proses pemodelan disajikan secara ringkas pada Gambar~\ref{fig:6.flow_rf}.
 
 \begin{figure}[H]
