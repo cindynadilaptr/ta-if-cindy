@@ -151,11 +151,15 @@ Interpretasi global bertujuan untuk memberikan gambaran menyeluruh mengenai fakt
 \begin{enumerate}
     \item \textbf{\textit{Feature Importance Plot}} 
     
-    Visualisasi berbentuk diagram batang ini mengurutkan variabel determinan berdasarkan besaran rata-rata nilai SHAP absolut, yang dinyatakan secara matematis sebagai $\frac{1}{n} \sum_{i=1}^{n} |\phi_i^{(j)}|$. Grafik ini berfungsi untuk menentukan fitur mana yang memiliki dampak paling signifikan terhadap model secara keseluruhan tanpa memandang arah pengaruhnya, baik positif maupun negatif.    
-    
+    Visualisasi berbentuk diagram batang ini mengurutkan variabel determinan berdasarkan rata-rata nilai absolut SHAP. Perhitungan tersebut dinyatakan secara matematis melalui rumus $\frac{1}{n} \sum_{i=1}^{n} |\phi_i^{(j)}|$. Grafik ini berfungsi untuk melihat tingkat kepentingan setiap fitur terhadap keluaran model secara keseluruhan. Pengurutan posisi fitur dilakukan tanpa memandang arah pengaruh variabel tersebut, baik yang bernilai positif maupun negatif. Variabel yang berada di posisi paling atas merupakan indikator dengan dampak paling besar terhadap hasil tebakan algoritma.
+
     \item \textbf{\textit{Summary Plot (Beeswarm)}} 
     
-    Visualisasi distribusi nilai SHAP yang menyajikan arah pengaruh setiap variabel terhadap prediksi. Pada grafik ini, titik berwarna merah merepresentasikan nilai fitur yang tinggi, sedangkan biru merepresentasikan nilai rendah. Sebaran titik tersebut menunjukkan bagaimana nilai fitur tertentu dapat menaikkan (nilai SHAP positif) atau menurunkan (nilai SHAP negatif) risiko \textit{stunting}.
+    Visualisasi ini merupakan bentuk distribusi nilai SHAP yang menyajikan arah pengaruh setiap variabel terhadap hasil prediksi. Grafik beeswarm menggunakan gradasi warna untuk membedakan besaran nilai asli dari sebuah observasi. Titik berwarna merah merepresentasikan nilai fitur yang tinggi, sedangkan titik biru merepresentasikan nilai fitur yang rendah. Posisi titik di sebelah kanan sumbu nol menandakan adanya dorongan peningkatan pada prediksi prevalensi \textit{stunting}. Sebaliknya, sebaran titik di sebelah kiri sumbu nol menunjukkan bahwa variabel tersebut membantu menurunkan angka tebakan \textit{stunting}.
+
+    \item \textbf{\textit{Dependence Plot}}
+    
+    Visualisasi ini berbentuk grafik pencar (\textit{scatter plot}) yang bertugas membedah pola pengaruh dari satu variabel spesifik secara lebih rinci. Sumbu mendatar pada grafik ini menampilkan angka asli dari fitur yang sedang dianalisis. Sementara itu, sumbu vertikal menunjukkan besaran nilai SHAP yang dihasilkan oleh perubahan angka pada fitur tersebut. Visualisasi ini berguna untuk melihat ambang batas (\textit{threshold}) di mana sebuah indikator mulai merubah keputusan model secara drastis. Melalui grafik ini, peneliti dapat mengamati bentuk hubungan sebab-akibat secara langsung antara variabel masukan dan target keluaran.
 \end{enumerate}
 
 \subsection{Interpretasi Lokal}

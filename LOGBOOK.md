@@ -123,3 +123,6 @@
 
 ### 2026-04-21
 - Write the result of research (pre-process, Random Forest Modelling)
+
+### 2026-04-22
+- Write the result of research (evaluation metrics, model analysis, SHAP interpretation)

@@ -546,8 +546,8 @@ pd.set_option('display.float_format', lambda x: '%.2f' % x)
     \label{fig:visualisasi_prediksi}
 \end{figure}
 
-\subsubsection{Evaluasi Performa Model}
-Tahapan pengujian dilakukan untuk mengukur besaran tingkat kesalahan (\textit{error}) prediksi yang dihasilkan oleh model final. Pendekatan metrik yang digunakan mengacu pada perhitungan secara matematis antara nilai tebakan model (\texttt{y\_pred}) dan data realita (\texttt{y}). Metrik utama yang digunakan terdiri dari \textit{Mean Absolute Error} (MAE), \textit{Mean Squared Error} (MSE), \textit{Root Mean Squared Error} (RMSE), \textit{R-squared} ($R^2$), dan \textit{Mean Absolute Percentage Error} (MAPE). Perhitungan sintaksis dieksekusi pada Kode 4.8, di mana hasil rangkumannya dicatat pada Tabel \ref{table:4.hasil_evaluasi}.
+\section{Evaluasi Performa Model}
+Tahapan pengujian dilakukan untuk mengukur besaran tingkat kesalahan (\textit{error}) prediksi yang dihasilkan oleh model final. Pendekatan metrik yang digunakan mengacu pada perhitungan secara matematis antara nilai tebakan model (\texttt{y\_pred}) dan data realita (\texttt{y}). Metrik utama yang digunakan terdiri dari \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), \textit{R-squared} ($R^2$), dan \textit{Mean Absolute Percentage Error} (MAPE). Perhitungan sintaksis dieksekusi pada Kode 4.8, di mana hasil rangkumannya dicatat pada Tabel \ref{table:4.hasil_evaluasi}.
 
 \begin{lstlisting}[language=Python, title={\textbf{Kode 4.8} Perhitungan Metrik Evaluasi Regresi}, label={code:evaluasi}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -560,7 +560,7 @@ rmse = np.sqrt(mse)
 r2 = r2_score(y, y_pred)
 mape = np.mean(np.abs((y - y_pred) / y)) * 100
 
-print(f"MAE: {mae:.2f} | MSE: {mse:.2f} | RMSE: {rmse:.2f}")
+print(f"MAE: {mae:.2f} | RMSE: {rmse:.2f}")
 print(f"R-squared: {r2:.4f} | MAPE: {mape:.2f}%")
 \end{lstlisting}
 
@@ -583,15 +583,46 @@ Berdasarkan hasil evaluasi pada Tabel \ref{table:4.hasil_evaluasi}, model \texti
     \endlastfoot
     1 & \textit{Mean Absolute Error} (MAE) & \centering 1,40 \tabularnewline 
     \hline
-    2 & \textit{Mean Squared Error} (MSE) & \centering 3,15 \tabularnewline
+    2 & \textit{Root Mean Squared Error} (RMSE) & \centering 1,77 \tabularnewline
     \hline
-    3 & \textit{Root Mean Squared Error} (RMSE) & \centering 1,77 \tabularnewline
+    3 & \textit{R-Squared} ($R^2$) & \centering 0,9090 \tabularnewline
     \hline
-    4 & \textit{R-Squared} ($R^2$) & \centering 0,9090 \tabularnewline
-    \hline
-    5 & \textit{Mean Absolute Percentage Error} (MAPE) & \centering 7,22\% \tabularnewline
+    4 & \textit{Mean Absolute Percentage Error} (MAPE) & \centering 7,22\% \tabularnewline
     \hline
 \end{longtable}
+
+\section{Analisis Hasil Pemodelan \textit{Random Forest}}
+Setelah semua tahapan pembuatan model dan pengujian selesai dilakukan, bagian ini akan membahas hasil yang diperoleh. Analisis ini bertujuan untuk meninjau kecocokan pengaturan parameter, pola prediksi model, dan nilai evaluasinya. Pembahasan ini penting sebagai pengantar yang logis sebelum masuk ke tahap interpretasi fitur menggunakan SHAP. Rincian analisis tersebut dijelaskan pada poin-poin berikut.
+
+\subsection{Analisis Konfigurasi Parameter}
+Tahap konfigurasi parameter membahas kecocokan hasil \textit{tuning} optimal yang sebelumnya telah dirangkum pada Tabel \ref{table:4.best_param}. Pemilihan nilai \textit{max\_depth} sebesar 5 menunjukkan bahwa pembatasan kedalaman pohon efektif untuk \textit{dataset} dengan jumlah observasi yang sedikit. Langkah ini dilakukan untuk mencegah algoritma menghafal data latih secara berlebihan. Selain itu, penggunaan parameter \textit{max\_features} berupa \textit{log2} memastikan setiap variabel memiliki kesempatan yang sama untuk dievaluasi pada tiap cabang pohon. Pengaturan ini membantu model agar belajar lebih baik dan terhindar dari masalah \textit{overfitting}.
+
+\subsection{Analisis Pola Prediksi \textit{Stunting} per Provinsi}
+Pola tebakan model dapat diamati melalui komparasi pada Tabel \ref{table:4.komparasi_prediksi} dan visualisasi \textit{scatter plot} pada Gambar \ref{fig:visualisasi_prediksi}. Secara umum, garis prediksi menunjukkan tren yang sejalan dengan nilai aslinya di sebagian besar wilayah. Namun, masih terdapat sedikit perbedaan estimasi pada provinsi dengan tingkat prevalensi terendah seperti Bali, dan tertinggi seperti Nusa Tenggara Timur. Hal ini wajar terjadi karena algoritma \textit{Random Forest} bekerja dengan cara mengambil nilai rata-rata (\textit{averaging}) dari banyak pohon keputusan. Cara kerja ini membuat prediksi model menjadi lebih stabil dan tidak mudah terpengaruh oleh data ekstrem (\textit{outlier}), sehingga hasilnya tetap berada pada batas yang masuk akal secara statistik.
+
+\subsection{Analisis Metrik Evaluasi}
+Kualitas model dalam mengenali pola data dikonfirmasi oleh hasil pengujian performa pada Tabel \ref{table:4.hasil_evaluasi}. Koefisien determinasi ($R^2$) sebesar 0,9090 menunjukkan bahwa variabel-variabel yang digunakan sudah mampu menjelaskan 90,9\% penyebab terjadinya \textit{stunting}. Selain itu, nilai MAPE sebesar 7,22\% berada di bawah batas toleransi kesalahan regresi, yaitu 10\%. Tingkat persentase kesalahan yang kecil ini membuktikan bahwa model sudah layak digunakan untuk kebutuhan estimasi angka prevalensi. Secara keseluruhan, algoritma menunjukkan hasil komputasi yang baik dalam memproses data SSGI 2024.
+
+Nilai evaluasi yang didapatkan sudah memenuhi standar kelayakan. Namun, model prediksi ini memiliki batasan dalam hal transparansi. Algoritma berbasis \textit{ensemble} memiliki sifat kotak hitam (\textit{black-box}), sehingga proses pengambilan keputusannya tidak bisa dilihat secara langsung. Di sisi lain, diperlukan pemahaman mengenai fitur mana saja yang paling berpengaruh sebagai dasar rekomendasi penanganan \textit{stunting}. Oleh karena itu, tahapan analisis selanjutnya akan menggunakan metode SHAP. Metode ini berguna untuk membedah model dan melihat seberapa besar pengaruh dari masing-masing fitur secara lebih jelas.
+
+\section{Interpretasi Model Menggunakan SHAP}
+Mengacu pada batasan algoritma \textit{Random Forest} yang bersifat kotak hitam, tahapan ini difokuskan pada interpretasi hasil prediksi menggunakan \textit{SHapley Additive exPlanations} (SHAP). Pendekatan ini digunakan untuk membedah besaran pengaruh dari masing-masing variabel independen terhadap angka prevalensi \textit{stunting}. Analisis SHAP dalam penelitian ini dibagi menjadi dua ruang lingkup, yaitu analisis skala global dan analisis skala lokal. Pembagian ini bertujuan untuk melihat gambaran besar faktor penentu di tingkat nasional, sekaligus mengamati alasan spesifik di balik hasil prediksi pada masing-masing provinsi.
+
+Proses interpretasi diawali dengan menginisialisasi objek pembaca model (\textit{explainer}) ke dalam sistem. Karena \textit{Random Forest} merupakan algoritma yang dibangun dari sekumpulan pohon keputusan, pustaka SHAP menyediakan fungsi khusus berupa \texttt{TreeExplainer} untuk membaca struktur model tersebut secara efisien. Setelah model berhasil dibaca, sistem akan menghitung matriks nilai SHAP untuk mengukur seberapa besar dorongan atau tarikan setiap variabel terhadap hasil tebakan akhir. Rincian deklarasi algoritma SHAP beserta pengecekan dimensi \textit{output}-nya ditunjukkan pada Kode 4.9.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.9} Inisialisasi \textit{TreeExplainer} dan Ekstraksi Nilai SHAP}, label={code:shap_init}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+import shap
+import numpy as np
+
+# Inisialisasi SHAP explainer untuk model berbasis pohon
+explainer = shap.TreeExplainer(model_final)
+shap_values = explainer.shap_values(X)
+
+# Pengecekan dimensi matriks SHAP values
+print("Dimensi SHAP values:", np.shape(shap_values))
+# Output: (36, 54)
+\end{lstlisting}
+
 
 % ==========================================
 % SECTION 4.3: ANALISIS HASIL PENELITIAN
