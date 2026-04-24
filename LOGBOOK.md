@@ -126,3 +126,6 @@
 
 ### 2026-04-22
 - Write the result of research (evaluation metrics, model analysis, SHAP interpretation)
+
+### 2026-04-24
+- Write the result of research (SHAP interpretation (Global Explanation))

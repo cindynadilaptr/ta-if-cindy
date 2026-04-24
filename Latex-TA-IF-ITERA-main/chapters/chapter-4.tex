@@ -623,6 +623,165 @@ print("Dimensi SHAP values:", np.shape(shap_values))
 # Output: (36, 54)
 \end{lstlisting}
 
+\subsection{Interpretasi Global (\textit{Global Explanation})}
+Interpretasi skala global bertujuan untuk melihat pola pengambilan keputusan model terhadap seluruh data observasi tingkat nasional. Pendekatan ini berfokus pada evaluasi dampak masing-masing variabel secara umum sebelum meninjau kasus pada wilayah yang lebih spesifik. Proses interpretasi model pada tahapan ini dibagi ke dalam tiga bentuk visualisasi utama. Visualisasi tersebut mencakup identifikasi urutan variabel penentu, pengamatan arah pengaruh fitur, dan peninjauan batas angka kritis dari indikator utama. Rincian penjelasan untuk masing-masing tahapan analisis ini diuraikan pada sub-subbab berikut.
+
+\subsubsection{Tingkat Kepentingan Fitur (\textit{Feature Importance Plot})}
+Tahap awal interpretasi dilakukan dengan melihat tingkat kepentingan fitur melalui perhitungan rata-rata nilai absolut SHAP. Proses ini bertujuan untuk mengetahui variabel mana yang memiliki kontribusi paling besar terhadap prediksi model secara umum. Kode 4.10 menunjukkan implementasi fungsi \texttt{summary\_plot} untuk menghasilkan diagram batang yang mengurutkan fitur-fitur tersebut. Hasil visualisasi dari kode tersebut kemudian ditampilkan pada Gambar \ref{fig:shap_bar}. Melalui grafik ini, urutan indikator kesehatan yang menjadi penentu angka \textit{stunting} di Indonesia dapat diidentifikasi secara urut.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.10} Visualisasi Tingkat Kepentingan Fitur Global}, label={code:shap_bar}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+import matplotlib.pyplot as plt
+
+# Visualisasi Bar Plot untuk 20 fitur paling berpengaruh
+shap.summary_plot(shap_values, X, plot_type="bar", 
+                  max_display=20, show=False)
+
+fig = plt.gcf()
+fig.set_size_inches(10, 8)
+plt.title("Rata-rata Dampak Absolut Fitur terhadap Stunting", fontsize=14)
+plt.tight_layout()
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figure/feature_importance.png} 
+    \caption{Rata-Rata Dampak Absolut Fitur terhadap \textit{Stunting} (\textit{SHAP Bar Plot})}
+    \label{fig:shap_bar}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \caption{Keterangan Istilah Variabel pada \textit{SHAP Bar Plot}}
+    \label{table:legenda_shap}
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|l|p{0.6\textwidth}|}
+    \hline
+    \textbf{No} & \textbf{Nama Variabel di Grafik} & \textbf{Keterangan / Makna Istilah} \\ 
+    \hline
+    1 & \texttt{persen\_tidak\_memenuhi\_mmff} & \textit{Minimum Milk Feeding Frequency} (Persentase balita non-ASI yang kurang asupan susu minimal 2 kali sehari). \\ 
+    \hline
+    2 & \texttt{persen\_tidak\_memenuhi\_mdd} & \textit{Minimum Dietary Diversity} (Persentase balita yang kurang keberagaman jenis kelompok makanan harian). \\ 
+    \hline
+    3 & \texttt{persen\_cakupan\_pmt} & Pemberian Makanan Tambahan (Bantuan pangan gizi untuk balita atau ibu hamil berisiko). \\ 
+    \hline
+    4 & \texttt{persen\_tidak\_memenuhi\_mad} & \textit{Minimum Acceptable Diet} (Gabungan indikator frekuensi makan dan keberagaman jenis makanan minimal). \\ 
+    \hline
+    5 & \texttt{persen\_cakupan\_ttd} & Tablet Tambah Darah (Suplemen zat besi untuk mencegah anemia pada ibu hamil atau remaja putri). \\ 
+    \hline
+    6 & \texttt{persen\_kunjungan\_anc} & \textit{Antenatal Care} (Pelayanan pemeriksaan kesehatan ibu selama masa kehamilan oleh tenaga medis). \\ 
+    \hline
+    7 & \texttt{persen\_pendampingan\_tpk} & Tim Pendamping Keluarga (Tim yang mendampingi keluarga berisiko \textit{stunting} di tingkat desa/kelurahan). \\ 
+    \hline
+    8 & \texttt{persen\_kepemilikan\_kia} & Kesehatan Ibu dan Anak (Merujuk pada kepemilikan dan penggunaan Buku KIA untuk pemantauan kesehatan). \\ 
+    \hline
+    9 & \texttt{persen\_usia\_ibu\_berisiko} & Persentase ibu melahirkan pada usia berisiko (di bawah 20 tahun atau di atas 35 tahun). \\ 
+    \hline
+    \end{tabular}%
+    }
+\end{table}
+
+Gambar \ref{fig:shap_bar} menunjukkan bahwa variabel \texttt{persen\_tidak\_memenuhi\_mmff} atau \textit{Minimum Milk Feeding Frequency} menjadi faktor yang paling dominan dalam model. Indikator ini merepresentasikan persentase balita non-ASI yang tidak mendapatkan asupan susu minimal dua kali dalam sehari. Selain itu, faktor usia ibu yang berisiko dan kurangnya \textit{Minimum Dietary Diversity} (MDD) atau variasi kelompok jenis makanan harian juga menempati posisi tiga besar. Temuan ini mengindikasikan bahwa pemenuhan frekuensi susu dan keberagaman gizi anak memiliki dampak yang lebih besar terhadap prevalensi \textit{stunting} dibandingkan variabel fasilitas kesehatan. Identifikasi peringkat ini menjadi landasan untuk melakukan analisis yang lebih mendalam pada tahapan distribusi arah pengaruh variabel selanjutnya.
+
+\subsubsection{Arah dan Distribusi Dampak Fitur (\textit{Summary Plot})}
+Tahapan analisis selanjutnya difokuskan pada pengamatan arah pengaruh dari masing-masing variabel terhadap hasil keluaran model. Pemetaan arah distribusi ini dilakukan dengan mengeksekusi Kode 4.11 untuk menghasilkan visualisasi \textit{SHAP Summary Plot}. Hasil komputasi dari kode tersebut ditampilkan dalam bentuk grafik sebaran pada Gambar \ref{fig:shap_summary}. Karena visualisasi ini menggunakan urutan fitur yang identik dengan tahapan sebelumnya, pembaca dapat merujuk kembali pada Tabel 4.1 untuk melihat keterangan label. Grafik ini menggunakan parameter gradasi warna untuk merepresentasikan angka asli pada data, di mana merah berarti tinggi dan biru berarti rendah.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.11} Visualisasi Arah dan Distribusi Dampak Fitur}, label={code:shap_summary}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+import matplotlib.pyplot as plt
+
+# Visualisasi sebaran arah pengaruh fitur (Summary Plot/Beeswarm)
+shap.summary_plot(shap_values, X, show=False)
+
+fig = plt.gcf()
+fig.set_size_inches(10, 8)
+plt.title("Arah dan Distribusi Dampak Fitur (Summary Plot)", fontsize=14)
+plt.tight_layout()
+plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figure/summary.png} 
+    \caption{Arah dan Distribusi Dampak Fitur terhadap \textit{Stunting} (\textit{SHAP Summary Plot})}
+    \label{fig:shap_summary}
+\end{figure}
+
+Berdasarkan Gambar \ref{fig:shap_summary}, terlihat jelas bagaimana tiga variabel utama memberikan dorongan kenaikan terhadap tebakan prevalensi model. Pada variabel \texttt{persen\_tidak\_memenuhi\_mmff}, sebaran titik berwarna merah mendominasi area di sebelah kanan garis tegak (nol). Pola serupa juga ditemukan secara konsisten pada variabel persentase usia ibu berisiko dan kurangnya pemenuhan MDD. Sebaran ini membuktikan bahwa semakin tinggi persentase masalah kelengkapan gizi dan risiko usia ibu, maka prediksi kasus \textit{stunting} di suatu wilayah akan bertambah. Hasil distribusi warna yang sejalan dengan teori kesehatan ini menandakan bahwa algoritma telah berhasil memetakan pola sebab-akibat dengan akurat.
+
+\subsubsection{Analisis Ketergantungan Fitur (\textit{Dependence Plot})}
+Langkah terakhir dalam analisis skala global adalah membedah distribusi nilai dari lima variabel dengan peringkat tertinggi. Pendekatan ini dilakukan menggunakan visualisasi \textit{SHAP Dependence Plot} untuk mencari titik batas perubahan pengaruh pada masing-masing indikator. Eksekusi sintaksis perulangan untuk menghasilkan kelima grafik tersebut secara berurutan ditunjukkan pada Kode 4.12. Visualisasi yang dihasilkan kemudian dianalisis untuk melihat pada rentang angka berapa suatu variabel mulai merubah arah keputusan model. Penjelasan rincian dari setiap grafik dijabarkan pada paragraf-paragraf di bawah ini.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.12} Visualisasi Ketergantungan Lima Fitur Teratas}, label={code:shap_dependence}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+import matplotlib.pyplot as plt
+
+# Daftar 5 fitur teratas berdasarkan SHAP
+top5_features = [
+    "persen_tidak_memenuhi_mmff",
+    "persen_usia_ibu_berisiko",
+    "persen_tidak_memenuhi_mdd",
+    "persen_tidak_dapat_pmt",
+    "persen_akses_sanitasi_berisiko"
+]
+
+# Visualisasi dependence plot per fitur
+for feature in top5_features:
+    plt.figure(figsize=(7, 5))
+    shap.dependence_plot(
+        feature, shap_values, X,
+        interaction_index=None, 
+        show=False
+    )
+    plt.title(f"SHAP Dependence Plot - {feature.replace('_', ' ').title()}", fontsize=13, pad=10)
+    plt.xlabel("Nilai Fitur", fontsize=11)
+    plt.ylabel("SHAP Value (Pengaruh terhadap Risiko Stunting)", fontsize=11)
+    plt.tight_layout()
+    plt.show()
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure/dependence_mmff.png} 
+    \caption{\textit{Dependence Plot} Variabel Persen Tidak Memenuhi MMFF}
+    \label{fig:dep_mmff}
+\end{figure}
+
+Gambar \ref{fig:dep_mmff} menampilkan grafik ketergantungan untuk fitur persentase tidak memenuhi MMFF. Berdasarkan sebaran titik pada visualisasi tersebut, nilai SHAP berada secara stabil di area negatif saat angka observasi berada di bawah 22\%. Namun, terdapat lonjakan drastis yang menyeberangi sumbu nol menuju area positif ketika persentase fitur melampaui ambang batas 22\% hingga 25\%. Semakin nilai persentase menjauhi batas tersebut ke arah kanan, dorongan terhadap risiko prediksi \textit{stunting} menjadi semakin tinggi secara signifikan. Pola ini membuktikan bahwa kurangnya asupan susu pada balita non-ASI memiliki batas toleransi maksimal di kisaran 22\% sebelum memicu lonjakan kasus.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure/dependence_usia_ibu.png} 
+    \caption{\textit{Dependence Plot} Variabel Persen Usia Ibu Berisiko}
+    \label{fig:dep_usia_ibu}
+\end{figure}
+
+Visualisasi ketergantungan untuk persentase usia ibu berisiko ditunjukkan pada Gambar \ref{fig:dep_usia_ibu}. Grafik ini memperlihatkan pola lonjakan nilai SHAP yang tegas ketika angka asli fitur melewati ambang batas 14\%. Pada rentang persentase di bawah 14\%, dampak yang diberikan cenderung bernilai negatif atau menekan angka prediksi. Sebaliknya, ketika persentase wilayah menyentuh angka 15\% ke atas, hasil tebakan langsung mendapat dorongan positif yang memicu kenaikan prediksi. Karakteristik ini mengindikasikan bahwa intervensi pencegahan kehamilan pada usia berisiko sebaiknya diupayakan agar tidak melampaui batas 14\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure/dependence_mdd.png} 
+    \caption{\textit{Dependence Plot} Variabel Persen Tidak Memenuhi MDD}
+    \label{fig:dep_mdd}
+\end{figure}
+
+Analisis ketergantungan untuk persentase balita tidak memenuhi MDD dapat diamati melalui sebaran titik pada Gambar \ref{fig:dep_mdd}. Indikator keberagaman makanan ini menunjukkan pola hubungan naik yang sejalan dengan peningkatan nilai aslinya. Titik kritis dari variabel ini terlihat secara jelas berada di sekitar angka 55\% ketika melewati sumbu nol. Semakin nilai persentase bergerak menjauhi ambang batas tersebut menuju angka 80\%, risiko prevalensi yang ditebak oleh model menjadi semakin tinggi. Pola distribusi ini menegaskan bahwa peningkatan masalah keberagaman asupan gizi secara proporsional akan menambah tinggi prediksi kasus di suatu wilayah.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure/dependence_pmt.png} 
+    \caption{\textit{Dependence Plot} Variabel Persen Tidak Dapat PMT}
+    \label{fig:dep_pmt}
+\end{figure}
+
+Gambar \ref{fig:dep_pmt} membedah sebaran dampak dari variabel persentase sasaran yang tidak mendapatkan Pemberian Makanan Tambahan (PMT). Persebaran data pada visualisasi ini menunjukkan tarikan nilai SHAP yang tinggi saat angka asli fitur berada di bawah 85\%. Ketika persentase fitur mendekati rentang 90\% hingga 95\%, dampak variabel mulai melemah dan berpindah ke area nol hingga negatif. Karakteristik bentuk ini memperlihatkan dinamika kontribusi ketiadaan PMT yang tidak selalu lurus berbanding dengan prediksi hasil. Hasil pemetaan batas persentase ini memberikan informasi pendukung untuk mengevaluasi pemerataan bantuan PMT di wilayah observasi.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figure/dependence_sanitasi.png} 
+    \caption{\textit{Dependence Plot} Variabel Persen Akses Sanitasi Berisiko}
+    \label{fig:dep_sanitasi}
+\end{figure}
+
+Grafik ketergantungan kelima yang membedah persentase akses sanitasi berisiko ditampilkan pada Gambar \ref{fig:dep_sanitasi}. Distribusi titik data pada sumbu vertikal memperlihatkan kecenderungan pergerakan naik secara berkelanjutan. Variabel sanitasi mulai memberikan sumbangsih positif terhadap peningkatan prediksi \textit{stunting} ketika angkanya melewati batas kritis 10\%. Pada persentase di bawah angka batas tersebut, nilai perhitungan SHAP berada di area negatif yang mendeskripsikan penurunan angka tebakan. Pemetaan dari model ini membuktikan bahwa wilayah observasi perlu menekan persentase ketiadaan akses sanitasi layak di bawah batas 10\%.
 
 % ==========================================
 % SECTION 4.3: ANALISIS HASIL PENELITIAN
