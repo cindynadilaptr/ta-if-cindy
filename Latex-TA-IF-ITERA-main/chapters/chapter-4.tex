@@ -783,6 +783,112 @@ Gambar \ref{fig:dep_pmt} membedah sebaran dampak dari variabel persentase sasara
 
 Grafik ketergantungan kelima yang membedah persentase akses sanitasi berisiko ditampilkan pada Gambar \ref{fig:dep_sanitasi}. Distribusi titik data pada sumbu vertikal memperlihatkan kecenderungan pergerakan naik secara berkelanjutan. Variabel sanitasi mulai memberikan sumbangsih positif terhadap peningkatan prediksi \textit{stunting} ketika angkanya melewati batas kritis 10\%. Pada persentase di bawah angka batas tersebut, nilai perhitungan SHAP berada di area negatif yang mendeskripsikan penurunan angka tebakan. Pemetaan dari model ini membuktikan bahwa wilayah observasi perlu menekan persentase ketiadaan akses sanitasi layak di bawah batas 10\%.
 
+\subsection{Interpretasi Lokal (\textit{Local Explanation})}
+Analisis skala lokal bertujuan untuk membedah proses pengambilan keputusan algoritma pada satu observasi data yang spesifik. Berbeda dengan pendekatan global yang memetakan tren secara keseluruhan, tahapan ini berfokus pada faktor-faktor pendorong hasil tebakan pada kasus tunggal. Pendekatan ini berguna untuk memahami alasan di balik tingginya atau rendahnya prediksi prevalensi \textit{stunting} pada sampel wilayah tertentu. Visualisasi pada tahap ini akan menampilkan bagaimana masing-masing variabel berkontribusi secara rinci dalam menambah atau menekan nilai dasar model. Hasil interpretasi dari observasi tunggal ini kemudian dapat diuraikan sebagai rujukan evaluasi khusus bagi wilayah yang bersangkutan.
+
+\subsubsection{Kriteria Pemilihan Sampel Wilayah}
+Sebelum melakukan ekstraksi visualisasi \textit{Local Explanation}, tahap penentuan sampel observasi perlu dilakukan agar analisis lebih terarah. Pemilihan sampel provinsi pada penelitian ini menggunakan teknik \textit{purposive sampling} yang didasarkan pada enam kriteria kondisi demografis dan tingkat prevalensi. Keenam sampel tersebut dirancang untuk merepresentasikan berbagai variasi keadaan yang memengaruhi hasil tebakan algoritma secara spesifik. Melalui variasi observasi ini, model diharapkan mampu menunjukkan perbedaan pola pengambilan keputusan pada setiap kasus secara transparan.
+
+Kriteria pertama difokuskan pada kedekatan geografis dan keterwakilan regional Pulau Sumatera sebagai lokasi institusi tempat penelitian ini dilakukan. Provinsi Lampung dipilih sebagai representasi wilayah utama karena merupakan domisili pelaksanaan penelitian di Institut Teknologi Sumatera. Selain Lampung, Provinsi Aceh dan Sumatera Utara turut dipilih untuk mewakili karakteristik regional Sumatera masing-masing sebagai wilayah dengan angka prevalensi tertinggi dan populasi terpadat di pulau tersebut. Peninjauan khusus pada ketiga provinsi ini bertujuan untuk memberikan kontribusi akademis yang relevan terhadap identifikasi masalah kesehatan di wilayah Sumatera.
+
+Kriteria selanjutnya mencakup pemilihan provinsi yang memegang rekor ekstrem pada skala nasional untuk melihat respons model terhadap kondisi data yang kontras. Analisis pada wilayah dengan prevalensi tertinggi secara nasional bertujuan untuk menemukan pemicu utama krisis gizi, sementara wilayah dengan angka terendah berfungsi sebagai pembanding keberhasilan intervensi. Provinsi dengan populasi penduduk terpadat di tingkat nasional juga disertakan untuk meninjau dampak persaingan akses sumber daya terhadap hasil prediksi. Penggabungan sampel regional dan nasional ini ditujukan agar visualisasi skala lokal dapat memberikan gambaran yang menyeluruh mengenai kinerja model \textit{machine learning}.
+
+\subsubsection{Analisis Skala Lokal (\textit{Waterfall Plot})}
+Tahapan interpretasi skala lokal dilakukan dengan mengeksekusi visualisasi \textit{SHAP Waterfall Plot} untuk membedah data observasi secara spesifik. Proses komputasi ini bertujuan untuk menguraikan kontribusi masing-masing variabel dalam mendorong atau menekan nilai rata-rata dasar prediksi model (\textit{base value}) yang berada pada angka 22,375. Implementasi ekstraksi grafik untuk seluruh provinsi secara otomatis beserta proses penyimpanannya ditunjukkan pada Kode 4.13. Berdasarkan hasil pemrosesan tersebut, analisis mendalam difokuskan pada enam provinsi yang telah ditetapkan melalui kriteria \textit{purposive sampling} sebelumnya. Rincian penjabaran kontribusi fitur penentu \textit{stunting} untuk keenam sampel wilayah tersebut diuraikan sebagai berikut.
+
+\begin{lstlisting}[language=Python, title={\textbf{Kode 4.13} Visualisasi dan Ekstraksi \textit{Waterfall Plot} Seluruh Provinsi}, label={code:waterfall_all}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+# SHAP waterfall plot value for a specific province
+explainer = shap.TreeExplainer(model_final)
+shap_values = explainer(X)
+
+nama_folder = "hasil_waterfall_stunting"
+
+if not os.path.exists(nama_folder):
+    os.makedirs(nama_folder)
+    print(f"Folder '{nama_folder}' berhasil dibuat!")
+
+daftar_provinsi = plot_data_clean['Provinsi'].tolist()
+
+for i in range(len(shap_values)):
+    prov_name = daftar_provinsi[i]
+    file_name = f"waterfall_{prov_name.replace(' ', '_')}.png"
+    path_simpan = os.path.join(nama_folder, file_name)
+    
+    plt.figure(figsize=(10, 7))
+    shap.plots.waterfall(shap_values[i], show=False)
+    plt.suptitle(f"Kontribusi Fitur terhadap Prediksi Stunting - Provinsi {prov_name}", 
+                 fontsize=14, y=1.05, fontweight='bold')
+    
+    plt.figtext(
+        0.5, -0.02,
+        "Merah = menaikkan risiko stunting | Biru = menurunkan risiko stunting",
+        ha='center', fontsize=11, color='gray', style='italic'
+    )
+    
+    plt.tight_layout()
+    plt.savefig(path_simpan, dpi=300, bbox_inches='tight')
+    plt.show()
+    plt.close()
+
+print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
+\end{lstlisting}
+
+\begin{enumerate}
+    \item Provinsi Lampung (Representasi Domisili Institusi)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figure/waterfall_Lampung.png} 
+        \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Lampung}
+        \label{fig:wf_lampung}
+    \end{figure}
+    Visualisasi pada Gambar \ref{fig:wf_lampung} menampilkan distribusi pengaruh fitur untuk Provinsi Lampung dengan hasil tebakan akhir sebesar 18,63. Penurunan dari nilai dasar ini didominasi secara penuh oleh kontribusi negatif (warna biru) dari mayoritas indikator kesehatan. Faktor sasaran balita tidak dapat PMT, risiko akses sanitasi, dan persentase usia ibu berisiko menjadi variabel teratas yang menekan angka prevalensi. Tarikan searah tanpa adanya perlawanan balok merah ini mengindikasikan bahwa fasilitas kesehatan dasar di wilayah Lampung secara umum sudah cukup menekan potensi lonjakan kasus \textit{stunting}.
+
+    \item Provinsi Aceh (Prevalensi Tertinggi Regional Sumatera)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figure/waterfall_Aceh.png} 
+        \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Aceh}
+        \label{fig:wf_aceh}
+    \end{figure}
+    Observasi skala lokal untuk Provinsi Aceh memproyeksikan tebakan model yang melonjak tinggi menuju angka 26,301. Berdasarkan Gambar \ref{fig:wf_aceh}, peningkatan ini didorong kuat oleh sekumpulan balok merah yang mempresentasikan nilai positif terhadap prediksi risiko. Variabel kurangnya pemenuhan MMFF dan jarangnya pemantauan pertumbuhan balita menjadi pemicu utama dengan kontribusi dorongan terbesar. Tingginya tumpukan fitur pembawa risiko ini merepresentasikan akar permasalahan gizi yang memerlukan intervensi segera di wilayah tersebut.
+
+    \item Provinsi Sumatera Utara (Populasi Terpadat Regional Sumatera)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figure/waterfall_Sumatera_Utara.png} 
+        \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Sumatera Utara}
+        \label{fig:wf_sumut}
+    \end{figure}
+    Dinamika kontribusi yang saling mengimbangi terlihat pada grafik distribusi Provinsi Sumatera Utara di Gambar \ref{fig:wf_sumut}. Prediksi model untuk wilayah ini berakhir pada angka 22,501, yang sangat mendekati nilai rata-rata dasar prediksi nasional. Penekanan risiko oleh variabel pemenuhan MAD dan usia ibu berisiko mendapat perlawanan dari dorongan risiko akibat indikator tidak KB pasca salin dan imunisasi PCV yang tidak lengkap. Keseimbangan antara balok penekan dan pendorong ini menggambarkan kompleksitas tantangan fasilitas kesehatan di wilayah dengan padat penduduk.
+
+    \item Provinsi Nusa Tenggara Timur (Prevalensi Tertinggi Nasional)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figure/waterfall_Nusa_Tenggara_Timur.png} 
+        \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Nusa Tenggara Timur}
+        \label{fig:wf_ntt}
+    \end{figure}
+    Gambar \ref{fig:wf_ntt} membedah secara ekstrem pemicu di balik rekor prevalensi tertinggi secara nasional di Provinsi Nusa Tenggara Timur. Model menghasilkan tebakan akhir yang sangat tinggi di angka 33,815 dengan grafik yang didominasi oleh pergerakan balok merah secara masif. Kurangnya asupan susu (MMFF) dan minimnya pemantauan pertumbuhan memberikan sumbangsih penambahan risiko terbesar, masing-masing sebesar +1,0. Identifikasi tumpukan pendorong arah positif ini menegaskan keparahan krisis kelengkapan gizi dasar dan fasilitas pemantauan anak di wilayah tersebut.
+
+    \item Provinsi Bali (Prevalensi Terendah Nasional)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figure/waterfall_Bali.png} 
+        \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Bali}
+        \label{fig:wf_bali}
+    \end{figure}
+    Sebagai representasi wilayah dengan angka kasus terendah, \textit{Waterfall Plot} Provinsi Bali pada Gambar \ref{fig:wf_bali} memperlihatkan pola sapuan biru yang sempurna. Prediksi akhir wilayah ini ditekan secara drastis hingga mencapai angka 12,565 tanpa adanya satu pun fitur utama yang memberi dorongan risiko. Keberagaman asupan makanan (MDD) dan efektivitas PMT menjadi indikator terkuat yang mengurangkan nilai prediksi dasar. Ketiadaan balok merah pada grafik ini mengonfirmasi kualitas standar keunggulan kesehatan ibu dan anak yang sangat baik di wilayah Bali.
+
+    \item Provinsi Jawa Barat (Populasi Terpadat Nasional)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.85\textwidth]{figure/waterfall_Jawa_Barat.png} 
+        \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Jawa Barat}
+        \label{fig:wf_jabar}
+    \end{figure}
+    Analisis visualisasi untuk provinsi dengan populasi terpadat, yaitu Jawa Barat, dapat diamati melalui Gambar \ref{fig:wf_jabar}. Meskipun memiliki tekanan persaingan akses yang tinggi, model secara mengejutkan memprediksi penurunan angka prevalensi menuju nilai 17,755. Penurunan ini didorong secara konsisten oleh efektivitas program PMT dan kecukupan keberagaman pangan (MDD). Terdapat satu variabel yang memberikan dorongan risiko kecil, yakni masalah akses sanitasi berisiko, yang merupakan dampak logis dari kepadatan permukiman penduduk di wilayah tersebut.
+\end{enumerate}
+
 % ==========================================
 % SECTION 4.3: ANALISIS HASIL PENELITIAN
 % ==========================================

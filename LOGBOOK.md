@@ -129,3 +129,7 @@
 
 ### 2026-04-24
 - Write the result of research (SHAP interpretation (Global Explanation))
+
+### 2026-04-28
+- Write the result of research (SHAP interpretation (Local Explanation))
+- Change column name blog code waterfall plot
