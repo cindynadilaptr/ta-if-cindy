@@ -133,3 +133,7 @@
 ### 2026-04-28
 - Write the result of research (SHAP interpretation (Local Explanation))
 - Change column name blog code waterfall plot
+
+### 2026-05-04
+- Reviewing chapter 4 
+- Add train and validation graphic to see tuning process
