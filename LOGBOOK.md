@@ -137,3 +137,6 @@
 ### 2026-05-04
 - Reviewing chapter 4 
 - Add train and validation graphic to see tuning process
+
+### 2026-05-07
+- Reviewing chapter 4 

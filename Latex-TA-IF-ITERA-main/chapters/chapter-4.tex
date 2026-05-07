@@ -1,80 +1,3 @@
-\newpage
-\chapter{HASIL DAN PEMBAHASAN} \label{Bab IV}
-
-\section{Hasil Penelitian} \label{IV.Hasil}
-Berisi hasil penelitian berdasarkan rancangan yang sudah dijelaskan pada Bab \ref{Bab III}, terutama dari Subbab \ref{III.Metode}. Bagi yang membuat alat, jelaskan alat yang jadi dalam bentuk apa. Bagi yang membuat aplikasi, jelaskan aplikasi yang jadi dalam bentuk seperti apa. Jabarkan dalam bentuk pseudocode dan dijelaskan per bagian kodenya. Gunakan gambar dan tabel sebagai alat bantu menjelaskan hasil. \par
-
-Contoh implementasi kode dapat ditulis menggunakan \verb|\begin{lstlisting}|. Contoh kode dapat dilihat pada Kode \ref{code:4.contoh}. \par
-% Menulis blok kode
-\begin{lstlisting}[caption={Akuisisi Gambar}, label={code:4.contoh}]
-def process_dataset(dataset_path):
-	image_files = glob(os.path.join(dataset_path, '*.png'))
-	image_files.sort()
-	for image_file in image_files:
-		frame = cv2.imread(image_file)
-		if frame is None:
-			continue
-		frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-		cv2.imshow('Frame', frame)
-		if cv2.waitKey(1) & 0xFF == ord('q'):
-			break
-	cv2.destroyAllWindows()
-def main():
-	datasets = get_all_dataset_folders(DATASET_ROOT)
-	for dataset in datasets:
-		process_dataset(dataset)
-		print("print string")
-\end{lstlisting}
-
-\section{Hasil Pengujian} \label{IV.Hasil_Uji}
-Berikan hasil pengujian berdasarkan rancangan \& skenario yang sudah direncanakan sebelumnya pada Subbab \ref{III.Rancang_Uji}. \par
-
-\begin{longtable}{|c|c|c|c|c|c|c|c|c|}
-	\caption{Data \textit{dummy} Pengujian}
-	\label{table:4.dummy}\\
-	\hline
-	\multirow{2}{*}{\textbf{Subjek}} & \multicolumn{7}{|c|}{\textbf{Hasil Prediksi (BPM)}} & \multirow{2}{*}{\textbf{GT}} \\ \cline{2-8}
-	& \textbf{F} & \textbf{NA} & \textbf{NO} & \textbf{RC} & \textbf{LC} & \textbf{M} & \textbf{C} & \\ 
-	\hline
-	\endfirsthead
-	\hline
-	\multirow{2}{*}{\textbf{Subjek}} & \multicolumn{7}{|c|}{\textbf{Hasil Prediksi (BPM)}} & \multirow{2}{*}{\textbf{GT}} \\ \cline{2-8}
-	& \textbf{F} & \textbf{NA} & \textbf{NO} & \textbf{RC} & \textbf{LC} & \textbf{M} & \textbf{C} & \\ 
-	\hline
-	\endhead
-	\hline
-	\endfoot
-	\hline
-	\endlastfoot
-	1 & 68 & 69 & 68 & 70 & 68 & 71 & 69 & 68 \\ 
-	\hline
-	2 & 69 & 69 & 68 & 70 & 68 & 71 & 69 & 69 \\
-	\hline
-	3 & 70 & 70 & 69 & 71 & 68 & 73 & 69 & 70\\
-	\hline
-	4 & 71 & 70 & 70 & 72 & 69 & 73 & 70 & 71 \\
-	\hline
-	5 & 72 & 72 & 70 & 72 & 70 & 74 & 70 & 72 \\
-\end{longtable}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.7\textwidth]{figure/zeta.png}
-	\caption{Contoh Graf Pengujian}
-	\label{fig:4.graf}
-\end{figure}
-
-\section{Analisis Hasil Penelitian} \label{IV.Analisis}
-Berikan analisis hasil penelitian \& pengujian, berupa data yang didapatkan dari penelitian \& pengujian Tugas Akhir yang sudah anda kerjakan. Gunakan gambar dan tabel sebagai alat bantu menjelaskan analisis hasil. Data luaran penelitian yang dapat dianalisis berupa: \par
-\begin{enumerate}[noitemsep]
-	\item Hasil pengujian
-	\item Hasil kuesioner
-	\item Aplikasi yang dikembangkan
-\end{enumerate}
-Analisis dapat membandingkan dengan hasil penelitian sebelumnya yang memiliki kemiripan topik. \par
-
-
-\newpage
 \chapter{HASIL DAN PEMBAHASAN} \label{Bab IV}
 
 \section{Hasil Penelitian} \label{IV.Hasil}
@@ -326,7 +249,7 @@ Analisis sebaran frekuensi data target selanjutnya dijabarkan melalui bentuk his
 Identifikasi hubungan linear antarvariabel diekstraksi menggunakan matriks korelasi \textit{Pearson} berbentuk \textit{heatmap} seperti yang tertera pada Gambar \ref{fig:eda_heatmap}. Baris pertama pada matriks tersebut secara spesifik memetakan nilai korelasi 15 kandidat fitur teratas terhadap variabel target prevalensi \textit{stunting}. Hasil perhitungan matematis menunjukkan hubungan positif yang sangat kuat dengan indikator malnutrisi lain, yakni \textit{underweight} (0,93) dan \textit{wasting} (0,78). Pada kategori fasilitas kesehatan dan lingkungan, fitur ketidaklengkapan pemeriksaan ANC K6 (0,61) serta risiko akses sanitasi (0,58) memegang peranan korelatif tertinggi. Temuan pola hubungan kuantitatif ini memberikan landasan objektif yang kuat untuk tahapan seleksi fitur sebelum masuk ke proses pemodelan.
 
 \subsubsection{Penanganan \textit{Missing Value}}
-Tahap penanganan \textit{missing value} dilakukan untuk memastikan integritas data sebelum memasuki fase pemodelan. Berdasarkan hasil inspeksi pada data mentah SSGI 2024, ditemukan kekosongan data yang masif pada Provinsi Papua Tengah dan Papua Pegunungan sebagai wilayah pemekaran baru. Karena ketiadaan data tersebut bersifat struktural pada level observasi, metode \textit{listwise deletion} diterapkan dengan menghapus kedua provinsi tersebut dari \textit{dataset}. Selain itu, baris agregat "Indonesia" juga dieliminasi karena bukan merupakan entitas provinsi independen. Langkah ini memastikan bahwa \textit{dataset} yang tersisa merupakan data lengkap tanpa memerlukan imputasi buatan. Implementasi kode dan ringkasan perubahan jumlah observasi ditunjukkan pada Kode 4.2 dan Tabel \ref{table:4.before_after_baris}.
+Tahap penanganan \textit{missing value} dilakukan untuk memastikan integritas data sebelum memasuki fase pemodelan. Berdasarkan hasil temuan pada data mentah SSGI 2024, ditemukan kekosongan data yang masif pada Provinsi Papua Tengah dan Papua Pegunungan sebagai wilayah pemekaran baru. Karena ketiadaan data tersebut bersifat struktural pada level observasi, metode \textit{listwise deletion} diterapkan dengan menghapus kedua provinsi tersebut dari \textit{dataset}. Selain itu, baris agregat "Indonesia" juga dieliminasi karena bukan merupakan entitas provinsi independen. Langkah ini memastikan bahwa \textit{dataset} yang tersisa merupakan data lengkap tanpa memerlukan imputasi buatan. Implementasi kode dan ringkasan perubahan jumlah observasi ditunjukkan pada Kode 4.2 dan Tabel \ref{table:4.before_after_baris}.
 
 \begin{lstlisting}[language=Python, title={\textbf{Kode 4.2} Penghapusan Observasi dan Validasi \textit{Missing Value}}, label={code:missing_value}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 # 1. Menghapus baris provinsi dengan data kosong dan agregat nasional
@@ -437,7 +360,9 @@ print("Dimensi y:", y.shape) # (36,)
 Setelah melalui serangkaian tahapan pra-pemrosesan data, langkah selanjutnya adalah pengembangan algoritma untuk memprediksi angka prevalensi \textit{stunting}. Mengacu pada alur penelitian, rangkaian proses pengembangan model dibagi menjadi tiga tahapan utama, mulai dari pencarian parameter optimal (\textit{hyperparameter tuning}), pelatihan model secara utuh (\textit{fitting}), hingga diakhiri dengan evaluasi performa model. Adapun proses-proses tersebut dijabarkan sebagai berikut.
 
 \subsubsection{\textit{Hyperparameter Tuning} Berbasis \textit{Cross Validation}}
-Mengingat dimensi \textit{dataset} penelitian yang tergolong kecil (36 observasi), pembagian data latih (\textit{training}) dan data uji (\textit{testing}) konvensional berisiko menghasilkan variansi bias yang tinggi. Oleh karena itu, pendekatan LOOCV diterapkan. Model dilatih sebanyak 36 kali, di mana pada setiap iterasinya, 35 data digunakan untuk pelatihan dan 1 data ditinggalkan untuk pengujian. Bersamaan dengan proses ini, dilakukan pencarian parameter terbaik menggunakan \textit{Grid Search} terhadap 108 kombinasi parameter \textit{Random Forest Regressor}. Evaluasi difokuskan untuk menekan nilai \textit{Mean Absolute Error} (MAE). Proses komputasi iteratif ini dijabarkan pada Kode 4.5.
+Tahapan \textit{hyperparameter tuning} dilaksanakan dengan tujuan mengidentifikasi konfigurasi optimal pada model \textit{Random Forest Regressor} agar mampu menghasilkan performa prediksi yang stabil dan akurat. Mengingat dimensi \textit{dataset} penelitian yang tergolong kecil (36 observasi), pembagian data latih (\textit{training}) dan data uji (\textit{testing}) konvensional berisiko menghasilkan variansi bias yang tinggi. Oleh karena itu, pendekatan \textit{Leave-One-Out Cross-Validation} (LOOCV) diterapkan. Pada skema ini, model dilatih sebanyak 36 kali, di mana pada setiap iterasinya, 35 data digunakan untuk pelatihan dan 1 data ditinggalkan untuk pengujian. Bersamaan dengan proses ini, dilakukan pencarian parameter terbaik menggunakan \textit{Grid Search} terhadap 108 kombinasi parameter. Evaluasi kinerja difokuskan untuk menekan nilai \textit{Mean Absolute Error} (MAE).
+
+Secara konseptual, tahapan pencarian parameter melalui skema LOOCV ini merupakan fase di mana proses pelatihan (\textit{training}), validasi (\textit{validation}), dan pengujian (\textit{testing}) dieksekusi secara serentak di dalam satu siklus iterasi terintegrasi. Melalui pendekatan ini, evaluasi performa model dapat dilakukan secara menyeluruh terhadap data yang disembunyikan (\textit{unseen data}) pada setiap iterasinya tanpa memerlukan pemisahan proporsi data di awal, sehingga representasi informasi penting dari keseluruhan populasi sampel tetap terjaga. Rincian proses komputasi iteratif beserta ekstraksi matriks evaluasi pada tahapan ini dijabarkan pada Kode 4.5.
 
 \begin{lstlisting}[language=Python, title={\textbf{Kode 4.5} Pelaksanaan LOOCV, \textit{Grid Search}, dan Ekstraksi Evaluasi}, label={code:tuning}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 from sklearn.model_selection import GridSearchCV, LeaveOneOut
@@ -508,7 +433,7 @@ Hasil komputasi dari pencarian parameter optimal secara komprehensif direpresent
 \end{figure}
 
 \subsubsection{Pelatihan Model Final}
-Parameter optimal yang diperoleh dari proses \textit{tuning} dikonfigurasi ke dalam algoritma \textit{Random Forest Regressor} yang baru. Model final ini kemudian dilatih kembali (\textit{retrain}) menggunakan keseluruhan 36 baris \textit{dataset} untuk mendapatkan pola pemetaan variabel fitur secara maksimal. Setelah model berhasil dilatih, dilakukan prediksi nilai prevalensi \textit{stunting} guna membandingkan kedekatan nilai aktual target dengan nilai tebakan dari sistem. Rincian implementasi deklarasi model dan prediksi dapat dilihat pada Kode 4.6. Selanjutnya, sintaksis untuk memvisualisasikan sebaran kedekatan tersebut ditunjukkan pada Kode 4.7, dengan hasil komparasi aktual-prediksi dicatat pada Tabel \ref{table:4.komparasi_prediksi} dan Gambar \ref{fig:visualisasi_prediksi}.
+Setelah konfigurasi parameter terbaik berhasil diidentifikasi pada tahapan sebelumnya, proses dilanjutkan dengan pembentukan model final. Parameter optimal yang diperoleh dari proses \textit{tuning} tersebut kemudian dikonfigurasikan ke dalam algoritma \textit{Random Forest Regressor} yang baru. Model final ini dilatih kembali (\textit{retrain}) menggunakan keseluruhan 36 baris \textit{dataset} populasi untuk mendapatkan pola pemetaan variabel fitur secara maksimal tanpa adanya reduksi sampel. Setelah model berhasil dilatih secara utuh, dilakukan prediksi terhadap nilai prevalensi \textit{stunting} guna membandingkan kedekatan antara nilai target aktual dengan nilai tebakan dari sistem. Rincian implementasi deklarasi model dan eksekusi prediksi dapat dilihat pada Kode 4.6. Selanjutnya, sintaksis komputasi untuk memvisualisasikan sebaran kedekatan tersebut ditunjukkan pada Kode 4.7, dengan hasil komparasi aktual-prediksi direpresentasikan pada Tabel \ref{table:4.komparasi_prediksi} dan Gambar \ref{fig:visualisasi_prediksi}.
 
 \begin{lstlisting}[language=Python, title={\textbf{Kode 4.6} Pelatihan Model dan Eksekusi Prediksi}, label={code:pelatihan_final}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import pandas as pd
@@ -563,6 +488,8 @@ pd.set_option('display.float_format', lambda x: '%.2f' % x)
     \hline
 \end{longtable}
 
+Rincian komparasi numerik pada Tabel \ref{table:4.komparasi_prediksi} tersebut memberikan gambaran awal mengenai tingkat simpangan yang dihasilkan oleh model final. Agar mempermudah observasi terhadap pola sebaran selisih data secara komprehensif, hasil perbandingan antara nilai prevalensi \textit{stunting} aktual dan tebakan prediksi divisualisasikan secara utuh pada Gambar \ref{fig:visualisasi_prediksi}. Representasi grafis ini memetakan kedekatan kedua nilai tersebut pada masing-masing dari 36 provinsi agar performa akurasi sistem dapat diinterpretasikan dengan lebih intuitif.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{figure/pred_act.png} 
@@ -571,7 +498,7 @@ pd.set_option('display.float_format', lambda x: '%.2f' % x)
 \end{figure}
 
 \section{Evaluasi Performa Model}
-Tahapan pengujian dilakukan untuk mengukur besaran tingkat kesalahan (\textit{error}) prediksi yang dihasilkan oleh model final. Pendekatan metrik yang digunakan mengacu pada perhitungan secara matematis antara nilai tebakan model (\texttt{y\_pred}) dan data realita (\texttt{y}). Metrik utama yang digunakan terdiri dari \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), \textit{R-squared} ($R^2$), dan \textit{Mean Absolute Percentage Error} (MAPE). Perhitungan sintaksis dieksekusi pada Kode 4.8, di mana hasil rangkumannya dicatat pada Tabel \ref{table:4.hasil_evaluasi}.
+Tahapan evaluasi dilakukan untuk mengukur besaran tingkat penyimpangan (\textit{error}) dan kesesuaian pola yang dihasilkan oleh model final terhadap keseluruhan populasi data. Sesuai dengan skema fase kedua, model final ini telah dilatih menggunakan 100\% observasi tanpa adanya data yang disembunyikan. Oleh karena itu, evaluasi pada tahap ini tidak bertujuan untuk menguji generalisasi pada data baru (\textit{testing}), melainkan untuk meninjau seberapa baik algoritma berhasil memetakan variabel fitur terhadap target aktualnya sebelum memasuki tahapan ekstraksi interpretasi SHAP. Pendekatan evaluasi dilakukan melalui perhitungan matematis antara nilai tebakan model (\texttt{y\_pred}) dan data realita (\texttt{y}). Metrik utama yang digunakan mencakup \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), \textit{R-squared} ($R^2$), dan \textit{Mean Absolute Percentage Error} (MAPE). Rincian sintaksis komputasi untuk kalkulasi metrik tersebut dieksekusi pada Kode 4.8, di mana hasil rangkumannya dicatat pada Tabel \ref{table:4.hasil_evaluasi}.
 
 \begin{lstlisting}[language=Python, title={\textbf{Kode 4.8} Perhitungan Metrik Evaluasi Regresi}, label={code:evaluasi}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
@@ -591,27 +518,27 @@ print(f"R-squared: {r2:.4f} | MAPE: {mape:.2f}%")
 Berdasarkan hasil evaluasi pada Tabel \ref{table:4.hasil_evaluasi}, model \textit{Random Forest} mampu merekam pola \textit{dataset} dengan nilai determinasi ($R^2$) sebesar 0,9090. Hal ini mengindikasikan bahwa model dapat menjelaskan 90,9\% variabilitas penyebab \textit{stunting} secara representatif. Di sisi lain, persentase deviasi prediksi yang ditunjukkan oleh nilai MAPE mencatatkan angka 7,22\%, yang mengklasifikasikan performa model ke dalam kategori akurat.
 
 \begin{longtable}{|c|p{0.55\textwidth}|c|}
-    \caption{Hasil Pengujian Performa Model Regresi Final}
+    \caption{Hasil Evaluasi Performa Model Regresi Final}
     \label{table:4.hasil_evaluasi}\\
     \hline
-    \centering\textbf{No} & \centering\textbf{Metrik Evaluasi} & \textbf{Skor} \tabularnewline 
+    \textbf{No} & \multicolumn{1}{c|}{\textbf{Metrik Evaluasi}} & \textbf{Skor} \tabularnewline 
     \hline
     \endfirsthead
     \hline
-    \centering\textbf{No} & \centering\textbf{Metrik Evaluasi} & \textbf{Skor} \tabularnewline 
+    \textbf{No} & \multicolumn{1}{c|}{\textbf{Metrik Evaluasi}} & \textbf{Skor} \tabularnewline 
     \hline
     \endhead
     \hline
     \endfoot
     \hline
     \endlastfoot
-    1 & \textit{Mean Absolute Error} (MAE) & \centering 1,40 \tabularnewline 
+    1 & \textit{Mean Absolute Error} (MAE) & 1,40 \tabularnewline 
     \hline
-    2 & \textit{Root Mean Squared Error} (RMSE) & \centering 1,77 \tabularnewline
+    2 & \textit{Root Mean Squared Error} (RMSE) & 1,77 \tabularnewline
     \hline
-    3 & \textit{R-Squared} ($R^2$) & \centering 0,9090 \tabularnewline
+    3 & \textit{R-Squared} ($R^2$) & 0,9090 \tabularnewline
     \hline
-    4 & \textit{Mean Absolute Percentage Error} (MAPE) & \centering 7,22\% \tabularnewline
+    4 & \textit{Mean Absolute Percentage Error} (MAPE) & 7,22\% \tabularnewline
     \hline
 \end{longtable}
 
@@ -622,15 +549,15 @@ Setelah semua tahapan pembuatan model dan pengujian selesai dilakukan, bagian in
 Tahap konfigurasi parameter membahas kecocokan hasil \textit{tuning} optimal yang sebelumnya telah dirangkum pada Tabel \ref{table:4.best_param}. Pemilihan nilai \textit{max\_depth} sebesar 5 menunjukkan bahwa pembatasan kedalaman pohon efektif untuk \textit{dataset} dengan jumlah observasi yang sedikit. Langkah ini dilakukan untuk mencegah algoritma menghafal data latih secara berlebihan. Selain itu, penggunaan parameter \textit{max\_features} berupa \textit{log2} memastikan setiap variabel memiliki kesempatan yang sama untuk dievaluasi pada tiap cabang pohon. Pengaturan ini membantu model agar belajar lebih baik dan terhindar dari masalah \textit{overfitting}.
 
 \subsection{Analisis Pola Prediksi \textit{Stunting} per Provinsi}
-Pola tebakan model dapat diamati melalui komparasi pada Tabel \ref{table:4.komparasi_prediksi} dan visualisasi \textit{scatter plot} pada Gambar \ref{fig:visualisasi_prediksi}. Secara umum, garis prediksi menunjukkan tren yang sejalan dengan nilai aslinya di sebagian besar wilayah. Namun, masih terdapat sedikit perbedaan estimasi pada provinsi dengan tingkat prevalensi terendah seperti Bali, dan tertinggi seperti Nusa Tenggara Timur. Hal ini wajar terjadi karena algoritma \textit{Random Forest} bekerja dengan cara mengambil nilai rata-rata (\textit{averaging}) dari banyak pohon keputusan. Cara kerja ini membuat prediksi model menjadi lebih stabil dan tidak mudah terpengaruh oleh data ekstrem (\textit{outlier}), sehingga hasilnya tetap berada pada batas yang masuk akal secara statistik.
+Pola tebakan model dapat diamati melalui komparasi pada Tabel \ref{table:4.komparasi_prediksi} dan visualisasi \textit{scatter plot} pada Gambar \ref{fig:visualisasi_prediksi}. Secara umum, garis prediksi menunjukkan tren yang sejalan dengan nilai aslinya di sebagian besar wilayah. Namun, masih terdapat sedikit perbedaan estimasi pada provinsi dengan tingkat prevalensi terendah seperti Bali, dan tertinggi seperti Nusa Tenggara Timur. Hal ini terjadi karena algoritma \textit{Random Forest} bekerja dengan cara mengambil nilai rata-rata (\textit{averaging}) dari banyak pohon keputusan. Cara kerja ini membuat prediksi model menjadi lebih stabil dan tidak mudah terpengaruh oleh data ekstrem (\textit{outlier}), sehingga hasilnya tetap berada pada batas yang masuk akal secara statistik.
 
 \subsection{Analisis Metrik Evaluasi}
-Kualitas model dalam mengenali pola data dikonfirmasi oleh hasil pengujian performa pada Tabel \ref{table:4.hasil_evaluasi}. Koefisien determinasi ($R^2$) sebesar 0,9090 menunjukkan bahwa variabel-variabel yang digunakan sudah mampu menjelaskan 90,9\% penyebab terjadinya \textit{stunting}. Selain itu, nilai MAPE sebesar 7,22\% berada di bawah batas toleransi kesalahan regresi, yaitu 10\%. Tingkat persentase kesalahan yang kecil ini membuktikan bahwa model sudah layak digunakan untuk kebutuhan estimasi angka prevalensi. Secara keseluruhan, algoritma menunjukkan hasil komputasi yang baik dalam memproses data SSGI 2024.
+Setelah meninjau sebaran kedekatan nilai prediksi secara visual pada tahapan sebelumnya, performa dari model referensi final perlu dikuantifikasi secara matematis menggunakan tolok ukur yang objektif. Kualitas model dalam mengenali pola data dikonfirmasi oleh perolehan matriks evaluasi pada Tabel \ref{table:4.hasil_evaluasi}. Skor \textit{Mean Absolute Error} (MAE) sebesar 1,40 mengindikasikan bahwa rata-rata selisih absolut antara tebakan sistem dengan realita prevalensi \textit{stunting} hanya terpaut sebesar 1,40\%. Nilai \textit{Root Mean Squared Error} (RMSE) sebesar 1,77, yang secara proporsional tidak terpaut jauh dari MAE, menunjukkan bahwa model cukup stabil dan terhindar dari penyimpangan residual yang ekstrem. Lebih lanjut, koefisien determinasi ($R^2$) sebesar 0,9090 membuktikan bahwa variabel prediktor yang digunakan secara kolektif mampu menjelaskan 90,9\% variansi prevalensi \textit{stunting}. Diperkuat dengan nilai \textit{Mean Absolute Percentage Error} (MAPE) sebesar 7,22\% yang berada di ambang batas sangat baik (di bawah 10\%), dapat disimpulkan bahwa model telah berhasil memetakan pola hubungan antar variabel secara komprehensif pada observasi populasi SSGI 2024.
 
-Nilai evaluasi yang didapatkan sudah memenuhi standar kelayakan. Namun, model prediksi ini memiliki batasan dalam hal transparansi. Algoritma berbasis \textit{ensemble} memiliki sifat kotak hitam (\textit{black-box}), sehingga proses pengambilan keputusannya tidak bisa dilihat secara langsung. Di sisi lain, diperlukan pemahaman mengenai fitur mana saja yang paling berpengaruh sebagai dasar rekomendasi penanganan \textit{stunting}. Oleh karena itu, tahapan analisis selanjutnya akan menggunakan metode SHAP. Metode ini berguna untuk membedah model dan melihat seberapa besar pengaruh dari masing-masing fitur secara lebih jelas.
+Meskipun algoritma telah menunjukkan tingkat kesesuaian (\textit{fitting}) yang tinggi, metrik tersebut merepresentasikan evaluasi pada data pelatihan secara utuh, sehingga model final ini difokuskan sebagai model referensi interpretasi, bukan dideklarasikan untuk ekstrapolasi atau estimasi pada data baru. Kendala utama dari algoritma berbasis \textit{ensemble} seperti \textit{Random Forest} adalah sifatnya yang \textit{black-box}, sehingga mekanisme internal pembobotan keputusannya tidak dapat diobservasi secara langsung. Di sisi lain, rumusan rekomendasi penanganan \textit{stunting} yang presisi membutuhkan transparansi mengenai determinan mana yang paling berpengaruh. Oleh karena itu, tahapan analisis selanjutnya dikhususkan untuk menguraikan model final tersebut menggunakan pendekatan \textit{SHapley Additive exPlanations} (SHAP) guna mengekstraksi besaran dan arah kontribusi dari masing-masing fitur secara saintifik dan transparan.
 
 \section{Interpretasi Model Menggunakan SHAP}
-Mengacu pada batasan algoritma \textit{Random Forest} yang bersifat kotak hitam, tahapan ini difokuskan pada interpretasi hasil prediksi menggunakan \textit{SHapley Additive exPlanations} (SHAP). Pendekatan ini digunakan untuk membedah besaran pengaruh dari masing-masing variabel independen terhadap angka prevalensi \textit{stunting}. Analisis SHAP dalam penelitian ini dibagi menjadi dua ruang lingkup, yaitu analisis skala global dan analisis skala lokal. Pembagian ini bertujuan untuk melihat gambaran besar faktor penentu di tingkat nasional, sekaligus mengamati alasan spesifik di balik hasil prediksi pada masing-masing provinsi.
+Mengacu pada batasan algoritma \textit{Random Forest} yang bersifat kotak hitam, tahapan ini difokuskan pada interpretasi hasil prediksi menggunakan SHAP. Pendekatan ini digunakan untuk mengetahui besaran pengaruh dari masing-masing variabel independen terhadap angka prevalensi \textit{stunting}. Analisis SHAP dalam penelitian ini dibagi menjadi dua ruang lingkup, yaitu analisis skala global dan analisis skala lokal. Pembagian ini bertujuan untuk melihat gambaran besar faktor penentu di tingkat nasional, sekaligus mengamati alasan spesifik di balik hasil prediksi pada masing-masing provinsi.
 
 Proses interpretasi diawali dengan menginisialisasi objek pembaca model (\textit{explainer}) ke dalam sistem. Karena \textit{Random Forest} merupakan algoritma yang dibangun dari sekumpulan pohon keputusan, pustaka SHAP menyediakan fungsi khusus berupa \texttt{TreeExplainer} untuk membaca struktur model tersebut secara efisien. Setelah model berhasil dibaca, sistem akan menghitung matriks nilai SHAP untuk mengukur seberapa besar dorongan atau tarikan setiap variabel terhadap hasil tebakan akhir. Rincian deklarasi algoritma SHAP beserta pengecekan dimensi \textit{output}-nya ditunjukkan pada Kode 4.9.
 
@@ -669,7 +596,7 @@ plt.show()
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{figure/feature_importance.png} 
+    \includegraphics[width=0.85\textwidth]{figure/feature_importance.png} 
     \caption{Rata-Rata Dampak Absolut Fitur terhadap \textit{Stunting} (\textit{SHAP Bar Plot})}
     \label{fig:shap_bar}
 \end{figure}
@@ -705,7 +632,13 @@ plt.show()
     }
 \end{table}
 
-Gambar \ref{fig:shap_bar} menunjukkan bahwa variabel \texttt{persen\_tidak\_memenuhi\_mmff} atau \textit{Minimum Milk Feeding Frequency} menjadi faktor yang paling dominan dalam model. Indikator ini merepresentasikan persentase balita non-ASI yang tidak mendapatkan asupan susu minimal dua kali dalam sehari. Selain itu, faktor usia ibu yang berisiko dan kurangnya \textit{Minimum Dietary Diversity} (MDD) atau variasi kelompok jenis makanan harian juga menempati posisi tiga besar. Temuan ini mengindikasikan bahwa pemenuhan frekuensi susu dan keberagaman gizi anak memiliki dampak yang lebih besar terhadap prevalensi \textit{stunting} dibandingkan variabel fasilitas kesehatan. Identifikasi peringkat ini menjadi landasan untuk melakukan analisis yang lebih mendalam pada tahapan distribusi arah pengaruh variabel selanjutnya.
+Visualisasi \textit{Global Feature Importance} pada Gambar \ref{fig:shap_bar} menunjukkan besaran rata-rata kontribusi absolut dari setiap variabel prediktor. Berdasarkan hasil ekstraksi SHAP, variabel \texttt{persen\_tidak\_memenuhi\_mmff} atau persentase balita non-ASI yang tidak mendapatkan asupan susu minimal dua kali sehari (\textit{Minimum Milk Feeding Frequency}) menempati peringkat pertama sebagai determinan paling dominan. Secara keilmuan gizi, susu merupakan sumber utama protein hewani, kalsium, dan faktor pertumbuhan esensial yang sangat krusial bagi pembentukan linear tulang anak pada masa 1000 Hari Pertama Kehidupan (HPK) [SITASI 1]. Defisiensi asupan ini secara langsung memicu malnutrisi kronis yang bermanifestasi menjadi \textit{stunting}.
+
+Faktor paling berpengaruh kedua dalam model adalah persentase kehamilan pada wanita dengan usia berisiko. Kehamilan pada usia yang belum matang secara biologis memicu terjadinya kompetisi pemenuhan nutrisi antara janin dengan tubuh ibu yang masih dalam tahap pertumbuhan. Kondisi ini secara signifikan meningkatkan probabilitas bayi lahir dengan Berat Badan Lahir Rendah (BBLR) serta panjang badan di bawah standar, yang merupakan prediktor kuat terjadinya \textit{stunting} di kemudian hari [SITASI 2]. 
+
+Selanjutnya, variabel \texttt{persen\_tidak\_memenuhi\_mdd} atau kurangnya \textit{Minimum Dietary Diversity} (MDD) menempati posisi ketiga. Hal ini menegaskan bahwa kuantitas frekuensi makan tidak akan optimal jika tidak diimbangi dengan keberagaman jenis pangan. Kegagalan memenuhi variasi kelompok makanan harian dapat menyebabkan anak mengalami \textit{hidden hunger} (kelaparan tersembunyi), yaitu defisiensi mikronutrien spesifik seperti zink, zat besi, dan vitamin A yang sangat vital bagi metabolisme dan pertumbuhan seluler [SITASI 3].
+
+Temuan dari algoritma ini memberikan wawasan (\textit{insight}) bahwa determinan proksimal yang berkaitan langsung dengan kualitas asupan gizi rumah tangga dan kesiapan biologis ibu memiliki bobot dampak yang lebih kuat terhadap prevalensi \textit{stunting} dibandingkan faktor infrastruktur atau fasilitas kesehatan. Akses terhadap fasilitas kesehatan cenderung bersifat sebagai faktor distal (tidak langsung), di mana keberadaannya tidak akan menurunkan angka \textit{stunting} secara optimal apabila akar permasalahan nutrisi harian tingkat individu tidak teratasi [SITASI 4]. Identifikasi peringkat ini menjadi landasan komprehensif untuk melakukan analisis yang lebih mendalam pada tahapan distribusi arah pengaruh variabel selanjutnya.
 
 \subsubsection{Arah dan Distribusi Dampak Fitur (\textit{Summary Plot})}
 Tahapan analisis selanjutnya difokuskan pada pengamatan arah pengaruh dari masing-masing variabel terhadap hasil keluaran model. Pemetaan arah distribusi ini dilakukan dengan mengeksekusi Kode 4.11 untuk menghasilkan visualisasi \textit{SHAP Summary Plot}. Hasil komputasi dari kode tersebut ditampilkan dalam bentuk grafik sebaran pada Gambar \ref{fig:shap_summary}. Karena visualisasi ini menggunakan urutan fitur yang identik dengan tahapan sebelumnya, pembaca dapat merujuk kembali pada Tabel 4.1 untuk melihat keterangan label. Grafik ini menggunakan parameter gradasi warna untuk merepresentasikan angka asli pada data, di mana merah berarti tinggi dan biru berarti rendah.
@@ -725,15 +658,15 @@ plt.show()
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{figure/summary.png} 
+    \includegraphics[width=0.85\textwidth]{figure/summary.png} 
     \caption{Arah dan Distribusi Dampak Fitur terhadap \textit{Stunting} (\textit{SHAP Summary Plot})}
     \label{fig:shap_summary}
 \end{figure}
 
-Berdasarkan Gambar \ref{fig:shap_summary}, terlihat jelas bagaimana tiga variabel utama memberikan dorongan kenaikan terhadap tebakan prevalensi model. Pada variabel \texttt{persen\_tidak\_memenuhi\_mmff}, sebaran titik berwarna merah mendominasi area di sebelah kanan garis tegak (nol). Pola serupa juga ditemukan secara konsisten pada variabel persentase usia ibu berisiko dan kurangnya pemenuhan MDD. Sebaran ini membuktikan bahwa semakin tinggi persentase masalah kelengkapan gizi dan risiko usia ibu, maka prediksi kasus \textit{stunting} di suatu wilayah akan bertambah. Hasil distribusi warna yang sejalan dengan teori kesehatan ini menandakan bahwa algoritma telah berhasil memetakan pola sebab-akibat dengan akurat.
+Berdasarkan Gambar \ref{fig:shap_summary}, terlihat bagaimana tiga variabel utama memberikan dorongan kenaikan terhadap tebakan prevalensi model. Pada variabel \texttt{persen\_tidak\_memenuhi\_mmff}, sebaran titik berwarna merah mendominasi area di sebelah kanan garis tegak (nol). Pola serupa juga ditemukan secara konsisten pada variabel persentase usia ibu berisiko dan kurangnya pemenuhan MDD. Sebaran ini membuktikan bahwa semakin tinggi persentase masalah kelengkapan gizi dan risiko usia ibu, maka prediksi kasus \textit{stunting} di suatu wilayah akan bertambah. Hasil distribusi warna yang sejalan dengan teori kesehatan ini menandakan bahwa algoritma telah berhasil memetakan pola sebab-akibat dengan akurat.
 
 \subsubsection{Analisis Ketergantungan Fitur (\textit{Dependence Plot})}
-Langkah terakhir dalam analisis skala global adalah membedah distribusi nilai dari lima variabel dengan peringkat tertinggi. Pendekatan ini dilakukan menggunakan visualisasi \textit{SHAP Dependence Plot} untuk mencari titik batas perubahan pengaruh pada masing-masing indikator. Eksekusi sintaksis perulangan untuk menghasilkan kelima grafik tersebut secara berurutan ditunjukkan pada Kode 4.12. Visualisasi yang dihasilkan kemudian dianalisis untuk melihat pada rentang angka berapa suatu variabel mulai merubah arah keputusan model. Penjelasan rincian dari setiap grafik dijabarkan pada paragraf-paragraf di bawah ini.
+Langkah terakhir dalam analisis skala global adalah menginterpretasikan distribusi nilai dari lima variabel dengan peringkat tertinggi. Pendekatan ini dilakukan menggunakan visualisasi \textit{SHAP Dependence Plot} untuk mencari titik batas perubahan pengaruh pada masing-masing indikator. Eksekusi sintaksis perulangan untuk menghasilkan kelima grafik tersebut secara berurutan ditunjukkan pada Kode 4.12. Visualisasi yang dihasilkan kemudian dianalisis untuk melihat pada rentang angka berapa suatu variabel mulai merubah arah keputusan model. Penjelasan rincian dari setiap grafik dijabarkan pada paragraf-paragraf di bawah ini.
 
 \begin{lstlisting}[language=Python, title={\textbf{Kode 4.12} Visualisasi Ketergantungan Lima Fitur Teratas}, label={code:shap_dependence}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import matplotlib.pyplot as plt
@@ -764,61 +697,71 @@ for feature in top5_features:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figure/dependence_mmff.png} 
+    \includegraphics[width=0.65\textwidth]{figure/dependence_mmff.png} 
     \caption{\textit{Dependence Plot} Variabel Persen Tidak Memenuhi MMFF}
     \label{fig:dep_mmff}
 \end{figure}
 
 Gambar \ref{fig:dep_mmff} menampilkan grafik ketergantungan untuk fitur persentase tidak memenuhi MMFF. Berdasarkan sebaran titik pada visualisasi tersebut, nilai SHAP berada secara stabil di area negatif saat angka observasi berada di bawah 22\%. Namun, terdapat lonjakan drastis yang menyeberangi sumbu nol menuju area positif ketika persentase fitur melampaui ambang batas 22\% hingga 25\%. Semakin nilai persentase menjauhi batas tersebut ke arah kanan, dorongan terhadap risiko prediksi \textit{stunting} menjadi semakin tinggi secara signifikan. Pola ini membuktikan bahwa kurangnya asupan susu pada balita non-ASI memiliki batas toleransi maksimal di kisaran 22\% sebelum memicu lonjakan kasus.
 
+Pola lonjakan risiko yang teridentifikasi setelah melewati ambang batas 22\% tersebut mengonfirmasi tingginya kerentanan biologis balita non-ASI terhadap defisiensi protein hewani secara komunal. Secara keilmuan gizi dan pediatri, susu merupakan substitusi krusial yang menyumbangkan asam amino esensial, kalsium, dan mineral fosfor bagi anak yang tidak lagi menerima Air Susu Ibu (ASI). Ketiadaan asupan profil asam amino yang adekuat secara persisten terbukti secara klinis menekan sekresi \textit{Insulin-like Growth Factor 1} (IGF-1), yakni hormon peptida spesifik yang paling bertanggung jawab dalam menstimulasi proliferasi kondrosit dan pemanjangan tulang linear pada masa balita [SITASI 25]. Lebih lanjut, transisi drastis nilai SHAP menuju area pendorong risiko positif ketika persentase wilayah melampaui batas toleransi tersebut merepresentasikan titik kegagalan kompensasi gizi populasi. Apabila tingkat deprivasi asupan susu bergeser menjadi fenomena yang masif, mekanisme pertahanan tubuh balita tidak lagi mampu menutupi defisit gizi absolut melalui sumber pangan alternatif harian, sehingga bermanifestasi menjadi hambatan pertumbuhan massal [SITASI 26]. Visualisasi presisi dari algoritma ini secara saintifik memvalidasi urgensi pemenuhan asupan susu minimal sebagai jaring pengaman nutrisi wajib untuk mencegah malnutrisi kronis pada kelompok anak pasca-penyapihan.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figure/dependence_usia_ibu.png} 
+    \includegraphics[width=0.65\textwidth]{figure/dependence_usia_ibu.png} 
     \caption{\textit{Dependence Plot} Variabel Persen Usia Ibu Berisiko}
     \label{fig:dep_usia_ibu}
 \end{figure}
 
 Visualisasi ketergantungan untuk persentase usia ibu berisiko ditunjukkan pada Gambar \ref{fig:dep_usia_ibu}. Grafik ini memperlihatkan pola lonjakan nilai SHAP yang tegas ketika angka asli fitur melewati ambang batas 14\%. Pada rentang persentase di bawah 14\%, dampak yang diberikan cenderung bernilai negatif atau menekan angka prediksi. Sebaliknya, ketika persentase wilayah menyentuh angka 15\% ke atas, hasil tebakan langsung mendapat dorongan positif yang memicu kenaikan prediksi. Karakteristik ini mengindikasikan bahwa intervensi pencegahan kehamilan pada usia berisiko sebaiknya diupayakan agar tidak melampaui batas 14\%.
 
+Lonjakan risiko yang teramati ketika prevalensi usia ibu berisiko melampaui batas kritis tersebut sejalan dengan kajian biologi reproduksi dan obstetri. Kehamilan pada usia reproduksi ekstrem, khususnya pada fase remaja (di bawah 20 tahun), memicu terjadinya kompetisi biologis dalam penyerapan nutrisi esensial antara tubuh ibu yang masih dalam masa pertumbuhan linear dengan janin yang sedang dikandung (\textit{maternal-fetal competition}). Kompetisi ini secara langsung membatasi aliran oksigen dan transfer mikronutrien melalui plasenta, yang berdampak pada tingginya probabilitas \textit{Intrauterine Growth Restriction} (IUGR) dan kelahiran bayi dengan Berat Badan Lahir Rendah (BBLR) [SITASI 23]. Di sisi lain, kehamilan pada kelompok usia lanjut (di atas 35 tahun) turut membawa risiko penurunan fungsi organ reproduksi dan insufisiensi plasenta yang secara sistemik menghambat laju pertumbuhan janin secara intrauterin [SITASI 24]. Transisi nilai perhitungan matematis menuju area pendorong risiko positif secara masif setelah melewati ambang batas 14\% membuktikan bahwa beban akumulasi kelahiran bayi dengan kerentanan fisik sejak lahir dapat menciptakan efek bola salju (\textit{snowball effect}) yang memperburuk angka prevalensi secara komunal. Temuan ini secara saintifik memvalidasi urgensi optimalisasi program edukasi kesehatan reproduksi dan perencanaan keluarga untuk menjaga persentase wilayah di bawah ambang batas toleransi algoritma tersebut.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figure/dependence_mdd.png} 
+    \includegraphics[width=0.65\textwidth]{figure/dependence_mdd.png} 
     \caption{\textit{Dependence Plot} Variabel Persen Tidak Memenuhi MDD}
     \label{fig:dep_mdd}
 \end{figure}
 
 Analisis ketergantungan untuk persentase balita tidak memenuhi MDD dapat diamati melalui sebaran titik pada Gambar \ref{fig:dep_mdd}. Indikator keberagaman makanan ini menunjukkan pola hubungan naik yang sejalan dengan peningkatan nilai aslinya. Titik kritis dari variabel ini terlihat secara jelas berada di sekitar angka 55\% ketika melewati sumbu nol. Semakin nilai persentase bergerak menjauhi ambang batas tersebut menuju angka 80\%, risiko prevalensi yang ditebak oleh model menjadi semakin tinggi. Pola distribusi ini menegaskan bahwa peningkatan masalah keberagaman asupan gizi secara proporsional akan menambah tinggi prediksi kasus di suatu wilayah.
 
+Pola peningkatan risiko yang berbanding lurus dengan tingginya ketiadaan keberagaman pangan ini sejalan dengan patofisiologi malnutrisi kronis pada anak. Secara keilmuan gizi, ketergantungan pada pola makan monoton yang umumnya hanya didominasi oleh sumber karbohidrat tunggal akan memicu terjadinya defisiensi mikronutrien esensial multisistemik atau \textit{hidden hunger}. Ketidakmampuan dalam memenuhi spektrum nutrisi dari berbagai kelompok pangan mengakibatkan tubuh kekurangan kofaktor vital seperti zink, zat besi, dan vitamin A yang bertugas meregulasi sintesis hormon pertumbuhan, pembelahan sel osteoblas, serta diferensiasi jaringan fungsional pembentuk tulang [SITASI 21]. Lebih lanjut, transisi arah tarikan nilai SHAP menjadi positif secara masif ketika melewati ambang batas 55\% mengindikasikan bahwa suatu wilayah akan kehilangan efek daya lenting gizi (\textit{nutritional resilience}) apabila lebih dari separuh populasi balitanya terjebak dalam krisis variasi asupan harian [SITASI 22]. Pemetaan matematis dari algoritma ini secara saintifik memvalidasi urgensi penganekaragaman konsumsi pangan berbasis sumber daya lokal sebagai strategi krusial dalam pencegahan \textit{stunting} primer.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figure/dependence_pmt.png} 
+    \includegraphics[width=0.65\textwidth]{figure/dependence_pmt.png} 
     \caption{\textit{Dependence Plot} Variabel Persen Tidak Dapat PMT}
     \label{fig:dep_pmt}
 \end{figure}
 
-Gambar \ref{fig:dep_pmt} membedah sebaran dampak dari variabel persentase sasaran yang tidak mendapatkan Pemberian Makanan Tambahan (PMT). Persebaran data pada visualisasi ini menunjukkan tarikan nilai SHAP yang tinggi saat angka asli fitur berada di bawah 85\%. Ketika persentase fitur mendekati rentang 90\% hingga 95\%, dampak variabel mulai melemah dan berpindah ke area nol hingga negatif. Karakteristik bentuk ini memperlihatkan dinamika kontribusi ketiadaan PMT yang tidak selalu lurus berbanding dengan prediksi hasil. Hasil pemetaan batas persentase ini memberikan informasi pendukung untuk mengevaluasi pemerataan bantuan PMT di wilayah observasi.
+Gambar \ref{fig:dep_pmt} menjelaskan sebaran dampak dari variabel persentase sasaran yang tidak mendapatkan Pemberian Makanan Tambahan (PMT). Persebaran data pada visualisasi ini menunjukkan tarikan nilai SHAP yang tinggi saat angka asli fitur berada di bawah 85\%. Ketika persentase fitur mendekati rentang 90\% hingga 95\%, dampak variabel mulai melemah dan berpindah ke area nol hingga negatif. Karakteristik bentuk ini memperlihatkan dinamika kontribusi ketiadaan PMT yang tidak selalu lurus berbanding dengan prediksi hasil. Hasil pemetaan batas persentase ini memberikan informasi pendukung untuk mengevaluasi pemerataan bantuan PMT di wilayah observasi.
+
+Terdapat situasi non-linear yang ditangkap oleh model ini merepresentasikan karakteristik program Pemberian Makanan Tambahan (PMT) yang sejatinya berfungsi sebagai intervensi gizi spesifik yang bersifat kuratif dan komplementer, bukan sebagai substitusi asupan gizi harian. Secara keilmuan gizi kesehatan masyarakat, tingginya lonjakan risiko pada rentang ketiadaan PMT di bawah 85\% mengindikasikan bahwa pada tingkat tersebut, kelompok rentan sangat bergantung pada suplementasi eksternal untuk menutup defisit makronutrien (\textit{energy-protein gap}) yang tidak mampu terpenuhi secara mandiri oleh rumah tangga [SITASI 19]. Namun, ketika persentase ketiadaan bantuan menyentuh skala ekstrem (90\% hingga 95\%), daya ungkit variabel ini cenderung melemah dan terdistraksi. Hal ini secara epidemiologis dapat dijelaskan oleh pergeseran dominasi faktor determinan. Wilayah dengan tingkat kegagalan intervensi setinggi itu umumnya berhadapan dengan kerusakan sistemik pada infrastruktur kesehatan dan ketahanan pangan dasar. Dalam kondisi krisis multisektoral tersebut, keparahan prevalensi \textit{stunting} lebih didikte secara langsung oleh ketiadaan asupan pokok absolut harian (seperti MDD dan MMFF) maupun keparahan infeksi lingkungan, sehingga ketiadaan PMT tidak lagi menjadi variabel penentu utama yang membedakan peningkatan risiko di dalam algoritma [SITASI 20]. Dinamika matematis ini memvalidasi hipotesis bahwa efektivitas PMT sangat bergantung pada ketepatan sasaran distribusi (\textit{targeting accuracy}) di tengah kondisi ketahanan pangan yang bervariasi.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\textwidth]{figure/dependence_sanitasi.png} 
+    \includegraphics[width=0.65\textwidth]{figure/dependence_sanitasi.png} 
     \caption{\textit{Dependence Plot} Variabel Persen Akses Sanitasi Berisiko}
     \label{fig:dep_sanitasi}
 \end{figure}
 
-Grafik ketergantungan kelima yang membedah persentase akses sanitasi berisiko ditampilkan pada Gambar \ref{fig:dep_sanitasi}. Distribusi titik data pada sumbu vertikal memperlihatkan kecenderungan pergerakan naik secara berkelanjutan. Variabel sanitasi mulai memberikan sumbangsih positif terhadap peningkatan prediksi \textit{stunting} ketika angkanya melewati batas kritis 10\%. Pada persentase di bawah angka batas tersebut, nilai perhitungan SHAP berada di area negatif yang mendeskripsikan penurunan angka tebakan. Pemetaan dari model ini membuktikan bahwa wilayah observasi perlu menekan persentase ketiadaan akses sanitasi layak di bawah batas 10\%.
+Grafik ketergantungan kelima yang menjelaskan persentase akses sanitasi berisiko ditampilkan pada Gambar \ref{fig:dep_sanitasi}. Distribusi titik data pada sumbu vertikal memperlihatkan kecenderungan pergerakan naik secara berkelanjutan. Variabel sanitasi mulai memberikan sumbangsih positif terhadap peningkatan prediksi \textit{stunting} ketika angkanya melewati batas kritis 10\%. Pada persentase di bawah angka batas tersebut, nilai perhitungan SHAP berada di area negatif yang mendeskripsikan penurunan angka tebakan. Pemetaan dari model ini membuktikan bahwa wilayah observasi perlu menekan persentase ketiadaan akses sanitasi layak di bawah batas 10\%.
+
+Korelasi linear antara ketiadaan fasilitas sanitasi yang layak dengan peningkatan risiko \textit{stunting} secara langsung berkaitan dengan tingginya paparan patogen lingkungan. Secara kajian kesehatan masyarakat, tingginya proporsi akses sanitasi berisiko memfasilitasi transmisi patogen fekal-oral yang memicu penyakit infeksi enterik berulang serta \textit{Environmental Enteric Dysfunction} (EED). Peradangan kronis pada saluran pencernaan akibat EED mengakibatkan atrofi vili usus, sehingga memicu malabsorpsi nutrisi esensial yang sejatinya sangat dibutuhkan untuk proses osteogenesis atau pembentukan tulang [SITASI 17]. Lebih lanjut, terbentuknya ambang batas kritis pada angka 10\% mengindikasikan berlakunya konsep perlindungan kelompok (\textit{herd protection}) dalam ekologi kesehatan lingkungan. Apabila persentase rumah tangga tanpa sanitasi layak melampaui batas toleransi tersebut, tingkat akumulasi kontaminasi patogen pada sumber air dan tanah akan mencapai beban paparan yang terlalu masif untuk dinetralisasi oleh sistem imun balita [SITASI 18]. Pemetaan ambang batas dari algoritma ini secara saintifik memvalidasi urgensi pemerataan infrastruktur sanitasi dasar sebagai prasyarat wajib agar intervensi gizi yang diberikan dapat diserap secara optimal oleh tubuh anak.
 
 \subsection{Interpretasi Lokal (\textit{Local Explanation})}
-Analisis skala lokal bertujuan untuk membedah proses pengambilan keputusan algoritma pada satu observasi data yang spesifik. Berbeda dengan pendekatan global yang memetakan tren secara keseluruhan, tahapan ini berfokus pada faktor-faktor pendorong hasil tebakan pada kasus tunggal. Pendekatan ini berguna untuk memahami alasan di balik tingginya atau rendahnya prediksi prevalensi \textit{stunting} pada sampel wilayah tertentu. Visualisasi pada tahap ini akan menampilkan bagaimana masing-masing variabel berkontribusi secara rinci dalam menambah atau menekan nilai dasar model. Hasil interpretasi dari observasi tunggal ini kemudian dapat diuraikan sebagai rujukan evaluasi khusus bagi wilayah yang bersangkutan.
+Analisis skala lokal bertujuan untuk menjelaskan proses pengambilan keputusan algoritma pada satu observasi data yang spesifik. Berbeda dengan pendekatan global yang memetakan tren secara keseluruhan, tahapan ini berfokus pada faktor-faktor pendorong hasil tebakan pada kasus tunggal. Pendekatan ini berguna untuk memahami alasan di balik tingginya atau rendahnya prediksi prevalensi \textit{stunting} pada sampel wilayah tertentu. Visualisasi pada tahap ini akan menampilkan bagaimana masing-masing variabel berkontribusi secara rinci dalam menambah atau menekan nilai dasar model. Hasil interpretasi dari observasi tunggal ini kemudian dapat diuraikan sebagai rujukan evaluasi khusus bagi wilayah yang bersangkutan.
 
 \subsubsection{Kriteria Pemilihan Sampel Wilayah}
 Sebelum melakukan ekstraksi visualisasi \textit{Local Explanation}, tahap penentuan sampel observasi perlu dilakukan agar analisis lebih terarah. Pemilihan sampel provinsi pada penelitian ini menggunakan teknik \textit{purposive sampling} yang didasarkan pada enam kriteria kondisi demografis dan tingkat prevalensi. Keenam sampel tersebut dirancang untuk merepresentasikan berbagai variasi keadaan yang memengaruhi hasil tebakan algoritma secara spesifik. Melalui variasi observasi ini, model diharapkan mampu menunjukkan perbedaan pola pengambilan keputusan pada setiap kasus secara transparan.
 
-Kriteria pertama difokuskan pada kedekatan geografis dan keterwakilan regional Pulau Sumatera sebagai lokasi institusi tempat penelitian ini dilakukan. Provinsi Lampung dipilih sebagai representasi wilayah utama karena merupakan domisili pelaksanaan penelitian di Institut Teknologi Sumatera. Selain Lampung, Provinsi Aceh dan Sumatera Utara turut dipilih untuk mewakili karakteristik regional Sumatera masing-masing sebagai wilayah dengan angka prevalensi tertinggi dan populasi terpadat di pulau tersebut. Peninjauan khusus pada ketiga provinsi ini bertujuan untuk memberikan kontribusi akademis yang relevan terhadap identifikasi masalah kesehatan di wilayah Sumatera.
+Kriteria pertama difokuskan pada kedekatan geografis dan keterwakilan regional Pulau Sumatera sebagai lokasi institusi tempat penelitian ini dilakukan. Provinsi Lampung dipilih sebagai representasi wilayah utama karena merupakan domisili pelaksanaan penelitian di Institut Teknologi Sumatera. Selain Lampung, Provinsi Aceh dan Sumatera Utara turut dipilih untuk mewakili karakteristik regional Sumatera masing-masing, yakni sebagai wilayah dengan angka prevalensi \textit{stunting} tertinggi dan wilayah dengan populasi terpadat di pulau tersebut yang mencapai lebih dari 15,4 juta jiwa [SITASI 1]. Peninjauan khusus pada ketiga provinsi ini bertujuan untuk memberikan kontribusi akademis yang relevan terhadap identifikasi dan penanganan masalah kesehatan di wilayah Sumatera.
 
-Kriteria selanjutnya mencakup pemilihan provinsi yang memegang rekor ekstrem pada skala nasional untuk melihat respons model terhadap kondisi data yang kontras. Analisis pada wilayah dengan prevalensi tertinggi secara nasional bertujuan untuk menemukan pemicu utama krisis gizi, sementara wilayah dengan angka terendah berfungsi sebagai pembanding keberhasilan intervensi. Provinsi dengan populasi penduduk terpadat di tingkat nasional juga disertakan untuk meninjau dampak persaingan akses sumber daya terhadap hasil prediksi. Penggabungan sampel regional dan nasional ini ditujukan agar visualisasi skala lokal dapat memberikan gambaran yang menyeluruh mengenai kinerja model \textit{machine learning}.
+Kriteria selanjutnya mencakup pemilihan provinsi yang memegang rekor ekstrem pada skala nasional untuk melihat respons model terhadap kondisi data yang kontras. Analisis pada wilayah dengan prevalensi tertinggi secara nasional, yakni Provinsi Nusa Tenggara Timur (NTT) dengan angka \textit{stunting} mencapai 37,0\% [SITASI 2], bertujuan untuk menemukan pemicu utama krisis gizi. Sementara itu, Provinsi Bali yang berhasil menekan prevalensi hingga menyentuh angka terendah secara nasional sebesar 8,7\% [SITASI 3] berfungsi sebagai pembanding keberhasilan intervensi. Provinsi Jawa Barat sebagai wilayah dengan populasi penduduk terpadat di tingkat nasional yang menembus lebih dari 50,4 juta jiwa [SITASI 4] juga disertakan untuk meninjau dampak persaingan akses sumber daya terhadap hasil prediksi. Penggabungan sampel regional dan nasional ini ditujukan agar visualisasi skala lokal dapat memberikan gambaran yang menyeluruh mengenai kinerja model \textit{machine learning}.
 
 \subsubsection{Analisis Skala Lokal (\textit{Waterfall Plot})}
-Tahapan interpretasi skala lokal dilakukan dengan mengeksekusi visualisasi \textit{SHAP Waterfall Plot} untuk membedah data observasi secara spesifik. Proses komputasi ini bertujuan untuk menguraikan kontribusi masing-masing variabel dalam mendorong atau menekan nilai rata-rata dasar prediksi model (\textit{base value}) yang berada pada angka 22,375. Implementasi ekstraksi grafik untuk seluruh provinsi secara otomatis beserta proses penyimpanannya ditunjukkan pada Kode 4.13. Berdasarkan hasil pemrosesan tersebut, analisis mendalam difokuskan pada enam provinsi yang telah ditetapkan melalui kriteria \textit{purposive sampling} sebelumnya. Rincian penjabaran kontribusi fitur penentu \textit{stunting} untuk keenam sampel wilayah tersebut diuraikan sebagai berikut.
+Tahapan interpretasi skala lokal dilakukan dengan mengeksekusi visualisasi \textit{SHAP Waterfall Plot} untuk menginterpretasikan data observasi secara spesifik. Proses komputasi ini bertujuan untuk menguraikan kontribusi masing-masing variabel dalam mendorong atau menekan nilai rata-rata dasar prediksi model (\textit{base value}) yang berada pada angka 22,375. Implementasi ekstraksi grafik untuk seluruh provinsi secara otomatis beserta proses penyimpanannya ditunjukkan pada Kode 4.13. Berdasarkan hasil pemrosesan tersebut, analisis mendalam difokuskan pada enam provinsi yang telah ditetapkan melalui kriteria \textit{purposive sampling} sebelumnya. Rincian penjabaran kontribusi fitur penentu \textit{stunting} untuk keenam sampel wilayah tersebut diuraikan sebagai berikut.
 
 \begin{lstlisting}[language=Python, title={\textbf{Kode 4.13} Visualisasi dan Ekstraksi \textit{Waterfall Plot} Seluruh Provinsi}, label={code:waterfall_all}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 # SHAP waterfall plot value for a specific province
@@ -865,6 +808,7 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
         \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Lampung}
         \label{fig:wf_lampung}
     \end{figure}
+
     Visualisasi pada Gambar \ref{fig:wf_lampung} menampilkan distribusi pengaruh fitur untuk Provinsi Lampung dengan hasil tebakan akhir sebesar 18,63. Penurunan dari nilai dasar ini didominasi secara penuh oleh kontribusi negatif (warna biru) dari mayoritas indikator kesehatan. Faktor sasaran balita tidak dapat PMT, risiko akses sanitasi, dan persentase usia ibu berisiko menjadi variabel teratas yang menekan angka prevalensi. Tarikan searah tanpa adanya perlawanan balok merah ini mengindikasikan bahwa fasilitas kesehatan dasar di wilayah Lampung secara umum sudah cukup menekan potensi lonjakan kasus \textit{stunting}.
 
     \item Provinsi Aceh (Prevalensi Tertinggi Regional Sumatera)
@@ -874,6 +818,7 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
         \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Aceh}
         \label{fig:wf_aceh}
     \end{figure}
+
     Observasi skala lokal untuk Provinsi Aceh memproyeksikan tebakan model yang melonjak tinggi menuju angka 26,301. Berdasarkan Gambar \ref{fig:wf_aceh}, peningkatan ini didorong kuat oleh sekumpulan balok merah yang mempresentasikan nilai positif terhadap prediksi risiko. Variabel kurangnya pemenuhan MMFF dan jarangnya pemantauan pertumbuhan balita menjadi pemicu utama dengan kontribusi dorongan terbesar. Tingginya tumpukan fitur pembawa risiko ini merepresentasikan akar permasalahan gizi yang memerlukan intervensi segera di wilayah tersebut.
 
     \item Provinsi Sumatera Utara (Populasi Terpadat Regional Sumatera)
@@ -883,6 +828,7 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
         \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Sumatera Utara}
         \label{fig:wf_sumut}
     \end{figure}
+
     Dinamika kontribusi yang saling mengimbangi terlihat pada grafik distribusi Provinsi Sumatera Utara di Gambar \ref{fig:wf_sumut}. Prediksi model untuk wilayah ini berakhir pada angka 22,501, yang sangat mendekati nilai rata-rata dasar prediksi nasional. Penekanan risiko oleh variabel pemenuhan MAD dan usia ibu berisiko mendapat perlawanan dari dorongan risiko akibat indikator tidak KB pasca salin dan imunisasi PCV yang tidak lengkap. Keseimbangan antara balok penekan dan pendorong ini menggambarkan kompleksitas tantangan fasilitas kesehatan di wilayah dengan padat penduduk.
 
     \item Provinsi Nusa Tenggara Timur (Prevalensi Tertinggi Nasional)
@@ -892,7 +838,8 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
         \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Nusa Tenggara Timur}
         \label{fig:wf_ntt}
     \end{figure}
-    Gambar \ref{fig:wf_ntt} membedah secara ekstrem pemicu di balik rekor prevalensi tertinggi secara nasional di Provinsi Nusa Tenggara Timur. Model menghasilkan tebakan akhir yang sangat tinggi di angka 33,815 dengan grafik yang didominasi oleh pergerakan balok merah secara masif. Kurangnya asupan susu (MMFF) dan minimnya pemantauan pertumbuhan memberikan sumbangsih penambahan risiko terbesar, masing-masing sebesar +1,0. Identifikasi tumpukan pendorong arah positif ini menegaskan keparahan krisis kelengkapan gizi dasar dan fasilitas pemantauan anak di wilayah tersebut.
+
+    Gambar \ref{fig:wf_ntt} menjelaskan secara ekstrem pemicu di balik rekor prevalensi tertinggi secara nasional di Provinsi Nusa Tenggara Timur. Model menghasilkan tebakan akhir yang sangat tinggi di angka 33,815 dengan grafik yang didominasi oleh pergerakan balok merah secara masif. Kurangnya asupan susu (MMFF) dan minimnya pemantauan pertumbuhan memberikan sumbangsih penambahan risiko terbesar, masing-masing sebesar +1,0. Identifikasi tumpukan pendorong arah positif ini menegaskan keparahan krisis kelengkapan gizi dasar dan fasilitas pemantauan anak di wilayah tersebut.
 
     \item Provinsi Bali (Prevalensi Terendah Nasional)
     \begin{figure}[H]
@@ -901,6 +848,7 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
         \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Bali}
         \label{fig:wf_bali}
     \end{figure}
+
     Sebagai representasi wilayah dengan angka kasus terendah, \textit{Waterfall Plot} Provinsi Bali pada Gambar \ref{fig:wf_bali} memperlihatkan pola sapuan biru yang sempurna. Prediksi akhir wilayah ini ditekan secara drastis hingga mencapai angka 12,565 tanpa adanya satu pun fitur utama yang memberi dorongan risiko. Keberagaman asupan makanan (MDD) dan efektivitas PMT menjadi indikator terkuat yang mengurangkan nilai prediksi dasar. Ketiadaan balok merah pada grafik ini mengonfirmasi kualitas standar keunggulan kesehatan ibu dan anak yang sangat baik di wilayah Bali.
 
     \item Provinsi Jawa Barat (Populasi Terpadat Nasional)
@@ -910,28 +858,6 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
         \caption{\textit{Waterfall Plot} Prediksi \textit{Stunting} Provinsi Jawa Barat}
         \label{fig:wf_jabar}
     \end{figure}
+    
     Analisis visualisasi untuk provinsi dengan populasi terpadat, yaitu Jawa Barat, dapat diamati melalui Gambar \ref{fig:wf_jabar}. Meskipun memiliki tekanan persaingan akses yang tinggi, model secara mengejutkan memprediksi penurunan angka prevalensi menuju nilai 17,755. Penurunan ini didorong secara konsisten oleh efektivitas program PMT dan kecukupan keberagaman pangan (MDD). Terdapat satu variabel yang memberikan dorongan risiko kecil, yakni masalah akses sanitasi berisiko, yang merupakan dampak logis dari kepadatan permukiman penduduk di wilayah tersebut.
 \end{enumerate}
-
-% ==========================================
-% SECTION 4.3: ANALISIS HASIL PENELITIAN
-% ==========================================
-\section{Analisis Hasil Penelitian} \label{IV.Analisis}
-
-\subsection{Interpretasi Global (\textit{Global Explanation})}
-\begin{itemize}
-    \item \textbf{Peringkat Variabel:} Analisis fitur paling determinan secara nasional menggunakan \textit{SHAP Bar Plot}.
-    \item \textbf{Arah Kontribusi:} Analisis \textit{SHAP Summary Plot} untuk melihat bagaimana kondisi variabel yang memburuk (titik merah) mendorong kenaikan angka \textit{stunting}.
-\end{itemize}
-
-\subsection{Interpretasi Lokal (\textit{Local Explanation})}
-\begin{itemize}
-    \item \textbf{Bedah Provinsi:} Analisis spesifik pada provinsi dengan prevalensi ekstrem menggunakan \textit{SHAP Waterfall Plot}.
-    \item \textbf{Mekanisme Prediksi:} Menjelaskan pergeseran dari nilai rata-rata nasional (\textit{Base Value}) menuju nilai prediksi akhir akibat dorongan faktor lokal (balok merah/biru).
-\end{itemize}
-
-\subsection{Pembahasan dan Rekomendasi Kebijakan}
-\begin{itemize}
-    \item \textbf{Kesesuaian Teori:} Konfirmasi temuan \textit{multiplier effect} antarvariabel \textit{stunting} dengan pedoman gizi Kementerian Kesehatan.
-    \item \textbf{Rekomendasi Spesifik:} Usulan intervensi kebijakan gizi yang tidak dipukul rata, melainkan disesuaikan dengan akar masalah terbesar di masing-masing provinsi berdasarkan \textit{Waterfall Plot}.
-\end{itemize}
