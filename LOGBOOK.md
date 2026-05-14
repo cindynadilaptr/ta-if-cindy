@@ -140,3 +140,7 @@
 
 ### 2026-05-07
 - Reviewing chapter 4 
+
+### 2026-05-14
+- Reviewing chapter 4 
+- Add citation for some analysis
