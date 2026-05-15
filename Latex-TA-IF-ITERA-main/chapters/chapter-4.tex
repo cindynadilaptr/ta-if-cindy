@@ -11,8 +11,6 @@ Dataset akhir yang digunakan dalam penelitian ini terdiri dari 38 baris yang mew
 \subsection{Persiapan Data}
 Laporan SSGI tahun 2024 disajikan dalam bentuk dokumen \textit{Portable Document Format} (PDF) yang memuat sekitar 5.189 tabel statistik yang berisi berbagai indikator kesehatan, gizi, serta kondisi sosial dan lingkungan. Data dalam laporan tersebut mencakup informasi terkait kesehatan ibu dan anak, pola asuh, akses layanan kesehatan, sanitasi, serta karakteristik demografi rumah tangga dengan fokus pada balita usia 0--59 bulan menggunakan pendekatan \textit{cross-sectional}. Meskipun data tersedia pada beberapa tingkat wilayah seperti nasional, provinsi, dan kabupaten/kota, penelitian ini hanya menggunakan tingkat provinsi sebagai unit analisis untuk melihat perbedaan determinan \textit{stunting} secara umum. Struktur data dalam bentuk laporan ini belum dapat langsung digunakan untuk pemodelan \textit{machine learning}, sehingga diperlukan proses pengolahan lebih lanjut. Oleh karena itu, kondisi awal dan karakteristik data sebelum dilakukan ekstraksi disajikan pada Tabel \ref{table:4.kondisi_awal}.
 
-\newpage
-
 \begin{longtable}{|c|p{0.3\textwidth}|p{0.5\textwidth}|}
     \caption{Kondisi Awal Dataset SSGI 2024}
     \label{table:4.kondisi_awal}\\
@@ -174,7 +172,7 @@ Tahapan pra-pemrosesan data bertujuan untuk mengubah \textit{dataset} mentah has
 \subsubsection{Eksplorasi Data (EDA)}
 Tahap \textit{Exploratory Data Analysis} (EDA) dilakukan untuk memahami karakteristik distribusi data, memastikan kesesuaian tipe variabel, serta mengidentifikasi pola hubungan antarfitur sebelum proses pemodelan. Analisis awal difokuskan pada variabel target, yaitu persentase prevalensi \textit{stunting}, di mana sebarannya divisualisasikan secara nasional untuk melihat ketimpangan antarwilayah. Hasil eksplorasi menunjukkan rentang prevalensi yang signifikan, dengan Provinsi Nusa Tenggara Timur mencatatkan angka tertinggi (37,0\%) dan Bali berada pada posisi terendah (8,6\%). Adapun secara distribusi frekuensi, visualisasi histogram menunjukkan bahwa mayoritas provinsi di Indonesia memiliki tingkat prevalensi yang terkonsentrasi pada rentang 15\% hingga 30\%. Selanjutnya, dilakukan perhitungan matriks korelasi \textit{Pearson} untuk meninjau hubungan linear antara 15 kandidat fitur teratas dengan variabel target. Analisis ini mengungkap adanya korelasi positif yang sangat kuat antara \textit{stunting} dengan kondisi fisik balita lainnya, seperti prevalensi \textit{underweight} (0,93), serta kaitannya dengan indikator pelayanan kesehatan. Rincian implementasi kode program, beserta grafik distribusi dan \textit{heatmap} korelasi yang dihasilkan dari tahapan ini, diuraikan berturut-turut pada Kode 4.1 serta urutan visualisasi pada Gambar \ref{fig:eda_barchart}, Gambar \ref{fig:eda_histogram}, dan Gambar \ref{fig:eda_heatmap}.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.1} Implementasi Kode Eksplorasi Data (EDA)}, label={code:eda_process}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Implementasi Kode Eksplorasi Data (EDA)}, label={code:eda_process}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -239,6 +237,8 @@ Visualisasi diagram batang pada Gambar \ref{fig:eda_barchart} merepresentasikan 
 
 Analisis sebaran frekuensi data target selanjutnya dijabarkan melalui bentuk histogram yang ditunjukkan pada Gambar \ref{fig:eda_histogram}. Kurva kepadatan pada grafik ini memperlihatkan pemusatan data (\textit{central tendency}) yang mendekati distribusi normal. Mayoritas provinsi di Indonesia memiliki tingkat prevalensi yang terkonsentrasi secara padat pada kelas interval 15\% hingga 25\%. Hanya terdapat sebagian kecil provinsi yang berada pada titik rentang ekstrem bawah maupun ekstrem atas. Pola distribusi ini mengonfirmasi bahwa masalah \textit{stunting} pada sebagian besar wilayah observasi cenderung seragam di sekitar nilai rata-rata.
 
+Histogram pada gambar menunjukkan bahwa sebagian besar provinsi memiliki persentase yang berada pada rentang nilai tengah. Hal tersebut terlihat dari balok histogram dengan frekuensi paling tinggi yang terkonsentrasi di bagian tengah distribusi. Kurva distribusi yang berada di atas histogram juga memperlihatkan bahwa jumlah data semakin berkurang pada bagian kiri maupun kanan grafik. Selain itu, terdapat satu balok kecil pada sisi kanan histogram yang posisinya cukup terpisah dari kelompok data utama. Kondisi ini mengindikasikan adanya data dengan nilai yang jauh lebih tinggi dibandingkan data lainnya atau disebut sebagai \textit{outlier}. Secara umum, distribusi data yang terpusat pada nilai tengah seperti ini cukup baik karena dapat membantu algoritma \textit{machine learning} dalam mempelajari pola utama dari data latih secara lebih optimal.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.95\textwidth]{figure/heatmap_korelasi.png}
@@ -251,7 +251,7 @@ Identifikasi hubungan linear antarvariabel diekstraksi menggunakan matriks korel
 \subsubsection{Penanganan \textit{Missing Value}}
 Tahap penanganan \textit{missing value} dilakukan untuk memastikan integritas data sebelum memasuki fase pemodelan. Berdasarkan hasil temuan pada data mentah SSGI 2024, ditemukan kekosongan data yang masif pada Provinsi Papua Tengah dan Papua Pegunungan sebagai wilayah pemekaran baru. Karena ketiadaan data tersebut bersifat struktural pada level observasi, metode \textit{listwise deletion} diterapkan dengan menghapus kedua provinsi tersebut dari \textit{dataset}. Selain itu, baris agregat "Indonesia" juga dieliminasi karena bukan merupakan entitas provinsi independen. Langkah ini memastikan bahwa \textit{dataset} yang tersisa merupakan data lengkap tanpa memerlukan imputasi buatan. Implementasi kode dan ringkasan perubahan jumlah observasi ditunjukkan pada Kode 4.2 dan Tabel \ref{table:4.before_after_baris}.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.2} Penghapusan Observasi dan Validasi \textit{Missing Value}}, label={code:missing_value}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Penghapusan Observasi dan Validasi Missing Value}, label={code:missing_value}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 # 1. Menghapus baris provinsi dengan data kosong dan agregat nasional
 provinces_to_drop = ['Papua Tengah', 'Papua Pegunungan', 'Indonesia']
 
@@ -290,7 +290,7 @@ if len(missing_values) == 0:
 \subsubsection{Eliminasi Variabel Non-Determinan}
 Setelah pembersihan baris, dilakukan eliminasi fitur pada tingkat kolom untuk menghindari bias pemodelan. Fitur \texttt{prevalensi\_underweight\_persen} dan \texttt{prevalensi\_wasting\_persen} dihapus secara sengaja karena merupakan indikator malnutrisi yang sangat berkorelasi dengan target \textit{stunting}. Mempertahankan kedua variabel ini akan memicu \textit{data leakage}, di mana model seolah-olah memiliki performa tinggi namun secara logika tidak valid dalam memetakan faktor penyebab (determinan) luar. Proses eliminasi ini dijabarkan pada Kode 4.3 dan perubahan dimensi kolomnya diringkas pada Tabel \ref{table:4.before_after_kolom}.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.3} Eliminasi Fitur untuk Mencegah \textit{Data Leakage}}, label={code:eliminasi_kolom}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Eliminasi Fitur untuk Mencegah \textit{Data Leakage}}, label={code:eliminasi_kolom}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 # Menghapus kolom underweight dan wasting
 columns_to_drop = ['prevalensi_underweight_persen', 'prevalensi_wasting_persen']
 plot_data_clean = plot_data_clean.drop(columns=columns_to_drop)
@@ -322,7 +322,7 @@ print(f"Jumlah kolom setelah penghapusan: {len(plot_data_clean.columns)}")
 \subsubsection{Penetapan Variabel Penelitian}
 Tahap akhir pra-pemrosesan adalah penetapan matriks variabel penelitian yang siap masuk ke tahap pemodelan. \textit{Dataset} final terdiri dari 36 provinsi dengan 54 fitur determinan numerik murni sebagai variabel independen ($X$) dan satu kolom target persentase prevalensi \textit{stunting} ($y$). Kolom nama provinsi dipisahkan karena tidak berperan dalam perhitungan matematis algoritma \textit{Random Forest}. Rincian pemisahan matriks ditunjukkan pada Kode 4.4, sedangkan struktur data finalnya direpresentasikan pada Tabel \ref{table:4.dataset_final}.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.4} Pemisahan Variabel Independen (X) dan Dependen (y)}, label={code:penetapan_variabel}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Pemisahan Variabel Independen (X) dan Dependen (y)}, label={code:penetapan_variabel}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 # Menentukan target dan fitur prediktor
 y = plot_data_clean['prevalensi_stunting_persen']
 X = plot_data_clean.drop(['Provinsi', 'prevalensi_stunting_persen'], axis=1)
@@ -364,7 +364,7 @@ Tahapan \textit{hyperparameter tuning} dilaksanakan dengan tujuan mengidentifika
 
 Secara konseptual, tahapan pencarian parameter melalui skema LOOCV ini merupakan fase di mana proses pelatihan (\textit{training}), validasi (\textit{validation}), dan pengujian (\textit{testing}) dieksekusi secara serentak di dalam satu siklus iterasi terintegrasi. Melalui pendekatan ini, evaluasi performa model dapat dilakukan secara menyeluruh terhadap data yang disembunyikan (\textit{unseen data}) pada setiap iterasinya tanpa memerlukan pemisahan proporsi data di awal, sehingga representasi informasi penting dari keseluruhan populasi sampel tetap terjaga. Rincian proses komputasi iteratif beserta ekstraksi matriks evaluasi pada tahapan ini dijabarkan pada Kode 4.5.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.5} Pelaksanaan LOOCV, \textit{Grid Search}, dan Ekstraksi Evaluasi}, label={code:tuning}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Pelaksanaan LOOCV, Grid Search, dan Ekstraksi Evaluasi}, label={code:tuning}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 from sklearn.model_selection import GridSearchCV, LeaveOneOut
 from sklearn.ensemble import RandomForestRegressor
 
@@ -398,7 +398,6 @@ print(f"Skor MAE Terbaik: {best_mae:.2f}")
 print(f"Skor RMSE Terbaik: {best_rmse:.2f}")
 \end{lstlisting}
 
-\newpage
 Hasil komputasi dari pencarian parameter optimal secara komprehensif direpresentasikan pada Tabel \ref{table:4.best_param}. Berdasarkan matriks evaluasi, konfigurasi terbaik untuk algoritma \textit{Random Forest Regressor} diperoleh pada kombinasi penggunaan 100 estimasi pohon (\texttt{n\_estimators}), kedalaman maksimal 5 tingkat (\texttt{max\_depth}), batas minimal 1 observasi pada simpul daun (\texttt{min\_samples\_leaf}), dan fungsi logaritma basis 2 untuk penyeleksian fitur maksimal (\texttt{max\_features}). Penerapan pengaturan parameter tersebut secara komputasional menghasilkan tingkat penyimpangan prediksi terendah dengan skor \textit{Mean Absolute Error} (MAE) dan \textit{Root Mean Squared Error} (RMSE) yang masing-masing bernilai 3,44. Konsistensi perolehan angka minimal pada kedua metrik evaluasi tersebut mengonfirmasi tingkat stabilitas model dalam mengenali pola data. 
 
 \begin{longtable}{|c|p{0.4\textwidth}|c|}
@@ -438,7 +437,7 @@ Selanjutnya, untuk memvalidasi stabilitas performa model secara visual, dinamika
 \subsubsection{Pelatihan Model Final}
 Setelah konfigurasi parameter terbaik berhasil diidentifikasi pada tahapan sebelumnya, proses dilanjutkan dengan pembentukan model final. Parameter optimal yang diperoleh dari proses \textit{tuning} tersebut kemudian dikonfigurasikan ke dalam algoritma \textit{Random Forest Regressor} yang baru. Model final ini dilatih kembali (\textit{retrain}) menggunakan keseluruhan 36 baris \textit{dataset} populasi untuk mendapatkan pola pemetaan variabel fitur secara maksimal tanpa adanya reduksi sampel. Setelah model berhasil dilatih secara utuh, dilakukan prediksi terhadap nilai prevalensi \textit{stunting} guna membandingkan kedekatan antara nilai target aktual dengan nilai tebakan dari sistem. Rincian implementasi deklarasi model dan eksekusi prediksi dapat dilihat pada Kode 4.6. Selanjutnya, sintaksis komputasi untuk memvisualisasikan sebaran kedekatan tersebut ditunjukkan pada Kode 4.7, dengan hasil komparasi aktual-prediksi direpresentasikan pada Tabel \ref{table:4.komparasi_prediksi} dan Gambar \ref{fig:visualisasi_prediksi}.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.6} Pelatihan Model dan Eksekusi Prediksi}, label={code:pelatihan_final}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Pelatihan Model dan Eksekusi Prediksi}, label={code:pelatihan_final}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -503,7 +502,7 @@ Rincian komparasi numerik pada Tabel \ref{table:4.komparasi_prediksi} tersebut m
 \section{Evaluasi Performa Model}
 Tahapan evaluasi dilakukan untuk mengukur besaran tingkat penyimpangan (\textit{error}) dan kesesuaian pola yang dihasilkan oleh model final terhadap keseluruhan populasi data. Sesuai dengan skema fase kedua, model final ini telah dilatih menggunakan 100\% observasi tanpa adanya data yang disembunyikan. Oleh karena itu, evaluasi pada tahap ini tidak bertujuan untuk menguji generalisasi pada data baru (\textit{testing}), melainkan untuk meninjau seberapa baik algoritma berhasil memetakan variabel fitur terhadap target aktualnya sebelum memasuki tahapan ekstraksi interpretasi SHAP. Pendekatan evaluasi dilakukan melalui perhitungan matematis antara nilai tebakan model (\texttt{y\_pred}) dan data realita (\texttt{y}). Metrik utama yang digunakan mencakup \textit{Mean Absolute Error} (MAE), \textit{Root Mean Squared Error} (RMSE), \textit{R-squared} ($R^2$), dan \textit{Mean Absolute Percentage Error} (MAPE). Rincian sintaksis komputasi untuk kalkulasi metrik tersebut dieksekusi pada Kode 4.8, di mana hasil rangkumannya dicatat pada Tabel \ref{table:4.hasil_evaluasi}.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.8} Perhitungan Metrik Evaluasi Regresi}, label={code:evaluasi}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Perhitungan Metrik Evaluasi Regresi}, label={code:evaluasi}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
 
@@ -564,7 +563,7 @@ Mengacu pada batasan algoritma \textit{Random Forest} yang bersifat kotak hitam,
 
 Proses interpretasi diawali dengan menginisialisasi objek pembaca model (\textit{explainer}) ke dalam sistem. Karena \textit{Random Forest} merupakan algoritma yang dibangun dari sekumpulan pohon keputusan, pustaka SHAP menyediakan fungsi khusus berupa \texttt{TreeExplainer} untuk membaca struktur model tersebut secara efisien. Setelah model berhasil dibaca, sistem akan menghitung matriks nilai SHAP untuk mengukur seberapa besar dorongan atau tarikan setiap variabel terhadap hasil tebakan akhir. Rincian deklarasi algoritma SHAP beserta pengecekan dimensi \textit{output}-nya ditunjukkan pada Kode 4.9.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.9} Inisialisasi \textit{TreeExplainer} dan Ekstraksi Nilai SHAP}, label={code:shap_init}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Inisialisasi TreeExplainer dan Ekstraksi Nilai SHAP}, label={code:shap_init}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import shap
 import numpy as np
 
@@ -583,7 +582,7 @@ Interpretasi skala global bertujuan untuk melihat pola pengambilan keputusan mod
 \subsubsection{Tingkat Kepentingan Fitur (\textit{Feature Importance Plot})}
 Tahap awal interpretasi dilakukan dengan melihat tingkat kepentingan fitur melalui perhitungan rata-rata nilai absolut SHAP. Proses ini bertujuan untuk mengetahui variabel mana yang memiliki kontribusi paling besar terhadap prediksi model secara umum. Kode 4.10 menunjukkan implementasi fungsi \texttt{summary\_plot} untuk menghasilkan diagram batang yang mengurutkan fitur-fitur tersebut. Hasil visualisasi dari kode tersebut kemudian ditampilkan pada Gambar \ref{fig:shap_bar}. Melalui grafik ini, urutan indikator kesehatan yang menjadi penentu angka \textit{stunting} di Indonesia dapat diidentifikasi secara urut.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.10} Visualisasi Tingkat Kepentingan Fitur Global}, label={code:shap_bar}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Visualisasi Tingkat Kepentingan Fitur Global}, label={code:shap_bar}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import matplotlib.pyplot as plt
 
 # Visualisasi Bar Plot untuk 20 fitur paling berpengaruh
@@ -646,7 +645,7 @@ Temuan dari algoritma ini memberikan wawasan bahwa determinan proksimal yang ber
 \subsubsection{Arah dan Distribusi Dampak Fitur (\textit{Summary Plot})}
 Tahapan analisis selanjutnya difokuskan pada pengamatan arah pengaruh dari masing-masing variabel terhadap hasil keluaran model. Pemetaan arah distribusi ini dilakukan dengan mengeksekusi Kode 4.11 untuk menghasilkan visualisasi \textit{SHAP Summary Plot}. Hasil komputasi dari kode tersebut ditampilkan dalam bentuk grafik sebaran pada Gambar \ref{fig:shap_summary}. Karena visualisasi ini menggunakan urutan fitur yang identik dengan tahapan sebelumnya, pembaca dapat merujuk kembali pada Tabel 4.1 untuk melihat keterangan label. Grafik ini menggunakan parameter gradasi warna untuk merepresentasikan angka asli pada data, di mana merah berarti tinggi dan biru berarti rendah.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.11} Visualisasi Arah dan Distribusi Dampak Fitur}, label={code:shap_summary}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Visualisasi Arah dan Distribusi Dampak Fitur}, label={code:shap_summary}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import matplotlib.pyplot as plt
 
 # Visualisasi sebaran arah pengaruh fitur (Summary Plot/Beeswarm)
@@ -671,7 +670,7 @@ Berdasarkan Gambar \ref{fig:shap_summary}, terlihat bagaimana tiga variabel utam
 \subsubsection{Analisis Ketergantungan Fitur (\textit{Dependence Plot})}
 Langkah terakhir dalam analisis skala global adalah menginterpretasikan distribusi nilai dari lima variabel dengan peringkat tertinggi. Pendekatan ini dilakukan menggunakan visualisasi \textit{SHAP Dependence Plot} untuk mencari titik batas perubahan pengaruh pada masing-masing indikator. Eksekusi sintaksis perulangan untuk menghasilkan kelima grafik tersebut secara berurutan ditunjukkan pada Kode 4.12. Visualisasi yang dihasilkan kemudian dianalisis untuk melihat pada rentang angka berapa suatu variabel mulai merubah arah keputusan model. Penjelasan rincian dari setiap grafik dijabarkan pada paragraf-paragraf di bawah ini.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.12} Visualisasi Ketergantungan Lima Fitur Teratas}, label={code:shap_dependence}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Visualisasi Ketergantungan Lima Fitur Teratas}, label={code:shap_dependence}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 import matplotlib.pyplot as plt
 
 # Daftar 5 fitur teratas berdasarkan SHAP
@@ -699,7 +698,7 @@ for feature in top5_features:
 \end{lstlisting}
 
 \newpage
-\begin{enumerate}
+\begin{enumerate}[listparindent=\parindent]
     \item Analisis Ketergantungan Variabel Tidak Memenuhi MMFF
     \begin{figure}[H]
         \centering
@@ -710,7 +709,7 @@ for feature in top5_features:
 
     Gambar \ref{fig:dep_mmff} menampilkan grafik ketergantungan untuk fitur persentase tidak memenuhi MMFF. Berdasarkan sebaran titik pada visualisasi tersebut, nilai SHAP berada secara stabil di area negatif saat angka observasi berada di bawah 22\%. Namun, terdapat lonjakan drastis yang menyeberangi sumbu nol menuju area positif ketika persentase fitur melampaui ambang batas 22\% hingga 25\%. Semakin nilai persentase menjauhi batas tersebut ke arah kanan, dorongan terhadap risiko prediksi \textit{stunting} menjadi semakin tinggi secara signifikan. Pola ini membuktikan bahwa kurangnya asupan susu pada balita non-ASI memiliki batas toleransi maksimal di kisaran 22\% sebelum memicu lonjakan kasus.
 
-    Pola lonjakan risiko yang terlihat setelah melewati batas 22\% menunjukkan bahwa balita yang tidak lagi meminum ASI sangat rentan jika tidak diberikan asupan susu pengganti. Bagi anak yang sudah disapih, susu merupakan sumber utama kalsium dan protein yang perannya sangat penting untuk mendukung pertumbuhan tulang \cite{who2023complementary}. Perubahan drastis nilai SHAP menjadi positif setelah melewati batas toleransi ini menunjukkan terjadinya titik kegagalan pemenuhan gizi di suatu wilayah. Artinya, jika angka anak yang tidak mendapatkan susu sudah melebihi 22\%, makanan pengganti yang ada di masyarakat terbukti tidak mampu lagi menambal kekurangan nutrisi tersebut, yang pada akhirnya memicu lonjakan kasus \textit{stunting} \cite{beal2018review}. Temuan matematis dari algoritma ini secara langsung menegaskan bahwa asupan susu minimal adalah syarat wajib yang tidak bisa ditawar lagi bagi balita non-ASI.
+    \indent Pola lonjakan risiko yang terlihat setelah melewati batas 22\% menunjukkan bahwa balita yang tidak lagi meminum ASI sangat rentan jika tidak diberikan asupan susu pengganti. Bagi anak yang sudah disapih, susu merupakan sumber utama kalsium dan protein yang perannya sangat penting untuk mendukung pertumbuhan tulang \cite{who2023complementary}. Perubahan drastis nilai SHAP menjadi positif setelah melewati batas toleransi ini menunjukkan terjadinya titik kegagalan pemenuhan gizi di suatu wilayah. Artinya, jika angka anak yang tidak mendapatkan susu sudah melebihi 22\%, makanan pengganti yang ada di masyarakat terbukti tidak mampu lagi menambal kekurangan nutrisi tersebut, yang pada akhirnya memicu lonjakan kasus \textit{stunting} \cite{beal2018review}. Temuan matematis dari algoritma ini secara langsung menegaskan bahwa asupan susu minimal adalah syarat wajib yang tidak bisa ditawar lagi bagi balita non-ASI.
 
     \item Analisis Ketergantungan Variabel Usia Ibu Berisiko
     \begin{figure}[H]
@@ -722,7 +721,7 @@ for feature in top5_features:
 
     Visualisasi ketergantungan untuk persentase usia ibu berisiko ditunjukkan pada Gambar \ref{fig:dep_usia_ibu}. Grafik ini memperlihatkan pola lonjakan nilai SHAP yang tegas ketika angka asli fitur melewati ambang batas 14\%. Pada rentang persentase di bawah 14\%, dampak yang diberikan cenderung bernilai negatif atau menekan angka prediksi. Sebaliknya, ketika persentase wilayah menyentuh angka 15\% ke atas, hasil tebakan langsung mendapat dorongan positif yang memicu kenaikan prediksi. Karakteristik ini mengindikasikan bahwa intervensi pencegahan kehamilan pada usia berisiko sebaiknya diupayakan agar tidak melampaui batas 14\%.
 
-    Peningkatan risiko yang terlihat saat melewati batas kritis ini sangat sejalan dengan kondisi fisik pada ibu hamil. Pada kehamilan di usia remaja, tubuh ibu yang sebenarnya masih dalam masa pertumbuhan terpaksa berebut gizi dengan janin yang dikandungnya \cite{Rahman2025}. Kondisi ini membuat penyaluran nutrisi ke janin menjadi terhambat, sehingga memperbesar kemungkinan bayi lahir dengan Berat Badan Lahir Rendah (BBLR). Sebaliknya, pada kehamilan di usia tua, penurunan fungsi organ tubuh ibu membuat penyaluran makanan ke kandungan menjadi tidak optimal, yang juga berisiko menghambat perkembangan janin \cite{Rahman2025}. Perubahan drastis nilai SHAP menjadi positif saat melewati batas 14\% membuktikan bahwa banyaknya bayi yang lahir dalam kondisi rentan ini akan langsung memperburuk angka \textit{stunting} di suatu wilayah. Temuan algoritma ini menegaskan pentingnya program edukasi dan perencanaan keluarga untuk menekan angka ibu hamil berisiko agar tetap berada di bawah ambang batas 14\%.
+    \indent Peningkatan risiko yang terlihat saat melewati batas kritis ini sangat sejalan dengan kondisi fisik pada ibu hamil. Pada kehamilan di usia remaja, tubuh ibu yang sebenarnya masih dalam masa pertumbuhan terpaksa berebut gizi dengan janin yang dikandungnya \cite{Rahman2025}. Kondisi ini membuat penyaluran nutrisi ke janin menjadi terhambat, sehingga memperbesar kemungkinan bayi lahir dengan Berat Badan Lahir Rendah (BBLR). Sebaliknya, pada kehamilan di usia tua, penurunan fungsi organ tubuh ibu membuat penyaluran makanan ke kandungan menjadi tidak optimal, yang juga berisiko menghambat perkembangan janin \cite{Rahman2025}. Perubahan drastis nilai SHAP menjadi positif saat melewati batas 14\% membuktikan bahwa banyaknya bayi yang lahir dalam kondisi rentan ini akan langsung memperburuk angka \textit{stunting} di suatu wilayah. Temuan algoritma ini menegaskan pentingnya program edukasi dan perencanaan keluarga untuk menekan angka ibu hamil berisiko agar tetap berada di bawah ambang batas 14\%.
 
     \item Analisis Ketergantungan Variabel Tidak Memenuhi MDD
     \begin{figure}[H]
@@ -734,7 +733,7 @@ for feature in top5_features:
 
     Analisis ketergantungan untuk persentase balita tidak memenuhi MDD dapat diamati melalui sebaran titik pada Gambar \ref{fig:dep_mdd}. Indikator keberagaman makanan ini menunjukkan pola hubungan naik yang sejalan dengan peningkatan nilai aslinya. Titik kritis dari variabel ini terlihat secara jelas berada di sekitar angka 55\% ketika melewati sumbu nol. Semakin nilai persentase bergerak menjauhi ambang batas tersebut menuju angka 80\%, risiko prevalensi yang ditebak oleh model menjadi semakin tinggi. Pola distribusi ini menegaskan bahwa peningkatan masalah keberagaman asupan gizi secara proporsional akan menambah tinggi prediksi kasus di suatu wilayah.
 
-    Pola peningkatan risiko yang berbanding lurus dengan tingginya ketiadaan keberagaman pangan ini mengonfirmasi krusialnya variasi asupan pada masa pertumbuhan anak. Ketergantungan pada pola makan yang monoton, seperti hanya mengonsumsi sumber karbohidrat utama tanpa variasi protein dan sayuran, dapat menyebabkan tubuh balita kekurangan nutrisi esensial. Kurangnya asupan mineral dan vitamin penting seperti zink, zat besi, dan vitamin A secara langsung akan menghambat proses pembentukan tulang dan perkembangan fisik \cite{UNICEF2024_ChildFoodPoverty}. Lebih lanjut, perubahan drastis nilai perhitungan SHAP menjadi positif saat melewati ambang batas 55\% mengindikasikan tingginya kerentanan gizi di suatu wilayah. Hal ini menunjukkan bahwa apabila lebih dari separuh populasi balita tidak mendapatkan keberagaman makanan yang memadai, wilayah tersebut memiliki probabilitas kegagalan gizi komunal yang tinggi sehingga memicu lonjakan kasus \textit{stunting}. Temuan algoritma ini secara objektif memvalidasi urgensi pemenuhan keragaman konsumsi pangan sebagai strategi utama dalam menekan angka prevalensi.
+    \indent Pola peningkatan risiko yang berbanding lurus dengan tingginya ketiadaan keberagaman pangan ini mengonfirmasi krusialnya variasi asupan pada masa pertumbuhan anak. Ketergantungan pada pola makan yang monoton, seperti hanya mengonsumsi sumber karbohidrat utama tanpa variasi protein dan sayuran, dapat menyebabkan tubuh balita kekurangan nutrisi esensial. Kurangnya asupan mineral dan vitamin penting seperti zink, zat besi, dan vitamin A secara langsung akan menghambat proses pembentukan tulang dan perkembangan fisik \cite{UNICEF2024_ChildFoodPoverty}. Lebih lanjut, perubahan drastis nilai perhitungan SHAP menjadi positif saat melewati ambang batas 55\% mengindikasikan tingginya kerentanan gizi di suatu wilayah. Hal ini menunjukkan bahwa apabila lebih dari separuh populasi balita tidak mendapatkan keberagaman makanan yang memadai, wilayah tersebut memiliki probabilitas kegagalan gizi komunal yang tinggi sehingga memicu lonjakan kasus \textit{stunting}. Temuan algoritma ini secara objektif memvalidasi urgensi pemenuhan keragaman konsumsi pangan sebagai strategi utama dalam menekan angka prevalensi.
 
     \newpage
     \item Analisis Ketergantungan Variabel Tidak Dapat PMT
@@ -747,7 +746,7 @@ for feature in top5_features:
 
     Gambar \ref{fig:dep_pmt} menjelaskan sebaran dampak dari variabel persentase sasaran yang tidak mendapatkan Pemberian Makanan Tambahan (PMT). Persebaran data pada visualisasi ini menunjukkan tarikan nilai SHAP yang tinggi saat angka asli fitur berada di bawah 85\%. Ketika persentase fitur mendekati rentang 90\% hingga 95\%, dampak variabel mulai melemah dan berpindah ke area nol hingga negatif. Karakteristik bentuk ini memperlihatkan dinamika kontribusi ketiadaan PMT yang tidak selalu lurus berbanding dengan prediksi hasil. Hasil pemetaan batas persentase ini memberikan informasi pendukung untuk mengevaluasi pemerataan bantuan PMT di wilayah observasi.
 
-    Pola non-linear pada grafik ini menunjukkan bahwa Pemberian Makanan Tambahan (PMT) pada dasarnya adalah bantuan pendamping, bukan pengganti makanan pokok sehari-hari \cite{kemenkes2023juknispmt}. Lonjakan risiko yang tinggi saat persentase balita tidak mendapat PMT berada di bawah 85\% mengindikasikan bahwa pada rentang tersebut, intervensi pemerintah masih dinilai penting sebagai langkah pemulihan awal untuk menutupi defisit gizi di tingkat rumah tangga. Namun, ketika angka ketiadaan bantuan mencapai skala yang sangat ekstrem (90\% hingga 95\%), pengaruh variabel ini di dalam model justru melemah. Kondisi ini terjadi karena wilayah dengan tingkat ketiadaan PMT setinggi itu umumnya memiliki masalah ketahanan pangan dasar yang jauh lebih parah. Pada situasi tersebut, tingginya angka \textit{stunting} lebih banyak dipengaruhi oleh kurangnya makanan harian (seperti keragaman lauk pauk dan asupan susu) serta buruknya kebersihan lingkungan, sehingga masalah ketiadaan PMT tidak lagi menjadi pemicu utamanya \cite{keats2021effective}. Temuan dari algoritma ini membuktikan bahwa pengaruh program PMT akan sangat bergantung pada pemerataan gizi dasar di wilayah tersebut.
+    \indent Pola non-linear pada grafik ini menunjukkan bahwa Pemberian Makanan Tambahan (PMT) pada dasarnya adalah bantuan pendamping, bukan pengganti makanan pokok sehari-hari \cite{kemenkes2023juknispmt}. Lonjakan risiko yang tinggi saat persentase balita tidak mendapat PMT berada di bawah 85\% mengindikasikan bahwa pada rentang tersebut, intervensi pemerintah masih dinilai penting sebagai langkah pemulihan awal untuk menutupi defisit gizi di tingkat rumah tangga. Namun, ketika angka ketiadaan bantuan mencapai skala yang sangat ekstrem (90\% hingga 95\%), pengaruh variabel ini di dalam model justru melemah. Kondisi ini terjadi karena wilayah dengan tingkat ketiadaan PMT setinggi itu umumnya memiliki masalah ketahanan pangan dasar yang jauh lebih parah. Pada situasi tersebut, tingginya angka \textit{stunting} lebih banyak dipengaruhi oleh kurangnya makanan harian (seperti keragaman lauk pauk dan asupan susu) serta buruknya kebersihan lingkungan, sehingga masalah ketiadaan PMT tidak lagi menjadi pemicu utamanya \cite{keats2021effective}. Temuan dari algoritma ini membuktikan bahwa pengaruh program PMT akan sangat bergantung pada pemerataan gizi dasar di wilayah tersebut.
 
     \item Analisis Ketergantungan Variabel Akses Sanitasi Berisiko
     \begin{figure}[H]
@@ -759,7 +758,7 @@ for feature in top5_features:
 
     Grafik ketergantungan kelima yang menjelaskan persentase akses sanitasi berisiko ditampilkan pada Gambar \ref{fig:dep_sanitasi}. Distribusi titik data pada sumbu vertikal memperlihatkan kecenderungan pergerakan naik secara berkelanjutan. Variabel sanitasi mulai memberikan sumbangsih positif terhadap peningkatan prediksi \textit{stunting} ketika angkanya melewati batas kritis 10\%. Pada persentase di bawah angka batas tersebut, nilai perhitungan SHAP berada di area negatif yang mendeskripsikan penurunan angka tebakan. Pemetaan dari model ini membuktikan bahwa wilayah observasi perlu menekan persentase ketiadaan akses sanitasi layak di bawah batas 10\%.
 
-    Peningkatan risiko \textit{stunting} yang berbanding lurus dengan memburuknya fasilitas sanitasi sangat berkaitan erat dengan paparan bakteri dari lingkungan. Secara kajian kesehatan masyarakat, buruknya akses sanitasi akan mempermudah penularan kuman penyakit yang memicu infeksi pencernaan berulang pada anak. Gangguan pencernaan kronis ini mengakibatkan usus tidak mampu menyerap nutrisi dari makanan secara maksimal, padahal gizi tersebut sangat dibutuhkan untuk mendukung pertumbuhan fisik balita \cite{kemenkes2022tatalaksana}. Selanjutnya, kemunculan ambang batas kritis pada angka 10\% mengindikasikan pentingnya menjaga kebersihan lingkungan secara komunal. Apabila jumlah rumah tangga tanpa sanitasi layak di suatu wilayah melampaui batas toleransi tersebut, pencemaran bakteri pada sumber air dan tanah akan menjadi terlalu masif sehingga memicu keadaan inflamasi kronis pada tubuh balita, di mana sistem kekebalan tubuh bekerja terlalu keras tanpa henti untuk melawan infeksi \cite{torlesse2016determinants}. Temuan ambang batas dari algoritma ini membuktikan bahwa penyediaan infrastruktur sanitasi yang bersih adalah syarat wajib agar makanan bergizi yang diberikan dapat diserap secara optimal oleh tubuh anak.
+    \indent Peningkatan risiko \textit{stunting} yang berbanding lurus dengan memburuknya fasilitas sanitasi sangat berkaitan erat dengan paparan bakteri dari lingkungan. Secara kajian kesehatan masyarakat, buruknya akses sanitasi akan mempermudah penularan kuman penyakit yang memicu infeksi pencernaan berulang pada anak. Gangguan pencernaan kronis ini mengakibatkan usus tidak mampu menyerap nutrisi dari makanan secara maksimal, padahal gizi tersebut sangat dibutuhkan untuk mendukung pertumbuhan fisik balita \cite{kemenkes2022tatalaksana}. Selanjutnya, kemunculan ambang batas kritis pada angka 10\% mengindikasikan pentingnya menjaga kebersihan lingkungan secara komunal. Apabila jumlah rumah tangga tanpa sanitasi layak di suatu wilayah melampaui batas toleransi tersebut, pencemaran bakteri pada sumber air dan tanah akan menjadi terlalu masif sehingga memicu keadaan inflamasi kronis pada tubuh balita, di mana sistem kekebalan tubuh bekerja terlalu keras tanpa henti untuk melawan infeksi \cite{torlesse2016determinants}. Temuan ambang batas dari algoritma ini membuktikan bahwa penyediaan infrastruktur sanitasi yang bersih adalah syarat wajib agar makanan bergizi yang diberikan dapat diserap secara optimal oleh tubuh anak.
 
 \end{enumerate}
 
@@ -776,7 +775,7 @@ Kriteria selanjutnya mencakup pemilihan provinsi yang memegang rekor ekstrem pad
 \subsubsection{Analisis Skala Lokal (\textit{Waterfall Plot})}
 Tahapan interpretasi skala lokal dilakukan dengan mengeksekusi visualisasi \textit{SHAP Waterfall Plot} untuk menginterpretasikan data observasi secara spesifik. Proses komputasi ini bertujuan untuk menguraikan kontribusi masing-masing variabel dalam mendorong atau menekan nilai rata-rata dasar prediksi model (\textit{base value}) yang berada pada angka 22,375. Implementasi ekstraksi grafik untuk seluruh provinsi secara otomatis beserta proses penyimpanannya ditunjukkan pada Kode 4.13. Berdasarkan hasil pemrosesan tersebut, analisis mendalam difokuskan pada enam provinsi yang telah ditetapkan melalui kriteria \textit{purposive sampling} sebelumnya. Rincian penjabaran kontribusi fitur penentu \textit{stunting} untuk keenam sampel wilayah tersebut diuraikan sebagai berikut.
 
-\begin{lstlisting}[language=Python, title={\textbf{Kode 4.13} Visualisasi dan Ekstraksi \textit{Waterfall Plot} Seluruh Provinsi}, label={code:waterfall_all}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
+\begin{lstlisting}[language=Python, caption={Visualisasi dan Ekstraksi Waterfall Plot Seluruh Provinsi}, label={code:waterfall_all}, frame=single, basicstyle=\ttfamily\scriptsize, breaklines=true]
 # SHAP waterfall plot value for a specific province
 explainer = shap.TreeExplainer(model_final)
 shap_values = explainer(X)
@@ -854,6 +853,7 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
 
     Gambar \ref{fig:wf_ntt} menjelaskan secara ekstrem pemicu di balik rekor prevalensi tertinggi secara nasional di Provinsi Nusa Tenggara Timur. Model menghasilkan tebakan akhir yang sangat tinggi di angka 33,815 dengan grafik yang didominasi oleh pergerakan balok merah secara masif. Kurangnya asupan susu (MMFF) dan minimnya pemantauan pertumbuhan memberikan sumbangsih penambahan risiko terbesar, masing-masing sebesar +1,0. Identifikasi tumpukan pendorong arah positif ini menegaskan keparahan krisis kelengkapan gizi dasar dan fasilitas pemantauan anak di wilayah tersebut.
 
+    \newpage
     \item Provinsi Bali (Prevalensi Terendah Nasional)
     \begin{figure}[H]
         \centering
@@ -864,6 +864,7 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
 
     Sebagai representasi wilayah dengan angka kasus terendah, \textit{Waterfall Plot} Provinsi Bali pada Gambar \ref{fig:wf_bali} memperlihatkan pola sapuan biru yang sempurna. Prediksi akhir wilayah ini ditekan secara drastis hingga mencapai angka 12,565 tanpa adanya satu pun fitur utama yang memberi dorongan risiko. Keberagaman asupan makanan (MDD) dan efektivitas PMT menjadi indikator terkuat yang mengurangkan nilai prediksi dasar. Ketiadaan balok merah pada grafik ini mengonfirmasi kualitas standar keunggulan kesehatan ibu dan anak yang sangat baik di wilayah Bali.
 
+    \newpage
     \item Provinsi Jawa Barat (Populasi Terpadat Nasional)
     \begin{figure}[H]
         \centering
@@ -872,5 +873,5 @@ print(f"\nSelesai! Semua gambar sudah tersimpan di folder: {nama_folder}")
         \label{fig:wf_jabar}
     \end{figure}
     
-    Analisis visualisasi untuk provinsi dengan populasi terpadat, yaitu Jawa Barat, dapat diamati melalui Gambar \ref{fig:wf_jabar}. Meskipun memiliki tekanan persaingan akses yang tinggi, model secara mengejutkan memprediksi penurunan angka prevalensi menuju nilai 17,755. Penurunan ini didorong secara konsisten oleh efektivitas program PMT dan kecukupan keberagaman pangan (MDD). Terdapat satu variabel yang memberikan dorongan risiko kecil, yakni masalah akses sanitasi berisiko, yang merupakan dampak logis dari kepadatan permukiman penduduk di wilayah tersebut.
+    Analisis visualisasi untuk provinsi dengan populasi terpadat, yaitu Jawa Barat, dapat diamati melalui Gambar \ref{fig:wf_jabar}. Meskipun memiliki tekanan persaingan akses yang tinggi, model memprediksi penurunan angka prevalensi menuju nilai 17,755. Penurunan ini didorong secara konsisten oleh efektivitas program PMT dan kecukupan keberagaman pangan (MDD). Terdapat satu variabel yang memberikan dorongan risiko kecil, yakni masalah akses sanitasi berisiko, yang merupakan dampak logis dari kepadatan permukiman penduduk di wilayah tersebut.
 \end{enumerate}

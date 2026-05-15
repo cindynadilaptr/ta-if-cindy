@@ -144,3 +144,8 @@
 ### 2026-05-14
 - Reviewing chapter 4 
 - Add citation for some analysis
+
+### 2026-05-15
+- Reviewing chapter 4 
+- Revised the draft of chapter 2 based on feedback.
+- Write conclusion
