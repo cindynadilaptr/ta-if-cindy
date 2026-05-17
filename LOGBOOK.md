@@ -149,3 +149,8 @@
 - Reviewing chapter 4 
 - Revised the draft of chapter 2 based on feedback.
 - Write conclusion
+
+### 2026-05-17
+- Reviewing chapter 5
+- Completed the appendix
+- Write summary and abstract

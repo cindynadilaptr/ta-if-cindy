@@ -4,17 +4,24 @@
 \thispagestyle{fancy}
 
 \begin{center}
-	\large \bfseries \MakeUppercase{Ringkasan}\\
-	\normalsize \normalfont {\thetitle}\\
-	\normalsize \normalfont {\theauthor}\\
-	\bigskip
-	
-	\normalsize \normalfont \justifying
-	\normalsize \normalfont \justifying
-	\textit{Halaman Ringkasan berisi uraian singkat tentang latar belakang masalah, rumusan masalah, tujuan, metodologi penelitian, hasil dan analisis data, serta kesimpulan dan saran. Isi ringkasan tidak lebih dari 1000 kata (sekitar maksimal 2 halaman).}\par
-	\lipsum[1-2] % Menampilkan paragraf 1 sampai 2 dari lorem ipsum
-
-	\vfill
-	
+    \large \bfseries \MakeUppercase{Ringkasan}\\
+    \normalsize \normalfont {\thetitle}\\
+    \normalsize \normalfont {\theauthor}\\
+    \bigskip
 \end{center}
+
+\normalsize \normalfont \justifying
+Prevalensi \textit{stunting} di Indonesia merupakan masalah kesehatan masyarakat yang dipengaruhi oleh banyak faktor. Hubungan antarindikator kesehatan ini sering kali bersifat non-linear, sehingga pemodelan linear konvensional kurang sesuai untuk menganalisis akar masalahnya. Penelitian ini bertujuan untuk membangun model estimasi prevalensi \textit{stunting} tingkat provinsi di Indonesia, mengidentifikasi faktor determinan utama, serta menganalisis titik ambang batas pada setiap indikator menggunakan data Survei Status Gizi Indonesia (SSGI) tahun 2024.
+
+Penelitian ini menggunakan pendekatan \textit{Machine Learning} dengan algoritma \textit{Random Forest Regression}. Parameter model dioptimalkan melalui metode \textit{Grid Search} dan dievaluasi menggunakan \textit{Leave-One-Out Cross-Validation} (LOOCV). Pemrosesan data melibatkan 54 fitur determinan yang berpotensi memengaruhi angka \textit{stunting}. Selanjutnya, untuk menginterpretasikan hasil prediksi model \textit{Random Forest} yang bersifat \textit{black-box}, diterapkan metode \textit{SHapley Additive exPlanations} (SHAP) guna menganalisis kontribusi setiap fitur terhadap variabel target.
+
+Hasil pengujian menunjukkan bahwa algoritma \textit{Random Forest Regression} dapat memodelkan data agregat kesehatan dengan baik. Evaluasi model menghasilkan nilai koefisien determinasi ($R^2$) sebesar 0,9090, \textit{Mean Absolute Error} (MAE) sebesar 1,40, \textit{Root Mean Squared Error} (RMSE) sebesar 1,77, dan \textit{Mean Absolute Percentage Error} (MAPE) sebesar 7,22\%. Hasil ini menunjukkan bahwa model yang dibangun cukup layak digunakan untuk mengestimasi angka prevalensi \textit{stunting} tingkat provinsi.
+
+Berdasarkan visualisasi \textit{SHAP Feature Importance} dan \textit{Summary Plot}, faktor determinan utama yang memengaruhi prevalensi \textit{stunting} antarprovinsi berkaitan dengan kelengkapan asupan gizi balita, kondisi kehamilan, dan fasilitas sanitasi. Fitur yang paling berdampak meliputi ketiadaan pemenuhan \textit{Minimum Dietary Diversity} (MDD) dan \textit{Minimum Milk Feeding Frequency} (MMFF), persentase usia ibu berisiko saat hamil, ketiadaan sanitasi layak, serta rendahnya cakupan Pemberian Makanan Tambahan (PMT).
+
+Lebih lanjut, analisis \textit{SHAP Dependence Plot} memperlihatkan adanya titik ambang batas risiko pada beberapa indikator utama. Beberapa titik batas yang ditemukan antara lain ketiadaan MDD di angka 55\%, ketiadaan MMFF di 22\%, usia ibu berisiko sebesar 14\%, dan fasilitas sanitasi berisiko sebesar 10\%. Apabila persentase indikator di suatu provinsi melewati nilai tersebut, risiko kenaikan prevalensi \textit{stunting} akan cenderung meningkat.
+
+Secara keseluruhan, pemodelan \textit{Random Forest Regression} yang digabungkan dengan interpretasi SHAP dapat digunakan sebagai alat bantu analisis faktor penyebab \textit{stunting}. Nilai ambang batas yang ditemukan dapat dijadikan informasi tambahan bagi instansi terkait dalam mengevaluasi program perbaikan gizi dan sanitasi lingkungan. Untuk penelitian selanjutnya, disarankan menggunakan data dengan cakupan tingkat kabupaten/kota serta melakukan perbandingan dengan metode interpretasi lain seperti LIME untuk memverifikasi konsistensi penjelasan model.
+
+\vfill
 \clearpage

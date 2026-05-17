@@ -1,12 +1,244 @@
-\section{Dataset}
-Penelitian ini menggunakan data sekunder dari laporan Survei Status Gizi Indonesia (SSGI) tahun 2024. Sebagai bagian dari studi pendahuluan, data telah melalui tahap ekstraksi dan agregasi awal untuk memastikan ketersediaan variabel determinan. Berikut adalah rincian akses data:
+\appendix
+\addcontentsline{toc}{chapter}{LAMPIRAN}
+
+% --- LAMPIRAN I ---
+\refstepcounter{chapter} 
+\renewcommand{\thechapter}{\Roman{chapter}}
+\addcontentsline{toc}{section}{Lampiran \thechapter\ Dataset}
+\noindent{\large Lampiran \thechapter\ Dataset} \par
+\vspace{0.5cm}
+
+Penelitian ini menggunakan data sekunder dari laporan Survei Status Gizi Indonesia (SSGI) tahun 2024. Berikut adalah rincian akses data:
 
 \begin{enumerate}
-    \item \textbf{Sumber Data Mentah (Laporan Resmi):} 
-    Buku Laporan Survei Status Gizi Indonesia (SSGI) Tahun 2024 oleh Badan Kebijakan Pembangunan Kesehatan (BKPK) Kementerian Kesehatan: \\
+    \item \textbf{Sumber Data Mentah (Laporan Resmi):} \\
     \url{https://www.badankebijakan.kemkes.go.id/survei-status-gizi-indonesia-ssgi-2024/}
     
-    \item \textbf{Draf Dataset Pra-pemrosesan (Studi Pendahuluan):} 
-    Dataset tabular yang telah diekstraksi berbasis provinsi yang siap digunakan dalam eksperimen pemodelan: \\
+    \item \textbf{Draf Dataset Pra-pemrosesan:} \\
     \url{https://bit.ly/Dataset_SSGI_2024}
 \end{enumerate}
+
+% --- LAMPIRAN II ---
+\newpage
+\refstepcounter{chapter} 
+\addcontentsline{toc}{section}{Lampiran \thechapter\ Log Hasil Hyperparameter Tuning}
+\noindent{\large Lampiran \thechapter\ Log Hasil Hyperparameter Tuning} \par
+\vspace{0.5cm}
+
+\begin{table}[H]
+\centering
+\caption{Log 10 Kombinasi Hyperparameter Terbaik Random Forest}
+\label{tab:log_tuning}
+\small
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+\textbf{No.} & \textbf{\textit{n\_estimators}} & \textbf{\textit{max\_depth}} & \textbf{\textit{min\_samples\_leaf}} & \textbf{\textit{max\_features}} & \textbf{Train MAE} & \textbf{Test MAE} & \textbf{Test RMSE} & \textbf{Rank} \\ \hline
+1  & 100 & 5    & 1 & log2 & 1.3363 & 3.4378 & 3.4378 & 1 \\ \hline
+2  & 150 & 5    & 1 & log2 & 1.3609 & 3.4883 & 3.4883 & 2 \\ \hline
+3  & 100 & 5    & 2 & sqrt & 1.5093 & 3.5127 & 3.5127 & 3 \\ \hline
+4  & 150 & 5    & 2 & log2 & 1.5617 & 3.5278 & 3.5278 & 4 \\ \hline
+5  & 150 & 5    & 2 & sqrt & 1.4952 & 3.5299 & 3.5299 & 5 \\ \hline
+6  & 100 & 7    & 2 & sqrt & 1.4897 & 3.5328 & 3.5328 & 6 \\ \hline
+7  & 150 & 7    & 2 & log2 & 1.5378 & 3.5339 & 3.5339 & 7 \\ \hline
+8  & 100 & None & 2 & sqrt & 1.4896 & 3.5347 & 3.5347 & 8 \\ \hline
+9  & 150 & None & 2 & log2 & 1.5372 & 3.5352 & 3.5352 & 9 \\ \hline
+10 & 150 & 7    & 2 & sqrt & 1.4776 & 3.5395 & 3.5395 & 10 \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+\vspace{0.3cm}
+\noindent\textit{Catatan: Angka performa pada baris pertama (Peringkat 1) merupakan parameter optimal yang dipilih dan digunakan sebagai model utama dalam penelitian ini. Riwayat lengkap dari seluruh 108 kombinasi parameter telah disimpan secara digital dalam file log\_hasil\_tuning.csv.}
+
+% --- LAMPIRAN III ---
+\newpage
+\refstepcounter{chapter} 
+\addcontentsline{toc}{section}{Lampiran \thechapter\ Nilai Rata-Rata Absolut SHAP (\textit{Feature Importance Plot})}
+\noindent{\large Lampiran \thechapter\ Nilai Rata-Rata Absolut SHAP (\textit{Feature Importance Plot})} \par
+\vspace{0.5cm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figure/feature_importance_lengkap.png}
+    \caption{Grafik Nilai Rata-Rata Absolut SHAP Seluruh Fitur}
+\end{figure}
+
+% --- LAMPIRAN IV ---
+\newpage
+\refstepcounter{chapter} 
+\addcontentsline{toc}{section}{Lampiran \thechapter\ Arah dan Distribusi Dampak Fitur (\textit{SHAP Summary Plot})}
+\noindent{\large Lampiran \thechapter\ Arah dan Distribusi Dampak Fitur (\textit{SHAP Summary Plot})} \par
+\vspace{0.5cm}
+
+\begin{center}
+    \includegraphics[width=0.5\textwidth]{figure/summary_plot_lengkap.png}
+\end{center}
+
+% --- LAMPIRAN V ---
+\newpage
+\refstepcounter{chapter} 
+\addcontentsline{toc}{section}{Lampiran \thechapter\ Grafik Interaksi Fitur (\textit{SHAP Dependence Plot})}
+\noindent{\large Lampiran \thechapter\ Grafik Interaksi Fitur (\textit{SHAP Dependence Plot})} \par
+\vspace{0.5cm}
+
+% HALAMAN 1 (8 GAMBAR)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_jarak_kehamilan_berisiko.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_usia_ibu_berisiko.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_ikut_kelas_bumil.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_masalah_buku_kia.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_kia_tidak_dijelaskan.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_anc_tidak_lengkap_k6.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_anc_tempat_informal.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_usg_tidak_lengkap.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_usg_oleh_non_spesialis.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_patuh_minum_ttd.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_mulai_ttd_terlambat.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_bblr.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_pblr.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_imd_terlambat.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_pernah_asi.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_asi_eksklusif.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_diberi_makanan_campuran_dini.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_asi_berhenti_sebelum_2_tahun.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_mpasi_tidak_tepat_waktu.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_memenuhi_mdd.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_memenuhi_mmf.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_memenuhi_mmff.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_memenuhi_mad.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_konsumsi_protein_hewani.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_konsumsi_minuman_manis.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_konsumsi_makanan_tak_sehat.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_konsumsi_buah_sayur.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_pemberian_makan_dini.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_diberi_susu_formula.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_jarang_pantau_pertumbuhan.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_pemantauan_nonstandar.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_risiko_layanan_nonlengkap.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_dapat_pmt.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_pmt_tidak_habis.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_dapat_vit_a.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_imunisasi_dasar_incomplete.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_imunisasi_lanjutan_incomplete.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_imunisasi_pcv_incomplete.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_imunisasi_rotavirus_incomplete.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_balita_ispa.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_balita_diare.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_balita_pneumonia.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_balita_tbc.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_memiliki_jamkes.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_jamkes_tidak_dimanfaatkan.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_keluarga_tanpa_tpk.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_balita_dianggap_berisiko.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_persepsi_ibu_anak_bermasalah_gizi.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_pengetahuan_stunting_baik.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_kb_pasca_salin.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_tidak_dapat_bansos.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_akses_air_minum_berisiko.png} \\ \vspace{0.2cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_akses_sanitasi_berisiko.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_dependence_plot/dependence_persen_pembuangan_limbah_berisiko.png}
+\end{figure}
+
+% --- LAMPIRAN VI ---
+\newpage
+\refstepcounter{chapter} 
+\addcontentsline{toc}{section}{Lampiran \thechapter\ Grafik Kontribusi Fitur Per Provinsi (\textit{SHAP Waterfall Plot})}
+\noindent{\large Lampiran \thechapter\ Grafik Kontribusi Fitur Per Provinsi (\textit{SHAP Waterfall Plot})} \par
+\vspace{0.5cm}
+
+\begin{center}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Aceh.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sumatera_Utara.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sumatera_Barat.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Riau.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Jambi.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sumatera_Selatan.png}
+\end{center}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Bengkulu.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Lampung.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Bangka_Belitung.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Kepulauan_Riau.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_DKI_Jakarta.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Jawa_Barat.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Jawa_Tengah.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_DI_Yogyakarta.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Jawa_Timur.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Banten.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Bali.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Nusa_Tenggara_Barat.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Nusa_Tenggara_Timur.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Kalimantan_Barat.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Kalimantan_Tengah.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Kalimantan_Selatan.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Kalimantan_Timur.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Kalimantan_Utara.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sulawesi_Utara.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sulawesi_Tengah.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sulawesi_Selatan.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sulawesi_Tenggara.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Gorontalo.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Sulawesi_Barat.png}
+\end{figure}
+
+\newpage
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Maluku.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Maluku_Utara.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Papua_Barat.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Papua_Barat_Daya.png} \\ \vspace{0.5cm}
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Papua.png} \hfill
+    \includegraphics[width=0.48\textwidth]{figure/hasil_waterfall_stunting/waterfall_Papua_Selatan.png}
+\end{figure}
+
