@@ -18,6 +18,84 @@ Penelitian ini menggunakan data sekunder dari laporan Survei Status Gizi Indones
     \url{https://bit.ly/Dataset_SSGI_2024}
 \end{enumerate}
 
+Tabel berikut menyajikan daftar komprehensif 56 variabel independen yang diekstraksi dari laporan SSGI 2024 pada tahap awal sebelum dilakukan seleksi fitur. Penjelasan pada tabel ini merujuk pada distribusi kategori tematik yang sebelumnya dirangkum pada Bab 3.
+
+\begin{longtable}{|c|p{0.30\textwidth}|p{0.35\textwidth}|p{0.25\textwidth}|}
+    \caption{Daftar Lengkap Pemetaan 56 Variabel Determinan \textit{Stunting}}
+    \label{table:lampiran_variabel}\\
+    \hline
+    \textbf{No} & \multicolumn{1}{c|}{\textbf{Kategori Tematik}} & \multicolumn{1}{c|}{\textbf{Nama Variabel (\textit{Fitur})}} & \multicolumn{1}{c|}{\textbf{Keterangan}} \tabularnewline 
+    \hline
+    \endfirsthead
+    \hline
+    \textbf{No} & \multicolumn{1}{c|}{\textbf{Kategori Tematik}} & \multicolumn{1}{c|}{\textbf{Nama Variabel (\textit{Fitur})}} & \multicolumn{1}{c|}{\textbf{Keterangan}} \tabularnewline 
+    \hline
+    \endhead
+    \hline
+    \endfoot
+    \hline
+    \endlastfoot
+    
+    1 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak jarak\_\allowbreak kehamilan\_\allowbreak berisiko} & Ibu hamil dengan jarak kehamilan terlalu dekat. \tabularnewline \hline
+    2 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak usia\_\allowbreak ibu\_\allowbreak berisiko} & Ibu melahirkan di bawah usia 20 atau di atas 35 tahun. \tabularnewline \hline
+    3 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak tidak\_\allowbreak ikut\_\allowbreak kelas\_\allowbreak bumil} & Ibu hamil yang tidak mengikuti kelas kehamilan. \tabularnewline \hline
+    4 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak masalah\_\allowbreak buku\_\allowbreak kia} & Ibu yang memiliki kendala atau tanpa Buku KIA. \tabularnewline \hline
+    5 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak kia\_\allowbreak tidak\_\allowbreak dijelaskan} & Memiliki Buku KIA namun tidak mendapat penjelasan medis. \tabularnewline \hline
+    6 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak anc\_\allowbreak tidak\_\allowbreak lengkap\_\allowbreak k6} & Layanan \textit{Antenatal Care} (ANC) kurang dari 6 kali. \tabularnewline \hline
+    7 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak anc\_\allowbreak tempat\_\allowbreak informal} & Pemeriksaan kehamilan dilakukan di fasilitas informal. \tabularnewline \hline
+    8 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak usg\_\allowbreak tidak\_\allowbreak lengkap} & Ibu hamil dengan pemeriksaan USG tidak lengkap. \tabularnewline \hline
+    9 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak usg\_\allowbreak oleh\_\allowbreak non\_\allowbreak spesialis} & Pemeriksaan USG dilakukan oleh tenaga non-spesialis. \tabularnewline \hline
+    10 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak tidak\_\allowbreak patuh\_\allowbreak minum\_\allowbreak ttd} & Ibu hamil tidak patuh mengonsumsi Tablet Tambah Darah. \tabularnewline \hline
+    11 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak mulai\_\allowbreak ttd\_\allowbreak terlambat} & Terlambat memulai konsumsi Tablet Tambah Darah (TTD). \tabularnewline \hline
+    12 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak bblr} & Bayi lahir dengan status Berat Badan Lahir Rendah. \tabularnewline \hline
+    13 & Riwayat Kehamilan dan Kelahiran & \texttt{persen\_\allowbreak pblr} & Bayi lahir dengan status Panjang Badan Lahir Rendah. \tabularnewline \hline
+    14 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak imd\_\allowbreak terlambat} & Bayi yang terlambat menerima Inisiasi Menyusu Dini. \tabularnewline \hline
+    15 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak pernah\_\allowbreak asi} & Balita yang tidak pernah diberikan Air Susu Ibu (ASI). \tabularnewline \hline
+    16 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak asi\_\allowbreak eksklusif} & Bayi tidak mendapat ASI eksklusif selama 6 bulan penuh. \tabularnewline \hline
+    17 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak diberi\_\allowbreak makanan\_\allowbreak campuran\_\allowbreak dini} & Makanan campuran diberikan sebelum sistem cerna siap. \tabularnewline \hline
+    18 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak asi\_\allowbreak berhenti\_\allowbreak sebelum\_\allowbreak 2\_\allowbreak tahun} & Proses menyusui dihentikan sebelum anak berusia 2 tahun. \tabularnewline \hline
+    19 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak mpasi\_\allowbreak tidak\_\allowbreak tepat\_\allowbreak waktu} & Makanan Pendamping ASI (MP-ASI) diberikan tidak tepat waktu. \tabularnewline \hline
+    20 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak memenuhi\_\allowbreak mdd} & Balita tidak memenuhi standar keberagaman makanan (MDD). \tabularnewline \hline
+    21 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak memenuhi\_\allowbreak mmf} & Balita tidak memenuhi frekuensi makan minimal (MMF). \tabularnewline \hline
+    22 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak memenuhi\_\allowbreak mmff} & Balita non-ASI dengan asupan susu kurang dari 2 kali/hari. \tabularnewline \hline
+    23 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak memenuhi\_\allowbreak mad} & Standar gizi \textit{Minimum Acceptable Diet} tidak terpenuhi. \tabularnewline \hline
+    24 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak konsumsi\_\allowbreak protein\_\allowbreak hewani} & Balita kurang mengonsumsi sumber protein hewani. \tabularnewline \hline
+    25 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak konsumsi\_\allowbreak minuman\_\allowbreak manis} & Balita sering mengonsumsi minuman berpemanis. \tabularnewline \hline
+    26 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak konsumsi\_\allowbreak makanan\_\allowbreak tak\_\allowbreak sehat} & Balita sering terpapar konsumsi makanan instan/kurang gizi. \tabularnewline \hline
+    27 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak tidak\_\allowbreak konsumsi\_\allowbreak buah\_\allowbreak sayur} & Rendahnya tingkat konsumsi buah dan sayuran pada balita. \tabularnewline \hline
+    28 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak pemberian\_\allowbreak makan\_\allowbreak dini} & Bayi diberikan makanan padat terlalu dini. \tabularnewline \hline
+    29 & Riwayat Pemberian ASI dan MP-ASI & \texttt{persen\_\allowbreak diberi\_\allowbreak susu\_\allowbreak formula} & Balita mengonsumsi susu formula secara dominan. \tabularnewline \hline
+    30 & Akses Pelayanan Kesehatan & \texttt{persen\_\allowbreak jarang\_\allowbreak pantau\_\allowbreak pertumbuhan} & Balita yang jarang dipantau pertumbuhannya di Posyandu. \tabularnewline \hline
+    31 & Akses Pelayanan Kesehatan & \texttt{persen\_\allowbreak pemantauan\_\allowbreak nonstandar} & Pemantauan pertumbuhan tidak sesuai standar medis operasional. \tabularnewline \hline
+    32 & Akses Pelayanan Kesehatan & \texttt{persen\_\allowbreak risiko\_\allowbreak layanan\_\allowbreak nonlengkap} & Balita menerima layanan fasilitas kesehatan tidak lengkap. \tabularnewline \hline
+    33 & Akses Pelayanan Kesehatan & \texttt{persen\_\allowbreak tidak\_\allowbreak dapat\_\allowbreak pmt} & Balita/Bumil berisiko tidak menerima Pemberian Makanan Tambahan. \tabularnewline \hline
+    34 & Akses Pelayanan Kesehatan & \texttt{persen\_\allowbreak pmt\_\allowbreak tidak\_\allowbreak habis} & Penerima tidak menghabiskan porsi Makanan Tambahan gizi. \tabularnewline \hline
+    35 & Akses Pelayanan Kesehatan & \texttt{persen\_\allowbreak tidak\_\allowbreak dapat\_\allowbreak vit\_\allowbreak a} & Balita tidak mendapatkan suplementasi Vitamin A reguler. \tabularnewline \hline
+    36 & Imunisasi dan Morbiditas Balita & \texttt{prevalensi\_\allowbreak underweight\_\allowbreak persen}* & Persentase balita dengan status gizi berat badan kurang. \tabularnewline \hline
+    37 & Imunisasi dan Morbiditas Balita & \texttt{prevalensi\_\allowbreak wasting\_\allowbreak persen}* & Persentase balita dengan status gizi kurus akut. \tabularnewline \hline
+    38 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak imunisasi\_\allowbreak dasar\_\allowbreak incomplete} & Balita tidak melengkapi jadwal imunisasi dasar. \tabularnewline \hline
+    39 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak imunisasi\_\allowbreak lanjutan\_\allowbreak incomplete} & Balita tidak melengkapi jadwal imunisasi lanjutan. \tabularnewline \hline
+    40 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak imunisasi\_\allowbreak pcv\_\allowbreak incomplete} & Balita tidak menerima vaksin PCV secara lengkap. \tabularnewline \hline
+    41 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak imunisasi\_\allowbreak rotavirus\_\allowbreak incomplete} & Balita tidak menerima vaksin Rotavirus secara lengkap. \tabularnewline \hline
+    42 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak balita\_\allowbreak ispa} & Persentase balita yang mengalami infeksi pernapasan (ISPA). \tabularnewline \hline
+    43 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak balita\_\allowbreak diare} & Persentase balita yang mengalami kejadian diare rutin. \tabularnewline \hline
+    44 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak balita\_\allowbreak pneumonia} & Balita yang terdiagnosis medis menderita pneumonia. \tabularnewline \hline
+    45 & Imunisasi dan Morbiditas Balita & \texttt{persen\_\allowbreak balita\_\allowbreak tbc} & Balita yang terdiagnosis medis menderita tuberkulosis (TBC). \tabularnewline \hline
+    46 & Kepemilikan Jaminan Kesehatan & \texttt{persen\_\allowbreak tidak\_\allowbreak memiliki\_\allowbreak jamkes} & Rumah tangga/anak tidak memiliki Jaminan Kesehatan Nasional. \tabularnewline \hline
+    47 & Kepemilikan Jaminan Kesehatan & \texttt{persen\_\allowbreak jamkes\_\allowbreak tidak\_\allowbreak dimanfaatkan} & Fasilitas Jaminan Kesehatan dimiliki namun tidak dimanfaatkan. \tabularnewline \hline
+    48 & Pendampingan dan Pengetahuan & \texttt{persen\_\allowbreak keluarga\_\allowbreak tanpa\_\allowbreak tpk} & Keluarga berisiko tidak didampingi Tim Pendamping Keluarga. \tabularnewline \hline
+    49 & Pendampingan dan Pengetahuan & \texttt{persen\_\allowbreak balita\_\allowbreak dianggap\_\allowbreak berisiko} & Persepsi keluarga yang menganggap kondisi balitanya rentan. \tabularnewline \hline
+    50 & Pendampingan dan Pengetahuan & \texttt{persen\_\allowbreak persepsi\_\allowbreak ibu\_\allowbreak anak\_\allowbreak bermasalah\_\allowbreak gizi} & Ibu menyadari anaknya mengalami permasalahan gizi klinis. \tabularnewline \hline
+    51 & Pendampingan dan Pengetahuan & \texttt{persen\_\allowbreak pengetahuan\_\allowbreak stunting\_\allowbreak baik} & Tingkat pemahaman keluarga yang memadai mengenai \textit{stunting}. \tabularnewline \hline
+    52 & Kontrasepsi Pasca Bersalin & \texttt{persen\_\allowbreak tidak\_\allowbreak kb\_\allowbreak pasca\_\allowbreak salin} & Ibu bersalin tidak menggunakan kontrasepsi pasca persalinan. \tabularnewline \hline
+    53 & Bantuan Sosial & \texttt{persen\_\allowbreak tidak\_\allowbreak dapat\_\allowbreak bansos} & Keluarga sasaran tidak menerima Bantuan Sosial pemerintah. \tabularnewline \hline
+    54 & Akses Air Minum dan Sanitasi & \texttt{persen\_\allowbreak akses\_\allowbreak air\_\allowbreak minum\_\allowbreak berisiko} & Rumah tangga dengan sumber air minum tidak layak/berisiko. \tabularnewline \hline
+    55 & Akses Air Minum dan Sanitasi & \texttt{persen\_\allowbreak akses\_\allowbreak sanitasi\_\allowbreak berisiko} & Rumah tangga yang memiliki fasilitas sanitasi tidak layak. \tabularnewline \hline
+    56 & Akses Air Minum dan Sanitasi & \texttt{persen\_\allowbreak pembuangan\_\allowbreak limbah\_\allowbreak berisiko} & Rumah tangga dengan sistem pembuangan limbah berisiko. \tabularnewline \hline
+    
+    \multicolumn{4}{p{\textwidth}}{\footnotesize \textit{*Catatan: Fitur prevalensi underweight dan wasting dieliminasi pada tahapan pra-pemrosesan model final (menyisakan 54 fitur) untuk menghindari terjadinya data leakage terhadap target probabilitas stunting.}} \tabularnewline
+\end{longtable}
+
 % --- LAMPIRAN II ---
 \newpage
 \refstepcounter{chapter} 

@@ -69,30 +69,32 @@ Alur pra-pemrosesan data ditunjukkan pada Gambar \ref{fig:5.flowchart_preprocess
 \end{figure}
 
 \subsubsection{Representasi Dataset Penelitian} \label{sec:karakteristik_data}
-Dataset yang digunakan dalam penelitian ini bersumber dari Laporan Publikasi SSGI tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Data tersebut merupakan data sekunder berskala nasional yang menyajikan berbagai indikator status gizi, kesehatan ibu dan anak, serta kondisi lingkungan dan sosial ekonomi pada tingkat provinsi. Setelah melalui tahap penyiapan dan seleksi data, diperoleh satu dataset terstruktur yang terdiri dari 56 variabel independen dan satu variabel dependen berupa prevalensi \textit{stunting}. Untuk memudahkan pemahaman struktur data dan menjaga konsistensi analisis determinan, seluruh variabel independen kemudian dikelompokkan ke dalam beberapa kategori tematik berdasarkan karakteristik indikator yang diwakilinya.
+Dataset yang diekstraksi bersumber dari Laporan Publikasi SSGI tahun 2024 yang diterbitkan oleh Kementerian Kesehatan Republik Indonesia \cite{kemenkes2025ssgi}. Data sekunder berskala nasional ini merepresentasikan berbagai indikator kesehatan, gizi, serta kondisi sosial ekonomi pada tingkat provinsi. Representasi struktur data perlu dijabarkan secara terperinci guna mendemonstrasikan transparansi pemilihan variabel sebelum diproses oleh algoritma.
+
+Pada tahap ekstraksi awal, diperoleh format data terstruktur yang memuat 56 variabel independen dan satu variabel dependen berupa prevalensi \textit{stunting}. Tahapan pra-pemrosesan kemudian mengeksekusi penghapusan dua variabel berisiko \textit{data leakage}, yakni prevalensi \textit{underweight} dan prevalensi \textit{wasting}. Eliminasi ini pada akhirnya menyisakan 54 variabel independen final yang secara sah menjadi masukan bagi algoritma \textit{Random Forest}. Seluruh variabel prediktor tersebut dikelompokkan ke dalam kategori tematik berdasarkan karakteristik indikator yang diwakilinya. Pengelompokan ini dilakukan untuk mengorganisasi alur pemahaman data sekaligus menjaga konsistensi kerangka analisis determinan.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Distribusi Variabel Determinan Stunting berdasarkan Kategori}
+\caption{Distribusi Variabel Determinan \textit{Stunting} berdasarkan Kategori}
 \label{tab:distribusi_variabel}
-\begin{tabular}{|c|l|c|}
+\begin{tabular}{|c|p{0.45\textwidth}|c|c|}
 \hline
-\textbf{No} & \textbf{Kategori Variabel} & \textbf{Jumlah Fitur} \\ \hline
-1 & Riwayat Kehamilan dan Kelahiran & 15 \\ \hline
-2 & Riwayat Pemberian ASI dan MP-ASI & 17 \\ \hline
-3 & Akses dan Pemanfaatan Pelayanan Kesehatan & 9 \\ \hline
-4 & Imunisasi dan Morbiditas Balita & 8 \\ \hline
-5 & Kepemilikan dan Pemanfaatan Jaminan Kesehatan & 2 \\ \hline
-6 & Pendampingan Keluarga dan Pengetahuan Stunting & 4 \\ \hline
-7 & Kontrasepsi Pasca Bersalin & 1 \\ \hline
-8 & Bantuan Sosial & 1 \\ \hline
-9 & Akses Air Minum dan Sanitasi & 4 \\ \hline
-\multicolumn{2}{|c|}{\textbf{Total}} & \textbf{56} \\ \hline
+\textbf{No} & \multicolumn{1}{c|}{\textbf{Kategori Variabel}} & \textbf{Sebelum Seleksi} & \textbf{Sesudah Seleksi} \tabularnewline \hline
+1 & Riwayat Kehamilan dan Kelahiran & 15 & 15 \tabularnewline \hline
+2 & Riwayat Pemberian ASI dan MP-ASI & 17 & 17 \tabularnewline \hline
+3 & Akses dan Pemanfaatan Pelayanan Kesehatan & 9 & 9 \tabularnewline \hline
+4 & Imunisasi dan Morbiditas Balita & 8 & 6 \tabularnewline \hline
+5 & Kepemilikan dan Pemanfaatan Jaminan Kesehatan & 2 & 2 \tabularnewline \hline
+6 & Pendampingan Keluarga dan Pengetahuan \textit{Stunting} & 4 & 4 \tabularnewline \hline
+7 & Kontrasepsi Pasca Bersalin & 1 & 1 \tabularnewline \hline
+8 & Bantuan Sosial & 1 & 1 \tabularnewline \hline
+9 & Akses Air Minum dan Sanitasi & 4 & 4 \tabularnewline \hline
+\multicolumn{2}{|c|}{\textbf{Total}} & \textbf{56} & \textbf{54} \tabularnewline \hline
 \end{tabular}
 \end{table}
 
-Tabel \ref{tab:distribusi_variabel} menunjukkan bahwa variabel determinan yang digunakan dalam penelitian ini didominasi oleh indikator terkait riwayat kehamilan, pola pemberian makan bayi dan anak, serta akses pelayanan kesehatan. Komposisi ini mencerminkan pendekatan multidimensi dalam menganalisis \textit{stunting}, di mana faktor biologis, perilaku, layanan kesehatan, serta kondisi lingkungan dianalisis secara simultan. Pengelompokan ini juga menjadi dasar dalam interpretasi model, khususnya pada tahap analisis kontribusi fitur menggunakan SHAP.
+Tabel \ref{tab:distribusi_variabel} memperlihatkan bahwa variabel determinan sangat didominasi oleh indikator riwayat kehamilan, pola pemberian makan, dan pemanfaatan layanan medis. Komposisi ini menegaskan pemakaian pendekatan multidimensi yang mengevaluasi faktor biologis, perilaku, serta lingkungan secara serentak di dalam sistem. Adapun rincian komprehensif mengenai pemetaan seluruh 56 variabel awal ke dalam sembilan kategori tematik tersebut dijabarkan secara lengkap pada bagian Lampiran. Pemetaan kategori ini mutlak diperlukan sebagai fondasi rujukan pada tahapan evaluasi berikutnya. Tahap lanjutan tersebut berpusat pada penelusuran arah kontribusi setiap fitur secara saintifik menggunakan pendekatan SHAP.
 
 
 \subsection{Pemodelan \textit{Random Forest}} \label{subsec:modeling}
